@@ -1,23 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+// Replace the mockFirebase with real Firebase imports
+import { auth, db } from './firebase';
+import { 
+  signInWithEmailAndPassword, 
+  signOut, 
+  onAuthStateChanged 
+} from 'firebase/auth';
+import { 
+  doc, 
+  setDoc, 
+  onSnapshot 
+} from 'firebase/firestore';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className='text-3xl font-bold text-red-500'>App</h1>
     </div>
   );
 }
