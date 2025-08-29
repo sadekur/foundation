@@ -1,6 +1,6 @@
 // src/components/ProjectControls.js
 import React from 'react';
-import { Plus } from 'lucide-react';
+import { BarChart3, Plus } from 'lucide-react';
 
 const ProjectControls = ({ 
   currentProject, 
@@ -9,7 +9,8 @@ const ProjectControls = ({
   setSelectedYear, 
   projects, 
   availableYears, 
-  onAddProject 
+  onAddProject,
+  onShowYearlySummary 
 }) => {
   return (
     <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
@@ -42,13 +43,22 @@ const ProjectControls = ({
           </div>
         </div>
 
-        <button
-          onClick={onAddProject}
-          className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
-        >
-          <Plus size={20} />
-          Add Project
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={onShowYearlySummary}
+            className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+          >
+            <BarChart3 size={20} />
+            Yearly Summary
+          </button>
+          <button
+            onClick={onAddProject}
+            className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+          >
+            <Plus size={20} />
+            Add Project
+          </button>
+        </div>
       </div>
     </div>
   );
