@@ -4,14 +4,18 @@ import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   // Replace with your actual Firebase config
-  apiKey: "your-api-key",
-  authDomain: "your-project.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "your-app-id"
+  apiKey: "AIzaSyCCKkFADRBxCntebH1isPYrKrHB0qpN26I",
+  authDomain: "as-salsabil-foundation.firebaseapp.com",
+  // databaseURL: "https://as-salsabil-foundation-default-rtdb.firebaseio.com",
+  projectId: "as-salsabil-foundation",
+  storageBucket: "as-salsabil-foundation.firebasestorage.app",
+  messagingSenderId: "589960728860",
+  appId: "1:589960728860:web:49ada3445fdbcf92672ad9",
+  // measurementId: "G-3SY22ZVD2Z"
 };
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
+export default app;
