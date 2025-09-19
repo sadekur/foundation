@@ -5,8 +5,7 @@ import React, { useState, useEffect } from 'react';
 
 // Import Firebase functions
 import { auth, db } from './firebase';
-import { 
-  signOut, 
+import {  
   onAuthStateChanged 
 } from 'firebase/auth';
 import { 
@@ -80,15 +79,6 @@ const FoundationApp = () => {
         return () => unsubscribeAuth();
     }, [currentProject]);
 
-    const handleLogout = async () => {
-        setLoading(true);
-        try {
-            await signOut(auth);
-        } catch (error) {
-            alert('Logout failed: ' + error.message);
-        }
-        setLoading(false);
-    };
 
     const saveToFirebase = async (updatedProjects) => {
         try {
@@ -256,7 +246,7 @@ const FoundationApp = () => {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            <Header user={user} onLogout={handleLogout} />
+            <Header user={user} setLoading={setLoading} />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <SyncIndicator />

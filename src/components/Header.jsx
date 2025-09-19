@@ -1,8 +1,20 @@
 // src/components/Header.js
 import React from 'react';
 import { LogOut } from 'lucide-react';
+import { auth } from '../firebase';
+import { signOut } from 'firebase/auth';
 
-const Header = ({ user, onLogout }) => {
+const Header = ({ user, setLoading }) => {
+
+    const handleLogout = async () => {
+          setLoading(true);
+          try {
+              await signOut(auth);
+          } catch (error) {
+              alert('Logout failed: ' + error.message);
+          }
+          setLoading(false);
+      };
   return (
     <header className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,7 +24,7 @@ const Header = ({ user, onLogout }) => {
             <p className="text-sm text-gray-600">Multi-Admin Dashboard - {user?.email}</p>
           </div>
           <button
-            onClick={onLogout}
+            onClick={handleLogout}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
           >
             <LogOut size={20} />
