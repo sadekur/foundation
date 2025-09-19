@@ -61,8 +61,16 @@ const FoundationApp = () => {
                         const data = docSnap.data();
                         setProjects(data.projects || {});
                         
+                        // Set current project if none selected
                         if (!currentProject && Object.keys(data.projects || {}).length > 0) {
-                            setCurrentProject(Object.keys(data.projects)[0]);
+                            const firstProject = Object.keys(data.projects)[0];
+                            setCurrentProject(firstProject);
+                            
+                            // Set year to most recent year with data for this project
+                            const projectYears = getProjectYears(data.projects[firstProject]);
+                            if (projectYears.length > 0) {
+                                setSelectedYear(Math.max(...projectYears));
+                            }
                         }
                     }
                 }, (error) => {
@@ -79,6 +87,16 @@ const FoundationApp = () => {
         return () => unsubscribeAuth();
     }, [currentProject]);
 
+    // Helper function to get all years for a project
+    const getProjectYears = (projectData) => {
+        if (!projectData) return [];
+        
+        const incomeYears = Object.keys(projectData.income || {}).map(Number);
+        const expenseYears = Object.keys(projectData.expenses || {}).map(Number);
+        const allYears = [...new Set([...incomeYears, ...expenseYears])];
+        
+        return allYears.sort((a, b) => b - a);
+    };
 
     const saveToFirebase = async (updatedProjects) => {
         try {
@@ -101,7 +119,9 @@ const FoundationApp = () => {
                 ...projects,
                 [newProjectName.trim()]: {
                     income: {},
-                    expenses: {}
+                    expenses: {},
+                    createdAt: new Date().toISOString(),
+                    createdYear: newProjectYear
                 }
             };
             
@@ -121,24 +141,30 @@ const FoundationApp = () => {
             return;
         }
 
-        const year = new Date(transactionForm.date).getFullYear().toString();
+        const transactionDate = new Date(transactionForm.date);
+        const year = transactionDate.getFullYear().toString();
         const transactionId = Date.now().toString();
+        
         const transaction = {
             id: transactionId,
             date: transactionForm.date,
             donor: transactionForm.donor,
             amount: parseFloat(transactionForm.amount),
+            year: parseInt(year),
             createdAt: new Date().toISOString()
         };
 
+        // Initialize project structure if it doesn't exist
+        const currentProjectData = projects[currentProject] || { income: {}, expenses: {} };
+        
         const updatedProjects = {
             ...projects,
             [currentProject]: {
-                ...projects[currentProject],
+                ...currentProjectData,
                 [type]: {
-                    ...projects[currentProject][type],
+                    ...currentProjectData[type],
                     [year]: {
-                        ...projects[currentProject][type][year],
+                        ...currentProjectData[type][year],
                         [transactionId]: transaction
                     }
                 }
@@ -147,6 +173,11 @@ const FoundationApp = () => {
 
         setProjects(updatedProjects);
         await saveToFirebase(updatedProjects);
+        
+        // Update selected year to the transaction year if different
+        if (parseInt(year) !== selectedYear) {
+            setSelectedYear(parseInt(year));
+        }
         
         setTransactionForm({ date: '', donor: '', amount: '' });
         setShowIncomeForm(false);
@@ -176,8 +207,8 @@ const FoundationApp = () => {
         const year = selectedYear.toString();
         const projectData = projects[currentProject];
         
-        const incomeData = projectData.income[year] || {};
-        const expenseData = projectData.expenses[year] || {};
+        const incomeData = projectData.income?.[year] || {};
+        const expenseData = projectData.expenses?.[year] || {};
 
         const totalIncome = Object.values(incomeData).reduce((sum, transaction) => sum + transaction.amount, 0);
         const totalExpenses = Object.values(expenseData).reduce((sum, transaction) => sum + transaction.amount, 0);
@@ -186,19 +217,55 @@ const FoundationApp = () => {
         return { totalIncome, totalExpenses, balance };
     };
 
+    // Calculate totals for all years of current project
+    const calculateProjectTotals = (projectName) => {
+        if (!projectName || !projects[projectName]) {
+            return { totalIncome: 0, totalExpenses: 0, balance: 0, years: [] };
+        }
+
+        const projectData = projects[projectName];
+        const allYears = getProjectYears(projectData);
+        
+        let totalIncome = 0;
+        let totalExpenses = 0;
+        
+        allYears.forEach(year => {
+            const yearStr = year.toString();
+            const incomeData = projectData.income?.[yearStr] || {};
+            const expenseData = projectData.expenses?.[yearStr] || {};
+            
+            totalIncome += Object.values(incomeData).reduce((sum, transaction) => sum + transaction.amount, 0);
+            totalExpenses += Object.values(expenseData).reduce((sum, transaction) => sum + transaction.amount, 0);
+        });
+
+        return { 
+            totalIncome, 
+            totalExpenses, 
+            balance: totalIncome - totalExpenses,
+            years: allYears
+        };
+    };
+
     const getAvailableYears = () => {
         if (!currentProject || !projects[currentProject]) {
             return [new Date().getFullYear()];
         }
         
-        const projectData = projects[currentProject];
-        const incomeYears = Object.keys(projectData.income || {});
-        const expenseYears = Object.keys(projectData.expenses || {});
-        const allYears = [...new Set([...incomeYears, ...expenseYears])]
-            .map(Number)
-            .sort((a, b) => b - a);
-        
-        return allYears.length > 0 ? allYears : [new Date().getFullYear()];
+        const projectYears = getProjectYears(projects[currentProject]);
+        return projectYears.length > 0 ? projectYears : [new Date().getFullYear()];
+    };
+
+    // Handle project change - update year to most recent year with data
+    const handleProjectChange = (newProject) => {
+        setCurrentProject(newProject);
+        if (projects[newProject]) {
+            const projectYears = getProjectYears(projects[newProject]);
+            if (projectYears.length > 0) {
+                setSelectedYear(Math.max(...projectYears));
+            } else {
+                setSelectedYear(new Date().getFullYear());
+            }
+        }
     };
 
     // Handle modal actions
@@ -236,13 +303,13 @@ const FoundationApp = () => {
         return <LoginScreen />;
     }
     
-    // Corrected conditional rendering
     if (showYearlySummary) {
         return <YearlySummaryScreen projects={projects} onBack={handleBackToDashboard} />;
     }
 
     const { totalIncome, totalExpenses, balance } = calculateTotals();
     const availableYears = getAvailableYears();
+    const projectTotals = calculateProjectTotals(currentProject);
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -253,7 +320,7 @@ const FoundationApp = () => {
                 
                 <ProjectControls
                     currentProject={currentProject}
-                    setCurrentProject={setCurrentProject}
+                    setCurrentProject={handleProjectChange}
                     selectedYear={selectedYear}
                     setSelectedYear={setSelectedYear}
                     projects={projects}
@@ -264,16 +331,41 @@ const FoundationApp = () => {
 
                 {currentProject && (
                     <>
+                        {/* Current Year Summary */}
                         <SummaryCards 
                             totalIncome={totalIncome}
                             totalExpenses={totalExpenses}
                             balance={balance}
+                            year={selectedYear}
                         />
+
+                        {/* Project Total Summary (All Years) */}
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                            <h3 className="text-sm font-medium text-blue-800 mb-2">
+                                Total for "{currentProject}" (All Years: {projectTotals.years.join(', ') || 'No data'})
+                            </h3>
+                            <div className="grid grid-cols-3 gap-4 text-sm">
+                                <div>
+                                    <span className="text-blue-600 font-medium">Total Income: </span>
+                                    <span className="text-green-600 font-bold">${projectTotals.totalIncome.toLocaleString()}</span>
+                                </div>
+                                <div>
+                                    <span className="text-blue-600 font-medium">Total Expenses: </span>
+                                    <span className="text-red-600 font-bold">${projectTotals.totalExpenses.toLocaleString()}</span>
+                                </div>
+                                <div>
+                                    <span className="text-blue-600 font-medium">Net Balance: </span>
+                                    <span className={`font-bold ${projectTotals.balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                        ${projectTotals.balance.toLocaleString()}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             <TransactionSection
                                 type="income"
-                                title="Income"
+                                title={`Income (${selectedYear})`}
                                 transactions={projects[currentProject]?.income?.[selectedYear.toString()] || {}}
                                 onDelete={(id) => deleteTransaction('income', id)}
                                 onAddTransaction={() => setShowIncomeForm(true)}
@@ -282,7 +374,7 @@ const FoundationApp = () => {
 
                             <TransactionSection
                                 type="expense"
-                                title="Expenses"
+                                title={`Expenses (${selectedYear})`}
                                 transactions={projects[currentProject]?.expenses?.[selectedYear.toString()] || {}}
                                 onDelete={(id) => deleteTransaction('expenses', id)}
                                 onAddTransaction={() => setShowExpenseForm(true)}

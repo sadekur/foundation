@@ -7,14 +7,15 @@ import { signOut } from 'firebase/auth';
 const Header = ({ user, setLoading }) => {
 
     const handleLogout = async () => {
-          setLoading(true);
-          try {
-              await signOut(auth);
-          } catch (error) {
-              alert('Logout failed: ' + error.message);
-          }
-          setLoading(false);
-      };
+        setLoading(true);
+        try {
+            await signOut(auth);
+        } catch (error) {
+            alert('Logout failed: ' + error.message);
+        }
+        setLoading(false);
+    };
+    
   return (
     <header className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
