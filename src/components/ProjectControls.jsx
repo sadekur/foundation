@@ -158,10 +158,8 @@ const ProjectControls = ({
                       min-h-[40px] xs:min-h-[44px]"
             aria-label="View yearly summary"
           >
-            <BarChart3 size={16} className="xs:w-5 xs:h-5 flex-shrink-0" />
-            <span className="hidden xs:inline sm:hidden lg:inline">Summary</span>
-            <span className="hidden sm:inline lg:hidden">Yearly Summary</span>
-            <span className="xs:hidden">Summary</span>
+            <BarChart3 size={16} className="md:w-5 md:h-5 flex-shrink-0" />
+            <span className="text-[12px] md:text-base">Yearly Summary</span>
           </button>
 
           {/* Add Project Button */}
@@ -180,10 +178,8 @@ const ProjectControls = ({
                       min-h-[40px] xs:min-h-[44px]"
             aria-label="Add new project"
           >
-            <Plus size={16} className="xs:w-5 xs:h-5 flex-shrink-0" />
-            <span className="hidden xs:inline sm:hidden lg:inline">Add</span>
-            <span className="hidden sm:inline lg:hidden">Add Project</span>
-            <span className="xs:hidden">Add</span>
+            <Plus size={16} className="md:w-5 md:h-5 flex-shrink-0" />
+            <span className="text-[12px] md:text-base">Add Project</span>
           </button>
         </div>
       </div>
