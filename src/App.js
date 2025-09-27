@@ -315,76 +315,118 @@ const FoundationApp = () => {
         <div className="min-h-screen bg-gray-50">
             <Header user={user} setLoading={setLoading} />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <SyncIndicator />
+            {/* Main Container - Responsive padding and max-width */}
+            <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-4 xs:py-6 sm:py-8">
+                {/* Sync Indicator */}
+                <div className="mb-4 sm:mb-6">
+                    <SyncIndicator />
+                </div>
                 
-                <ProjectControls
-                    currentProject={currentProject}
-                    setCurrentProject={handleProjectChange}
-                    selectedYear={selectedYear}
-                    setSelectedYear={setSelectedYear}
-                    projects={projects}
-                    availableYears={availableYears}
-                    onAddProject={() => setShowAddProject(true)}
-                    onShowYearlySummary={handleShowYearlySummary}
-                />
+                {/* Project Controls - Responsive */}
+                <div className="mb-6 sm:mb-8">
+                    <ProjectControls
+                        currentProject={currentProject}
+                        setCurrentProject={handleProjectChange}
+                        selectedYear={selectedYear}
+                        setSelectedYear={setSelectedYear}
+                        projects={projects}
+                        availableYears={availableYears}
+                        onAddProject={() => setShowAddProject(true)}
+                        onShowYearlySummary={handleShowYearlySummary}
+                    />
+                </div>
 
                 {currentProject && (
                     <>
-                        {/* Current Year Summary */}
-                        <SummaryCards 
-                            totalIncome={totalIncome}
-                            totalExpenses={totalExpenses}
-                            balance={balance}
-                            year={selectedYear}
-                        />
+                        {/* Current Year Summary - Responsive */}
+                        <div className="mb-4 sm:mb-6">
+                            <SummaryCards 
+                                totalIncome={totalIncome}
+                                totalExpenses={totalExpenses}
+                                balance={balance}
+                                year={selectedYear}
+                            />
+                        </div>
 
-                        {/* Project Total Summary (All Years) */}
-                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                            <h3 className="text-sm font-medium text-blue-800 mb-2">
+                        {/* Project Total Summary (All Years) - Responsive */}
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 xs:p-4 sm:p-6 mb-4 sm:mb-6 overflow-x-auto">
+                            <h3 className="text-sm sm:text-base font-medium text-blue-800 mb-3 sm:mb-4">
                                 Total for "{currentProject}" (All Years: {projectTotals.years.join(', ') || 'No data'})
                             </h3>
-                            <div className="grid grid-cols-3 gap-4 text-sm">
-                                <div>
-                                    <span className="text-blue-600 font-medium">Total Income: </span>
-                                    <span className="text-green-600 font-bold">${projectTotals.totalIncome.toLocaleString()}</span>
+                            
+                            {/* Desktop Layout (3 columns) */}
+                            <div className="hidden sm:grid sm:grid-cols-3 gap-4 text-sm">
+                                <div className="flex flex-col space-y-1">
+                                    <span className="text-blue-600 font-medium">Total Income:</span>
+                                    <span className="text-green-600 font-bold text-base lg:text-lg">
+                                        ${projectTotals.totalIncome.toLocaleString()}
+                                    </span>
                                 </div>
-                                <div>
-                                    <span className="text-blue-600 font-medium">Total Expenses: </span>
-                                    <span className="text-red-600 font-bold">${projectTotals.totalExpenses.toLocaleString()}</span>
+                                <div className="flex flex-col space-y-1">
+                                    <span className="text-blue-600 font-medium">Total Expenses:</span>
+                                    <span className="text-red-600 font-bold text-base lg:text-lg">
+                                        ${projectTotals.totalExpenses.toLocaleString()}
+                                    </span>
                                 </div>
-                                <div>
-                                    <span className="text-blue-600 font-medium">Net Balance: </span>
-                                    <span className={`font-bold ${projectTotals.balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                <div className="flex flex-col space-y-1">
+                                    <span className="text-blue-600 font-medium">Net Balance:</span>
+                                    <span className={`font-bold text-base lg:text-lg ${projectTotals.balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                        ${projectTotals.balance.toLocaleString()}
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* Mobile Layout (Stacked) */}
+                            <div className="sm:hidden space-y-3">
+                                <div className="flex justify-between items-center border-b border-blue-200 pb-2">
+                                    <span className="text-blue-600 font-medium text-sm">Total Income:</span>
+                                    <span className="text-green-600 font-bold text-base">
+                                        ${projectTotals.totalIncome.toLocaleString()}
+                                    </span>
+                                </div>
+                                <div className="flex justify-between items-center border-b border-blue-200 pb-2">
+                                    <span className="text-blue-600 font-medium text-sm">Total Expenses:</span>
+                                    <span className="text-red-600 font-bold text-base">
+                                        ${projectTotals.totalExpenses.toLocaleString()}
+                                    </span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-blue-600 font-medium text-sm">Net Balance:</span>
+                                    <span className={`font-bold text-base ${projectTotals.balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                                         ${projectTotals.balance.toLocaleString()}
                                     </span>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            <TransactionSection
-                                type="income"
-                                title={`Income (${selectedYear})`}
-                                transactions={projects[currentProject]?.income?.[selectedYear.toString()] || {}}
-                                onDelete={(id) => deleteTransaction('income', id)}
-                                onAddTransaction={() => setShowIncomeForm(true)}
-                                buttonColor="green"
-                            />
+                        {/* Transaction Sections - Responsive Grid */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                            <div className="w-full">
+                                <TransactionSection
+                                    type="income"
+                                    title={`Income (${selectedYear})`}
+                                    transactions={projects[currentProject]?.income?.[selectedYear.toString()] || {}}
+                                    onDelete={(id) => deleteTransaction('income', id)}
+                                    onAddTransaction={() => setShowIncomeForm(true)}
+                                    buttonColor="green"
+                                />
+                            </div>
 
-                            <TransactionSection
-                                type="expense"
-                                title={`Expenses (${selectedYear})`}
-                                transactions={projects[currentProject]?.expenses?.[selectedYear.toString()] || {}}
-                                onDelete={(id) => deleteTransaction('expenses', id)}
-                                onAddTransaction={() => setShowExpenseForm(true)}
-                                buttonColor="red"
-                            />
+                            <div className="w-full">
+                                <TransactionSection
+                                    type="expense"
+                                    title={`Expenses (${selectedYear})`}
+                                    transactions={projects[currentProject]?.expenses?.[selectedYear.toString()] || {}}
+                                    onDelete={(id) => deleteTransaction('expenses', id)}
+                                    onAddTransaction={() => setShowExpenseForm(true)}
+                                    buttonColor="red"
+                                />
+                            </div>
                         </div>
                     </>
                 )}
 
-                {/* Modals */}
+                {/* Modals - These should be responsive by default */}
                 <AddProjectModal
                     show={showAddProject}
                     projectName={newProjectName}
