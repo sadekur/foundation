@@ -20,12 +20,12 @@ const TransactionSection = ({
     <div className="bg-white rounded-lg shadow-sm">
       <div className="p-6 border-b">
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+          <h2 className="text-base md:text-xl font-semibold text-gray-800">{title}</h2>
           <button
             onClick={onAddTransaction}
-            className={`flex items-center gap-2 text-white px-4 py-2 rounded-lg transition-colors ${colorClasses[buttonColor]}`}
+            className={`flex items-center gap-2 text-sm md:text-lg text-white px-[6px] py-2 md:px-4 md:py-2 rounded-lg transition-colors ${colorClasses[buttonColor]}`}
           >
-            <Plus size={16} />
+            <Plus size={16} className="text-white" />
             Add {title}
           </button>
         </div>
