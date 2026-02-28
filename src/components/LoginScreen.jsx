@@ -34,7 +34,7 @@ const LoginScreen = () => {
             As-Salsabil Foundation
           </h1>
           <p className="text-xs xs:text-sm sm:text-base text-gray-600">
-            Multi-Admin Access System
+            Multi-Admin Access Systemdsfcdsfds
           </p>
         </div>
         
