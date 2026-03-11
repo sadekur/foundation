@@ -25,7 +25,21 @@ import AddProjectModal from './components/AddProjectModal';
 import TransactionFormModal from './components/TransactionFormModal';
 import YearlySummaryScreen from './components/YearlySummaryScreen';
 
+// import { getDocs, collection } from "firebase/firestore";
 
+// async function exportFirestore() {
+//   const snapshot = await getDocs(collection(db, "foundations"));
+
+//   const data = snapshot.docs.map(doc => ({
+//     id: doc.id,
+//     ...doc.data()
+//   }));
+
+//   const json = JSON.stringify(data, null, 2);
+//   console.log(json);
+// }
+
+// exportFirestore();
 const FoundationApp = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
