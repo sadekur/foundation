@@ -196,28 +196,8 @@ const ProjectControls = ({
                   ? 'bg-green-500' 
                   : 'bg-yellow-500'
               }`}></div>
-              <span className="text-xs xs:text-sm text-gray-600">
-                {projectInfo && projectInfo.years.includes(selectedYear) 
-                  ? `Active year - showing ${selectedYear} data` 
-                  : `No transactions in ${selectedYear} yet`
-                }
-              </span>
             </div>
-            
-            {/* Latest Activity */}
-            {projectInfo && projectInfo.years.length > 0 && (
-              <div className="text-xs xs:text-sm text-gray-500 pl-4 xs:pl-0">
-                Latest: {Math.max(...projectInfo.years)}
-              </div>
-            )}
           </div>
-
-          {/* Mobile Help Text */}
-          {currentProject && availableYears.length > 1 && (
-            <div className="mt-2 text-xs text-gray-500 sm:hidden">
-              💡 Tip: Use the year buttons above to quickly switch between periods
-            </div>
-          )}
         </div>
       )}
     </div>
