@@ -63,7 +63,7 @@ const ProjectControls = ({
             {projectInfo && (
               <div className="mt-1.5 xs:mt-2 text-xs text-gray-500 space-y-1">
                 <div className="flex flex-col xs:flex-row xs:gap-4">
-                  <div>Active Years: {projectInfo.years.join(', ') || 'No data'}</div>
+                  {/* <div>Active Years: {projectInfo.years.join(', ') || 'No data'}</div> */}
                   <div>Total Years: {projectInfo.totalYears}</div>
                 </div>
               </div>
