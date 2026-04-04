@@ -1,7 +1,7 @@
 // src/components/TransactionTable.js
 import React, { useState } from "react";
 import { Trash2 } from "lucide-react";
-import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import DeleteConfirmationModal from "./common/DeleteConfirmationModal";
 
 const TransactionTable = ({ transactions, onDelete, type }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
