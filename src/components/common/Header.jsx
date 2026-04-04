@@ -1,7 +1,7 @@
 // src/components/Header.js
 import React from 'react';
 import { LogOut } from 'lucide-react';
-import { auth } from '../firebase';
+import { auth } from '../../firebase';
 import { signOut } from 'firebase/auth';
 
 const Header = ({ user, setLoading }) => {

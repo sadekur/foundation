@@ -16,8 +16,8 @@ import {
 // Import components
 import LoginScreen from './components/LoginScreen';
 import LoadingScreen from './components/LoadingScreen';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
 import SyncIndicator from './components/SyncIndicator';
 import ProjectControls from './components/ProjectControls';
 import SummaryCards from './components/SummaryCards';
