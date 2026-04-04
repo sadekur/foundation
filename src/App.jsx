@@ -62,7 +62,6 @@ const FoundationApp = () => {
     const [newProjectYear, setNewProjectYear] = useState(new Date().getFullYear());
 
     // Authentication and data listener
-    // REPLACE your entire useEffect with this:
     useEffect(() => {
         let unsubscribeData = null;
 
