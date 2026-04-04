@@ -107,7 +107,7 @@ const ProjectControls = ({
           </div>
 
           {/* Quick Year Navigation - Responsive */}
-          {currentProject && projectInfo && projectInfo.years.length > 1 && (
+          {/* {currentProject && projectInfo && projectInfo.years.length > 1 && (
             <div className="w-full sm:w-auto sm:min-w-[200px]">
               <label className="block text-xs xs:text-sm font-medium text-gray-700 mb-1 xs:mb-2">
                 Quick Navigation
@@ -136,7 +136,7 @@ const ProjectControls = ({
                 )}
               </div>
             </div>
-          )}
+          )} */}
         </div>
 
         {/* Right Section - Action Buttons */}
