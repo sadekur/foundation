@@ -1,9 +1,31 @@
 // src/components/TransactionTable.js
-import React from "react";
+import React, { useState } from "react";
 import { Trash2 } from "lucide-react";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
 const TransactionTable = ({ transactions, onDelete, type }) => {
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+
   const transactionList = Object.values(transactions || {});
+
+  const handleDeleteClick = (transactionId) => {
+    setSelectedTransactionId(transactionId);
+    setDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (selectedTransactionId) {
+      onDelete(selectedTransactionId);
+      setDeleteModalOpen(false);
+      setSelectedTransactionId(null);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setDeleteModalOpen(false);
+    setSelectedTransactionId(null);
+  };
 
   if (transactionList.length === 0) {
     return (
@@ -54,7 +76,7 @@ const TransactionTable = ({ transactions, onDelete, type }) => {
                 </td>
                 <td className="p-1.5 xs:p-2 sm:p-3 text-center">
                   <button
-                    onClick={() => onDelete(transaction.id)}
+                    onClick={() => handleDeleteClick(transaction.id)}
                     className="text-red-600 hover:text-red-800 transition-colors p-1 xs:p-1.5 rounded hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
                     title="Delete transaction"
                     aria-label="Delete transaction"
@@ -80,6 +102,14 @@ const TransactionTable = ({ transactions, onDelete, type }) => {
           </tr>
         </tfoot>
       </table>
+
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmationModal
+        show={deleteModalOpen}
+        onCancel={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+        itemName={type === "income" ? "income transaction" : "expense transaction"}
+      />
     </div>
   );
 };
