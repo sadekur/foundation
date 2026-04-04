@@ -183,23 +183,6 @@ const ProjectControls = ({
           </button>
         </div>
       </div>
-
-      {/* Project Status Indicator - Responsive */}
-      {currentProject && (
-        <div className="mt-3 xs:mt-4 pt-3 xs:pt-4 border-t border-gray-200">
-          <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2 xs:gap-4">
-            
-            {/* Status Indicator */}
-            <div className="flex items-center gap-2">
-              <div className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                projectInfo && projectInfo.years.includes(selectedYear) 
-                  ? 'bg-green-500' 
-                  : 'bg-yellow-500'
-              }`}></div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
