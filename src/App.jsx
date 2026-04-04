@@ -15,14 +15,14 @@ import {
 
 // Import components
 import LoginScreen from './components/LoginScreen';
-import LoadingScreen from './components/LoadingScreen';
+import LoadingScreen from './components/common/LoadingScreen';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import SyncIndicator from './components/SyncIndicator';
 import ProjectControls from './components/ProjectControls';
 import SummaryCards from './components/SummaryCards';
 import TransactionSection from './components/TransactionSection';
-import AddProjectModal from './components/AddProjectModal';
+import AddProjectModal from './components/common/AddProjectModal';
 import TransactionFormModal from './components/TransactionFormModal';
 import YearlySummaryScreen from './components/YearlySummaryScreen';
 
