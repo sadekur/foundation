@@ -62,44 +62,53 @@ const FoundationApp = () => {
     const [newProjectYear, setNewProjectYear] = useState(new Date().getFullYear());
 
     // Authentication and data listener
+    // REPLACE your entire useEffect with this:
     useEffect(() => {
-        const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
+        let unsubscribeData = null;
+
+        const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
             setUser(user);
             setLoading(false);
-            
+
             if (user) {
                 const foundationDocRef = doc(db, 'foundations', 'as-salsabil');
-                
-                const unsubscribeData = onSnapshot(foundationDocRef, (docSnap) => {
+
+                unsubscribeData = onSnapshot(foundationDocRef, (docSnap) => {
                     if (docSnap.exists()) {
                         const data = docSnap.data();
                         setProjects(data.projects || {});
-                        
-                        // Set current project if none selected
-                        if (!currentProject && Object.keys(data.projects || {}).length > 0) {
-                            const firstProject = Object.keys(data.projects)[0];
-                            setCurrentProject(firstProject);
-                            
-                            // Set year to most recent year with data for this project
-                            const projectYears = getProjectYears(data.projects[firstProject]);
-                            if (projectYears.length > 0) {
-                                setSelectedYear(Math.max(...projectYears));
+
+                        // Functional update — no stale closure on currentProject
+                        setCurrentProject(prev => {
+                            if (!prev && Object.keys(data.projects || {}).length > 0) {
+                                const firstProject = Object.keys(data.projects)[0];
+                                const projectYears = getProjectYears(data.projects[firstProject]);
+                                if (projectYears.length > 0) {
+                                    setSelectedYear(Math.max(...projectYears));
+                                }
+                                return firstProject;
                             }
-                        }
+                            return prev; // keep whatever is already selected
+                        });
                     }
                 }, (error) => {
                     console.error('Error listening to document:', error);
                 });
-
-                return () => unsubscribeData();
             } else {
                 setProjects({});
                 setCurrentProject('');
+                if (unsubscribeData) {
+                    unsubscribeData();
+                    unsubscribeData = null;
+                }
             }
         });
 
-        return () => unsubscribeAuth();
-    }, [currentProject]);
+        return () => {
+            unsubscribeAuth();
+            if (unsubscribeData) unsubscribeData();
+        };
+    }, []); // ← empty array: runs only once, no stale listeners
 
     // Helper function to get all years for a project
     const getProjectYears = (projectData) => {
@@ -118,8 +127,7 @@ const FoundationApp = () => {
             await setDoc(foundationDocRef, {
                 projects: updatedProjects,
                 lastUpdated: new Date().toISOString()
-            }, { merge: true });
-            
+            }); // ← no merge:true — overwrites the document so deletes actually stick
             console.log('Data saved to Firebase successfully');
         } catch (error) {
             console.error('Failed to save data:', error);
@@ -200,15 +208,17 @@ const FoundationApp = () => {
 
     const deleteTransaction = async (type, transactionId) => {
         const year = selectedYear.toString();
-        const updatedProjects = { ...projects };
-        
-        if (updatedProjects[currentProject][type][year]) {
+
+        // Deep copy — shallow spread doesn't protect nested objects
+        const updatedProjects = JSON.parse(JSON.stringify(projects));
+
+        if (updatedProjects[currentProject]?.[type]?.[year]) {
             delete updatedProjects[currentProject][type][year][transactionId];
             if (Object.keys(updatedProjects[currentProject][type][year]).length === 0) {
                 delete updatedProjects[currentProject][type][year];
             }
         }
-        
+
         setProjects(updatedProjects);
         await saveToFirebase(updatedProjects);
     };
