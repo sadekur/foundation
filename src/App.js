@@ -17,6 +17,7 @@ import {
 import LoginScreen from './components/LoginScreen';
 import LoadingScreen from './components/LoadingScreen';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import SyncIndicator from './components/SyncIndicator';
 import ProjectControls from './components/ProjectControls';
 import SummaryCards from './components/SummaryCards';
@@ -468,6 +469,7 @@ const FoundationApp = () => {
                     onCancel={handleTransactionFormCancel}
                 />
             </div>
+            <Footer />
         </div>
     );
 };
