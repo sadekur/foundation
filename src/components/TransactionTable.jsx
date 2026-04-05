@@ -1,6 +1,6 @@
 // src/components/TransactionTable.js
 import React, { useState } from "react";
-import { Trash2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Trash2, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import DeleteConfirmationModal from "./common/DeleteConfirmationModal";
 
 const TransactionTable = ({ 
@@ -13,7 +13,8 @@ const TransactionTable = ({
   startRecord = 0,
   endRecord = 0,
   onPreviousPage,
-  onNextPage
+  onNextPage,
+  isLoading = false
 }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedTransactionId, setSelectedTransactionId] = useState(null);
@@ -38,7 +39,7 @@ const TransactionTable = ({
     setSelectedTransactionId(null);
   };
 
-  if (transactionList.length === 0) {
+  if (totalItems === 0 && !isLoading) {
     return (
       <div className="text-center py-8 text-gray-500">
         <p>No {type} records found for this year</p>
@@ -78,47 +79,59 @@ const TransactionTable = ({
           </tr>
         </thead>
         <tbody>
-          {transactionList.map((transaction) => (
-            <tr key={transaction.id} className="border-b hover:bg-gray-50">
-              <td className="p-1.5 xs:p-2 sm:p-3 text-xs xs:text-sm whitespace-nowrap">
-                {new Date(transaction.date).toLocaleDateString("en-BD")}
-              </td>
-              <td
-                className="p-1.5 xs:p-2 sm:p-3 text-xs xs:text-sm max-w-[120px] xs:max-w-[150px] sm:max-w-none truncate"
-                title={transaction.donor}
-              >
-                {transaction.donor}
-              </td>
-              <td className="p-1.5 xs:p-2 sm:p-3 font-medium text-xs xs:text-sm whitespace-nowrap">
-                ৳{transaction.amount.toLocaleString("en-BD")}
-              </td>
-              <td className="p-1.5 xs:p-2 sm:p-3 text-center">
-                <button
-                  onClick={() => handleDeleteClick(transaction.id)}
-                  className="text-red-600 hover:text-red-800 transition-colors p-1 xs:p-1.5 rounded hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
-                  title="Delete transaction"
-                  aria-label="Delete transaction"
-                >
-                  <Trash2 size={14} className="xs:w-4 xs:h-4" />
-                </button>
+          {isLoading ? (
+            // Loader inside table row
+            <tr>
+              <td colSpan="4" className="p-8 text-center">
+                <Loader2 size={24} className="animate-spin mx-auto text-gray-400" />
+                <p className="text-sm text-gray-500 mt-2">Loading...</p>
               </td>
             </tr>
-          ))}
+          ) : (
+            transactionList.map((transaction) => (
+              <tr key={transaction.id} className="border-b hover:bg-gray-50">
+                <td className="p-1.5 xs:p-2 sm:p-3 text-xs xs:text-sm whitespace-nowrap">
+                  {new Date(transaction.date).toLocaleDateString("en-BD")}
+                </td>
+                <td
+                  className="p-1.5 xs:p-2 sm:p-3 text-xs xs:text-sm max-w-[120px] xs:max-w-[150px] sm:max-w-none truncate"
+                  title={transaction.donor}
+                >
+                  {transaction.donor}
+                </td>
+                <td className="p-1.5 xs:p-2 sm:p-3 font-medium text-xs xs:text-sm whitespace-nowrap">
+                  ৳{transaction.amount.toLocaleString("en-BD")}
+                </td>
+                <td className="p-1.5 xs:p-2 sm:p-3 text-center">
+                  <button
+                    onClick={() => handleDeleteClick(transaction.id)}
+                    className="text-red-600 hover:text-red-800 transition-colors p-1 xs:p-1.5 rounded hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                    title="Delete transaction"
+                    aria-label="Delete transaction"
+                  >
+                    <Trash2 size={14} className="xs:w-4 xs:h-4" />
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
-        <tfoot>
-          <tr className="border-t-2 font-semibold bg-gray-50">
-            <td colSpan="2" className="p-1.5 xs:p-2 sm:p-3 text-xs xs:text-sm">
-              Total (this page):
-            </td>
-            <td className="p-1.5 xs:p-2 sm:p-3 text-xs xs:text-sm whitespace-nowrap">
-              ৳
-              {transactionList
-                .reduce((sum, t) => sum + t.amount, 0)
-                .toLocaleString("en-BD")}
-            </td>
-            <td className="p-1.5 xs:p-2 sm:p-3"></td>
-          </tr>
-        </tfoot>
+        {!isLoading && (
+          <tfoot>
+            <tr className="border-t-2 font-semibold bg-gray-50">
+              <td colSpan="2" className="p-1.5 xs:p-2 sm:p-3 text-xs xs:text-sm">
+                Total (this page):
+              </td>
+              <td className="p-1.5 xs:p-2 sm:p-3 text-xs xs:text-sm whitespace-nowrap">
+                ৳
+                {transactionList
+                  .reduce((sum, t) => sum + t.amount, 0)
+                  .toLocaleString("en-BD")}
+              </td>
+              <td className="p-1.5 xs:p-2 sm:p-3"></td>
+            </tr>
+          </tfoot>
+        )}
       </table>
 
       {/* Pagination Controls */}
@@ -130,9 +143,9 @@ const TransactionTable = ({
           <div className="flex gap-2">
             <button
               onClick={onPreviousPage}
-              disabled={currentPage === 1}
+              disabled={currentPage === 1 || isLoading}
               className={`flex items-center gap-1 px-3 py-1.5 rounded text-sm font-medium transition-colors ${
-                currentPage === 1
+                currentPage === 1 || isLoading
                   ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                   : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-300"
               }`}
@@ -143,9 +156,9 @@ const TransactionTable = ({
             </button>
             <button
               onClick={onNextPage}
-              disabled={currentPage === totalPages}
+              disabled={currentPage === totalPages || isLoading}
               className={`flex items-center gap-1 px-3 py-1.5 rounded text-sm font-medium transition-colors ${
-                currentPage === totalPages
+                currentPage === totalPages || isLoading
                   ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                   : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-300"
               }`}
