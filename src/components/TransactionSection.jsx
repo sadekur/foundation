@@ -1,20 +1,58 @@
 // src/components/TransactionSection.js
-import React from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Plus } from 'lucide-react';
 import TransactionTable from './TransactionTable';
 
-const TransactionSection = ({ 
-  type, 
-  title, 
-  transactions, 
-  onDelete, 
-  onAddTransaction, 
-  buttonColor 
+const TransactionSection = ({
+  type,
+  title,
+  transactions,
+  onDelete,
+  onAddTransaction,
+  buttonColor
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   const colorClasses = {
     green: 'bg-green-600 hover:bg-green-700',
     red: 'bg-red-600 hover:bg-red-700'
   };
+
+  // Sort and paginate transactions
+  const sortedTransactions = useMemo(() => {
+    return Object.values(transactions || {})
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+  }, [transactions]);
+
+  const totalItems = sortedTransactions.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  
+  const paginatedTransactions = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return sortedTransactions.slice(startIndex, endIndex);
+  }, [sortedTransactions, currentPage, itemsPerPage]);
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // Reset to page 1 when transactions change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [transactions]);
+
+  const startRecord = totalItems === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
+  const endRecord = Math.min(currentPage * itemsPerPage, totalItems);
 
   return (
     <div className="bg-white rounded-lg shadow-sm">
@@ -30,12 +68,19 @@ const TransactionSection = ({
           </button>
         </div>
       </div>
-      
+
       <div className="p-6">
         <TransactionTable
-          transactions={transactions}
+          transactions={paginatedTransactions}
           onDelete={onDelete}
           type={type}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={totalItems}
+          startRecord={startRecord}
+          endRecord={endRecord}
+          onPreviousPage={handlePreviousPage}
+          onNextPage={handleNextPage}
         />
       </div>
     </div>
