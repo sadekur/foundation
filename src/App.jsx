@@ -259,61 +259,21 @@ const FoundationApp = () => {
         await saveToFirebase(updatedProjects);
     };
 
-    const calculateTotals = () => {
-        if (!currentProject || !projects[currentProject]) {
-            return { totalIncome: 0, totalExpenses: 0, balance: 0 };
-        }
-
-        const year = selectedYear.toString();
-        const projectData = projects[currentProject];
-        
-        const incomeData = projectData.income?.[year] || {};
-        const expenseData = projectData.expenses?.[year] || {};
-
-        const totalIncome = Object.values(incomeData).reduce((sum, transaction) => sum + transaction.amount, 0);
-        const totalExpenses = Object.values(expenseData).reduce((sum, transaction) => sum + transaction.amount, 0);
-        const balance = totalIncome - totalExpenses;
-
-        return { totalIncome, totalExpenses, balance };
-    };
-
-    // Calculate totals for all years of current project
-    const calculateProjectTotals = (projectName) => {
-        if (!projectName || !projects[projectName]) {
-            return { totalIncome: 0, totalExpenses: 0, balance: 0, years: [] };
-        }
-
-        const projectData = projects[projectName];
-        const allYears = getProjectYears(projectData);
-        
-        let totalIncome = 0;
-        let totalExpenses = 0;
-        
-        allYears.forEach(year => {
-            const yearStr = year.toString();
-            const incomeData = projectData.income?.[yearStr] || {};
-            const expenseData = projectData.expenses?.[yearStr] || {};
-            
-            totalIncome += Object.values(incomeData).reduce((sum, transaction) => sum + transaction.amount, 0);
-            totalExpenses += Object.values(expenseData).reduce((sum, transaction) => sum + transaction.amount, 0);
-        });
-
-        return { 
-            totalIncome, 
-            totalExpenses, 
-            balance: totalIncome - totalExpenses,
-            years: allYears
-        };
-    };
-
-    const getAvailableYears = () => {
-        if (!currentProject || !projects[currentProject]) {
-            return [new Date().getFullYear()];
-        }
-        
-        const projectYears = getProjectYears(projects[currentProject]);
-        return projectYears.length > 0 ? projectYears : [new Date().getFullYear()];
-    };
+    // Derived stats — memoized so they only recompute when the underlying
+    // data actually changes, not on every keystroke/render (e.g. while a
+    // transaction form is open and unrelated state is updating).
+    const { totalIncome, totalExpenses, balance } = useMemo(
+        () => calculateTotals(projects, currentProject, selectedYear),
+        [projects, currentProject, selectedYear]
+    );
+    const availableYears = useMemo(
+        () => getAvailableYears(projects, currentProject),
+        [projects, currentProject]
+    );
+    const projectTotals = useMemo(
+        () => calculateProjectTotals(projects, currentProject),
+        [projects, currentProject]
+    );
 
     // Handle project change - update year to most recent year with data
     const handleProjectChange = (newProject) => {
