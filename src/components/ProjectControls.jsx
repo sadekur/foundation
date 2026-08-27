@@ -1,27 +1,27 @@
 // src/components/ProjectControls.js
 import React from 'react';
-import { BarChart3, Plus } from 'lucide-react';
+import { BarChart3, Plus, Pencil, Trash2 } from 'lucide-react';
+import { getProjectYearKeys } from '../utils/projectStats';
 
-const ProjectControls = ({ 
-  currentProject, 
-  setCurrentProject, 
-  selectedYear, 
-  setSelectedYear, 
-  projects, 
-  availableYears, 
+const ProjectControls = ({
+  currentProject,
+  setCurrentProject,
+  selectedYear,
+  setSelectedYear,
+  projects,
+  availableYears,
   onAddProject,
-  onShowYearlySummary 
+  onShowYearlySummary,
+  onEditProject,
+  onDeleteProject
 }) => {
   // Helper function to get project info
   const getProjectInfo = (projectName) => {
     if (!projects[projectName]) return null;
-    
+
     const project = projects[projectName];
-    const allYears = new Set([
-      ...Object.keys(project.income || {}),
-      ...Object.keys(project.expenses || {})
-    ]);
-    
+    const allYears = getProjectYearKeys(project);
+
     return {
       totalYears: allYears.size,
       years: Array.from(allYears).map(Number).sort((a, b) => b - a),
