@@ -2,8 +2,8 @@
 https://salsabil-foundation.vercel.app
 
 salsabilfoubdtion@gmail.com
-shadekur.rahman60@gmail.com pass: 111111
-salsabilfoubdtion@gmail.com pass: 111111
+shadekur.rahman60@gmail.com pass:
+salsabilfoubdtion@gmail.com pass:
 databaseURL: "https://as-salsabil-foundation-default-rtdb.firebaseio.com",
 
 ## Available Scripts
