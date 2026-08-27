@@ -349,10 +349,6 @@ const FoundationApp = () => {
         return <YearlySummaryScreen projects={projects} onBack={handleBackToDashboard} />;
     }
 
-    const { totalIncome, totalExpenses, balance } = calculateTotals();
-    const availableYears = getAvailableYears();
-    const projectTotals = calculateProjectTotals(currentProject);
-
     return (
         <div className="min-h-screen bg-gray-50">
             <Header user={user} setLoading={setLoading} />
