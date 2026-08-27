@@ -295,6 +295,28 @@ const FoundationApp = () => {
         setNewProjectYear(new Date().getFullYear());
     };
 
+    const handleEditProjectOpen = () => {
+        setEditProjectName(currentProject);
+        setShowEditProject(true);
+    };
+
+    const handleEditProjectCancel = () => {
+        setShowEditProject(false);
+        setEditProjectName('');
+    };
+
+    const handleEditProjectSave = () => {
+        renameProject(currentProject, editProjectName);
+    };
+
+    const handleDeleteProjectCancel = () => {
+        setShowDeleteProjectConfirm(false);
+    };
+
+    const handleDeleteProjectConfirm = () => {
+        deleteProject(currentProject);
+    };
+
     const handleShowYearlySummary = () => {
         setShowYearlySummary(true);
     };
