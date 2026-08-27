@@ -2,7 +2,7 @@
 import React from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 
-const DeleteConfirmationModal = ({ show, onCancel, onConfirm, itemName }) => {
+const DeleteConfirmationModal = ({ show, onCancel, onConfirm, itemName, description }) => {
   if (!show) return null;
 
   return (
