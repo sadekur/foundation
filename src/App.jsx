@@ -115,17 +115,6 @@ const FoundationApp = () => {
         };
     }, []); // ← empty array: runs only once, no stale listeners
 
-    // Helper function to get all years for a project
-    const getProjectYears = (projectData) => {
-        if (!projectData) return [];
-        
-        const incomeYears = Object.keys(projectData.income || {}).map(Number);
-        const expenseYears = Object.keys(projectData.expenses || {}).map(Number);
-        const allYears = [...new Set([...incomeYears, ...expenseYears])];
-        
-        return allYears.sort((a, b) => b - a);
-    };
-
     const saveToFirebase = async (updatedProjects) => {
         try {
             const foundationDocRef = doc(db, 'foundations', 'as-salsabil');
