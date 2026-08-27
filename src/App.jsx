@@ -52,7 +52,10 @@ const FoundationApp = () => {
     const [projects, setProjects] = useState({});
     const [newProjectName, setNewProjectName] = useState('');
     const [showAddProject, setShowAddProject] = useState(false);
-    
+    const [showEditProject, setShowEditProject] = useState(false);
+    const [editProjectName, setEditProjectName] = useState('');
+    const [showDeleteProjectConfirm, setShowDeleteProjectConfirm] = useState(false);
+
     // Transaction form state
     const [showIncomeForm, setShowIncomeForm] = useState(false);
     const [showExpenseForm, setShowExpenseForm] = useState(false);
