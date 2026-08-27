@@ -371,6 +371,8 @@ const FoundationApp = () => {
                         availableYears={availableYears}
                         onAddProject={() => setShowAddProject(true)}
                         onShowYearlySummary={handleShowYearlySummary}
+                        onEditProject={handleEditProjectOpen}
+                        onDeleteProject={() => setShowDeleteProjectConfirm(true)}
                     />
                 </div>
 
