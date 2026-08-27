@@ -23,8 +23,11 @@ import ProjectControls from './components/ProjectControls';
 import SummaryCards from './components/SummaryCards';
 import TransactionSection from './components/TransactionSection';
 import AddProjectModal from './components/common/AddProjectModal';
+import EditProjectModal from './components/common/EditProjectModal';
+import DeleteConfirmationModal from './components/common/DeleteConfirmationModal';
 import TransactionFormModal from './components/TransactionFormModal';
 import YearlySummaryScreen from './components/YearlySummaryScreen';
+import { getProjectYears, calculateTotals, calculateProjectTotals, getAvailableYears } from './utils/projectStats';
 
 // import { getDocs, collection } from "firebase/firestore";
 
