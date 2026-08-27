@@ -45,20 +45,50 @@ const ProjectControls = ({
             <label className="block text-xs xs:text-sm font-medium text-gray-700 mb-1 xs:mb-2">
               Current Project
             </label>
-            <select
-              value={currentProject}
-              onChange={(e) => setCurrentProject(e.target.value)}
-              className="w-full p-2 xs:p-2.5 sm:p-3 text-sm xs:text-base
-                        border border-gray-300 rounded-md xs:rounded-lg 
-                        focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
-                        transition-all duration-200 hover:border-gray-400"
-            >
-              <option value="">Select a project</option>
-              {Object.keys(projects).map(project => (
-                <option key={project} value={project}>{project}</option>
-              ))}
-            </select>
-            
+            <div className="flex gap-1.5 xs:gap-2">
+              <select
+                value={currentProject}
+                onChange={(e) => setCurrentProject(e.target.value)}
+                className="flex-1 min-w-0 p-2 xs:p-2.5 sm:p-3 text-sm xs:text-base
+                          border border-gray-300 rounded-md xs:rounded-lg
+                          focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                          transition-all duration-200 hover:border-gray-400"
+              >
+                <option value="">Select a project</option>
+                {Object.keys(projects).map(project => (
+                  <option key={project} value={project}>{project}</option>
+                ))}
+              </select>
+              {currentProject && (
+                <>
+                  <button
+                    type="button"
+                    onClick={onEditProject}
+                    className="flex-shrink-0 p-2 xs:p-2.5 sm:p-3 border border-gray-300 rounded-md xs:rounded-lg
+                              text-gray-500 hover:text-indigo-600 hover:border-indigo-400 hover:bg-indigo-50
+                              transition-all duration-200
+                              focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                    aria-label="Edit project"
+                    title="Edit project"
+                  >
+                    <Pencil size={16} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={onDeleteProject}
+                    className="flex-shrink-0 p-2 xs:p-2.5 sm:p-3 border border-gray-300 rounded-md xs:rounded-lg
+                              text-gray-500 hover:text-red-600 hover:border-red-400 hover:bg-red-50
+                              transition-all duration-200
+                              focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                    aria-label="Delete project"
+                    title="Delete project"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </>
+              )}
+            </div>
+
             {/* Project Info - Responsive */}
             {projectInfo && (
               <div className="mt-1.5 xs:mt-2 text-xs text-gray-500 space-y-1">
