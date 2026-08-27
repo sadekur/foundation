@@ -477,6 +477,21 @@ const FoundationApp = () => {
                     onCancel={handleAddProjectCancel}
                 />
 
+                <EditProjectModal
+                    show={showEditProject}
+                    projectName={editProjectName}
+                    setProjectName={setEditProjectName}
+                    onSave={handleEditProjectSave}
+                    onCancel={handleEditProjectCancel}
+                />
+
+                <DeleteConfirmationModal
+                    show={showDeleteProjectConfirm}
+                    onCancel={handleDeleteProjectCancel}
+                    onConfirm={handleDeleteProjectConfirm}
+                    description={`Are you sure you want to delete "${currentProject}"? All of its income and expense records will be permanently deleted. This action cannot be undone.`}
+                />
+
                 <TransactionFormModal
                     show={showIncomeForm}
                     type="income"
