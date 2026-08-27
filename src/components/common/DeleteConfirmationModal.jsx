@@ -35,7 +35,7 @@ const DeleteConfirmationModal = ({ show, onCancel, onConfirm, itemName, descript
             Confirm Delete
           </h3>
           <p className="text-sm text-gray-600 mb-6">
-            Are you sure you want to delete this {itemName || 'transaction'}? This action cannot be undone.
+            {description || `Are you sure you want to delete this ${itemName || 'transaction'}? This action cannot be undone.`}
           </p>
 
           {/* Actions */}
