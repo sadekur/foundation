@@ -27,8 +27,8 @@ export const Navbar = () => {
       <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 xs:h-18">
           <Link href="/" className="flex items-center gap-2 group min-w-0">
-            <span className="flex-shrink-0 flex items-center justify-center w-8 h-8 xs:w-9 xs:h-9 rounded-full bg-amber-400/90 text-emerald-950 font-bold text-sm xs:text-base">
-              ﷽
+            <span className="flex-shrink-0 relative w-8 h-8 xs:w-10 xs:h-10 rounded-full overflow-hidden ring-1 ring-amber-400/40">
+              <Image src="/logo192.png" alt="As-Salsabil Foundation" fill sizes="40px" className="object-cover" priority />
             </span>
             <span className="text-base xs:text-lg sm:text-xl font-semibold text-white truncate group-hover:text-amber-300 transition-colors">
               {dictionary.nav.brand}
