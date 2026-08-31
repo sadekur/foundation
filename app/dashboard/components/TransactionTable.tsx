@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Trash2, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
-import DeleteConfirmationModal from "@/components/common/DeleteConfirmationModal";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import type { Transaction, TransactionType } from "@/types";
 
 interface TransactionTableProps {
