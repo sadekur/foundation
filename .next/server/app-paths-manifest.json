@@ -1,1 +1,5 @@
-{}
+{
+  "/(public)/about/page": "app/(public)/about/page.js",
+  "/salsabilownerlogin/page": "app/salsabilownerlogin/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/(public)/page": "app/(public)/page.js",
