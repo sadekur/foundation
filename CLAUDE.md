@@ -76,12 +76,9 @@ Both route folders have a `layout.tsx` that sets `robots: { index: false, follow
 
 **Derived stats**: `lib/utils/projectStats.ts` holds pure, typed functions (`getProjectYears`, `calculateTotals`, `calculateProjectTotals`, `getAvailableYears`) that compute totals/years from the raw `projects` shape. `FoundationDashboard` wraps them in `useMemo` so they only recompute when `projects`/`currentProject`/`selectedYear` actually change.
 
-**Component structure** (`components/`):
-- `common/` — chrome shared by the admin routes (`Header`, `Footer`, `LoadingScreen`, `AddProjectModal`, `EditProjectModal`, `DeleteConfirmationModal`) — note this is the *admin* Header/Footer, distinct from `components/public/Navbar`/`Footer`.
-- `dashboard/` — `FoundationDashboard`, `LoginScreen`, `ProjectControls`, `SummaryCards`, `TransactionSection`/`TransactionTable`, `TransactionFormModal`, `YearlySummaryScreen`, `SyncIndicator`. `TransactionSection` owns search/sort/pagination (10 items/page) over the transactions object it's handed for the current project+year+type; `DeleteConfirmationModal` is reused for both per-transaction and per-project deletes.
-- `public/` — `Navbar`, `Footer`, `LanguageToggle` for the marketing site.
+**`app/dashboard/components/`** — `FoundationDashboard`, `Header`, `Footer` (the *admin* chrome, distinct from `app/(public)/components/Navbar`/`Footer`), `LoadingScreen`'s siblings `AddProjectModal`, `EditProjectModal`, `DeleteConfirmationModal`, `ProjectControls`, `SummaryCards`, `TransactionSection`/`TransactionTable`, `TransactionFormModal`, `YearlySummaryScreen`, `SyncIndicator`. `TransactionSection` owns search/sort/pagination (10 items/page) over the transactions object it's handed for the current project+year+type; `DeleteConfirmationModal` is reused for both per-transaction and per-project deletes. `YearlySummaryScreen` is a separate full-screen view (toggled via `showYearlySummary` state inside `FoundationDashboard`, not a route) that aggregates totals across all years/projects.
 
-`YearlySummaryScreen` is a separate full-screen view (toggled via `showYearlySummary` state inside `FoundationDashboard`, not a route) that aggregates totals across all years/projects.
+**`app/salsabilownerlogin/components/LoginScreen.tsx`** — the login form; only used by that one route.
 
 ### Firebase config
 
