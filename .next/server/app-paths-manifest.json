@@ -3,3 +3,6 @@
   "/salsabilownerlogin/page": "app/salsabilownerlogin/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/(public)/page": "app/(public)/page.js",
+  "/(public)/projects/page": "app/(public)/projects/page.js",
+  "/(public)/contact/page": "app/(public)/contact/page.js"
+}
