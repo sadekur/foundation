@@ -40,8 +40,8 @@ This is a single-tenant donation/expense tracker for "As-Salsabil Foundation," b
 **Auth**: Firebase Authentication gates the whole app — `LoginScreen` renders when there's no user, `LoadingScreen` while auth state is resolving. `src/firebase.js` exports `auth` and `db` (Firestore) from a single initialized Firebase app; config (including API key) is committed inline in that file, not via env vars.
 
 **Component structure** (`src/components/`):
-- `common/` — generic UI chrome (Header, Footer, LoadingScreen, AddProjectModal, DeleteConfirmationModal)
-- Feature components at the top level (`ProjectControls`, `SummaryCards`, `TransactionSection`/`TransactionTable`, `TransactionFormModal`, `YearlySummaryScreen`, `SyncIndicator`, `LoginScreen`) — these implement search, sort, and pagination locally over the props they're given, not over a global store.
+- `common/` — generic UI chrome (Header, Footer, LoadingScreen, AddProjectModal, EditProjectModal, DeleteConfirmationModal)
+- Feature components at the top level (`ProjectControls`, `SummaryCards`, `TransactionSection`/`TransactionTable`, `TransactionFormModal`, `YearlySummaryScreen`, `SyncIndicator`, `LoginScreen`) — these implement search, sort, and pagination locally over the props they're given, not over a global store. `TransactionSection` owns search/sort/pagination (10 items/page) over the transactions object it's handed for the current project+year+type; `DeleteConfirmationModal` is reused for both per-transaction and per-project deletes.
 
 `YearlySummaryScreen` is a separate full-screen view (toggled via `showYearlySummary` state in `App.jsx`, not a route) that aggregates totals across all years/projects.
 
