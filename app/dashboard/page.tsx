@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { onAuthStateChanged, type User } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-import LoadingScreen from "@/components/common/LoadingScreen";
-import FoundationDashboard from "@/components/dashboard/FoundationDashboard";
+import LoadingScreen from "@/components/LoadingScreen";
+import FoundationDashboard from "./components/FoundationDashboard";
 
 export default function DashboardPage() {
   const router = useRouter();
