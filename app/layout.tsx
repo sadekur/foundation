@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description:
     "As-Salsabil Foundation is a non-political charitable foundation established in 2021, running Zakat, sadaqah jariyah, and rehabilitation projects in Gobindaganj, Gaibandha.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/logo192.png",
     apple: "/logo192.png",
   },
   manifest: "/manifest.json",
