@@ -15,8 +15,8 @@ export const Footer = () => {
       <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
           <div className="flex items-center gap-2">
-            <span className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-amber-400/90 text-emerald-950 font-bold">
-              ﷽
+            <span className="flex-shrink-0 relative w-10 h-10 rounded-full overflow-hidden ring-1 ring-amber-400/40">
+              <Image src="/logo192.png" alt="As-Salsabil Foundation" fill sizes="40px" className="object-cover" />
             </span>
             <div>
               <p className="text-sm font-semibold text-white">{dictionary.nav.brand}</p>
