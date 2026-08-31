@@ -20,6 +20,10 @@ module.exports = {
       'wide': '1400px',     // Wide screens
     },
     extend: {
+      fontFamily: {
+        amiri: ['var(--font-amiri)', 'serif'],
+        bengali: ['var(--font-bengali)', 'system-ui', 'sans-serif'],
+      },
       // Custom spacing for better mobile experience
       spacing: {
         '18': '4.5rem',
