@@ -10,6 +10,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 There is no lint script; ESLint runs via `react-app`/`react-app/jest` config embedded in `package.json` as part of `react-scripts` (build/start/test all lint automatically).
 
+`src/App.test.js` is unmodified CRA boilerplate (asserts a "learn react" link that doesn't exist in this app) — it fails as-is and isn't representative of the real app; don't treat it as a template for new tests.
+
 ## Architecture
 
 This is a single-tenant donation/expense tracker for "As-Salsabil Foundation," built with Create React App + Tailwind CSS, using Firebase (Auth + Firestore) for backend and realtime sync.
