@@ -456,6 +456,7 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
           onCancel={handleTransactionFormCancel}
         />
       </div>
+      <Footer />
     </div>
   );
 };
