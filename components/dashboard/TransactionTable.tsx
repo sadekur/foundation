@@ -35,7 +35,7 @@ const TransactionTable = ({
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedTransactionId, setSelectedTransactionId] = useState<string | null>(null);
 
-  const transactionList = Array.isArray(transactions) ? transactions : Object.values(transactions || {});
+  const transactionList = transactions;
 
   const handleDeleteClick = (transactionId: string) => {
     setSelectedTransactionId(transactionId);
