@@ -1,6 +1,6 @@
 import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
-import { Navbar } from "@/components/public/Navbar";
-import { Footer } from "@/components/public/Footer";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
