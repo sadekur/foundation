@@ -33,7 +33,9 @@ This is a single-tenant donation/expense tracker for "As-Salsabil Foundation," b
 ```
 `App.jsx` subscribes to this document with `onSnapshot` (realtime listener set up once auth resolves) and always writes back with a full `setDoc` (no `merge: true`) so that deletions actually persist — any write path must send the complete `projects` object, not a partial patch.
 
-**Write flow**: every mutation (`addProject`, `addTransaction`, `deleteTransaction`) follows the same pattern — compute a new `projects` object locally, call `setProjects` for optimistic UI update, then `saveToFirebase(updatedProjects)`. `deleteTransaction` deep-clones via `JSON.parse(JSON.stringify(projects))` before mutating, since a shallow spread wouldn't protect the nested year/transaction objects.
+**Write flow**: every mutation (`addProject`, `renameProject`, `deleteProject`, `addTransaction`, `deleteTransaction`) follows the same pattern — compute a new `projects` object locally, call `setProjects` for optimistic UI update, then `saveToFirebase(updatedProjects)`. `deleteTransaction` deep-clones via `JSON.parse(JSON.stringify(projects))` before mutating, since a shallow spread wouldn't protect the nested year/transaction objects. `renameProject` moves a project to a new object key (rejecting the rename if the new name already exists) and updates `currentProject` in the same tick as `setProjects` so no render sees `currentProject` pointing at a deleted key.
+
+**Derived stats**: `src/utils/projectStats.js` holds pure, component-free functions (`getProjectYears`, `calculateTotals`, `calculateProjectTotals`, `getAvailableYears`) that compute totals/years from the raw `projects` shape. `App.jsx` wraps them in `useMemo` so they only recompute when `projects`/`currentProject`/`selectedYear` actually change.
 
 **Auth**: Firebase Authentication gates the whole app — `LoginScreen` renders when there's no user, `LoadingScreen` while auth state is resolving. `src/firebase.js` exports `auth` and `db` (Firestore) from a single initialized Firebase app; config (including API key) is committed inline in that file, not via env vars.
 
