@@ -43,6 +43,23 @@ export interface ProjectsDictionary {
   closingNote: string;
 }
 
+export interface ContactFormDictionary {
+  title: string;
+  intro: string;
+  nameLabel: string;
+  namePlaceholder: string;
+  emailLabel: string;
+  emailPlaceholder: string;
+  phoneLabel: string;
+  phonePlaceholder: string;
+  messageLabel: string;
+  messagePlaceholder: string;
+  submit: string;
+  submitting: string;
+  successMessage: string;
+  errorMessage: string;
+}
+
 export interface ContactDictionary {
   title: string;
   intro: string;
@@ -54,6 +71,7 @@ export interface ContactDictionary {
   donationTitle: string;
   donationBody: string;
   socialTitle: string;
+  form: ContactFormDictionary;
 }
 
 export interface FooterDictionary {
