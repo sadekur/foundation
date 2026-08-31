@@ -331,6 +331,22 @@ export const dictionaries: Record<Language, Dictionary> = {
       donationBody:
         "You can send donations directly to the numbers above via bKash or Nagad. For any questions, reach us by email or phone.",
       socialTitle: "Follow Us",
+      form: {
+        title: "Send Us a Message",
+        intro: "Fill out the form below and we'll get back to you as soon as possible.",
+        nameLabel: "Name",
+        namePlaceholder: "Your full name",
+        emailLabel: "Email",
+        emailPlaceholder: "Your email address",
+        phoneLabel: "Phone (optional)",
+        phonePlaceholder: "Your phone number",
+        messageLabel: "Message",
+        messagePlaceholder: "Write your message...",
+        submit: "Send Message",
+        submitting: "Sending...",
+        successMessage: "Thank you! Your message has been sent — we'll be in touch soon.",
+        errorMessage: "Sorry, we couldn't send your message. Please try again.",
+      },
     },
     footer: {
       tagline: "As-Salsabil Foundation — ongoing charitable (sadaqah jariyah) work, established 2021.",
