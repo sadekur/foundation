@@ -33,24 +33,29 @@ Firebase (Auth + Firestore) remains the backend for the admin half, unchanged fr
 
 `/salsabilownerlogin` is not linked from the public navbar/footer — reaching it requires the direct URL. That's a UX choice, not a security boundary; the real boundary is Firestore security rules (managed in the Firebase console, not versioned in this repo).
 
+### Component colocation
+
+Route-specific components live **inside their own route folder**, under a local `components/` subdirectory — not in a shared top-level directory — following the App Router convention that only `page.tsx`/`layout.tsx`/etc. are special; any other folder name (like `components/`) is invisible to the router and safe to nest anywhere. The only exception is `components/LoadingScreen.tsx` at the repo root, which stays there because it's genuinely shared between two sibling route folders (`app/dashboard/` and `app/salsabilownerlogin/`) that don't contain each other. When adding a component, colocate it inside the route folder that uses it; only promote it to the top-level `components/` if a second, unrelated route folder also needs it.
+
 ### Public site (`app/(public)/`)
 
-Each page is a **Server Component** (`page.tsx`) that exports Next's `metadata` for SEO, and renders a **Client Component** (`*-content.tsx`) that reads the active language. This split exists because Client Components can't export `metadata` — so the server file owns SEO, the client file owns the bilingual toggle.
+Each page is a **Server Component** (`page.tsx`) that exports Next's `metadata` for SEO, and renders a **Client Component** (`components/XxxContent.tsx`) that reads the active language. This split exists because Client Components can't export `metadata` — so the server file owns SEO, the client file owns the bilingual toggle.
 
 - `lib/i18n/LanguageProvider.tsx` — a client Context (`useLanguage()`) that holds `"bn" | "en"`, persists the choice to `localStorage`, and syncs `document.documentElement.lang`. Wraps only the `(public)` route group (`app/(public)/layout.tsx`), not the admin routes.
 - `lib/i18n/dictionaries.ts` — all bn/en copy for the four public pages, typed against a `Dictionary` interface. Content is adapted from `As-Salsabil Foundation.pdf` (the foundation's brochure).
 - `lib/siteConfig.ts` — language-independent facts (phone/bKash/Nagad numbers, email, social handles). The brochure only gives social **handles**, not URLs — `youtube.href`/`facebook.href` are placeholders; replace them with real links before relying on them.
-- `components/public/` — `Navbar` (nav links + `LanguageToggle`), `Footer`.
+- `app/(public)/components/` — `Navbar` (nav links + `LanguageToggle`), `Footer`, and `HomeContent` (the group-root page's content, colocated here since it lives directly in `app/(public)/`). `Navbar`/`Footer` are shared by every page in the group via `app/(public)/layout.tsx`.
+- `app/(public)/about/components/AboutContent.tsx`, `app/(public)/projects/components/ProjectsContent.tsx`, `app/(public)/contact/components/ContactContent.tsx` — one content component per nested route, colocated with its own `page.tsx`.
 
 ### Admin dashboard (`app/dashboard/`, `app/salsabilownerlogin/`)
 
 Firebase Auth is client-only, so both routes are Client Components that call `onAuthStateChanged` directly and redirect with `next/navigation`'s `useRouter().replace(...)`:
-- `/salsabilownerlogin` → already authenticated? redirect to `/dashboard`. Otherwise render `LoginScreen`.
-- `/dashboard` → not authenticated? redirect to `/salsabilownerlogin`. Otherwise render `FoundationDashboard`.
+- `/salsabilownerlogin` → already authenticated? redirect to `/dashboard`. Otherwise render `LoginScreen` (`app/salsabilownerlogin/components/LoginScreen.tsx`).
+- `/dashboard` → not authenticated? redirect to `/salsabilownerlogin`. Otherwise render `FoundationDashboard` (`app/dashboard/components/FoundationDashboard.tsx`).
 
-Both route folders have a `layout.tsx` that sets `robots: { index: false, follow: false }` (Client Component pages can't export `metadata` themselves); `public/robots.txt` also disallows both paths.
+Both route folders have a `layout.tsx` that sets `robots: { index: false, follow: false }` and `export const dynamic = "force-dynamic"` — Client Component pages can't export `metadata` themselves, and `force-dynamic` stops Next from statically prerendering these auth-gated pages at build time (prerendering them requires calling Firebase's `getAuth()` during the build, which throws `auth/invalid-api-key` if env vars aren't present in that build environment). `public/robots.txt` also disallows both paths.
 
-**`components/dashboard/FoundationDashboard.tsx`** is the old `App.jsx` (`FoundationApp`) body, unchanged in behavior: all state lives here (`useState`/`useEffect`, no state library), and every other dashboard component is presentational, receiving data/callbacks as props.
+**`app/dashboard/components/FoundationDashboard.tsx`** is the old `App.jsx` (`FoundationApp`) body, unchanged in behavior: all state lives here (`useState`/`useEffect`, no state library), and every other dashboard component (also under `app/dashboard/components/`) is presentational, receiving data/callbacks as props.
 
 **Data model**: the entire foundation's data is a single Firestore document at `foundations/as-salsabil`, shaped as:
 ```
