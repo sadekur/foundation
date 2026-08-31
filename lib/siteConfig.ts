@@ -6,4 +6,8 @@ export const siteConfig = {
   email: "salsabilfoundation1@gmail.com",
   youtube: { label: "As-Salsabil tv", handle: "/As-Salsabil tv", href: "" },
   facebook: { label: "As Salsabil-foundation", handle: "/As Salsabil-foundation", href: "" },
+  // Surah Fatir (35), ayah 29 — verified against quran.com/en/fatir/29.
+  // Arabic script doesn't change between the bn/en language toggle.
+  quranVerseArabic:
+    "إِنَّ الَّذِينَ يَتْلُونَ كِتَابَ اللَّهِ وَأَقَامُوا الصَّلَاةَ وَأَنفَقُوا مِمَّا رَزَقْنَاهُمْ سِرًّا وَعَلَانِيَةً يَرْجُونَ تِجَارَةً لَّن تَبُورَ",
 };
