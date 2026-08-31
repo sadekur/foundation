@@ -1,0 +1,9 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/(public)/page": "/",
+  "/(public)/projects/page": "/projects",
+  "/(public)/contact/page": "/contact",
+  "/(public)/about/page": "/about",
+  "/salsabilownerlogin/page": "/salsabilownerlogin",
+  "/dashboard/page": "/dashboard"
+}
