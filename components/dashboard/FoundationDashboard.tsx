@@ -6,6 +6,7 @@ import { doc, setDoc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
 import SyncIndicator from "./SyncIndicator";
 import ProjectControls from "./ProjectControls";
 import SummaryCards from "./SummaryCards";
