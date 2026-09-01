@@ -116,6 +116,8 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
           })}
         </div>
 
+        <GallerySection initialItems={initialGalleryItems} initialCursor={initialGalleryCursor} />
+
         <FadeIn>
           <p className="mt-8 text-xs xs:text-sm text-gray-500 italic max-w-3xl">{projects.closingNote}</p>
         </FadeIn>
