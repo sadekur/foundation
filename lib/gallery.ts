@@ -40,7 +40,3 @@ export const getGalleryItems = async ({
     return { items: [], nextCursor: null };
   }
 };
-
-// Unused import guard note: `where` is imported for potential future filtering (e.g. by type)
-// but not currently used — kept out to avoid an unused-import lint error.
-void where;
