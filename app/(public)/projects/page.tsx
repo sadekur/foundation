@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getGalleryItems } from "@/lib/gallery";
 import { ProjectsContent } from "./components/ProjectsContent";
 
 export const metadata: Metadata = {
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
     "Zakat distribution, sadaqah jariyah programs, and rehabilitation projects run by As-Salsabil Foundation for the community in Gobindaganj, Gaibandha.",
 };
 
-export default function ProjectsPage() {
-  return <ProjectsContent />;
+export default async function ProjectsPage() {
+  const { items, nextCursor } = await getGalleryItems();
+  return <ProjectsContent initialGalleryItems={items} initialGalleryCursor={nextCursor} />;
 }
