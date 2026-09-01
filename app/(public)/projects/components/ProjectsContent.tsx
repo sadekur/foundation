@@ -6,12 +6,19 @@ import { HandCoins, BookOpenText, HeartHandshake, Check, ImageIcon } from "lucid
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { projectMedia } from "@/lib/siteConfig";
+import type { GalleryItem } from "@/types";
 import { SectionDivider } from "../../components/SectionDivider";
 import { FadeIn } from "../../components/FadeIn";
+import { GallerySection } from "./GallerySection";
 
 const CATEGORY_ICONS = [HandCoins, BookOpenText, HeartHandshake];
 
-export const ProjectsContent = () => {
+interface ProjectsContentProps {
+  initialGalleryItems: GalleryItem[];
+  initialGalleryCursor: string | null;
+}
+
+export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: ProjectsContentProps) => {
   const { language } = useLanguage();
   const { projects } = getDictionary(language);
 
