@@ -21,6 +21,7 @@ interface BloggerFeedEntry {
 interface BloggerFeedResponse {
   feed: {
     entry?: BloggerFeedEntry[];
+    openSearch$totalResults?: { $t: string };
   };
 }
 
@@ -32,6 +33,13 @@ export interface BlogPost {
   excerpt: string;
   thumbnail: string | null;
 }
+
+export interface BlogPostsResult {
+  posts: BlogPost[];
+  total: number;
+}
+
+export const ACTIVITIES_PAGE_SIZE = 9;
 
 const EXCERPT_LENGTH = 160;
 
