@@ -1,4 +1,4 @@
-import { BarChart3, Plus, Pencil, Trash2 } from "lucide-react";
+import { BarChart3, Images, Plus, Pencil, Trash2 } from "lucide-react";
 import { getProjectYearKeys } from "@/lib/utils/projectStats";
 import type { Projects } from "@/types";
 
