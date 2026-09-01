@@ -47,6 +47,9 @@ Each page is a **Server Component** (`page.tsx`) that exports Next's `metadata` 
 - `lib/siteConfig.ts` — language-independent facts (phone/bKash/Nagad numbers, email, social handles). The brochure only gives social **handles**, not URLs — `youtube.href`/`facebook.href` are placeholders; replace them with real links before relying on them.
 - `app/(public)/components/` — `Navbar` (nav links + `LanguageToggle`), `Footer`, and `HomeContent` (the group-root page's content, colocated here since it lives directly in `app/(public)/`). `Navbar`/`Footer` are shared by every page in the group via `app/(public)/layout.tsx`.
 - `app/(public)/about/components/AboutContent.tsx`, `app/(public)/projects/components/ProjectsContent.tsx`, `app/(public)/contact/components/ContactContent.tsx` — one content component per nested route, colocated with its own `page.tsx`.
+- `app/(public)/components/FadeIn.tsx` and `SectionDivider.tsx` — small presentational helpers shared across public pages: `FadeIn` is a scroll-reveal wrapper (`IntersectionObserver` + CSS transition, no animation library); `SectionDivider` is a decorative rule used between sections.
+
+**Contact form** (`app/(public)/contact/components/ContactForm.tsx` → `app/api/contact/route.ts`): the only public-side server code. The client form `POST`s `{ name, email, phone, message }` as JSON to `/api/contact`, which sends it with `nodemailer` through Gmail (`service: "gmail"`) using an App Password — not the account's normal login password. Required server-only env vars (never `NEXT_PUBLIC_`-prefixed): `CONTACT_EMAIL_USER`, `CONTACT_EMAIL_APP_PASSWORD`, and optionally `CONTACT_TO_EMAIL` (defaults to `CONTACT_EMAIL_USER` if unset). These also need to be added to Vercel's environment variables when deploying, same as the Firebase vars below.
 
 ### Admin dashboard (`app/dashboard/`, `app/salsabilownerlogin/`)
 
