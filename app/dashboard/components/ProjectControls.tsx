@@ -173,6 +173,26 @@ const ProjectControls = ({
             <span className="text-[12px] md:text-base">Yearly Summary</span>
           </button>
 
+          {/* Gallery Button */}
+          <button
+            onClick={onShowGallery}
+            className="flex items-center justify-center xs:justify-start gap-2
+                      bg-purple-600 text-white
+                      px-3 xs:px-4 sm:px-5 py-2 xs:py-2.5
+                      text-sm xs:text-base font-medium
+                      rounded-md xs:rounded-lg
+                      hover:bg-purple-700 active:bg-purple-800
+                      transition-all duration-200 ease-in-out
+                      focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50
+                      transform hover:scale-105 active:scale-95
+                      shadow-sm hover:shadow-md
+                      min-h-[40px] xs:min-h-[44px]"
+            aria-label="Manage gallery"
+          >
+            <Images size={16} className="md:w-5 md:h-5 flex-shrink-0" />
+            <span className="text-[12px] md:text-base">Gallery</span>
+          </button>
+
           {/* Add Project Button */}
           <button
             onClick={onAddProject}
