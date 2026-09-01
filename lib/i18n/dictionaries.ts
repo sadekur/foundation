@@ -54,6 +54,9 @@ export interface ActivitiesDictionary {
   readMore: string;
   emptyMessage: string;
   visitBlog: string;
+  loadMore: string;
+  loadingMore: string;
+  loadMoreError: string;
 }
 
 export interface ContactFormDictionary {
