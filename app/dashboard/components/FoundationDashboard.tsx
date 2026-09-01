@@ -328,6 +328,7 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
             availableYears={availableYears}
             onAddProject={() => setShowAddProject(true)}
             onShowYearlySummary={handleShowYearlySummary}
+            onShowGallery={handleShowGallery}
             onEditProject={handleEditProjectOpen}
             onDeleteProject={() => setShowDeleteProjectConfirm(true)}
           />
