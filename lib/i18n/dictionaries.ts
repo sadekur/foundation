@@ -42,6 +42,10 @@ export interface ProjectsDictionary {
   intro: string;
   categories: ProjectCategory[];
   closingNote: string;
+  supportCta: string;
+  ctaTitle: string;
+  ctaBody: string;
+  ctaButton: string;
 }
 
 export interface ActivitiesDictionary {
