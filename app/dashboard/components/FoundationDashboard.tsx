@@ -302,6 +302,10 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
     return <YearlySummaryScreen projects={projects} onBack={handleBackToDashboard} />;
   }
 
+  if (showGallery) {
+    return <GalleryScreen user={user} onBack={handleBackToDashboard} />;
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header user={user} />
