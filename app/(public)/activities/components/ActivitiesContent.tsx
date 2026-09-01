@@ -1,22 +1,44 @@
 "use client";
 
-import { CalendarDays, ExternalLink, Newspaper } from "lucide-react";
+import { useState } from "react";
+import { CalendarDays, ExternalLink, Loader2, Newspaper } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { siteConfig } from "@/lib/siteConfig";
-import type { BlogPost } from "@/lib/blogger";
+import { ACTIVITIES_PAGE_SIZE, type BlogPost } from "@/lib/blogger";
 import { SectionDivider } from "../../components/SectionDivider";
 import { FadeIn } from "../../components/FadeIn";
 
 interface ActivitiesContentProps {
-  posts: BlogPost[];
+  initialPosts: BlogPost[];
+  total: number;
 }
 
-export const ActivitiesContent = ({ posts }: ActivitiesContentProps) => {
+export const ActivitiesContent = ({ initialPosts, total }: ActivitiesContentProps) => {
   const { language } = useLanguage();
   const { activities } = getDictionary(language);
   const locale = language === "bn" ? "bn-BD" : "en-US";
   const dateFormatter = new Intl.DateTimeFormat(locale, { dateStyle: "medium" });
+
+  const [posts, setPosts] = useState(initialPosts);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [loadMoreFailed, setLoadMoreFailed] = useState(false);
+  const hasMore = posts.length < total;
+
+  const loadMore = async () => {
+    setIsLoadingMore(true);
+    setLoadMoreFailed(false);
+    try {
+      const res = await fetch(`/api/activities?start=${posts.length + 1}&count=${ACTIVITIES_PAGE_SIZE}`);
+      if (!res.ok) throw new Error("request failed");
+      const data: { posts: BlogPost[] } = await res.json();
+      setPosts((prev) => [...prev, ...data.posts]);
+    } catch {
+      setLoadMoreFailed(true);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  };
 
   return (
     <div>
