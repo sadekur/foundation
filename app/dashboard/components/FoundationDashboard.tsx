@@ -16,6 +16,7 @@ import EditProjectModal from "./EditProjectModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import TransactionFormModal from "./TransactionFormModal";
 import YearlySummaryScreen from "./YearlySummaryScreen";
+import GalleryScreen from "./GalleryScreen";
 import { getProjectYears, calculateTotals, calculateProjectTotals, getAvailableYears } from "@/lib/utils/projectStats";
 import type { Projects, TransactionFormData, TransactionType } from "@/types";
 
