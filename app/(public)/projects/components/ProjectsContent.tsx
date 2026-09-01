@@ -61,8 +61,8 @@ export const ProjectsContent = () => {
                       />
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pattern-lattice-light">
-                        <Icon size={48} className="text-emerald-700/50" />
-                        <span className="flex items-center gap-1.5 text-[11px] text-emerald-400/80">
+                        <Icon size={48} className="text-emerald-100/30" />
+                        <span className="flex items-center gap-1.5 text-[11px] font-medium text-emerald-100/70">
                           <ImageIcon size={12} />
                           {language === "bn" ? "শীঘ্রই ছবি/ভিডিও যুক্ত হবে" : "Photos/video coming soon"}
                         </span>
