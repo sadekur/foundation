@@ -48,6 +48,20 @@ export interface ProjectsDictionary {
   ctaButton: string;
 }
 
+export interface GalleryDictionary {
+  title: string;
+  intro: string;
+  tabMedia: string;
+  tabYoutube: string;
+  emptyMediaMessage: string;
+  emptyYoutubeMessage: string;
+  loadMore: string;
+  loadingMore: string;
+  loadMoreError: string;
+  watchOnYoutube: string;
+  playlistVideoCount: string;
+}
+
 export interface ActivitiesDictionary {
   title: string;
   intro: string;
