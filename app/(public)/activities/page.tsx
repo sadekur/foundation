@@ -9,6 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default async function ActivitiesPage() {
-  const posts = await getBlogPosts();
-  return <ActivitiesContent posts={posts} />;
+  const { posts, total } = await getBlogPosts();
+  return <ActivitiesContent initialPosts={posts} total={total} />;
 }
