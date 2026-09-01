@@ -280,6 +280,11 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
 
   const handleBackToDashboard = () => {
     setShowYearlySummary(false);
+    setShowGallery(false);
+  };
+
+  const handleShowGallery = () => {
+    setShowGallery(true);
   };
 
   const handleTransactionFormCancel = () => {
