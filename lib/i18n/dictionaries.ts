@@ -44,6 +44,14 @@ export interface ProjectsDictionary {
   closingNote: string;
 }
 
+export interface ActivitiesDictionary {
+  title: string;
+  intro: string;
+  readMore: string;
+  emptyMessage: string;
+  visitBlog: string;
+}
+
 export interface ContactFormDictionary {
   title: string;
   intro: string;
