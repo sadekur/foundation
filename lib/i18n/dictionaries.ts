@@ -4,6 +4,7 @@ export interface NavDictionary {
   home: string;
   about: string;
   projects: string;
+  activities: string;
   contact: string;
   brand: string;
 }
