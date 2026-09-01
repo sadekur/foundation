@@ -12,3 +12,22 @@ export const siteConfig = {
   quranVerseArabic:
     "إِنَّ الَّذِينَ يَتْلُونَ كِتَابَ اللَّهِ وَأَقَامُوا الصَّلَاةَ وَأَنفَقُوا مِمَّا رَزَقْنَاهُمْ سِرًّا وَعَلَانِيَةً يَرْجُونَ تِجَارَةً لَّن تَبُورَ",
 };
+
+export interface ProjectMedia {
+  image: string | null;
+  video: string | null;
+}
+
+// One entry per entry in `dictionaries.ts`'s `projects.categories` (bn and en share the same
+// category order: Zakat, Sadaqah Jariyah, Rehabilitation) — the Our Projects page reads this
+// array by index to decide what to show in each category's media panel.
+//
+// To add real media later: drop the file under `public/projects/` (e.g. `public/projects/zakat.jpg`)
+// and set `image` (or `video`, for an mp4) to that path, e.g. "/projects/zakat.jpg". `video` takes
+// priority over `image` when both are set (the image is used as the video's poster frame). Leaving
+// both `null` falls back to a themed placeholder with the category's icon.
+export const projectMedia: ProjectMedia[] = [
+  { image: null, video: null }, // Zakat Project
+  { image: null, video: null }, // Sadaqah Jariyah Projects
+  { image: null, video: null }, // Rehabilitation Project
+];
