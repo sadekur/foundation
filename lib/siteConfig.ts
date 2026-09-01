@@ -4,7 +4,15 @@
 export const siteConfig = {
   phones: ["01780-664660", "01717-136456"],
   email: "salsabilfoundation1@gmail.com",
-  youtube: { label: "As-Salsabil tv", handle: "/As-Salsabil tv", href: "" },
+  youtube: {
+    label: "As-Salsabil tv",
+    handle: "/As-Salsabil tv",
+    href: "https://www.youtube.com/@AsSalsabilTv",
+    // Resolved once via YouTube Data API v3 (channels.list?forHandle=@AsSalsabilTv&part=id)
+    // — hardcoded here since a channel's ID essentially never changes, unlike its playlists
+    // (which the Gallery's YouTube tab fetches live). Replace with the real resolved ID.
+    channelId: "",
+  },
   facebook: { label: "As Salsabil-foundation", handle: "/As Salsabil-foundation", href: "" },
   blogUrl: "https://salsabilfoundation.blogspot.com/",
   // Surah Fatir (35), ayah 29 — verified against quran.com/en/fatir/29.
