@@ -43,6 +43,7 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
     amount: "",
   });
   const [showYearlySummary, setShowYearlySummary] = useState(false);
+  const [showGallery, setShowGallery] = useState(false);
   const [newProjectYear, setNewProjectYear] = useState(new Date().getFullYear());
 
   // Realtime data listener — starts as soon as the dashboard mounts (parent already gated on auth)
