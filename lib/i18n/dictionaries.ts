@@ -114,6 +114,7 @@ export interface Dictionary {
   home: HomeDictionary;
   about: AboutDictionary;
   projects: ProjectsDictionary;
+  gallery: GalleryDictionary;
   activities: ActivitiesDictionary;
   contact: ContactDictionary;
   footer: FooterDictionary;
