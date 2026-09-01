@@ -107,6 +107,27 @@ export const ActivitiesContent = ({ initialPosts, total }: ActivitiesContentProp
           </div>
         )}
 
+        {hasMore && (
+          <div className="mt-8 xs:mt-10 flex flex-col items-center gap-2">
+            <button
+              type="button"
+              onClick={loadMore}
+              disabled={isLoadingMore}
+              className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-emerald-300 text-emerald-800 text-sm font-semibold hover:bg-emerald-50 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {isLoadingMore ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" />
+                  {activities.loadingMore}
+                </>
+              ) : (
+                activities.loadMore
+              )}
+            </button>
+            {loadMoreFailed && <p className="text-xs text-red-600">{activities.loadMoreError}</p>}
+          </div>
+        )}
+
         <FadeIn delayMs={100}>
           <div className="mt-10 text-center">
             <a
