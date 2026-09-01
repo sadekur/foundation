@@ -339,6 +339,13 @@ export const dictionaries: Record<Language, Dictionary> = {
       closingNote:
         "God willing, every future project that falls under sadaqah/sadaqah jariyah will also be carried out under this Foundation.",
     },
+    activities: {
+      title: "Our Activities",
+      intro: "Read reports of our recent activities and events. Click any post to read the full story.",
+      readMore: "Read More",
+      emptyMessage: "No activity reports are available right now. Please check back later.",
+      visitBlog: "Visit Our Blog",
+    },
     contact: {
       title: "Contact Us",
       intro: "Reach out to us for cooperation, questions, or guidance on our sadaqah/sadaqah jariyah work.",
