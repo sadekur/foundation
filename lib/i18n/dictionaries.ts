@@ -104,6 +104,7 @@ export const dictionaries: Record<Language, Dictionary> = {
       home: "হোম",
       about: "আমাদের সম্পর্কে",
       projects: "আমাদের প্রকল্প",
+      activities: "আমাদের কার্যক্রম",
       contact: "যোগাযোগ",
       brand: "আস্-সালসাবিল ফাউন্ডেশন",
     },
