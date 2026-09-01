@@ -365,6 +365,9 @@ export const dictionaries: Record<Language, Dictionary> = {
       readMore: "Read More",
       emptyMessage: "No activity reports are available right now. Please check back later.",
       visitBlog: "Visit Our Blog",
+      loadMore: "Load More",
+      loadingMore: "Loading...",
+      loadMoreError: "Couldn't load more. Please try again.",
     },
     contact: {
       title: "Contact Us",
