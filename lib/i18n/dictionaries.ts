@@ -245,6 +245,7 @@ export const dictionaries: Record<Language, Dictionary> = {
       home: "Home",
       about: "About Us",
       projects: "Our Projects",
+      activities: "Our Activities",
       contact: "Contact Us",
       brand: "As-Salsabil Foundation",
     },
