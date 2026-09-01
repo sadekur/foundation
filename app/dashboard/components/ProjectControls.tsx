@@ -11,6 +11,7 @@ interface ProjectControlsProps {
   availableYears: number[];
   onAddProject: () => void;
   onShowYearlySummary: () => void;
+  onShowGallery: () => void;
   onEditProject: () => void;
   onDeleteProject: () => void;
 }
