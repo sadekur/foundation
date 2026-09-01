@@ -2,7 +2,7 @@
 // see the Firestore security rules in the console). Uses the client Firestore SDK directly,
 // from both server and browser: unlike the Blogger/YouTube integrations, Firestore's client
 // SDK has no CORS restriction and holds no secret, so no API route/proxy is needed to read it.
-import { collection, getDocs, limit, orderBy, query, startAfter } from "firebase/firestore";
+import { collection, getDocs, limit, orderBy, query, startAfter, type QueryConstraint } from "firebase/firestore";
 import { db } from "./firebase";
 import type { GalleryItem } from "@/types";
 
