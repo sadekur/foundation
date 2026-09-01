@@ -347,6 +347,11 @@ export const dictionaries: Record<Language, Dictionary> = {
       ],
       closingNote:
         "God willing, every future project that falls under sadaqah/sadaqah jariyah will also be carried out under this Foundation.",
+      supportCta: "Support This Project",
+      ctaTitle: "Your Donation Can Change a Life",
+      ctaBody:
+        "Join our work through sadaqah or sadaqah jariyah — send your donation via bKash, Nagad, or get in touch with us directly.",
+      ctaButton: "Donate Now",
     },
     activities: {
       title: "Our Activities",
