@@ -225,6 +225,19 @@ export const dictionaries: Record<Language, Dictionary> = {
         "সাদাকা/সাদাকায়ে জারিয়ার মাধ্যমে আমাদের প্রকল্পে শরিক হোন — বিকাশ, নগদ অথবা সরাসরি যোগাযোগ করে অনুদান পাঠাতে পারেন।",
       ctaButton: "এখনই অনুদান দিন",
     },
+    gallery: {
+      title: "আমাদের গ্যালারি",
+      intro: "আমাদের কার্যক্রমের ছবি, ভিডিও এবং ইউটিউব প্লেলিস্ট দেখুন।",
+      tabMedia: "ছবি ও ভিডিও",
+      tabYoutube: "ইউটিউব প্লেলিস্ট",
+      emptyMediaMessage: "এই মুহূর্তে কোনো ছবি বা ভিডিও নেই। পরে আবার দেখুন।",
+      emptyYoutubeMessage: "এই মুহূর্তে কোনো প্লেলিস্ট পাওয়া যায়নি।",
+      loadMore: "আরও দেখুন",
+      loadingMore: "লোড হচ্ছে...",
+      loadMoreError: "লোড করা যায়নি। আবার চেষ্টা করুন।",
+      watchOnYoutube: "ইউটিউবে দেখুন",
+      playlistVideoCount: "{count}টি ভিডিও",
+    },
     activities: {
       title: "আমাদের কার্যক্রম",
       intro:
