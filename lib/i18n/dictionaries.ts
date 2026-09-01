@@ -217,6 +217,9 @@ export const dictionaries: Record<Language, Dictionary> = {
       readMore: "বিস্তারিত পড়ুন",
       emptyMessage: "এই মুহূর্তে কোনো প্রতিবেদন পাওয়া যায়নি। পরে আবার দেখুন।",
       visitBlog: "আমাদের ব্লগ দেখুন",
+      loadMore: "আরও দেখুন",
+      loadingMore: "লোড হচ্ছে...",
+      loadMoreError: "লোড করা যায়নি। আবার চেষ্টা করুন।",
     },
     contact: {
       title: "যোগাযোগ করুন",
