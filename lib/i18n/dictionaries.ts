@@ -93,6 +93,7 @@ export interface Dictionary {
   home: HomeDictionary;
   about: AboutDictionary;
   projects: ProjectsDictionary;
+  activities: ActivitiesDictionary;
   contact: ContactDictionary;
   footer: FooterDictionary;
 }
