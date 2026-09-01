@@ -25,7 +25,7 @@ Firebase (Auth + Firestore) remains the backend for the admin half, unchanged fr
 ```
 /                      Home (public)
 /about                 About Us — vision/mission (public)
-/projects              Our Projects — Zakat / Sadaqah Jariyah / Rehabilitation programs (public)
+/projects              Our Projects — Zakat / Sadaqah Jariyah / Rehabilitation, shown as a donation-focused showcase with per-category media (public)
 /activities            Our Activities — posts pulled from the foundation's Blogger blog, link out to the original post (public)
 /contact               Contact Us — office, phone/bKash/Nagad, email, socials (public)
 /salsabilownerlogin    Admin login
