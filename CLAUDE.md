@@ -29,6 +29,7 @@ Firebase (Auth + Firestore) remains the backend for the admin half, unchanged fr
 /contact               Contact Us — office, phone/bKash/Nagad, email, socials (public)
 /salsabilownerlogin    Admin login
 /dashboard             Admin dashboard (auth-gated)
+/api/contact           POST — sends the Contact Us form via email (public, server-only)
 ```
 
 `/salsabilownerlogin` is not linked from the public navbar/footer — reaching it requires the direct URL. That's a UX choice, not a security boundary; the real boundary is Firestore security rules (managed in the Firebase console, not versioned in this repo).
