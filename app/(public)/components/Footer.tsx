@@ -34,6 +34,9 @@ export const Footer = () => {
             <Link href="/projects" className="text-emerald-200 hover:text-amber-300 transition-colors">
               {dictionary.nav.projects}
             </Link>
+            <Link href="/activities" className="text-emerald-200 hover:text-amber-300 transition-colors">
+              {dictionary.nav.activities}
+            </Link>
             <Link href="/contact" className="text-emerald-200 hover:text-amber-300 transition-colors">
               {dictionary.nav.contact}
             </Link>
