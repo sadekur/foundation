@@ -25,7 +25,7 @@ export const getGalleryItems = async ({
   pageSize = GALLERY_PAGE_SIZE,
 }: GetGalleryItemsOptions = {}): Promise<GalleryItemsResult> => {
   try {
-    const constraints = [orderBy("createdAt", "desc"), limit(pageSize)];
+    const constraints: QueryConstraint[] = [orderBy("createdAt", "desc"), limit(pageSize)];
     if (afterCreatedAt) {
       constraints.push(startAfter(afterCreatedAt));
     }
