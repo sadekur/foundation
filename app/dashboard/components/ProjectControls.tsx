@@ -25,6 +25,7 @@ const ProjectControls = ({
   availableYears,
   onAddProject,
   onShowYearlySummary,
+  onShowGallery,
   onEditProject,
   onDeleteProject,
 }: ProjectControlsProps) => {
