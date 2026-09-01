@@ -57,16 +57,26 @@ const extractFirstImage = (html: string): string | null => {
 // for a larger one to get a decent card thumbnail instead of a thumbnail-sized crop.
 const upsizeImage = (url: string) => url.replace(/\/s\d+(-c)?\//, "/s600/");
 
-export const getBlogPosts = async (): Promise<BlogPost[]> => {
+interface GetBlogPostsOptions {
+  startIndex?: number;
+  maxResults?: number;
+}
+
+// startIndex is 1-based, matching Blogger's feed API — pass posts.length + 1 to fetch the next page.
+export const getBlogPosts = async ({
+  startIndex = 1,
+  maxResults = ACTIVITIES_PAGE_SIZE,
+}: GetBlogPostsOptions = {}): Promise<BlogPostsResult> => {
   try {
-    const feedUrl = `${siteConfig.blogUrl}feeds/posts/default?alt=json&max-results=20`;
+    const feedUrl = `${siteConfig.blogUrl}feeds/posts/default?alt=json&start-index=${startIndex}&max-results=${maxResults}`;
     const res = await fetch(feedUrl, { next: { revalidate: 3600 } });
-    if (!res.ok) return [];
+    if (!res.ok) return { posts: [], total: 0 };
 
     const data: BloggerFeedResponse = await res.json();
     const entries = data.feed.entry ?? [];
+    const total = Number(data.feed.openSearch$totalResults?.$t ?? entries.length);
 
-    return entries.map((entry) => {
+    const posts = entries.map((entry) => {
       const link = entry.link.find((l) => l.rel === "alternate")?.href ?? siteConfig.blogUrl;
       const html = entry.content?.$t ?? entry.summary?.$t ?? "";
       const rawThumbnail = entry.media$thumbnail?.url ?? extractFirstImage(html);
@@ -80,7 +90,9 @@ export const getBlogPosts = async (): Promise<BlogPost[]> => {
         thumbnail: rawThumbnail ? upsizeImage(rawThumbnail) : null,
       };
     });
+
+    return { posts, total };
   } catch {
-    return [];
+    return { posts: [], total: 0 };
   }
 };
