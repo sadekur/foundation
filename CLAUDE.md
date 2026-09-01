@@ -15,10 +15,10 @@ There is no test runner configured. The old CRA `App.test.js` (unmodified boiler
 
 This is a single-tenant donation/expense tracker for "As-Salsabil Foundation," now split into two halves in one Next.js (App Router) + TypeScript app:
 
-1. **A public marketing site** — Home, About Us, Our Projects, Contact Us — built from the foundation's brochure content, bilingual (Bengali/English toggle).
+1. **A public marketing site** — Home, About Us, Our Projects, Our Activities, Contact Us — built from the foundation's brochure content, bilingual (Bengali/English toggle).
 2. **A private admin dashboard** — the original single-page donation/expense tracker — reachable only via `/salsabilownerlogin` → `/dashboard`.
 
-Firebase (Auth + Firestore) remains the backend for the admin half, unchanged from before the migration; there is no backend for the public half (it's static bilingual content).
+Firebase (Auth + Firestore) remains the backend for the admin half, unchanged from before the migration; there is no backend for the public half beyond the Contact form and the Our Activities page's read-only fetch from Blogger's public feed (see below) — the rest is static bilingual content.
 
 ### Route map
 
@@ -26,6 +26,7 @@ Firebase (Auth + Firestore) remains the backend for the admin half, unchanged fr
 /                      Home (public)
 /about                 About Us — vision/mission (public)
 /projects              Our Projects — Zakat / Sadaqah Jariyah / Rehabilitation programs (public)
+/activities            Our Activities — posts pulled from the foundation's Blogger blog, link out to the original post (public)
 /contact               Contact Us — office, phone/bKash/Nagad, email, socials (public)
 /salsabilownerlogin    Admin login
 /dashboard             Admin dashboard (auth-gated)
