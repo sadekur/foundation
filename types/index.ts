@@ -25,3 +25,24 @@ export interface TransactionFormData {
   donor: string;
   amount: string;
 }
+
+export type GalleryItemType = "image" | "video";
+
+export interface GalleryItem {
+  id: string;
+  type: GalleryItemType;
+  url: string;
+  publicId: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+  duration?: number;
+  bytes: number;
+  format: string;
+  createdAt: string;
+  createdBy: string;
+}
+
+export interface GalleryItemFormData {
+  caption: string;
+}
