@@ -33,9 +33,11 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
     return () => unsubscribe();
   }, []);
 
+  // Closing the modal is the modal's own job now that it can upload multiple files in one
+  // queue (see AddGalleryItemModal) — closing it here after the first file's Firestore write
+  // would hide the progress of every file after it.
   const handleUploaded = async (item: Omit<GalleryItem, "id">) => {
     await addDoc(collection(db, "gallery"), item);
-    setShowAddModal(false);
   };
 
   const handleDeleteConfirm = async () => {
