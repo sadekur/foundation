@@ -173,24 +173,26 @@ const AddGalleryItemModal = ({ show, user, onUploaded, onCancel }: AddGalleryIte
     setUploading(true);
     // Sequential, not parallel — keeps the per-file progress bar meaningful and avoids hammering
     // the signing endpoint / Cloudinary with a burst of simultaneous large uploads.
+    let anyFailed = false;
     for (let i = 0; i < queue.length; i++) {
       try {
         await uploadOne(queue[i].file, i);
       } catch (err) {
+        anyFailed = true;
         updateQueueItem(i, { status: "error", error: (err as Error).message });
       }
     }
     setUploading(false);
 
-    setQueue((prev) => {
-      const stillFailed = prev.filter((q) => q.status === "error");
-      if (stillFailed.length === 0) {
-        setCaption("");
-        onCancel();
-        return [];
-      }
-      return stillFailed;
-    });
+    // Calling onCancel() (a parent setState) from inside a setQueue updater would run during
+    // render in some cases — React warns loudly about that — so decide with a local flag instead.
+    if (anyFailed) {
+      setQueue((prev) => prev.filter((q) => q.status === "error"));
+    } else {
+      setQueue([]);
+      setCaption("");
+      onCancel();
+    }
   };
 
   const handleFilesSelected = (fileList: FileList | null) => {
