@@ -96,28 +96,28 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
             No gallery items yet. Click &quot;Add Media&quot; to upload the first photo or video.
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2 xs:gap-3">
             {items.map((item) => (
               <div
                 key={item.id}
-                className="relative aspect-square rounded-lg overflow-hidden bg-gray-100 border border-gray-200 group"
+                className="relative aspect-square rounded-md overflow-hidden bg-gray-100 border border-gray-200 group"
               >
                 {item.type === "video" ? (
                   <video src={item.url} className="w-full h-full object-cover" />
                 ) : (
                   // eslint-disable-next-line @next/next/no-img-element -- admin-only preview grid, not worth next/image here
-                  <img src={item.url} alt={item.caption ?? ""} className="w-full h-full object-cover" />
+                  <img src={item.url} alt={item.caption ?? ""} className="w-full h-full object-cover" loading="lazy" />
                 )}
                 <button
                   onClick={() => setDeleteTarget(item)}
-                  className="absolute top-2 right-2 bg-white/90 text-red-600 p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+                  className="absolute top-1 right-1 bg-white/90 text-red-600 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
                   aria-label="Delete item"
                   title="Delete item"
                 >
-                  <Trash2 size={14} />
+                  <Trash2 size={12} />
                 </button>
                 {item.caption && (
-                  <span className="absolute bottom-0 inset-x-0 bg-black/50 text-white text-[11px] px-2 py-1 truncate">
+                  <span className="absolute bottom-0 inset-x-0 bg-black/50 text-white text-[9px] xs:text-[10px] px-1.5 py-0.5 truncate">
                     {item.caption}
                   </span>
                 )}
