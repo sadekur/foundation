@@ -54,8 +54,16 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
 
   // Keeps the active thumbnail scrolled into view as the main slide changes, whether that
   // change came from autoplay, the arrow buttons, or clicking a different thumbnail directly.
+  // Scrolls only the thumbnail strip's own scrollLeft (never scrollIntoView) — scrollIntoView
+  // can also scroll the whole page's vertical position to bring the strip into view, which is
+  // exactly the "page jumps back to the gallery on every autoplay tick" bug this replaced.
   useEffect(() => {
-    thumbRefs.current[currentIndex]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    const strip = thumbStripRef.current;
+    const thumb = thumbRefs.current[currentIndex];
+    if (!strip || !thumb) return;
+
+    const target = thumb.offsetLeft - (strip.clientWidth - thumb.clientWidth) / 2;
+    strip.scrollTo({ left: target, behavior: "smooth" });
   }, [currentIndex]);
 
   // Auto-play: pauses on hover/touch and while the lightbox is open, so it never fights a
