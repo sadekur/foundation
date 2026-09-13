@@ -27,15 +27,38 @@ export interface ProjectMedia {
 }
 
 // One entry per entry in `dictionaries.ts`'s `projects.categories` (bn and en share the same
-// category order: Zakat, Sadaqah Jariyah, Rehabilitation) — the Our Projects page reads this
-// array by index to decide what to show in each category's media panel.
+// category order and `slug`s — see PROJECT_CATEGORY_SLUGS below) — the Our Projects grid and
+// each project's detail page read this array by index to decide what to show in the media panel.
 //
 // To add real media later: drop the file under `public/projects/` (e.g. `public/projects/zakat.jpg`)
 // and set `image` (or `video`, for an mp4) to that path, e.g. "/projects/zakat.jpg". `video` takes
 // priority over `image` when both are set (the image is used as the video's poster frame). Leaving
 // both `null` falls back to a themed placeholder with the category's icon.
 export const projectMedia: ProjectMedia[] = [
-  { image: null, video: null }, // Zakat Project
-  { image: null, video: null }, // Sadaqah Jariyah Projects
-  { image: null, video: null }, // Rehabilitation Project
+  { image: null, video: null }, // Islamic Education & Dawah
+  { image: null, video: null }, // Qur'an & Islamic Teaching
+  { image: null, video: null }, // Islamic Library & Publications
+  { image: null, video: null }, // Zakat & Sadaqah Projects
+  { image: null, video: null }, // Orphans, Students of Knowledge & the Poor
+  { image: null, video: null }, // Tube Wells & Public Welfare
+  { image: null, video: null }, // Tree Plantation & Eco-Friendly Activities
+  { image: null, video: null }, // Free Medical Care & Humanitarian Aid
+  { image: null, video: null }, // Mosque & Madrasa Construction Support
+  { image: null, video: null }, // Rehabilitation & Employment Support
 ];
+
+// Static routing keys for app/(public)/projects/[slug] — identical to the `slug` field on each
+// entry in dictionaries.ts's bn/en `projects.categories` (kept here too since routing needs a
+// language-independent list for generateStaticParams, without importing the language dictionaries).
+export const PROJECT_CATEGORY_SLUGS = [
+  "deeni-shiksha-o-dawah",
+  "quran-o-deeni-shikkhadan",
+  "islami-pathagar-o-prokashona",
+  "zakat-o-sadaka",
+  "yatim-talibe-ilm-o-daridro",
+  "tube-well-o-jonokollan",
+  "brikkhoropon",
+  "free-chikitsha-o-manobik-sahajjo",
+  "masjid-madrasa-nirman",
+  "punorbashon-o-kormosangsthan",
+] as const;
