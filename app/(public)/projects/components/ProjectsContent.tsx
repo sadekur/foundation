@@ -2,7 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { HandCoins, BookOpenText, HeartHandshake, Check, ImageIcon } from "lucide-react";
+import {
+  GraduationCap,
+  BookOpenText,
+  Library,
+  HandCoins,
+  Users,
+  Droplet,
+  Sprout,
+  HeartPulse,
+  Landmark,
+  Home,
+  ArrowRight,
+  ImageIcon,
+} from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { projectMedia } from "@/lib/siteConfig";
@@ -11,7 +24,19 @@ import { SectionDivider } from "../../components/SectionDivider";
 import { FadeIn } from "../../components/FadeIn";
 import { GallerySection } from "./GallerySection";
 
-const CATEGORY_ICONS = [HandCoins, BookOpenText, HeartHandshake];
+// Same order as dictionaries.ts's `projects.categories` / siteConfig's `projectMedia`.
+const CATEGORY_ICONS = [
+  GraduationCap,
+  BookOpenText,
+  Library,
+  HandCoins,
+  Users,
+  Droplet,
+  Sprout,
+  HeartPulse,
+  Landmark,
+  Home,
+];
 
 interface ProjectsContentProps {
   initialGalleryItems: GalleryItem[];
