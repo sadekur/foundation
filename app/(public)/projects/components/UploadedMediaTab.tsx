@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ImageOff, Loader2 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
@@ -30,6 +30,7 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const loadMore = async () => {
     if (!cursor) return;
@@ -49,6 +50,12 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
   const goTo = (index: number) => setCurrentIndex(((index % items.length) + items.length) % items.length);
   const goPrev = () => goTo(currentIndex - 1);
   const goNext = () => goTo(currentIndex + 1);
+
+  // Keeps the active thumbnail scrolled into view as the main slide changes, whether that
+  // change came from autoplay, the arrow buttons, or clicking a different thumbnail directly.
+  useEffect(() => {
+    thumbRefs.current[currentIndex]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [currentIndex]);
 
   // Auto-play: pauses on hover/touch and while the lightbox is open, so it never fights a
   // visitor who's actively looking at something.
@@ -80,7 +87,11 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
       >
         <div
           className="flex ease-in-out"
-          style={{ transform: `translateX(-${currentIndex * 100}%)`, transitionProperty: "transform", transitionDuration: `${SLIDE_TRANSITION_MS}ms` }}
+          style={{
+            transform: `translateX(-${currentIndex * 100}%)`,
+            transitionProperty: "transform",
+            transitionDuration: `${SLIDE_TRANSITION_MS}ms`,
+          }}
         >
           {items.map((item, i) => (
             <button
@@ -112,31 +123,55 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
             </button>
           ))}
         </div>
-
-        {items.length > 1 && (
-          <>
-            <button
-              type="button"
-              onClick={goPrev}
-              className="absolute left-2 xs:left-3 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 p-1.5 xs:p-2 rounded-full transition-colors"
-              aria-label="Previous"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              type="button"
-              onClick={goNext}
-              className="absolute right-2 xs:right-3 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 p-1.5 xs:p-2 rounded-full transition-colors"
-              aria-label="Next"
-            >
-              <ChevronRight size={20} />
-            </button>
-            <span className="absolute bottom-2 xs:bottom-3 right-3 xs:right-4 text-[11px] xs:text-xs text-white bg-black/40 rounded-full px-2.5 py-1">
-              {currentIndex + 1} / {items.length}
-            </span>
-          </>
-        )}
       </div>
+
+      {items.length > 1 && (
+        <div className="mt-4 xs:mt-5 flex items-center gap-2 xs:gap-3">
+          <button
+            type="button"
+            onClick={goPrev}
+            className="shrink-0 text-emerald-800 bg-white border border-emerald-100 shadow-sm hover:bg-emerald-50 p-2 rounded-full transition-colors"
+            aria-label="Previous"
+          >
+            <ChevronLeft size={18} />
+          </button>
+
+          <div
+            className="flex-1 flex gap-2 xs:gap-3 overflow-x-auto scroll-smooth py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {items.map((item, i) => (
+              <button
+                type="button"
+                key={item.id}
+                ref={(el) => {
+                  thumbRefs.current[i] = el;
+                }}
+                onClick={() => goTo(i)}
+                className={`relative shrink-0 w-16 h-16 xs:w-20 xs:h-20 rounded-lg overflow-hidden border-2 transition-colors ${
+                  i === currentIndex ? "border-emerald-600" : "border-transparent hover:border-emerald-200"
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+                aria-current={i === currentIndex}
+              >
+                {item.type === "video" ? (
+                  <video src={item.url} muted playsInline className="w-full h-full object-cover pointer-events-none" />
+                ) : (
+                  <Image src={item.url} alt="" fill sizes="80px" className="object-cover" />
+                )}
+              </button>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={goNext}
+            className="shrink-0 text-emerald-800 bg-white border border-emerald-100 shadow-sm hover:bg-emerald-50 p-2 rounded-full transition-colors"
+            aria-label="Next"
+          >
+            <ChevronRight size={18} />
+          </button>
+        </div>
+      )}
 
       {cursor && (
         <div className="mt-8 xs:mt-10 flex flex-col items-center gap-2">
