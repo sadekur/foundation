@@ -146,6 +146,7 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
           </button>
 
           <div
+            ref={thumbStripRef}
             className="flex-1 flex gap-2 xs:gap-3 overflow-x-auto scroll-smooth py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {items.map((item, i) => (
