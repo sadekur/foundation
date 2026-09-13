@@ -31,6 +31,7 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
   const [isPaused, setIsPaused] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const thumbStripRef = useRef<HTMLDivElement>(null);
 
   const loadMore = async () => {
     if (!cursor) return;
