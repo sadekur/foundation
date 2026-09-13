@@ -31,10 +31,28 @@ export interface AboutDictionary {
   values: { title: string; body: string }[];
 }
 
+export interface ProjectFaqItem {
+  question: string;
+  answer: string;
+}
+
+// `slug` is the language-independent routing key for /projects/[slug] (see PROJECT_CATEGORY_SLUGS
+// below) — kept identical between the bn and en entry at the same array index. Every other field
+// is real brochure-derived copy for the summary card; `description` through `faq` back the detail
+// page and are placeholder/generic copy until the foundation supplies real per-project figures
+// (objectives, budget, area, duration are safe generic statements — deliberately no invented
+// numbers or stats, see `ProjectDetailDictionary`'s `impactComingSoon`/`galleryComingSoon`).
 export interface ProjectCategory {
+  slug: string;
   title: string;
-  intro?: string;
-  items: string[];
+  blurb: string;
+  description: string;
+  objectives: string[];
+  targetAudience: string;
+  budgetItems: string[];
+  area: string;
+  duration: string;
+  faq: ProjectFaqItem[];
 }
 
 export interface ProjectsDictionary {
@@ -46,6 +64,26 @@ export interface ProjectsDictionary {
   ctaTitle: string;
   ctaBody: string;
   ctaButton: string;
+  detailsButton: string;
+}
+
+// Static section labels for app/(public)/projects/[slug] — the per-category content itself
+// lives in ProjectsDictionary.categories.
+export interface ProjectDetailDictionary {
+  backToProjects: string;
+  descriptionTitle: string;
+  objectivesTitle: string;
+  audienceTitle: string;
+  budgetTitle: string;
+  areaTitle: string;
+  durationTitle: string;
+  galleryTitle: string;
+  galleryComingSoon: string;
+  impactTitle: string;
+  impactComingSoon: string;
+  faqTitle: string;
+  notFoundTitle: string;
+  notFoundBody: string;
 }
 
 export interface GalleryDictionary {
