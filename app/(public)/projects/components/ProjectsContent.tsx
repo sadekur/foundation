@@ -63,24 +63,25 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
       </div>
 
       <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-10 xs:py-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 xs:gap-6">
+        <div className="space-y-8 xs:space-y-10">
           {projects.categories.map((category, index) => {
             const Icon = CATEGORY_ICONS[index] ?? HandCoins;
             const media = projectMedia[index] ?? { image: null, video: null };
+            const reversed = index % 2 === 1;
 
             return (
-              <FadeIn key={category.slug} delayMs={index * 75}>
-                <Link
-                  href={`/projects/${category.slug}`}
-                  className="group flex flex-col h-full bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-emerald-100"
+              <FadeIn key={category.slug} delayMs={index * 100}>
+                <div
+                  className={`flex flex-col ${
+                    reversed ? "lg:flex-row-reverse" : "lg:flex-row"
+                  } items-stretch bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-emerald-100`}
                 >
-                  <div className="relative w-full aspect-[4/3] sm:aspect-video bg-gradient-to-br from-emerald-900 to-emerald-950">
+                  <div className="relative w-full lg:w-1/2 aspect-[4/3] sm:aspect-video lg:aspect-auto min-h-[220px] bg-gradient-to-br from-emerald-900 to-emerald-950">
                     {media.video ? (
                       <video
                         src={media.video}
                         poster={media.image ?? undefined}
-                        muted
-                        playsInline
+                        controls
                         className="absolute inset-0 w-full h-full object-cover"
                       />
                     ) : media.image ? (
@@ -88,36 +89,52 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
                         src={media.image}
                         alt={category.title}
                         fill
-                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        sizes="(min-width: 1024px) 50vw, 100vw"
                         className="object-cover"
                       />
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pattern-lattice-light">
-                        <Icon size={40} className="text-emerald-100/30" />
+                        <Icon size={48} className="text-emerald-100/30" />
                         <span className="flex items-center gap-1.5 text-[11px] font-medium text-emerald-100/70">
                           <ImageIcon size={12} />
                           {language === "bn" ? "শীঘ্রই ছবি/ভিডিও যুক্ত হবে" : "Photos/video coming soon"}
                         </span>
                       </div>
                     )}
-                    <div className="absolute top-3 left-3 flex items-center gap-2 bg-white/95 backdrop-blur px-2.5 py-1 rounded-full shadow-sm">
-                      <Icon size={14} className="text-emerald-700" />
-                      <span className="text-[11px] font-bold text-emerald-900">
+                    <div className="absolute top-4 left-4 flex items-center gap-2 bg-white/95 backdrop-blur px-3 py-1.5 rounded-full shadow-sm">
+                      <Icon size={16} className="text-emerald-700" />
+                      <span className="text-xs font-bold text-emerald-900">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex-1 p-5 xs:p-6 flex flex-col">
-                    <span className="block w-10 h-1 bg-amber-400 rounded-full mb-3" />
-                    <h2 className="text-base xs:text-lg font-bold text-emerald-950 mb-2">{category.title}</h2>
-                    <p className="text-xs xs:text-sm text-gray-600 leading-relaxed mb-4 flex-1">{category.blurb}</p>
-                    <span className="inline-flex items-center gap-1.5 self-start text-sm font-semibold text-emerald-700 group-hover:text-emerald-800 group-hover:gap-2.5 transition-all">
+                  <div className="flex-1 p-5 xs:p-6 lg:p-8 flex flex-col justify-center">
+                    <span className="block w-12 h-1 bg-amber-400 rounded-full mb-4" />
+                    <h2 className="text-lg xs:text-xl lg:text-2xl font-bold text-emerald-950 mb-3">
+                      {category.title}
+                    </h2>
+                    <p className="text-sm xs:text-base text-gray-700 leading-relaxed mb-4">{category.blurb}</p>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-6 gap-y-2.5 mb-6">
+                      {category.objectives.map((objective) => (
+                        <li
+                          key={objective}
+                          className="flex items-start gap-2 text-xs xs:text-sm text-gray-600 leading-relaxed"
+                        >
+                          <Check size={14} className="mt-0.5 flex-shrink-0 text-amber-500" />
+                          <span>{objective}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href={`/projects/${category.slug}`}
+                      className="inline-flex items-center gap-2 self-start px-5 py-2.5 rounded-full bg-emerald-800 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors"
+                    >
                       {projects.detailsButton}
-                      <ArrowRight size={15} />
-                    </span>
+                      <ArrowRight size={16} />
+                    </Link>
                   </div>
-                </Link>
+                </div>
               </FadeIn>
             );
           })}
