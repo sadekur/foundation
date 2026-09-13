@@ -39,7 +39,18 @@ module.exports = {
       gridTemplateColumns: {
         'responsive': 'repeat(auto-fit, minmax(280px, 1fr))',
         'cards': 'repeat(auto-fit, minmax(200px, 1fr))',
-      }
+      },
+      keyframes: {
+        'gallery-marquee': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        // Duration is set inline per-instance (item count varies), this just supplies the
+        // name/timing-function/iteration-count part of the shorthand — see UploadedMediaTab.
+        'gallery-marquee': 'gallery-marquee linear infinite',
+      },
     },
   },
   plugins: [],
