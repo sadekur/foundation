@@ -138,22 +138,6 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
         )}
       </div>
 
-      {items.length > 1 && (
-        <div className="flex justify-center gap-1.5 mt-4 xs:mt-5">
-          {items.map((item, i) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => goTo(i)}
-              className={`h-1.5 rounded-full transition-all ${
-                i === currentIndex ? "w-6 bg-emerald-700" : "w-1.5 bg-emerald-200 hover:bg-emerald-300"
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
-      )}
-
       {cursor && (
         <div className="mt-8 xs:mt-10 flex flex-col items-center gap-2">
           <button
