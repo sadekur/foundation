@@ -14,6 +14,7 @@ import {
   Landmark,
   Home,
   ArrowRight,
+  Check,
   ImageIcon,
 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
