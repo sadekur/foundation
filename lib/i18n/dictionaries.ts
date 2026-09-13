@@ -159,6 +159,32 @@ export interface Dictionary {
   footer: FooterDictionary;
 }
 
+// Shared across every project category for now — generic, evergreen questions that are true
+// regardless of the specific project, unlike the numeric claims in ProjectDetailDictionary's
+// impact section (which stay as an explicit "coming soon" placeholder instead of invented data).
+const PROJECT_FAQ_BN: ProjectFaqItem[] = [
+  {
+    question: "আমি কীভাবে এই প্রকল্পে অনুদান করতে পারি?",
+    answer:
+      "বিকাশ, নগদ অথবা সরাসরি যোগাযোগের মাধ্যমে আপনি এই প্রকল্পে অনুদান পাঠাতে পারেন। বিস্তারিত জানতে আমাদের যোগাযোগ পাতা দেখুন।",
+  },
+  {
+    question: "এই প্রকল্প সম্পর্কে আরও তথ্য কোথায় পাব?",
+    answer: "আরও তথ্যের জন্য আমাদের সাথে ইমেইল বা ফোনে যোগাযোগ করতে পারেন — আমরা যত দ্রুত সম্ভব সাড়া দেব।",
+  },
+];
+
+const PROJECT_FAQ_EN: ProjectFaqItem[] = [
+  {
+    question: "How can I donate to this project?",
+    answer: "You can send a donation via bKash, Nagad, or by contacting us directly. See our Contact page for details.",
+  },
+  {
+    question: "Where can I learn more about this project?",
+    answer: "Reach out to us by email or phone for more information — we'll respond as soon as possible.",
+  },
+];
+
 export const dictionaries: Record<Language, Dictionary> = {
   bn: {
     nav: {
