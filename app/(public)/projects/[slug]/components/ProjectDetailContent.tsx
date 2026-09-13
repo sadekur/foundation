@@ -219,7 +219,7 @@ export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
         <FadeIn delayMs={150}>
           <div className="mt-10 xs:mt-12">
             <h2 className="text-xl xs:text-2xl font-bold text-emerald-950 text-center">{projectDetail.faqTitle}</h2>
-            <SectionDivider className="mt-4 mb-6 mx-auto" />
+            <SectionDivider className="mt-4 mb-6" />
             <div className="max-w-2xl mx-auto space-y-3">
               {category.faq.map((item, i) => {
                 const isOpen = openFaqIndex === i;
