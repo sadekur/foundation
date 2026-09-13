@@ -152,6 +152,7 @@ export interface Dictionary {
   home: HomeDictionary;
   about: AboutDictionary;
   projects: ProjectsDictionary;
+  projectDetail: ProjectDetailDictionary;
   gallery: GalleryDictionary;
   activities: ActivitiesDictionary;
   contact: ContactDictionary;
