@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ImageOff, Loader2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, ImageOff, Loader2 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getGalleryItems } from "@/lib/gallery";
@@ -14,12 +14,10 @@ interface UploadedMediaTabProps {
   initialCursor: string | null;
 }
 
-// However many real items are loaded, pad the belt up to this many so a small gallery doesn't
-// read as "3 thumbnails slowly drifting" — and so the loop (see `track` below) always has
-// enough width to feel continuous rather than obviously repeating within one viewport.
-const MIN_MARQUEE_ITEMS = 8;
-// Seconds each item takes to cross the belt — keeps the speed constant regardless of count.
-const SECONDS_PER_ITEM = 3.5;
+// Slow and unhurried on purpose — this is a background-ambient slideshow, not something
+// visitors are meant to actively track, so both numbers below stay generous.
+const AUTOPLAY_INTERVAL_MS = 6000;
+const SLIDE_TRANSITION_MS = 1200;
 
 export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaTabProps) => {
   const { language } = useLanguage();
@@ -29,6 +27,7 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
   const [cursor, setCursor] = useState(initialCursor);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [loadMoreFailed, setLoadMoreFailed] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -47,17 +46,19 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
     }
   };
 
-  // Two identical halves back to back, each padded up to MIN_MARQUEE_ITEMS real items. The
-  // animation (see globals.css's gallery-marquee keyframes) just slides left by exactly one
-  // half's width and the halves being pixel-identical is what makes the reset invisible.
-  const track = useMemo(() => {
-    if (items.length === 0) return [];
-    const repeatCount = Math.max(1, Math.ceil(MIN_MARQUEE_ITEMS / items.length));
-    const half = Array.from({ length: repeatCount }, () => items).flat();
-    return [...half, ...half];
-  }, [items]);
+  const goTo = (index: number) => setCurrentIndex(((index % items.length) + items.length) % items.length);
+  const goPrev = () => goTo(currentIndex - 1);
+  const goNext = () => goTo(currentIndex + 1);
 
-  const durationSeconds = (track.length / 2) * SECONDS_PER_ITEM;
+  // Auto-play: pauses on hover/touch and while the lightbox is open, so it never fights a
+  // visitor who's actively looking at something.
+  useEffect(() => {
+    if (isPaused || lightboxIndex !== null || items.length <= 1) return;
+    const id = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % items.length);
+    }, AUTOPLAY_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [isPaused, lightboxIndex, items.length]);
 
   if (items.length === 0) {
     return (
@@ -71,45 +72,87 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
   return (
     <div>
       <div
-        className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]"
+        className="relative rounded-2xl overflow-hidden bg-emerald-50 border border-emerald-100"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={() => setIsPaused(true)}
         onTouchEnd={() => setIsPaused(false)}
       >
         <div
-          className="flex w-max gap-3 xs:gap-4 animate-gallery-marquee motion-reduce:animate-none"
-          style={{ animationDuration: `${durationSeconds}s`, animationPlayState: isPaused ? "paused" : "running" }}
+          className="flex ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)`, transitionProperty: "transform", transitionDuration: `${SLIDE_TRANSITION_MS}ms` }}
         >
-          {track.map((item, i) => (
+          {items.map((item, i) => (
             <button
               type="button"
-              key={`${item.id}-${i}`}
-              onClick={() => setLightboxIndex(items.findIndex((original) => original.id === item.id))}
-              className="relative shrink-0 w-32 xs:w-40 sm:w-48 md:w-56 aspect-square rounded-xl overflow-hidden bg-emerald-50 border border-emerald-100 group focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+              key={item.id}
+              onClick={() => setLightboxIndex(i)}
+              className="relative w-full shrink-0 aspect-[4/3] xs:aspect-[16/10] sm:aspect-[16/9] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-inset"
               aria-label={item.caption || "View media"}
+              aria-hidden={i !== currentIndex}
+              tabIndex={i === currentIndex ? 0 : -1}
             >
               {item.type === "video" ? (
-                <video src={item.url} muted playsInline className="w-full h-full object-cover pointer-events-none" />
+                <video src={item.url} muted playsInline className="w-full h-full object-contain" />
               ) : (
                 <Image
                   src={item.url}
                   alt={item.caption ?? ""}
                   fill
-                  sizes="(min-width: 768px) 224px, (min-width: 640px) 192px, (min-width: 375px) 160px, 128px"
-                  className="object-cover"
+                  sizes="(min-width: 1024px) 800px, 100vw"
+                  className="object-contain"
+                  priority={i === 0}
                 />
               )}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
               {item.caption && (
-                <span className="absolute bottom-0 inset-x-0 bg-black/50 text-white text-[11px] px-2 py-1 truncate text-left">
+                <span className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent text-white text-xs xs:text-sm px-4 xs:px-5 py-3 xs:py-4 text-left">
                   {item.caption}
                 </span>
               )}
             </button>
           ))}
         </div>
+
+        {items.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={goPrev}
+              className="absolute left-2 xs:left-3 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 p-1.5 xs:p-2 rounded-full transition-colors"
+              aria-label="Previous"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              className="absolute right-2 xs:right-3 top-1/2 -translate-y-1/2 text-white bg-black/30 hover:bg-black/50 p-1.5 xs:p-2 rounded-full transition-colors"
+              aria-label="Next"
+            >
+              <ChevronRight size={20} />
+            </button>
+            <span className="absolute bottom-2 xs:bottom-3 right-3 xs:right-4 text-[11px] xs:text-xs text-white bg-black/40 rounded-full px-2.5 py-1">
+              {currentIndex + 1} / {items.length}
+            </span>
+          </>
+        )}
       </div>
+
+      {items.length > 1 && (
+        <div className="flex justify-center gap-1.5 mt-4 xs:mt-5">
+          {items.map((item, i) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => goTo(i)}
+              className={`h-1.5 rounded-full transition-all ${
+                i === currentIndex ? "w-6 bg-emerald-700" : "w-1.5 bg-emerald-200 hover:bg-emerald-300"
+              }`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
 
       {cursor && (
         <div className="mt-8 xs:mt-10 flex flex-col items-center gap-2">
