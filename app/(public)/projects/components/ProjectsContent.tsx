@@ -85,23 +85,13 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
                         className="absolute inset-0 w-full h-full object-cover"
                       />
                     ) : media.image ? (
-                      <>
-                        <Image
-                          src={media.image}
-                          alt=""
-                          aria-hidden="true"
-                          fill
-                          sizes="(min-width: 1024px) 50vw, 100vw"
-                          className="object-cover scale-110 blur-2xl opacity-60"
-                        />
-                        <Image
-                          src={media.image}
-                          alt={category.title}
-                          fill
-                          sizes="(min-width: 1024px) 50vw, 100vw"
-                          className="relative object-contain"
-                        />
-                      </>
+                      <Image
+                        src={media.image}
+                        alt={category.title}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-cover"
+                      />
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pattern-lattice-light">
                         <Icon size={48} className="text-emerald-100/30" />
