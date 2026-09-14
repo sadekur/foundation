@@ -102,7 +102,6 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
                           className="relative object-contain"
                         />
                       </>
-                      ) : null}
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pattern-lattice-light">
                         <Icon size={48} className="text-emerald-100/30" />
