@@ -90,7 +90,7 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
                         alt={category.title}
                         fill
                         sizes="(min-width: 1024px) 50vw, 100vw"
-                        className="object-cover"
+                        className="object-contain"
                       />
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pattern-lattice-light">
