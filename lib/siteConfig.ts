@@ -36,7 +36,7 @@ export interface ProjectMedia {
 // both `null` falls back to a themed placeholder with the category's icon.
 export const projectMedia: ProjectMedia[] = [
   { image: "/projects/islamic-education-dawah.jpg", video: null }, // Islamic Education & Dawah
-  { image: null, video: null }, // Qur'an & Islamic Teaching
+  { image: "/projects/islamic-education-dawah.jpg", video: null }, // Qur'an & Islamic Teaching
   { image: null, video: null }, // Islamic Library & Publications
   { image: null, video: null }, // Zakat & Sadaqah Projects
   { image: null, video: null }, // Orphans, Students of Knowledge & the Poor
