@@ -36,7 +36,7 @@ export const Navbar = () => {
             </span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-7">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
               return (
