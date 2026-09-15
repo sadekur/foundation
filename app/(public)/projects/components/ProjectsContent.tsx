@@ -74,7 +74,7 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
                 <div
                   className={`flex flex-col ${
                     reversed ? "lg:flex-row-reverse" : "lg:flex-row"
-                  } items-stretch bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-emerald-100 lg:h-[420px]`}
+                  } items-stretch bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-emerald-100 lg:h-[360px]`}
                 >
                   <div className="relative w-full lg:w-1/2 aspect-[4/3] sm:aspect-video lg:aspect-auto lg:h-full min-h-[220px] bg-gradient-to-br from-emerald-900 to-emerald-950">
                     {media.video ? (
