@@ -124,7 +124,7 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
                           className="flex items-start gap-2 text-xs xs:text-sm text-gray-600 leading-relaxed"
                         >
                           <Check size={14} className="mt-0.5 flex-shrink-0 text-amber-500" />
-                          <span className="lg:line-clamp-1">{objective}</span>
+                          <span>{objective}</span>
                         </li>
                       ))}
                     </ul>
