@@ -57,7 +57,7 @@ export const Navbar = () => {
             <LanguageToggle />
           </nav>
 
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             <LanguageToggle />
             <button
               type="button"
@@ -72,7 +72,7 @@ export const Navbar = () => {
         </div>
 
         {isOpen && (
-          <nav className="md:hidden border-t border-emerald-800 py-3 flex flex-col gap-1">
+          <nav className="lg:hidden border-t border-emerald-800 py-3 flex flex-col gap-1">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
               return (
