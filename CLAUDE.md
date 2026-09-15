@@ -48,6 +48,10 @@ Firebase (Auth + Firestore) remains the backend for the admin half, unchanged fr
 
 Route-specific components live **inside their own route folder**, under a local `components/` subdirectory — not in a shared top-level directory — following the App Router convention that only `page.tsx`/`layout.tsx`/etc. are special; any other folder name (like `components/`) is invisible to the router and safe to nest anywhere. The only exception is `components/LoadingScreen.tsx` at the repo root, which stays there because it's genuinely shared between two sibling route folders (`app/dashboard/` and `app/salsabilownerlogin/`) that don't contain each other. When adding a component, colocate it inside the route folder that uses it; only promote it to the top-level `components/` if a second, unrelated route folder also needs it.
 
+**Import style**: `tsconfig.json` maps `@/*` to the repo root, and cross-directory imports use it (`@/lib/firebase`, `@/types`, `@/components/LoadingScreen`). Relative paths are used only for *within-group* siblings — e.g. a nested public page reaching the group's shared helpers (`../../components/FadeIn`). Follow whichever the surrounding file already uses.
+
+**Images**: `next.config.js`'s `images.remotePatterns` allowlists exactly one remote host, `res.cloudinary.com` — so Gallery media (and anything else Cloudinary-hosted) can use `next/image`, and any *new* remote image host must be added there first or `next/image` will throw at runtime. Blogger thumbnails deliberately sidestep this with a plain `<img>` (see Our Activities below).
+
 ### Public site (`app/(public)/`)
 
 Each page is a **Server Component** (`page.tsx`) that exports Next's `metadata` for SEO, and renders a **Client Component** (`components/XxxContent.tsx`) that reads the active language. This split exists because Client Components can't export `metadata` — so the server file owns SEO, the client file owns the bilingual toggle.
