@@ -87,8 +87,8 @@ export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
         ) : (
           <div className="absolute inset-0 pattern-lattice-light" />
         )}
-        <div className="relative h-full flex items-center">
-          <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
+        <div className="relative h-full flex items-end sm:items-center">
+          <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 pb-5 xs:pb-6 sm:pb-0">
             <FadeIn>
               <Link
                 href="/projects"
