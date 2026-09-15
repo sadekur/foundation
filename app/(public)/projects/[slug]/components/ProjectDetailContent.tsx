@@ -82,7 +82,7 @@ export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
         {banner ? (
           <>
             <Image src={banner} alt="" fill priority sizes="100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/95 via-emerald-950/85 to-emerald-950/60" />
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/95 via-emerald-950/90 to-emerald-950/80" />
           </>
         ) : (
           <div className="absolute inset-0 pattern-lattice-light" />
