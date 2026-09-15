@@ -11,6 +11,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 There is no test runner configured. The old CRA `App.test.js` (unmodified boilerplate that asserted a non-existent "learn react" link) was removed during the Next.js migration; wiring up `next/jest` + Testing Library is a separate future task if tests are wanted.
 
+`npm run build` overwrites the `.next/` directory a running `npm run dev` server is serving from, leaving that dev server in a broken state — if the user has a dev server up, tell them to restart it after any build.
+
+**Stale leftovers from the pre-migration CRA app, both untracked and gitignored — ignore them, don't edit them, and don't treat them as build output:** `build/` (the old CRA production bundle) and `README.md` (CRA boilerplate plus a stale credentials scratchpad; this file, not the README, is the accurate description of the project).
+
 ## Architecture
 
 This is a single-tenant donation/expense tracker for "As-Salsabil Foundation," now split into two halves in one Next.js (App Router) + TypeScript app:
