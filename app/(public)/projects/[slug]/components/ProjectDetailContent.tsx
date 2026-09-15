@@ -78,33 +78,35 @@ export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
 
   return (
     <div>
-      <div className="relative bg-emerald-950 overflow-hidden">
+      <div className="relative bg-emerald-950 overflow-hidden h-[280px] xs:h-[300px] sm:h-[360px] md:h-[420px] lg:h-[500px]">
         {banner ? (
           <>
-            <Image src={banner} alt="" fill priority sizes="100vw" className="object-inherit" />
+            <Image src={banner} alt="" fill priority sizes="100vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-950/75 to-emerald-950/45" />
           </>
         ) : (
           <div className="absolute inset-0 pattern-lattice-light" />
         )}
-        <div className="relative w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-10 xs:py-14">
-          <FadeIn>
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-1.5 text-sm text-emerald-200 hover:text-white transition-colors"
-            >
-              <ArrowLeft size={15} />
-              {projectDetail.backToProjects}
-            </Link>
-            <div className="mt-5 flex items-center gap-3">
-              <span className="flex items-center justify-center w-12 h-12 xs:w-14 xs:h-14 rounded-full bg-white/10 text-amber-400 flex-shrink-0">
-                <Icon size={26} />
-              </span>
-              <h1 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white">{category.title}</h1>
-            </div>
-            <SectionDivider className="mt-5 mb-5" />
-            <p className="text-sm xs:text-base text-emerald-100 leading-relaxed max-w-3xl">{category.blurb}</p>
-          </FadeIn>
+        <div className="relative h-full flex items-center">
+          <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
+            <FadeIn>
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-1.5 text-sm text-emerald-200 hover:text-white transition-colors"
+              >
+                <ArrowLeft size={15} />
+                {projectDetail.backToProjects}
+              </Link>
+              <div className="mt-5 flex items-center gap-3">
+                <span className="flex items-center justify-center w-12 h-12 xs:w-14 xs:h-14 rounded-full bg-white/10 text-amber-400 flex-shrink-0">
+                  <Icon size={26} />
+                </span>
+                <h1 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white">{category.title}</h1>
+              </div>
+              <SectionDivider className="mt-5 mb-5" />
+              <p className="text-sm xs:text-base text-emerald-100 leading-relaxed max-w-3xl">{category.blurb}</p>
+            </FadeIn>
+          </div>
         </div>
       </div>
 
