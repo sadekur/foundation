@@ -124,6 +124,8 @@ The Gallery has its own, separate Firestore collection, `gallery` (one document 
 
 `lib/firebaseAdmin.ts` (Admin SDK, server-only) is a separate, newer piece used exclusively to verify the admin's ID token on the two Gallery API routes that touch Cloudinary (see Gallery write flow above); it reads the service account JSON from `FIREBASE_SERVICE_ACCOUNT_KEY` (one env var holding the whole downloaded JSON as a single-line string). It has no other purpose — ordinary Firestore reads/writes throughout the app are left to console-managed security rules, not the Admin SDK.
 
+`lib/cloudinary.ts` is the other server-only module holding a secret: it calls `cloudinary.config({ secure: true })` and lets the SDK auto-parse `CLOUDINARY_URL` (the combined `cloudinary://key:secret@cloud_name` form — no manual field mapping), and exports `signUploadParams({ folder })` for `/api/gallery/sign`. Never import it from a Client Component.
+
 **When deploying, all server-only and `NEXT_PUBLIC_FIREBASE_*` env vars need to be added to the Vercel project's environment variables**, since `.env.local` isn't committed. See `.env.example` for the full list: Firebase client config, Contact form (`CONTACT_EMAIL_*`), Cloudinary (`CLOUDINARY_URL`), YouTube (`YOUTUBE_API_KEY`), and Firebase Admin (`FIREBASE_SERVICE_ACCOUNT_KEY`).
 
 ### Types
