@@ -109,12 +109,14 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
                     </div>
                   </div>
 
-                  <div className="flex-1 p-5 xs:p-6 lg:p-8 flex flex-col justify-center">
+                  <div className="flex-1 p-5 xs:p-6 lg:p-8 flex flex-col justify-center lg:overflow-hidden">
                     <span className="block w-12 h-1 bg-amber-400 rounded-full mb-4" />
-                    <h2 className="text-lg xs:text-xl lg:text-2xl font-bold text-emerald-950 mb-3">
+                    <h2 className="text-lg xs:text-xl lg:text-2xl font-bold text-emerald-950 mb-3 lg:line-clamp-2">
                       {category.title}
                     </h2>
-                    <p className="text-sm xs:text-base text-gray-700 leading-relaxed mb-4">{category.blurb}</p>
+                    <p className="text-sm xs:text-base text-gray-700 leading-relaxed mb-4 lg:line-clamp-2">
+                      {category.blurb}
+                    </p>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-6 gap-y-2.5 mb-6">
                       {category.objectives.map((objective) => (
                         <li
@@ -122,7 +124,7 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
                           className="flex items-start gap-2 text-xs xs:text-sm text-gray-600 leading-relaxed"
                         >
                           <Check size={14} className="mt-0.5 flex-shrink-0 text-amber-500" />
-                          <span>{objective}</span>
+                          <span className="lg:line-clamp-1">{objective}</span>
                         </li>
                       ))}
                     </ul>
