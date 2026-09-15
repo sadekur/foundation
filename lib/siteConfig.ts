@@ -61,7 +61,7 @@ export const projectMedia: ProjectMedia[] = [
 // plain dark green pattern background used today.
 export const projectBanners: (string | null)[] = [
   null, // Islamic Education & Dawah
-  null, // Qur'an & Islamic Teaching
+  "/projects/banners/quran-o-deeni-shikkhadan.jpg", // Qur'an & Islamic Teaching
   null, // Islamic Library & Publications
   null, // Zakat & Sadaqah Projects
   null, // Orphans, Students of Knowledge & the Poor
