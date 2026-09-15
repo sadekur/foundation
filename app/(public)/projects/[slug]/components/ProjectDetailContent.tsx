@@ -23,9 +23,10 @@ import {
   Landmark,
   Home,
 } from "lucide-react";
+import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { projectMedia, PROJECT_CATEGORY_SLUGS } from "@/lib/siteConfig";
+import { projectMedia, projectBanners, PROJECT_CATEGORY_SLUGS } from "@/lib/siteConfig";
 import { SectionDivider } from "../../../components/SectionDivider";
 import { FadeIn } from "../../../components/FadeIn";
 
@@ -73,11 +74,20 @@ export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
 
   const Icon = CATEGORY_ICONS[index] ?? HandCoins;
   const media = projectMedia[index] ?? { image: null, video: null };
+  const banner = projectBanners[index] ?? null;
 
   return (
     <div>
-      <div className="bg-emerald-950 pattern-lattice-light">
-        <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-10 xs:py-14">
+      <div className="relative bg-emerald-950 overflow-hidden">
+        {banner ? (
+          <>
+            <Image src={banner} alt="" fill priority sizes="100vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/95 via-emerald-950/85 to-emerald-950/60" />
+          </>
+        ) : (
+          <div className="absolute inset-0 pattern-lattice-light" />
+        )}
+        <div className="relative w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-10 xs:py-14">
           <FadeIn>
             <Link
               href="/projects"

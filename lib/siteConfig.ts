@@ -47,6 +47,31 @@ export const projectMedia: ProjectMedia[] = [
   { image: null, video: null }, // Rehabilitation & Employment Support
 ];
 
+// One entry per category, same index/order as `projectMedia` above — the wide background photo
+// behind the hero banner on each category's detail page (app/(public)/projects/[slug]). This is
+// deliberately separate from `projectMedia`'s `image`/`video` (the showcase card's media panel is
+// a different crop/purpose) so a category can have a card photo without a banner, or vice versa.
+//
+// To add one: drop the file under `public/projects/banners/` (e.g. `public/projects/banners/zakat.jpg`)
+// and set the path here, e.g. "/projects/banners/zakat.jpg". Recommended source size: a landscape
+// photo at least 1920x600px (roughly 3:1), main subject centered — the hero renders full-bleed width
+// at a height driven by the overlaid text (not a fixed aspect ratio), so the image is cropped via
+// object-cover to whatever height that ends up being (shorter on mobile, taller on desktop); a centered
+// subject on a sufficiently large source survives any of those crops. Leaving `null` falls back to the
+// plain dark green pattern background used today.
+export const projectBanners: (string | null)[] = [
+  null, // Islamic Education & Dawah
+  null, // Qur'an & Islamic Teaching
+  null, // Islamic Library & Publications
+  null, // Zakat & Sadaqah Projects
+  null, // Orphans, Students of Knowledge & the Poor
+  null, // Tube Wells & Public Welfare
+  null, // Tree Plantation & Eco-Friendly Activities
+  null, // Free Medical Care & Humanitarian Aid
+  null, // Mosque & Madrasa Construction Support
+  null, // Rehabilitation & Employment Support
+];
+
 // Static routing keys for app/(public)/projects/[slug] — identical to the `slug` field on each
 // entry in dictionaries.ts's bn/en `projects.categories` (kept here too since routing needs a
 // language-independent list for generateStaticParams, without importing the language dictionaries).
