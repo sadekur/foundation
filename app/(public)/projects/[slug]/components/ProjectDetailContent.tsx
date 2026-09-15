@@ -81,7 +81,7 @@ export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
       <div className="relative bg-emerald-950 overflow-hidden">
         {banner ? (
           <>
-            <Image src={banner} alt="" fill priority sizes="100vw" className="object-cover" />
+            <Image src={banner} alt="" fill priority sizes="100vw" className="object-inherit" />
             <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-950/75 to-emerald-950/45" />
           </>
         ) : (
