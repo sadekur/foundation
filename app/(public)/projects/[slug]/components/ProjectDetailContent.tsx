@@ -82,13 +82,15 @@ export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
         {banner ? (
           <>
             <Image src={banner} alt="" fill priority sizes="100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/95 via-emerald-950/90 to-emerald-950/80" />
+            <div className="absolute inset-0 bg-emerald-950/45" />
           </>
         ) : (
           <div className="absolute inset-0 pattern-lattice-light" />
         )}
         <div className="relative w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-10 xs:py-14">
-          <FadeIn>
+          <FadeIn
+            className={banner ? "inline-block max-w-full bg-emerald-950/70 backdrop-blur-sm rounded-2xl px-5 py-5 xs:px-7 xs:py-7" : undefined}
+          >
             <Link
               href="/projects"
               className="inline-flex items-center gap-1.5 text-sm text-emerald-200 hover:text-white transition-colors"
