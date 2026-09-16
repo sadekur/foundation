@@ -103,7 +103,7 @@ export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
                 </span>
                 <h1 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white">{category.title}</h1>
               </div>
-              <SectionDivider className="mt-5 mb-5" />
+              <SectionDivider className="mt-5 mb-5" align="start" />
               <p className="text-sm xs:text-base text-emerald-100 leading-relaxed max-w-3xl">{category.blurb}</p>
             </FadeIn>
           </div>
