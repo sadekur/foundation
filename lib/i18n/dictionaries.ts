@@ -619,7 +619,7 @@ export const dictionaries: Record<Language, Dictionary> = {
             "Teacher training and guidelines to raise teaching quality",
           ],
           targetAudience: "Students of all ages, including children and teenagers, men and women",
-          budgetItems: ["Teacher honorariums", "Learning materials", "Mosque coordination support"],
+          budgetItems: ["Teacher honorariums", "Learning materials", "Teacher quality development"],
           area: "Mosque-based, designated areas",
           duration: "Ongoing, regular program",
           faq: PROJECT_FAQ_EN,
