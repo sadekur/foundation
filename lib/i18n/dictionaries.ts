@@ -611,17 +611,23 @@ export const dictionaries: Record<Language, Dictionary> = {
           title: "Qur'an & Islamic Teaching",
           blurb: "Mosque-based Qur'an and Islamic education for elders and women.",
           description:
-            "Through mosque-based classes, elders and — separately — women are taught proper Qur'an recitation and fundamental Islamic knowledge.",
+            "Under As-Salsabil Foundation's supervision, the Maktab education program already runs 20+ maktabs across the area. These maktabs teach children, teenagers, and students of all ages Qur'an, Aqidah, and essential Islamic knowledge grounded in correct religious understanding and sound methodology (manhaj). To improve and expand this program, there are plans to launch dedicated training for teachers to sharpen their skills and teaching quality, along with the necessary guidelines — to be rolled out as sufficient funding is secured.",
           objectives: [
             "Teach correct Qur'an recitation",
             "Separate classes for women",
             "Regular mosque-based sessions",
+            "Teacher training and guidelines to raise teaching quality",
           ],
-          targetAudience: "Elderly men and women worshippers",
+          targetAudience: "Students of all ages, including children and teenagers, men and women",
           budgetItems: ["Teacher honorariums", "Learning materials", "Mosque coordination support"],
           area: "Mosque-based, designated areas",
           duration: "Ongoing, regular program",
           faq: PROJECT_FAQ_EN,
+          impactStats: [
+            { value: "20+", label: "Maktabs running" },
+            { value: "300+", label: "Students benefited" },
+            { value: "100%", label: "Free of charge" },
+          ],
         },
         {
           slug: "islami-pathagar-o-prokashona",
