@@ -58,6 +58,7 @@ export interface ProjectCategory {
   area: string;
   duration: string;
   faq: ProjectFaqItem[];
+  impactStats?: ProjectImpactStat[];
 }
 
 export interface ProjectsDictionary {
