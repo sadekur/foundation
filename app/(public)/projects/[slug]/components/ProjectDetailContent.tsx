@@ -48,6 +48,19 @@ interface ProjectDetailContentProps {
   slug: string;
 }
 
+// Lightweight **bold** support for description copy — splits on the markers and wraps the
+// matched spans in <strong>, leaving plain text (no markers) untouched.
+const renderWithBold = (text: string) =>
+  text.split(/\*\*(.+?)\*\*/g).map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="font-semibold text-emerald-950">
+        {part}
+      </strong>
+    ) : (
+      <Fragment key={i}>{part}</Fragment>
+    )
+  );
+
 export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
   const { language } = useLanguage();
   const { projects, projectDetail } = getDictionary(language);
