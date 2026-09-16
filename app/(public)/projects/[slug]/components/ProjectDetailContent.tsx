@@ -127,7 +127,7 @@ export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 xs:gap-8">
           <FadeIn className="lg:col-span-3">
             <h2 className="text-lg xs:text-xl font-bold text-emerald-950 mb-4">{projectDetail.descriptionTitle}</h2>
-            <p className="text-sm xs:text-base text-gray-700 leading-relaxed">{category.description}</p>
+            <p className="text-sm xs:text-base text-gray-700 leading-relaxed">{renderWithBold(category.description)}</p>
           </FadeIn>
 
           <FadeIn delayMs={100} className="lg:col-span-2">
