@@ -46,7 +46,10 @@ export interface ProjectImpactStat {
 // is real brochure-derived copy for the summary card; `description` through `faq` back the detail
 // page and are placeholder/generic copy until the foundation supplies real per-project figures
 // (objectives, budget, area, duration are safe generic statements — deliberately no invented
-// numbers or stats, see `ProjectDetailDictionary`'s `impactComingSoon`/`galleryComingSoon`).
+// numbers or stats). `impactStats` is optional and left unset for most categories, which keeps the
+// detail page's impact section on `ProjectDetailDictionary.impactComingSoon`; set it once the
+// foundation supplies real figures for that category (see `galleryComingSoon` for the still-unbuilt
+// per-category gallery).
 export interface ProjectCategory {
   slug: string;
   title: string;
