@@ -36,6 +36,11 @@ export interface ProjectFaqItem {
   answer: string;
 }
 
+export interface ProjectImpactStat {
+  value: string;
+  label: string;
+}
+
 // `slug` is the language-independent routing key for /projects/[slug] (see PROJECT_CATEGORY_SLUGS
 // below) — kept identical between the bn and en entry at the same array index. Every other field
 // is real brochure-derived copy for the summary card; `description` through `faq` back the detail
