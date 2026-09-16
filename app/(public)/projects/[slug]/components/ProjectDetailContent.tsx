@@ -222,10 +222,24 @@ export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
             <h2 className="text-xl xs:text-2xl font-bold text-emerald-950">{projectDetail.impactTitle}</h2>
             <SectionDivider className="mt-4 mb-6" />
           </div>
-          <div className="rounded-2xl bg-gray-50 border border-gray-200 py-10 xs:py-14 flex flex-col items-center justify-center gap-2">
-            <BarChart3 size={36} className="text-gray-300" />
-            <p className="text-sm text-gray-500">{projectDetail.impactComingSoon}</p>
-          </div>
+          {category.impactStats && category.impactStats.length > 0 ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {category.impactStats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-2xl bg-emerald-50 border border-emerald-100 py-6 xs:py-8 px-4 text-center"
+                >
+                  <p className="text-2xl xs:text-3xl font-bold text-emerald-800">{stat.value}</p>
+                  <p className="mt-1.5 text-sm text-emerald-900/70">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-2xl bg-gray-50 border border-gray-200 py-10 xs:py-14 flex flex-col items-center justify-center gap-2">
+              <BarChart3 size={36} className="text-gray-300" />
+              <p className="text-sm text-gray-500">{projectDetail.impactComingSoon}</p>
+            </div>
+          )}
         </FadeIn>
 
         <FadeIn delayMs={150}>
