@@ -37,7 +37,7 @@ export interface ProjectMedia {
 export const projectMedia: ProjectMedia[] = [
   { image: "/projects/deeni-shiksha-o-dawah-mahfil.jpg", video: null }, // Islamic Education & Dawah
   { image: "/projects/islamic-education-dawah.jpg", video: null }, // Qur'an & Islamic Teaching
-  { image: null, video: null }, // Islamic Library & Publications
+  { image: "/projects/islami-pathagar-o-prokashona.png", video: null }, // Islamic Library & Publications
   { image: null, video: null }, // Zakat & Sadaqah Projects
   { image: null, video: null }, // Orphans, Students of Knowledge & the Poor
   { image: null, video: null }, // Tube Wells & Public Welfare
