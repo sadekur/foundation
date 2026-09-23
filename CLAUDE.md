@@ -5,9 +5,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 - `npm run dev` — run the dev server (Next.js, http://localhost:3000)
-- `npm run build` — production build (type-checks + lints + builds all routes)
+- `npm run build` — production build (type-checks + builds all routes)
 - `npm start` — serve the production build (run `npm run build` first)
-- `npm run lint` — ESLint (`eslint-config-next`)
+- `npm run lint` — `next lint` (`eslint-config-next`). **No ESLint config file is committed**, so on Next 15.5 this is deprecated and drops into an interactive setup prompt rather than linting, and `next build` skips its lint step for the same reason. Use `npx tsc --noEmit` for a quick type-check without a full build.
 
 There is no test runner configured. The old CRA `App.test.js` (unmodified boilerplate that asserted a non-existent "learn react" link) was removed during the Next.js migration; wiring up `next/jest` + Testing Library is a separate future task if tests are wanted.
 
