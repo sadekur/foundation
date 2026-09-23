@@ -35,7 +35,7 @@ export interface ProjectMedia {
 // priority over `image` when both are set (the image is used as the video's poster frame). Leaving
 // both `null` falls back to a themed placeholder with the category's icon.
 export const projectMedia: ProjectMedia[] = [
-  { image: "/projects/islamic-education-dawah.jpg", video: null }, // Islamic Education & Dawah
+  { image: "/projects/deeni-shiksha-o-dawah-mahfil.jpg", video: null }, // Islamic Education & Dawah
   { image: "/projects/islamic-education-dawah.jpg", video: null }, // Qur'an & Islamic Teaching
   { image: null, video: null }, // Islamic Library & Publications
   { image: null, video: null }, // Zakat & Sadaqah Projects
