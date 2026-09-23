@@ -12,6 +12,8 @@ import { MediaLightbox } from "./MediaLightbox";
 interface UploadedMediaTabProps {
   initialItems: GalleryItem[];
   initialCursor: string | null;
+  // Set on a project detail page so "Load More" keeps paging within that project's media.
+  projectSlug?: string;
 }
 
 // Slow and unhurried on purpose — this is a background-ambient slideshow, not something
