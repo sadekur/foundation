@@ -164,7 +164,7 @@ const AddGalleryItemModal = ({ show, user, onUploaded, onCancel }: AddGalleryIte
       xhr.send(formData);
     });
 
-    await onUploaded(buildItemPayload(uploadResult, caption, user));
+    await onUploaded(buildItemPayload(uploadResult, caption, projectSlug, user));
     updateQueueItem(index, { status: "done", progress: 100 });
   };
 
