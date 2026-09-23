@@ -27,8 +27,10 @@ import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { projectMedia, projectBanners, PROJECT_CATEGORY_SLUGS } from "@/lib/siteConfig";
+import type { GalleryItem } from "@/types";
 import { SectionDivider } from "../../../components/SectionDivider";
 import { FadeIn } from "../../../components/FadeIn";
+import { UploadedMediaTab } from "../../components/UploadedMediaTab";
 
 // Same order as dictionaries.ts's `projects.categories` / siteConfig's `projectMedia`.
 const CATEGORY_ICONS = [
