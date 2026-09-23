@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PROJECT_CATEGORY_SLUGS } from "@/lib/siteConfig";
+import { getGalleryItems } from "@/lib/gallery";
 import { dictionaries } from "@/lib/i18n/dictionaries";
 import { ProjectDetailContent } from "./components/ProjectDetailContent";
 
