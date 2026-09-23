@@ -20,6 +20,11 @@ export const GALLERY_PAGE_SIZE = 12;
 interface GetGalleryItemsOptions {
   afterCreatedAt?: string;
   pageSize?: number;
+  // Restricts to one project's media. The where + orderBy pair needs a Firestore composite
+  // index on `gallery` (projectSlug Ascending, createdAt Descending) — without it the query
+  // throws, which the catch below turns into an empty gallery (the console error links to
+  // the one-click index creation page).
+  projectSlug?: string;
 }
 
 export interface GalleryItemsResult {
