@@ -37,9 +37,13 @@ export interface GalleryItemsResult {
 export const getGalleryItems = async ({
   afterCreatedAt,
   pageSize = GALLERY_PAGE_SIZE,
+  projectSlug,
 }: GetGalleryItemsOptions = {}): Promise<GalleryItemsResult> => {
   try {
     const constraints: QueryConstraint[] = [orderBy("createdAt", "desc"), limit(pageSize)];
+    if (projectSlug) {
+      constraints.unshift(where("projectSlug", "==", projectSlug));
+    }
     if (afterCreatedAt) {
       constraints.push(startAfter(afterCreatedAt));
     }
