@@ -109,7 +109,14 @@ interface QueueItem {
 const AddGalleryItemModal = ({ show, user, onUploaded, onCancel }: AddGalleryItemModalProps) => {
   const [queue, setQueue] = useState<QueueItem[]>([]);
   const [caption, setCaption] = useState("");
+  const [projectSlug, setProjectSlug] = useState(defaultProjectSlug);
   const [uploading, setUploading] = useState(false);
+
+  // Follow the gallery screen's filter each time the modal opens, so uploading while viewing
+  // one project's media tags new files with that project by default.
+  useEffect(() => {
+    if (show) setProjectSlug(defaultProjectSlug);
+  }, [show, defaultProjectSlug]);
 
   if (!show) return null;
 
