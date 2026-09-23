@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PROJECT_CATEGORY_SLUGS } from "@/lib/siteConfig";
-import { getGalleryItems } from "@/lib/gallery";
+import { getProjectGalleryItems } from "@/lib/gallery";
 import { dictionaries } from "@/lib/i18n/dictionaries";
 import { ProjectDetailContent } from "./components/ProjectDetailContent";
 
@@ -33,6 +33,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   const isKnownSlug = (PROJECT_CATEGORY_SLUGS as readonly string[]).includes(slug);
   if (!isKnownSlug) notFound();
 
-  const { items, nextCursor } = await getGalleryItems({ projectSlug: slug });
-  return <ProjectDetailContent slug={slug} initialGalleryItems={items} initialGalleryCursor={nextCursor} />;
+  const galleryItems = await getProjectGalleryItems(slug);
+  return <ProjectDetailContent slug={slug} galleryItems={galleryItems} />;
 }
