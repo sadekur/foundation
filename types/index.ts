@@ -34,6 +34,9 @@ export interface GalleryItem {
   url: string;
   publicId: string;
   caption?: string;
+  // Slug from siteConfig's PROJECT_CATEGORY_SLUGS — shows the item on that project's detail
+  // page too. Absent = general media, shown only in the sitewide /projects gallery.
+  projectSlug?: string;
   width?: number;
   height?: number;
   duration?: number;
