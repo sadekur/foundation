@@ -1,13 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowLeft, ImagePlus, Trash2 } from "lucide-react";
+import { ArrowLeft, ImagePlus, Tag, Trash2 } from "lucide-react";
 import type { User } from "firebase/auth";
-import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  deleteField,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import type { GalleryItem } from "@/types";
 import AddGalleryItemModal from "./AddGalleryItemModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import { GALLERY_PROJECT_OPTIONS, getGalleryProjectTitle } from "./galleryProjectOptions";
+
+// "all" shows everything, "" shows untagged (general) items, anything else is a project slug.
+const ALL_PROJECTS = "all";
 
 interface GalleryScreenProps {
   user: User;
@@ -19,6 +33,13 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<GalleryItem | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [projectFilter, setProjectFilter] = useState(ALL_PROJECTS);
+  const [assignTarget, setAssignTarget] = useState<GalleryItem | null>(null);
+  const [assignSlug, setAssignSlug] = useState("");
+  const [isAssigning, setIsAssigning] = useState(false);
+
+  const visibleItems =
+    projectFilter === ALL_PROJECTS ? items : items.filter((item) => (item.projectSlug ?? "") === projectFilter);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -38,6 +59,28 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
   // would hide the progress of every file after it.
   const handleUploaded = async (item: Omit<GalleryItem, "id">) => {
     await addDoc(collection(db, "gallery"), item);
+  };
+
+  const openAssign = (item: GalleryItem) => {
+    setAssignTarget(item);
+    setAssignSlug(item.projectSlug ?? "");
+  };
+
+  // "" removes the field entirely (deleteField) rather than storing an empty string, so
+  // general items stay shaped exactly like ones uploaded without a project.
+  const handleAssignConfirm = async () => {
+    if (!assignTarget) return;
+    setIsAssigning(true);
+    try {
+      await updateDoc(doc(db, "gallery", assignTarget.id), {
+        projectSlug: assignSlug ? assignSlug : deleteField(),
+      });
+      setAssignTarget(null);
+    } catch (error) {
+      alert("Failed to update project: " + (error as Error).message);
+    } finally {
+      setIsAssigning(false);
+    }
   };
 
   const handleDeleteConfirm = async () => {
@@ -91,13 +134,38 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
       </div>
 
       <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-4 xs:py-6 sm:py-8">
+        <div className="mb-4 flex flex-col xs:flex-row xs:items-center gap-2">
+          <label htmlFor="gallery-project-filter" className="text-sm font-medium text-gray-700">
+            Show:
+          </label>
+          <select
+            id="gallery-project-filter"
+            value={projectFilter}
+            onChange={(e) => setProjectFilter(e.target.value)}
+            className="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-indigo-500 w-full xs:w-auto"
+          >
+            <option value={ALL_PROJECTS}>All media ({items.length})</option>
+            <option value="">General — no project</option>
+            {GALLERY_PROJECT_OPTIONS.map((option) => (
+              <option key={option.slug} value={option.slug}>
+                {option.title}
+              </option>
+            ))}
+          </select>
+        </div>
+
         {items.length === 0 ? (
           <div className="bg-white rounded-lg shadow-sm p-8 text-center text-gray-500">
             No gallery items yet. Click &quot;Add Media&quot; to upload the first photo or video.
           </div>
+        ) : visibleItems.length === 0 ? (
+          <div className="bg-white rounded-lg shadow-sm p-8 text-center text-gray-500">
+            No media for this project yet. Click &quot;Add Media&quot; to upload some, or tag existing items with the
+            tag button.
+          </div>
         ) : (
           <div className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2 xs:gap-3">
-            {items.map((item) => (
+            {visibleItems.map((item) => (
               <div
                 key={item.id}
                 className="relative aspect-square rounded-md overflow-hidden bg-gray-100 border border-gray-200 group"
@@ -116,6 +184,22 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
                 >
                   <Trash2 size={12} />
                 </button>
+                <button
+                  onClick={() => openAssign(item)}
+                  className="absolute top-1 left-1 bg-white/90 text-indigo-600 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+                  aria-label="Change project"
+                  title="Change project"
+                >
+                  <Tag size={12} />
+                </button>
+                {item.projectSlug && (
+                  <span
+                    className="absolute top-1 left-7 right-7 bg-indigo-600/85 text-white text-[9px] xs:text-[10px] px-1.5 py-0.5 rounded truncate"
+                    title={getGalleryProjectTitle(item.projectSlug) ?? item.projectSlug}
+                  >
+                    {getGalleryProjectTitle(item.projectSlug) ?? item.projectSlug}
+                  </span>
+                )}
                 {item.caption && (
                   <span className="absolute bottom-0 inset-x-0 bg-black/50 text-white text-[9px] xs:text-[10px] px-1.5 py-0.5 truncate">
                     {item.caption}
@@ -127,7 +211,50 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
         )}
       </div>
 
-      <AddGalleryItemModal show={showAddModal} user={user} onUploaded={handleUploaded} onCancel={() => setShowAddModal(false)} />
+      <AddGalleryItemModal
+        show={showAddModal}
+        user={user}
+        defaultProjectSlug={projectFilter === ALL_PROJECTS ? "" : projectFilter}
+        onUploaded={handleUploaded}
+        onCancel={() => setShowAddModal(false)}
+      />
+
+      {assignTarget && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-sm">
+            <h3 className="text-lg font-semibold mb-4">Change Project</h3>
+            <select
+              value={assignSlug}
+              onChange={(e) => setAssignSlug(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
+              disabled={isAssigning}
+            >
+              <option value="">General (main gallery only)</option>
+              {GALLERY_PROJECT_OPTIONS.map((option) => (
+                <option key={option.slug} value={option.slug}>
+                  {option.title}
+                </option>
+              ))}
+            </select>
+            <div className="flex gap-3 mt-4">
+              <button
+                onClick={handleAssignConfirm}
+                disabled={isAssigning}
+                className="flex-1 bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-60"
+              >
+                {isAssigning ? "Saving…" : "Save"}
+              </button>
+              <button
+                onClick={() => setAssignTarget(null)}
+                disabled={isAssigning}
+                className="flex-1 bg-gray-300 text-gray-700 p-3 rounded-lg hover:bg-gray-400 transition-colors disabled:opacity-60"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <DeleteConfirmationModal
         show={!!deleteTarget}
