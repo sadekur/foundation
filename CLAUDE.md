@@ -120,7 +120,7 @@ The Gallery has its own, separate Firestore collection, `gallery` (one document 
 
 ### Firebase config
 
-`lib/firebase.ts` (client SDK) reads `NEXT_PUBLIC_FIREBASE_*` env vars (see `.env.example`) instead of a hardcoded object — `.env.local` holds the real values and is gitignored. Same Firebase project as before the migration; this was a hygiene change only, not a backend change.
+`lib/firebase.ts` (client SDK) reads `NEXT_PUBLIC_FIREBASE_*` env vars (see `.env.example`) instead of a hardcoded object. `.env.local` holds the real values and is gitignored. An older, partial `.env` (also gitignored) sits beside it. Next loads both files, and `.env.local` wins on conflicts, so put new vars in `.env.local`. Same Firebase project as before the migration; this was a hygiene change only, not a backend change.
 
 `lib/firebaseAdmin.ts` (Admin SDK, server-only) is a separate, newer piece used exclusively to verify the admin's ID token on the two Gallery API routes that touch Cloudinary (see Gallery write flow above); it reads the service account JSON from `FIREBASE_SERVICE_ACCOUNT_KEY` (one env var holding the whole downloaded JSON as a single-line string). It has no other purpose — ordinary Firestore reads/writes throughout the app are left to console-managed security rules, not the Admin SDK.
 
