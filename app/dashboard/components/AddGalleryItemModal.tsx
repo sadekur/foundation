@@ -53,6 +53,7 @@ const buildItemPayload = (
   };
   const trimmedCaption = caption.trim();
   if (trimmedCaption) item.caption = trimmedCaption;
+  if (projectSlug) item.projectSlug = projectSlug;
   if (uploadResult.width !== undefined) item.width = uploadResult.width;
   if (uploadResult.height !== undefined) item.height = uploadResult.height;
   if (uploadResult.duration !== undefined) item.duration = uploadResult.duration;
