@@ -7,6 +7,8 @@ import type { GalleryItem, GalleryItemType } from "@/types";
 interface AddGalleryItemModalProps {
   show: boolean;
   user: User;
+  // Pre-selected project slug ("" = general, no project page).
+  defaultProjectSlug?: string;
   onUploaded: (item: Omit<GalleryItem, "id">) => Promise<void>;
   onCancel: () => void;
 }
