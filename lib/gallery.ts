@@ -20,11 +20,6 @@ export const GALLERY_PAGE_SIZE = 12;
 interface GetGalleryItemsOptions {
   afterCreatedAt?: string;
   pageSize?: number;
-  // Restricts to one project's media. The where + orderBy pair needs a Firestore composite
-  // index on `gallery` (projectSlug Ascending, createdAt Descending) — without it the query
-  // throws, which the catch below turns into an empty gallery (the console error links to
-  // the one-click index creation page).
-  projectSlug?: string;
 }
 
 export interface GalleryItemsResult {
@@ -37,13 +32,9 @@ export interface GalleryItemsResult {
 export const getGalleryItems = async ({
   afterCreatedAt,
   pageSize = GALLERY_PAGE_SIZE,
-  projectSlug,
 }: GetGalleryItemsOptions = {}): Promise<GalleryItemsResult> => {
   try {
     const constraints: QueryConstraint[] = [orderBy("createdAt", "desc"), limit(pageSize)];
-    if (projectSlug) {
-      constraints.unshift(where("projectSlug", "==", projectSlug));
-    }
     if (afterCreatedAt) {
       constraints.push(startAfter(afterCreatedAt));
     }
@@ -56,5 +47,21 @@ export const getGalleryItems = async ({
   } catch (error) {
     console.error("Failed to load gallery items:", error);
     return { items: [], nextCursor: null };
+  }
+};
+
+// All of one project's media, newest first, unpaginated. Filters on projectSlug only and sorts
+// here rather than adding orderBy("createdAt") to the query: where + orderBy on different
+// fields requires a Firestore composite index, and a single project's media stays small enough
+// that loading it in one go is fine.
+export const getProjectGalleryItems = async (projectSlug: string): Promise<GalleryItem[]> => {
+  try {
+    const snapshot = await getDocs(query(collection(db, "gallery"), where("projectSlug", "==", projectSlug)));
+    return snapshot.docs
+      .map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }) as GalleryItem)
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  } catch (error) {
+    console.error("Failed to load project gallery items:", error);
+    return [];
   }
 };

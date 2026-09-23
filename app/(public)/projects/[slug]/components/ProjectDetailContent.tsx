@@ -48,8 +48,7 @@ const CATEGORY_ICONS = [
 
 interface ProjectDetailContentProps {
   slug: string;
-  initialGalleryItems: GalleryItem[];
-  initialGalleryCursor: string | null;
+  galleryItems: GalleryItem[];
 }
 
 // Lightweight **bold** support for description copy — splits on the markers and wraps the
@@ -67,8 +66,7 @@ const renderWithBold = (text: string) =>
 
 export const ProjectDetailContent = ({
   slug,
-  initialGalleryItems,
-  initialGalleryCursor,
+  galleryItems,
 }: ProjectDetailContentProps) => {
   const { language } = useLanguage();
   const { projects, projectDetail } = getDictionary(language);
@@ -232,12 +230,9 @@ export const ProjectDetailContent = ({
             <h2 className="text-xl xs:text-2xl font-bold text-emerald-950">{projectDetail.galleryTitle}</h2>
             <SectionDivider className="mt-4 mb-6" />
           </div>
-          {initialGalleryItems.length > 0 ? (
-            <UploadedMediaTab
-              initialItems={initialGalleryItems}
-              initialCursor={initialGalleryCursor}
-              projectSlug={slug}
-            />
+          {galleryItems.length > 0 ? (
+            // All of the project's media is passed up front, so there's no cursor to load more from.
+            <UploadedMediaTab initialItems={galleryItems} initialCursor={null} />
           ) : (
             <div className="rounded-2xl overflow-hidden bg-emerald-50 border border-emerald-100 aspect-[16/9] xs:aspect-[21/9] flex flex-col items-center justify-center gap-2 pattern-lattice-light">
               <ImageIcon size={40} className="text-emerald-300" />

@@ -12,8 +12,6 @@ import { MediaLightbox } from "./MediaLightbox";
 interface UploadedMediaTabProps {
   initialItems: GalleryItem[];
   initialCursor: string | null;
-  // Set on a project detail page so "Load More" keeps paging within that project's media.
-  projectSlug?: string;
 }
 
 // Slow and unhurried on purpose — this is a background-ambient slideshow, not something
@@ -21,7 +19,7 @@ interface UploadedMediaTabProps {
 const AUTOPLAY_INTERVAL_MS = 6000;
 const SLIDE_TRANSITION_MS = 1200;
 
-export const UploadedMediaTab = ({ initialItems, initialCursor, projectSlug }: UploadedMediaTabProps) => {
+export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaTabProps) => {
   const { language } = useLanguage();
   const { gallery } = getDictionary(language);
 
@@ -40,7 +38,7 @@ export const UploadedMediaTab = ({ initialItems, initialCursor, projectSlug }: U
     setIsLoadingMore(true);
     setLoadMoreFailed(false);
     try {
-      const result = await getGalleryItems({ afterCreatedAt: cursor, projectSlug });
+      const result = await getGalleryItems({ afterCreatedAt: cursor });
       setItems((prev) => [...prev, ...result.items]);
       setCursor(result.nextCursor);
     } catch {
