@@ -46,6 +46,8 @@ const CATEGORY_ICONS = [
 
 interface ProjectDetailContentProps {
   slug: string;
+  initialGalleryItems: GalleryItem[];
+  initialGalleryCursor: string | null;
 }
 
 // Lightweight **bold** support for description copy — splits on the markers and wraps the
@@ -61,7 +63,11 @@ const renderWithBold = (text: string) =>
     )
   );
 
-export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
+export const ProjectDetailContent = ({
+  slug,
+  initialGalleryItems,
+  initialGalleryCursor,
+}: ProjectDetailContentProps) => {
   const { language } = useLanguage();
   const { projects, projectDetail } = getDictionary(language);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
