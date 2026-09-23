@@ -38,6 +38,7 @@ const MAX_IMAGE_BYTES = 1024 * 1024; // 1MB — images are compressed client-sid
 const buildItemPayload = (
   uploadResult: CloudinaryUploadResponse,
   caption: string,
+  projectSlug: string,
   user: User
 ): Omit<GalleryItem, "id"> => {
   const type: GalleryItemType = uploadResult.resource_type === "video" ? "video" : "image";
