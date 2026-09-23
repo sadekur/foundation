@@ -244,6 +244,26 @@ const AddGalleryItemModal = ({
           </div>
 
           <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Project (applied to all)</label>
+            <select
+              value={projectSlug}
+              onChange={(e) => setProjectSlug(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
+              disabled={uploading}
+            >
+              <option value="">General (main gallery only)</option>
+              {GALLERY_PROJECT_OPTIONS.map((option) => (
+                <option key={option.slug} value={option.slug}>
+                  {option.title}
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-500 mt-1">
+              Media tagged with a project also appears in that project&apos;s own gallery.
+            </p>
+          </div>
+
+          <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">Caption (optional, applied to all)</label>
             <input
               type="text"
