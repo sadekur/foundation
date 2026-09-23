@@ -39,7 +39,7 @@ export const projectMedia: ProjectMedia[] = [
   { image: "/projects/islamic-education-dawah.jpg", video: null }, // Qur'an & Islamic Teaching
   { image: "/projects/islami-pathagar-o-prokashona.png", video: null }, // Islamic Library & Publications
   { image: "/projects/zakat-o-sadaka.png", video: null }, // Zakat & Sadaqah Projects
-  { image: null, video: null }, // Orphans, Students of Knowledge & the Poor
+  { image: "/projects/yatim-talibe-ilm-o-daridro.png", video: null }, // Orphans, Students of Knowledge & the Poor
   { image: null, video: null }, // Tube Wells & Public Welfare
   { image: null, video: null }, // Tree Plantation & Eco-Friendly Activities
   { image: null, video: null }, // Free Medical Care & Humanitarian Aid
