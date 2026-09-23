@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { User } from "firebase/auth";
 import type { GalleryItem, GalleryItemType } from "@/types";
+import { GALLERY_PROJECT_OPTIONS } from "./galleryProjectOptions";
 
 interface AddGalleryItemModalProps {
   show: boolean;
