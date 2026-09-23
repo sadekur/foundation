@@ -9,6 +9,10 @@ interface ProjectDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
+// The gallery below is read through the Firestore SDK (not fetch), so without this Next would
+// freeze each page's media at build time — re-render at most every 5 minutes instead.
+export const revalidate = 300;
+
 export function generateStaticParams() {
   return PROJECT_CATEGORY_SLUGS.map((slug) => ({ slug }));
 }
