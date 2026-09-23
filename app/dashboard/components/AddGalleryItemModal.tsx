@@ -106,7 +106,13 @@ interface QueueItem {
 // The raw File + upload-progress state stay local to this modal rather than being lifted to
 // FoundationDashboard like other modals' fields — File objects don't cleanly serialize as
 // controlled string props the way the rest of this app's lifted form state does.
-const AddGalleryItemModal = ({ show, user, onUploaded, onCancel }: AddGalleryItemModalProps) => {
+const AddGalleryItemModal = ({
+  show,
+  user,
+  defaultProjectSlug = "",
+  onUploaded,
+  onCancel,
+}: AddGalleryItemModalProps) => {
   const [queue, setQueue] = useState<QueueItem[]>([]);
   const [caption, setCaption] = useState("");
   const [projectSlug, setProjectSlug] = useState(defaultProjectSlug);
