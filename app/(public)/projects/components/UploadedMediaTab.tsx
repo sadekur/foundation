@@ -40,7 +40,7 @@ export const UploadedMediaTab = ({ initialItems, initialCursor, projectSlug }: U
     setIsLoadingMore(true);
     setLoadMoreFailed(false);
     try {
-      const result = await getGalleryItems({ afterCreatedAt: cursor });
+      const result = await getGalleryItems({ afterCreatedAt: cursor, projectSlug });
       setItems((prev) => [...prev, ...result.items]);
       setCursor(result.nextCursor);
     } catch {
