@@ -224,10 +224,18 @@ export const ProjectDetailContent = ({ slug }: ProjectDetailContentProps) => {
             <h2 className="text-xl xs:text-2xl font-bold text-emerald-950">{projectDetail.galleryTitle}</h2>
             <SectionDivider className="mt-4 mb-6" />
           </div>
-          <div className="rounded-2xl overflow-hidden bg-emerald-50 border border-emerald-100 aspect-[16/9] xs:aspect-[21/9] flex flex-col items-center justify-center gap-2 pattern-lattice-light">
-            <ImageIcon size={40} className="text-emerald-300" />
-            <p className="text-sm text-emerald-800/70">{projectDetail.galleryComingSoon}</p>
-          </div>
+          {initialGalleryItems.length > 0 ? (
+            <UploadedMediaTab
+              initialItems={initialGalleryItems}
+              initialCursor={initialGalleryCursor}
+              projectSlug={slug}
+            />
+          ) : (
+            <div className="rounded-2xl overflow-hidden bg-emerald-50 border border-emerald-100 aspect-[16/9] xs:aspect-[21/9] flex flex-col items-center justify-center gap-2 pattern-lattice-light">
+              <ImageIcon size={40} className="text-emerald-300" />
+              <p className="text-sm text-emerald-800/70">{projectDetail.galleryComingSoon}</p>
+            </div>
+          )}
         </FadeIn>
 
         <FadeIn delayMs={150}>
