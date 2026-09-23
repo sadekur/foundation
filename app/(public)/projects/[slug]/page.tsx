@@ -28,5 +28,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   const isKnownSlug = (PROJECT_CATEGORY_SLUGS as readonly string[]).includes(slug);
   if (!isKnownSlug) notFound();
 
-  return <ProjectDetailContent slug={slug} />;
+  const { items, nextCursor } = await getGalleryItems({ projectSlug: slug });
+  return <ProjectDetailContent slug={slug} initialGalleryItems={items} initialGalleryCursor={nextCursor} />;
 }
