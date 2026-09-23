@@ -21,7 +21,7 @@ interface UploadedMediaTabProps {
 const AUTOPLAY_INTERVAL_MS = 6000;
 const SLIDE_TRANSITION_MS = 1200;
 
-export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaTabProps) => {
+export const UploadedMediaTab = ({ initialItems, initialCursor, projectSlug }: UploadedMediaTabProps) => {
   const { language } = useLanguage();
   const { gallery } = getDictionary(language);
 
