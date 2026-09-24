@@ -134,7 +134,7 @@ The Gallery has its own, separate Firestore collection, `gallery` (one document 
 
 `types/index.ts` defines the shared shapes: `Transaction`, `YearTransactions`, `ProjectData`, `Projects`, `TransactionType` (`"income" | "expenses"`), `TransactionFormData` for the donation/expense tracker; `GalleryItemType` (`"image" | "video"`), `GalleryItem` (Firestore doc shape: `url`/`publicId` from Cloudinary, optional `width`/`height`/`duration`/`caption`, plus `bytes`, `format`, `createdAt`, `createdBy`), and `GalleryItemFormData` for the Gallery.
 
-`lib/i18n/dictionaries.ts` additionally defines `ProjectCategory` (one Our Projects card + its detail page: `slug`, `title`, `blurb`, `description`, `objectives`, `targetAudience`, `budgetItems`, `area`, `duration`, `faq`) and `ProjectFaqItem` (`question`/`answer`) — `slug` is language-independent and must match the corresponding entry in `siteConfig.ts`'s `PROJECT_CATEGORY_SLUGS`.
+`lib/i18n/dictionaries.ts` additionally defines `ProjectCategory` (one Our Projects card + its detail page: `slug`, `title`, `blurb`, `description`, `objectives`, `targetAudience`, `budgetItems`, `area`, `duration`, `faq`, optional `impactStats`) and `ProjectFaqItem` (`question`/`answer`) — `slug` is language-independent and must match the corresponding entry in `siteConfig.ts`'s `PROJECT_CATEGORY_SLUGS`.
 
 ### Styling
 
