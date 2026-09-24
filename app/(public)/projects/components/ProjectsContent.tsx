@@ -82,7 +82,7 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
                         src={media.video}
                         poster={media.image ?? undefined}
                         controls
-                        className="absolute inset-0 w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full object-fill"
                       />
                     ) : media.image ? (
                       <Image
@@ -90,7 +90,7 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
                         alt={category.title}
                         fill
                         sizes="(min-width: 1024px) 50vw, 100vw"
-                        className="object-cover"
+                        className="object-fill"
                       />
                     ) : (
                       <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pattern-lattice-light">
