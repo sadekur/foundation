@@ -42,7 +42,7 @@ export const projectMedia: ProjectMedia[] = [
   { image: "/projects/yatim-talibe-ilm-o-daridro.png", video: null }, // Orphans, Students of Knowledge & the Poor
   { image: "/projects/tube-well-o-jonokollan.png", video: null }, // Tube Wells & Public Welfare
   { image: "/projects/brikkhoropon.png", video: null }, // Tree Plantation & Eco-Friendly Activities
-  { image: null, video: null }, // Free Medical Care & Humanitarian Aid
+  { image: "/projects/free-chikitsha-o-manobik-sahajjo.jpg", video: null }, // Free Medical Care & Humanitarian Aid
   { image: null, video: null }, // Mosque & Madrasa Construction Support
   { image: null, video: null }, // Rehabilitation & Employment Support
 ];
