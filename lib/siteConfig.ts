@@ -41,7 +41,7 @@ export const projectMedia: ProjectMedia[] = [
   { image: "/projects/zakat-o-sadaka.png", video: null }, // Zakat & Sadaqah Projects
   { image: "/projects/yatim-talibe-ilm-o-daridro.png", video: null }, // Orphans, Students of Knowledge & the Poor
   { image: "/projects/tube-well-o-jonokollan.png", video: null }, // Tube Wells & Public Welfare
-  { image: null, video: null }, // Tree Plantation & Eco-Friendly Activities
+  { image: "/projects/brikkhoropon.png", video: null }, // Tree Plantation & Eco-Friendly Activities
   { image: null, video: null }, // Free Medical Care & Humanitarian Aid
   { image: null, video: null }, // Mosque & Madrasa Construction Support
   { image: null, video: null }, // Rehabilitation & Employment Support
