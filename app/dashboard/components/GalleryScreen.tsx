@@ -323,7 +323,8 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
                   </span>
                 )}
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
