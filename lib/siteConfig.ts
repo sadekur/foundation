@@ -60,7 +60,7 @@ export const projectMedia: ProjectMedia[] = [
 // subject on a sufficiently large source survives any of those crops. Leaving `null` falls back to the
 // plain dark green pattern background used today.
 export const projectBanners: (string | null)[] = [
-  null, // Islamic Education & Dawah
+  "/projects/banners/deeni-shiksha-o-dawah.jpg", // Islamic Education & Dawah
   "/projects/banners/quran-o-deeni-shikkhadan.jpg", // Qur'an & Islamic Teaching
   null, // Islamic Library & Publications
   null, // Zakat & Sadaqah Projects
