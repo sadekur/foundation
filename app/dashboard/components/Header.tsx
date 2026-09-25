@@ -21,7 +21,7 @@ const Header = ({ user }: HeaderProps) => {
   return (
     <header className="bg-white shadow-sm border-b sticky top-0 z-50">
       {/* Responsive Container */}
-      <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-none xs:max-w-sm sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
 
         {/* Header Content - Responsive Layout */}
         <div className="flex flex-col xs:flex-row xs:justify-between xs:items-center

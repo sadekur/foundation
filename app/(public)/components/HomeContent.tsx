@@ -19,7 +19,7 @@ export const HomeContent = () => {
     <div>
       <section className="relative overflow-hidden bg-gradient-to-b from-emerald-950 via-emerald-900 to-emerald-800">
         <div className="absolute inset-0 pattern-lattice-light pointer-events-none" aria-hidden="true" />
-        <div className="relative w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-14 xs:py-20 sm:py-28 text-center">
+        <div className="relative w-full max-w-none xs:max-w-sm sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-14 xs:py-20 sm:py-28 text-center">
           <FadeIn>
             <span className="inline-block text-xs xs:text-sm font-semibold tracking-wide text-emerald-950 bg-amber-400 rounded-full px-3 py-1 mb-6">
               {home.heroEyebrow}
@@ -80,7 +80,7 @@ export const HomeContent = () => {
       </section>
 
       <section className="bg-stone-50">
-        <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-12 xs:py-16">
+        <div className="w-full max-w-none xs:max-w-sm sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-12 xs:py-16">
           <FadeIn>
             <h2 className="text-xl xs:text-2xl font-bold text-emerald-950 mb-3">{home.introTitle}</h2>
             <p className="text-sm xs:text-base text-gray-700 leading-relaxed max-w-3xl">{home.introBody}</p>

@@ -311,7 +311,7 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
       <Header user={user} />
 
       {/* Main Container - Responsive padding and max-width */}
-      <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-4 xs:py-6 sm:py-8">
+      <div className="w-full max-w-none xs:max-w-sm sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-4 xs:py-6 sm:py-8">
         {/* Sync Indicator */}
         <div className="mb-4 sm:mb-6">
           <SyncIndicator />

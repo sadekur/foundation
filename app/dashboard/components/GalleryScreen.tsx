@@ -106,7 +106,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white shadow-sm border-b">
-        <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-3 xs:py-4 sm:py-6">
+        <div className="w-full max-w-none xs:max-w-sm sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-3 xs:py-4 sm:py-6">
           <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-3 xs:gap-4">
             <div className="flex flex-col xs:flex-row xs:items-center gap-2 xs:gap-4">
               <button
@@ -133,7 +133,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
         </div>
       </div>
 
-      <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-4 xs:py-6 sm:py-8">
+      <div className="w-full max-w-none xs:max-w-sm sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-4 xs:py-6 sm:py-8">
         <div className="mb-4 flex flex-col xs:flex-row xs:items-center gap-2">
           <label htmlFor="gallery-project-filter" className="text-sm font-medium text-gray-700">
             Show:
