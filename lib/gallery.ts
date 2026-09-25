@@ -27,23 +27,52 @@ export interface GalleryItemsResult {
   nextCursor: string | null;
 }
 
-// Cursor is a serializable createdAt ISO string (not a DocumentSnapshot) so the same function
-// works identically whether called from a server component or the browser.
+// Cap on raw Firestore pages read per call while skipping hidden items, so a long run of
+// hidden media can't turn one "Load More" into an unbounded read loop.
+const MAX_PAGES_PER_CALL = 5;
+
+// The sitewide gallery (every item not flagged hideFromMainGallery). Cursor is a serializable
+// createdAt ISO string (not a DocumentSnapshot) so the same function works identically whether
+// called from a server component or the browser.
+//
+// Hidden items are skipped here, not in the query: where("hideFromMainGallery", "!=", true)
+// would also drop every doc that lacks the field (i.e. almost all of them — Firestore's != never
+// matches missing fields), and a where + orderBy on different fields would need a composite
+// index anyway. So it reads raw pages and keeps going until it has pageSize visible items, the
+// collection runs out, or MAX_PAGES_PER_CALL is hit. The cursor tracks the last *raw* doc read,
+// so hidden items are never re-read or double-counted by the next call.
 export const getGalleryItems = async ({
   afterCreatedAt,
   pageSize = GALLERY_PAGE_SIZE,
 }: GetGalleryItemsOptions = {}): Promise<GalleryItemsResult> => {
   try {
-    const constraints: QueryConstraint[] = [orderBy("createdAt", "desc"), limit(pageSize)];
-    if (afterCreatedAt) {
-      constraints.push(startAfter(afterCreatedAt));
+    const items: GalleryItem[] = [];
+    let cursor = afterCreatedAt;
+    let exhausted = false;
+
+    for (let page = 0; page < MAX_PAGES_PER_CALL && items.length < pageSize && !exhausted; page++) {
+      const constraints: QueryConstraint[] = [orderBy("createdAt", "desc"), limit(pageSize)];
+      if (cursor) constraints.push(startAfter(cursor));
+
+      const snapshot = await getDocs(query(collection(db, "gallery"), ...constraints));
+      const raw = snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }) as GalleryItem);
+      exhausted = raw.length < pageSize;
+
+      for (const item of raw) {
+        cursor = item.createdAt;
+        if (item.hideFromMainGallery) continue;
+        items.push(item);
+        // Stop mid-page once full, leaving the cursor on this item so the rest of the raw page
+        // is picked up by the next call rather than skipped.
+        if (items.length === pageSize) break;
+      }
+      if (items.length === pageSize) {
+        const lastRaw = raw[raw.length - 1];
+        if (lastRaw && cursor !== lastRaw.createdAt) exhausted = false;
+      }
     }
 
-    const snapshot = await getDocs(query(collection(db, "gallery"), ...constraints));
-    const items = snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }) as GalleryItem);
-    const nextCursor = items.length === pageSize ? items[items.length - 1].createdAt : null;
-
-    return { items, nextCursor };
+    return { items, nextCursor: exhausted ? null : (cursor ?? null) };
   } catch (error) {
     console.error("Failed to load gallery items:", error);
     return { items: [], nextCursor: null };
