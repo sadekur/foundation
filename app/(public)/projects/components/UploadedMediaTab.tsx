@@ -119,7 +119,7 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
                   src={item.url}
                   alt={item.caption ?? ""}
                   fill
-                  sizes="(min-width: 1024px) 800px, 100vw"
+                  sizes="(min-width: 1536px) 1536px, 100vw"
                   className="object-contain"
                   priority={i === 0}
                 />
