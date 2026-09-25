@@ -200,7 +200,11 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
           <select
             id="gallery-project-filter"
             value={projectFilter}
-            onChange={(e) => setProjectFilter(e.target.value)}
+            onChange={(e) => {
+              setProjectFilter(e.target.value);
+              // Don't let "Delete selected" reach items the new filter hides.
+              setSelectedIds(new Set());
+            }}
             className="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-indigo-500 w-full xs:w-auto"
           >
             <option value={ALL_PROJECTS}>All media ({items.length})</option>
