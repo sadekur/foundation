@@ -87,23 +87,77 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
     }
   };
 
+  const exitSelectMode = () => {
+    setSelectMode(false);
+    setSelectedIds(new Set());
+  };
+
+  const toggleSelected = (id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const allVisibleSelected = visibleItems.length > 0 && visibleItems.every((item) => selectedIds.has(item.id));
+
+  const toggleSelectAllVisible = () => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (allVisibleSelected) visibleItems.forEach((item) => next.delete(item.id));
+      else visibleItems.forEach((item) => next.add(item.id));
+      return next;
+    });
+  };
+
+  const deleteOne = async (item: GalleryItem, idToken: string) => {
+    const res = await fetch("/api/gallery/delete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` },
+      body: JSON.stringify({ publicId: item.publicId, type: item.type }),
+    });
+    if (!res.ok) throw new Error("Failed to delete asset");
+    await deleteDoc(doc(db, "gallery", item.id));
+  };
+
+  // Sequential rather than Promise.all so a large selection doesn't fire dozens of concurrent
+  // Cloudinary destroys, and so the confirmation modal can show "n of total" progress. Items
+  // that fail stay selected so the admin can retry just those.
   const handleDeleteConfirm = async () => {
-    if (!deleteTarget) return;
+    if (deleteTargets.length === 0 || isDeleting) return;
     setIsDeleting(true);
+    setDeleteProgress(0);
+    const failed: GalleryItem[] = [];
     try {
       const idToken = await user.getIdToken();
-      const res = await fetch("/api/gallery/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` },
-        body: JSON.stringify({ publicId: deleteTarget.publicId, type: deleteTarget.type }),
-      });
-      if (!res.ok) throw new Error("Failed to delete asset");
-      await deleteDoc(doc(db, "gallery", deleteTarget.id));
-      setDeleteTarget(null);
+      for (const item of deleteTargets) {
+        try {
+          await deleteOne(item, idToken);
+        } catch (error) {
+          console.error(`Failed to delete gallery item ${item.id}:`, error);
+          failed.push(item);
+        }
+        setDeleteProgress((n) => n + 1);
+      }
     } catch (error) {
-      alert("Failed to delete item: " + (error as Error).message);
+      failed.push(...deleteTargets.slice(failed.length));
+      console.error("Failed to get ID token:", error);
     } finally {
       setIsDeleting(false);
+      setDeleteTargets([]);
+      setSelectedIds((prev) => {
+        const next = new Set(prev);
+        deleteTargets.forEach((item) => next.delete(item.id));
+        failed.forEach((item) => next.add(item.id));
+        return next;
+      });
+    }
+    if (failed.length > 0) {
+      alert(`Failed to delete ${failed.length} of ${deleteTargets.length} item(s). They are still selected — try again.`);
+    } else if (selectMode) {
+      exitSelectMode();
     }
   };
 
