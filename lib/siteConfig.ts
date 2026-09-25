@@ -43,7 +43,7 @@ export const projectMedia: ProjectMedia[] = [
   { image: "/projects/tube-well-o-jonokollan.png", video: null }, // Tube Wells & Public Welfare
   { image: "/projects/brikkhoropon.png", video: null }, // Tree Plantation & Eco-Friendly Activities
   { image: "/projects/free-chikitsha-o-manobik-sahajjo.jpg", video: null }, // Free Medical Care & Humanitarian Aid
-  { image: null, video: null }, // Mosque & Madrasa Construction Support
+  { image: "/projects/masjid-madrasa-nirman.png", video: null }, // Mosque & Madrasa Construction Support
   { image: null, video: null }, // Rehabilitation & Employment Support
 ];
 
