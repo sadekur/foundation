@@ -375,13 +375,19 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
       )}
 
       <DeleteConfirmationModal
-        show={!!deleteTarget}
-        onCancel={() => setDeleteTarget(null)}
+        show={deleteTargets.length > 0}
+        onCancel={() => {
+          if (!isDeleting) setDeleteTargets([]);
+        }}
         onConfirm={handleDeleteConfirm}
         description={
           isDeleting
-            ? "Deleting..."
-            : `Are you sure you want to delete this ${deleteTarget?.type ?? "item"}? This action cannot be undone.`
+            ? deleteTargets.length > 1
+              ? `Deleting ${Math.min(deleteProgress + 1, deleteTargets.length)} of ${deleteTargets.length}...`
+              : "Deleting..."
+            : deleteTargets.length > 1
+              ? `Are you sure you want to delete these ${deleteTargets.length} items? This action cannot be undone.`
+              : `Are you sure you want to delete this ${deleteTargets[0]?.type ?? "item"}? This action cannot be undone.`
         }
       />
     </div>
