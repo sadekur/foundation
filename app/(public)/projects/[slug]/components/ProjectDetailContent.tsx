@@ -93,14 +93,23 @@ export const ProjectDetailContent = ({
 
   const Icon = CATEGORY_ICONS[index] ?? HandCoins;
   const media = projectMedia[index] ?? { image: null, video: null };
-  const banner = projectBanners[index] ?? null;
+  const bannerEntry = projectBanners[index] ?? null;
+  const banner = typeof bannerEntry === "string" ? { src: bannerEntry, position: "center" } : bannerEntry;
 
   return (
     <div>
       <div className="relative bg-emerald-950 overflow-hidden h-[280px] xs:h-[300px] sm:h-[360px] md:h-[420px] lg:h-[500px]">
         {banner ? (
           <>
-            <Image src={banner} alt="" fill priority sizes="100vw" className="object-cover" />
+            <Image
+              src={banner.src}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+              style={{ objectPosition: banner.position }}
+            />
             <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-950/75 to-emerald-950/45" />
           </>
         ) : (

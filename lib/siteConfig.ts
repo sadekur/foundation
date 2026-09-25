@@ -59,8 +59,15 @@ export const projectMedia: ProjectMedia[] = [
 // object-cover to whatever height that ends up being (shorter on mobile, taller on desktop); a centered
 // subject on a sufficiently large source survives any of those crops. Leaving `null` falls back to the
 // plain dark green pattern background used today.
-export const projectBanners: (string | null)[] = [
-  "/projects/banners/deeni-shiksha-o-dawah.jpg", // Islamic Education & Dawah
+//
+// A banner whose important content (e.g. baked-in title text) isn't in the vertical middle can
+// use the object form instead of a plain path — `position` is a CSS object-position (e.g.
+// "center top") choosing which part of the photo survives the crop. Plain strings stay centered.
+export type ProjectBanner = string | { src: string; position: string };
+
+export const projectBanners: (ProjectBanner | null)[] = [
+  // 16:9 source with its title in the top third — a centered crop cuts the title off.
+  { src: "/projects/banners/deeni-shiksha-o-dawah.jpg", position: "center top" }, // Islamic Education & Dawah
   "/projects/banners/quran-o-deeni-shikkhadan.jpg", // Qur'an & Islamic Teaching
   null, // Islamic Library & Publications
   null, // Zakat & Sadaqah Projects
