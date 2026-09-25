@@ -42,6 +42,10 @@ export interface GalleryItem {
   // (see lib/gallery.ts's getGalleryItemProjectSlugs) but never written — any admin re-tag
   // rewrites the item into projectSlugs and deletes this field.
   projectSlug?: string;
+  // true = left out of the sitewide /projects gallery (still shown on any tagged project pages).
+  // Only ever stored as true — absent means shown — so items saved before this flag existed stay
+  // visible without a migration.
+  hideFromMainGallery?: boolean;
   width?: number;
   height?: number;
   duration?: number;
