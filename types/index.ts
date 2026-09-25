@@ -34,9 +34,13 @@ export interface GalleryItem {
   url: string;
   publicId: string;
   caption?: string;
-  // Slug from siteConfig's PROJECT_CATEGORY_SLUGS — also shows the item on that project's
-  // detail page. The sitewide /projects gallery shows every item regardless; absent = general
-  // media that appears on no project page.
+  // Slugs from siteConfig's PROJECT_CATEGORY_SLUGS — also shows the item on each of those
+  // projects' detail pages. The sitewide /projects gallery shows every item regardless;
+  // absent/empty = general media that appears on no project page.
+  projectSlugs?: string[];
+  // Legacy single-project tag from before items could belong to several projects. Still read
+  // (see lib/gallery.ts's getGalleryItemProjectSlugs) but never written — any admin re-tag
+  // rewrites the item into projectSlugs and deletes this field.
   projectSlug?: string;
   width?: number;
   height?: number;
