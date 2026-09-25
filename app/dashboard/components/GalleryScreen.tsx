@@ -142,8 +142,9 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
         setDeleteProgress((n) => n + 1);
       }
     } catch (error) {
-      failed.push(...deleteTargets.slice(failed.length));
+      // Only getIdToken can land here (per-item errors are caught inside the loop), so nothing was deleted.
       console.error("Failed to get ID token:", error);
+      failed.push(...deleteTargets);
     } finally {
       setIsDeleting(false);
       setDeleteTargets([]);
