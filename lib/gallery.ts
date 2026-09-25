@@ -50,16 +50,29 @@ export const getGalleryItems = async ({
   }
 };
 
-// All of one project's media, newest first, unpaginated. Filters on projectSlug only and sorts
-// here rather than adding orderBy("createdAt") to the query: where + orderBy on different
-// fields requires a Firestore composite index, and a single project's media stays small enough
-// that loading it in one go is fine.
+// An item's project tags, whichever shape it was saved in (new projectSlugs array, or the
+// legacy single projectSlug string).
+export const getGalleryItemProjectSlugs = (item: Pick<GalleryItem, "projectSlugs" | "projectSlug">): string[] =>
+  item.projectSlugs ?? (item.projectSlug ? [item.projectSlug] : []);
+
+// All of one project's media, newest first, unpaginated. Runs two queries — the current
+// projectSlugs array and the legacy projectSlug string — and merges them, so items tagged
+// before multi-project support still show up without a data migration. Sorts here rather than
+// adding orderBy("createdAt") to the queries: where + orderBy on different fields requires a
+// Firestore composite index, and a single project's media stays small enough that loading it
+// in one go is fine.
 export const getProjectGalleryItems = async (projectSlug: string): Promise<GalleryItem[]> => {
   try {
-    const snapshot = await getDocs(query(collection(db, "gallery"), where("projectSlug", "==", projectSlug)));
-    return snapshot.docs
-      .map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }) as GalleryItem)
-      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    const gallery = collection(db, "gallery");
+    const [current, legacy] = await Promise.all([
+      getDocs(query(gallery, where("projectSlugs", "array-contains", projectSlug))),
+      getDocs(query(gallery, where("projectSlug", "==", projectSlug))),
+    ]);
+    const byId = new Map<string, GalleryItem>();
+    for (const docSnap of [...current.docs, ...legacy.docs]) {
+      byId.set(docSnap.id, { id: docSnap.id, ...docSnap.data() } as GalleryItem);
+    }
+    return Array.from(byId.values()).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   } catch (error) {
     console.error("Failed to load project gallery items:", error);
     return [];
