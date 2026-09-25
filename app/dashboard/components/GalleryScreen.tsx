@@ -24,6 +24,8 @@ import { GALLERY_PROJECT_OPTIONS, getGalleryProjectTitle } from "./galleryProjec
 
 // "all" shows everything, "" shows untagged (general) items, anything else is a project slug.
 const ALL_PROJECTS = "all";
+// Filter value for items hidden from the public main gallery slider.
+const HIDDEN_FROM_MAIN = "hidden-from-main";
 
 interface GalleryScreenProps {
   user: User;
@@ -48,6 +50,8 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
   const visibleItems =
     projectFilter === ALL_PROJECTS
       ? items
+      : projectFilter === HIDDEN_FROM_MAIN
+      ? items.filter((item) => item.hideFromMainGallery)
       : items.filter((item) => {
           const slugs = getGalleryItemProjectSlugs(item);
           return projectFilter === "" ? slugs.length === 0 : slugs.includes(projectFilter);
@@ -55,7 +59,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
 
   // Memoized so AddGalleryItemModal's open-time reset effect sees a stable array.
   const uploadDefaultSlugs = useMemo(
-    () => (projectFilter === ALL_PROJECTS || projectFilter === "" ? [] : [projectFilter]),
+    () => (projectFilter === ALL_PROJECTS || projectFilter === "" || projectFilter === HIDDEN_FROM_MAIN ? [] : [projectFilter]),
     [projectFilter]
   );
 
@@ -227,6 +231,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
           >
             <option value={ALL_PROJECTS}>All media ({items.length})</option>
             <option value="">General only — no project</option>
+            <option value={HIDDEN_FROM_MAIN}>Hidden from main gallery</option>
             {GALLERY_PROJECT_OPTIONS.map((option) => (
               <option key={option.slug} value={option.slug}>
                 {option.title}
@@ -345,7 +350,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
                 })()}
                 {item.hideFromMainGallery && (
                   <span
-                    className="absolute bottom-1 right-1 bg-gray-900/75 text-white p-1 rounded-full"
+                    className={`absolute right-1 bg-gray-900/75 text-white p-1 rounded-full ${item.caption ? "bottom-6" : "bottom-1"}`}
                     title="Hidden from the main gallery slider"
                   >
                     <EyeOff size={10} />
@@ -374,7 +379,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
       {assignTarget && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-sm">
-            <h3 className="text-lg font-semibold mb-4">Change Projects</h3>
+            <h3 className="text-lg font-semibold mb-4">Where to Show</h3>
             <GalleryProjectChecklist
               inMainGallery={assignInMain}
               onMainGalleryChange={setAssignInMain}
