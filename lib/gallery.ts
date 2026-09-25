@@ -56,7 +56,6 @@ export const getGalleryItems = async ({
 
       const snapshot = await getDocs(query(collection(db, "gallery"), ...constraints));
       const raw = snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }) as GalleryItem);
-      exhausted = raw.length < pageSize;
 
       for (const item of raw) {
         cursor = item.createdAt;
@@ -66,10 +65,9 @@ export const getGalleryItems = async ({
         // is picked up by the next call rather than skipped.
         if (items.length === pageSize) break;
       }
-      if (items.length === pageSize) {
-        const lastRaw = raw[raw.length - 1];
-        if (lastRaw && cursor !== lastRaw.createdAt) exhausted = false;
-      }
+      // Out of docs only if this raw page was short *and* we consumed all of it.
+      const lastRaw = raw[raw.length - 1];
+      exhausted = raw.length < pageSize && (!lastRaw || cursor === lastRaw.createdAt);
     }
 
     return { items, nextCursor: exhausted ? null : (cursor ?? null) };
