@@ -31,8 +31,12 @@ interface GalleryScreenProps {
 const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
   const [items, setItems] = useState<GalleryItem[]>([]);
   const [showAddModal, setShowAddModal] = useState(false);
-  const [deleteTarget, setDeleteTarget] = useState<GalleryItem | null>(null);
+  // One array for both the single trash button ([item]) and bulk delete (the selection).
+  const [deleteTargets, setDeleteTargets] = useState<GalleryItem[]>([]);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteProgress, setDeleteProgress] = useState(0);
+  const [selectMode, setSelectMode] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [projectFilter, setProjectFilter] = useState(ALL_PROJECTS);
   const [assignTarget, setAssignTarget] = useState<GalleryItem | null>(null);
   const [assignSlug, setAssignSlug] = useState("");
