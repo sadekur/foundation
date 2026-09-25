@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowLeft, ImagePlus, Tag, Trash2 } from "lucide-react";
+import { ArrowLeft, Check, CheckSquare, ImagePlus, Tag, Trash2 } from "lucide-react";
 import type { User } from "firebase/auth";
 import {
   addDoc,
