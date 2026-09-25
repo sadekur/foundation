@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Check, CheckSquare, ImagePlus, Tag, Trash2 } from "lucide-react";
 import type { User } from "firebase/auth";
 import {
@@ -15,9 +15,11 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { getGalleryItemProjectSlugs } from "@/lib/gallery";
 import type { GalleryItem } from "@/types";
 import AddGalleryItemModal from "./AddGalleryItemModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import GalleryProjectChecklist from "./GalleryProjectChecklist";
 import { GALLERY_PROJECT_OPTIONS, getGalleryProjectTitle } from "./galleryProjectOptions";
 
 // "all" shows everything, "" shows untagged (general) items, anything else is a project slug.
@@ -39,11 +41,22 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [projectFilter, setProjectFilter] = useState(ALL_PROJECTS);
   const [assignTarget, setAssignTarget] = useState<GalleryItem | null>(null);
-  const [assignSlug, setAssignSlug] = useState("");
+  const [assignSlugs, setAssignSlugs] = useState<string[]>([]);
   const [isAssigning, setIsAssigning] = useState(false);
 
   const visibleItems =
-    projectFilter === ALL_PROJECTS ? items : items.filter((item) => (item.projectSlug ?? "") === projectFilter);
+    projectFilter === ALL_PROJECTS
+      ? items
+      : items.filter((item) => {
+          const slugs = getGalleryItemProjectSlugs(item);
+          return projectFilter === "" ? slugs.length === 0 : slugs.includes(projectFilter);
+        });
+
+  // Memoized so AddGalleryItemModal's open-time reset effect sees a stable array.
+  const uploadDefaultSlugs = useMemo(
+    () => (projectFilter === ALL_PROJECTS || projectFilter === "" ? [] : [projectFilter]),
+    [projectFilter]
+  );
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -67,17 +80,19 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
 
   const openAssign = (item: GalleryItem) => {
     setAssignTarget(item);
-    setAssignSlug(item.projectSlug ?? "");
+    setAssignSlugs(getGalleryItemProjectSlugs(item));
   };
 
-  // "" removes the field entirely (deleteField) rather than storing an empty string, so
-  // general items stay shaped exactly like ones uploaded without a project.
+  // No projects removes the field entirely (deleteField) rather than storing an empty array, so
+  // general items stay shaped exactly like ones uploaded without a project. Always deletes the
+  // legacy projectSlug field too, converting old single-project items to the new shape.
   const handleAssignConfirm = async () => {
     if (!assignTarget) return;
     setIsAssigning(true);
     try {
       await updateDoc(doc(db, "gallery", assignTarget.id), {
-        projectSlug: assignSlug ? assignSlug : deleteField(),
+        projectSlugs: assignSlugs.length > 0 ? assignSlugs : deleteField(),
+        projectSlug: deleteField(),
       });
       setAssignTarget(null);
     } catch (error) {
@@ -208,7 +223,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
             className="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-indigo-500 w-full xs:w-auto"
           >
             <option value={ALL_PROJECTS}>All media ({items.length})</option>
-            <option value="">General — no project</option>
+            <option value="">General only — no project</option>
             {GALLERY_PROJECT_OPTIONS.map((option) => (
               <option key={option.slug} value={option.slug}>
                 {option.title}
@@ -306,21 +321,25 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
                     <button
                       onClick={() => openAssign(item)}
                       className="absolute top-1 left-1 bg-white/90 text-indigo-600 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
-                      aria-label="Change project"
-                      title="Change project"
+                      aria-label="Change projects"
+                      title="Change projects"
                     >
                       <Tag size={12} />
                     </button>
                   </>
                 )}
-                {item.projectSlug && (
-                  <span
-                    className="absolute top-1 left-7 right-7 bg-indigo-600/85 text-white text-[9px] xs:text-[10px] px-1.5 py-0.5 rounded truncate"
-                    title={getGalleryProjectTitle(item.projectSlug) ?? item.projectSlug}
-                  >
-                    {getGalleryProjectTitle(item.projectSlug) ?? item.projectSlug}
-                  </span>
-                )}
+                {(() => {
+                  const titles = getGalleryItemProjectSlugs(item).map((slug) => getGalleryProjectTitle(slug) ?? slug);
+                  if (titles.length === 0) return null;
+                  return (
+                    <span
+                      className="absolute top-1 left-7 right-7 bg-indigo-600/85 text-white text-[9px] xs:text-[10px] px-1.5 py-0.5 rounded truncate"
+                      title={titles.join(", ")}
+                    >
+                      {titles.length > 1 ? `${titles[0]} +${titles.length - 1}` : titles[0]}
+                    </span>
+                  );
+                })()}
                 {item.caption && (
                   <span className="absolute bottom-0 inset-x-0 bg-black/50 text-white text-[9px] xs:text-[10px] px-1.5 py-0.5 truncate">
                     {item.caption}
@@ -336,7 +355,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
       <AddGalleryItemModal
         show={showAddModal}
         user={user}
-        defaultProjectSlug={projectFilter === ALL_PROJECTS ? "" : projectFilter}
+        defaultProjectSlugs={uploadDefaultSlugs}
         onUploaded={handleUploaded}
         onCancel={() => setShowAddModal(false)}
       />
@@ -344,20 +363,8 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
       {assignTarget && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-sm">
-            <h3 className="text-lg font-semibold mb-4">Change Project</h3>
-            <select
-              value={assignSlug}
-              onChange={(e) => setAssignSlug(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
-              disabled={isAssigning}
-            >
-              <option value="">General (main gallery only)</option>
-              {GALLERY_PROJECT_OPTIONS.map((option) => (
-                <option key={option.slug} value={option.slug}>
-                  {option.title}
-                </option>
-              ))}
-            </select>
+            <h3 className="text-lg font-semibold mb-4">Change Projects</h3>
+            <GalleryProjectChecklist selected={assignSlugs} onChange={setAssignSlugs} disabled={isAssigning} />
             <div className="flex gap-3 mt-4">
               <button
                 onClick={handleAssignConfirm}
