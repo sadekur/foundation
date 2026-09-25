@@ -107,7 +107,7 @@ export const ProjectDetailContent = ({
           <div className="absolute inset-0 pattern-lattice-light" />
         )}
         <div className="relative h-full flex items-end lg:items-center">
-          <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 pb-5 xs:pb-6 sm:pb-7 md:pb-8 lg:pb-0">
+          <div className="w-full max-w-none xs:max-w-sm sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 pb-5 xs:pb-6 sm:pb-7 md:pb-8 lg:pb-0">
             <FadeIn>
               <Link
                 href="/projects"
@@ -129,7 +129,7 @@ export const ProjectDetailContent = ({
         </div>
       </div>
 
-      <div className="w-full max-w-none xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-10 xs:py-14">
+      <div className="w-full max-w-none xs:max-w-sm sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-10 xs:py-14">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 xs:gap-8">
           <FadeIn className="lg:col-span-3">
             <h2 className="text-lg xs:text-xl font-bold text-emerald-950 mb-4">{projectDetail.descriptionTitle}</h2>
