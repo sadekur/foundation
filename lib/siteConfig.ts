@@ -44,7 +44,7 @@ export const projectMedia: ProjectMedia[] = [
   { image: "/projects/brikkhoropon.png", video: null }, // Tree Plantation & Eco-Friendly Activities
   { image: "/projects/free-chikitsha-o-manobik-sahajjo.jpg", video: null }, // Free Medical Care & Humanitarian Aid
   { image: "/projects/masjid-madrasa-nirman.png", video: null }, // Mosque & Madrasa Construction Support
-  { image: null, video: null }, // Rehabilitation & Employment Support
+  { image: "/projects/punorbashon-o-kormosangsthan.png", video: null }, // Rehabilitation & Employment Support
 ];
 
 // One entry per category, same index/order as `projectMedia` above — the wide background photo
