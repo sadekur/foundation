@@ -193,7 +193,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
       </div>
 
       <div className="w-full max-w-none xs:max-w-sm sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-4 xs:py-6 sm:py-8">
-        <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-2">
+        <div className="mb-4 flex flex-col xs:flex-row xs:items-center gap-2">
           <label htmlFor="gallery-project-filter" className="text-sm font-medium text-gray-700">
             Show:
           </label>
@@ -201,7 +201,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
             id="gallery-project-filter"
             value={projectFilter}
             onChange={(e) => setProjectFilter(e.target.value)}
-            className="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-indigo-500 w-full sm:w-auto"
+            className="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-indigo-500 w-full xs:w-auto"
           >
             <option value={ALL_PROJECTS}>All media ({items.length})</option>
             <option value="">General — no project</option>
