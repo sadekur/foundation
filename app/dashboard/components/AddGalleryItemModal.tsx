@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import type { User } from "firebase/auth";
 import type { GalleryItem, GalleryItemType } from "@/types";
-import { GALLERY_PROJECT_OPTIONS } from "./galleryProjectOptions";
+import GalleryProjectChecklist from "./GalleryProjectChecklist";
 
 interface AddGalleryItemModalProps {
   show: boolean;
   user: User;
-  // Pre-selected project slug ("" = general, no project page).
-  defaultProjectSlug?: string;
+  // Pre-selected project slugs (empty = general, no project page).
+  defaultProjectSlugs?: string[];
   onUploaded: (item: Omit<GalleryItem, "id">) => Promise<void>;
   onCancel: () => void;
 }
@@ -33,6 +33,9 @@ interface CloudinaryUploadResponse {
   duration?: number;
 }
 
+// Stable default so the open-modal effect below doesn't re-run on every parent render.
+const NO_PROJECTS: string[] = [];
+
 const MAX_IMAGE_BYTES = 1024 * 1024; // 1MB — images are compressed client-side to fit this before upload.
 
 // Firestore's addDoc() throws on any field set to `undefined` (caption when empty,
@@ -41,7 +44,7 @@ const MAX_IMAGE_BYTES = 1024 * 1024; // 1MB — images are compressed client-sid
 const buildItemPayload = (
   uploadResult: CloudinaryUploadResponse,
   caption: string,
-  projectSlug: string,
+  projectSlugs: string[],
   user: User
 ): Omit<GalleryItem, "id"> => {
   const type: GalleryItemType = uploadResult.resource_type === "video" ? "video" : "image";
@@ -56,7 +59,7 @@ const buildItemPayload = (
   };
   const trimmedCaption = caption.trim();
   if (trimmedCaption) item.caption = trimmedCaption;
-  if (projectSlug) item.projectSlug = projectSlug;
+  if (projectSlugs.length > 0) item.projectSlugs = projectSlugs;
   if (uploadResult.width !== undefined) item.width = uploadResult.width;
   if (uploadResult.height !== undefined) item.height = uploadResult.height;
   if (uploadResult.duration !== undefined) item.duration = uploadResult.duration;
@@ -112,20 +115,20 @@ interface QueueItem {
 const AddGalleryItemModal = ({
   show,
   user,
-  defaultProjectSlug = "",
+  defaultProjectSlugs = NO_PROJECTS,
   onUploaded,
   onCancel,
 }: AddGalleryItemModalProps) => {
   const [queue, setQueue] = useState<QueueItem[]>([]);
   const [caption, setCaption] = useState("");
-  const [projectSlug, setProjectSlug] = useState(defaultProjectSlug);
+  const [projectSlugs, setProjectSlugs] = useState<string[]>(defaultProjectSlugs);
   const [uploading, setUploading] = useState(false);
 
   // Follow the gallery screen's filter each time the modal opens, so uploading while viewing
   // one project's media tags new files with that project by default.
   useEffect(() => {
-    if (show) setProjectSlug(defaultProjectSlug);
-  }, [show, defaultProjectSlug]);
+    if (show) setProjectSlugs(defaultProjectSlugs);
+  }, [show, defaultProjectSlugs]);
 
   if (!show) return null;
 
@@ -180,7 +183,7 @@ const AddGalleryItemModal = ({
       xhr.send(formData);
     });
 
-    await onUploaded(buildItemPayload(uploadResult, caption, projectSlug, user));
+    await onUploaded(buildItemPayload(uploadResult, caption, projectSlugs, user));
     updateQueueItem(index, { status: "done", progress: 100 });
   };
 
@@ -244,22 +247,10 @@ const AddGalleryItemModal = ({
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Project (applied to all)</label>
-            <select
-              value={projectSlug}
-              onChange={(e) => setProjectSlug(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 bg-white"
-              disabled={uploading}
-            >
-              <option value="">General (main gallery only)</option>
-              {GALLERY_PROJECT_OPTIONS.map((option) => (
-                <option key={option.slug} value={option.slug}>
-                  {option.title}
-                </option>
-              ))}
-            </select>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Show in (applied to all)</label>
+            <GalleryProjectChecklist selected={projectSlugs} onChange={setProjectSlugs} disabled={uploading} />
             <p className="text-xs text-gray-500 mt-1">
-              Media tagged with a project also appears in that project&apos;s own gallery.
+              Every upload appears in the main gallery. Tick projects to also show it on those project pages.
             </p>
           </div>
 
