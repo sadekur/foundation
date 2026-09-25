@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Check, CheckSquare, ImagePlus, Tag, Trash2 } from "lucide-react";
+import { ArrowLeft, Check, CheckSquare, EyeOff, ImagePlus, Tag, Trash2 } from "lucide-react";
 import type { User } from "firebase/auth";
 import {
   addDoc,
@@ -42,6 +42,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
   const [projectFilter, setProjectFilter] = useState(ALL_PROJECTS);
   const [assignTarget, setAssignTarget] = useState<GalleryItem | null>(null);
   const [assignSlugs, setAssignSlugs] = useState<string[]>([]);
+  const [assignInMain, setAssignInMain] = useState(true);
   const [isAssigning, setIsAssigning] = useState(false);
 
   const visibleItems =
@@ -81,6 +82,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
   const openAssign = (item: GalleryItem) => {
     setAssignTarget(item);
     setAssignSlugs(getGalleryItemProjectSlugs(item));
+    setAssignInMain(!item.hideFromMainGallery);
   };
 
   // No projects removes the field entirely (deleteField) rather than storing an empty array, so
@@ -93,6 +95,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
       await updateDoc(doc(db, "gallery", assignTarget.id), {
         projectSlugs: assignSlugs.length > 0 ? assignSlugs : deleteField(),
         projectSlug: deleteField(),
+        hideFromMainGallery: assignInMain ? deleteField() : true,
       });
       setAssignTarget(null);
     } catch (error) {
@@ -340,6 +343,14 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
                     </span>
                   );
                 })()}
+                {item.hideFromMainGallery && (
+                  <span
+                    className="absolute bottom-1 right-1 bg-gray-900/75 text-white p-1 rounded-full"
+                    title="Hidden from the main gallery slider"
+                  >
+                    <EyeOff size={10} />
+                  </span>
+                )}
                 {item.caption && (
                   <span className="absolute bottom-0 inset-x-0 bg-black/50 text-white text-[9px] xs:text-[10px] px-1.5 py-0.5 truncate">
                     {item.caption}
@@ -364,7 +375,13 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-sm">
             <h3 className="text-lg font-semibold mb-4">Change Projects</h3>
-            <GalleryProjectChecklist selected={assignSlugs} onChange={setAssignSlugs} disabled={isAssigning} />
+            <GalleryProjectChecklist
+              inMainGallery={assignInMain}
+              onMainGalleryChange={setAssignInMain}
+              selected={assignSlugs}
+              onChange={setAssignSlugs}
+              disabled={isAssigning}
+            />
             <div className="flex gap-3 mt-4">
               <button
                 onClick={handleAssignConfirm}

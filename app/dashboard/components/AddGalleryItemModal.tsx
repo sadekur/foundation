@@ -45,6 +45,7 @@ const buildItemPayload = (
   uploadResult: CloudinaryUploadResponse,
   caption: string,
   projectSlugs: string[],
+  inMainGallery: boolean,
   user: User
 ): Omit<GalleryItem, "id"> => {
   const type: GalleryItemType = uploadResult.resource_type === "video" ? "video" : "image";
@@ -60,6 +61,7 @@ const buildItemPayload = (
   const trimmedCaption = caption.trim();
   if (trimmedCaption) item.caption = trimmedCaption;
   if (projectSlugs.length > 0) item.projectSlugs = projectSlugs;
+  if (!inMainGallery) item.hideFromMainGallery = true;
   if (uploadResult.width !== undefined) item.width = uploadResult.width;
   if (uploadResult.height !== undefined) item.height = uploadResult.height;
   if (uploadResult.duration !== undefined) item.duration = uploadResult.duration;
@@ -122,12 +124,16 @@ const AddGalleryItemModal = ({
   const [queue, setQueue] = useState<QueueItem[]>([]);
   const [caption, setCaption] = useState("");
   const [projectSlugs, setProjectSlugs] = useState<string[]>(defaultProjectSlugs);
+  const [inMainGallery, setInMainGallery] = useState(true);
   const [uploading, setUploading] = useState(false);
 
   // Follow the gallery screen's filter each time the modal opens, so uploading while viewing
   // one project's media tags new files with that project by default.
   useEffect(() => {
-    if (show) setProjectSlugs(defaultProjectSlugs);
+    if (show) {
+      setProjectSlugs(defaultProjectSlugs);
+      setInMainGallery(true);
+    }
   }, [show, defaultProjectSlugs]);
 
   if (!show) return null;
@@ -183,7 +189,7 @@ const AddGalleryItemModal = ({
       xhr.send(formData);
     });
 
-    await onUploaded(buildItemPayload(uploadResult, caption, projectSlugs, user));
+    await onUploaded(buildItemPayload(uploadResult, caption, projectSlugs, inMainGallery, user));
     updateQueueItem(index, { status: "done", progress: 100 });
   };
 
@@ -248,10 +254,13 @@ const AddGalleryItemModal = ({
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">Show in (applied to all)</label>
-            <GalleryProjectChecklist selected={projectSlugs} onChange={setProjectSlugs} disabled={uploading} />
-            <p className="text-xs text-gray-500 mt-1">
-              Every upload appears in the main gallery. Tick projects to also show it on those project pages.
-            </p>
+            <GalleryProjectChecklist
+              inMainGallery={inMainGallery}
+              onMainGalleryChange={setInMainGallery}
+              selected={projectSlugs}
+              onChange={setProjectSlugs}
+              disabled={uploading}
+            />
           </div>
 
           <div className="mb-4">
