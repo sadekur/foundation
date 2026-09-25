@@ -211,6 +211,41 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
               </option>
             ))}
           </select>
+          {items.length > 0 &&
+            (selectMode ? (
+              <div className="flex flex-wrap items-center gap-2 xs:ml-auto">
+                <span className="text-sm text-gray-700 font-medium">{selectedIds.size} selected</span>
+                <button
+                  onClick={toggleSelectAllVisible}
+                  disabled={visibleItems.length === 0}
+                  className="px-3 py-2 text-sm rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50"
+                >
+                  {allVisibleSelected ? "Deselect all" : "Select all"}
+                </button>
+                <button
+                  onClick={() => setDeleteTargets(items.filter((item) => selectedIds.has(item.id)))}
+                  disabled={selectedIds.size === 0}
+                  className="flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
+                >
+                  <Trash2 size={14} />
+                  Delete selected
+                </button>
+                <button
+                  onClick={exitSelectMode}
+                  className="px-3 py-2 text-sm rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300"
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setSelectMode(true)}
+                className="flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 w-fit xs:ml-auto"
+              >
+                <CheckSquare size={14} />
+                Select
+              </button>
+            ))}
         </div>
 
         {items.length === 0 ? (
