@@ -259,10 +259,15 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
           </div>
         ) : (
           <div className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2 xs:gap-3">
-            {visibleItems.map((item) => (
+            {visibleItems.map((item) => {
+              const isSelected = selectedIds.has(item.id);
+              return (
               <div
                 key={item.id}
-                className="relative aspect-square rounded-md overflow-hidden bg-gray-100 border border-gray-200 group"
+                onClick={selectMode ? () => toggleSelected(item.id) : undefined}
+                className={`relative aspect-square rounded-md overflow-hidden bg-gray-100 border group ${
+                  selectMode ? "cursor-pointer" : ""
+                } ${isSelected ? "border-red-500 ring-2 ring-red-500" : "border-gray-200"}`}
               >
                 {item.type === "video" ? (
                   <video src={item.url} className="w-full h-full object-cover" />
@@ -270,22 +275,40 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
                   // eslint-disable-next-line @next/next/no-img-element -- admin-only preview grid, not worth next/image here
                   <img src={item.url} alt={item.caption ?? ""} className="w-full h-full object-cover" loading="lazy" />
                 )}
-                <button
-                  onClick={() => setDeleteTarget(item)}
-                  className="absolute top-1 right-1 bg-white/90 text-red-600 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
-                  aria-label="Delete item"
-                  title="Delete item"
-                >
-                  <Trash2 size={12} />
-                </button>
-                <button
-                  onClick={() => openAssign(item)}
-                  className="absolute top-1 left-1 bg-white/90 text-indigo-600 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
-                  aria-label="Change project"
-                  title="Change project"
-                >
-                  <Tag size={12} />
-                </button>
+                {selectMode ? (
+                  <>
+                    {isSelected && <div className="absolute inset-0 bg-red-500/20 pointer-events-none" />}
+                    <span
+                      role="checkbox"
+                      aria-checked={isSelected}
+                      aria-label="Select item"
+                      className={`absolute top-1 right-1 w-5 h-5 rounded border-2 flex items-center justify-center ${
+                        isSelected ? "bg-red-600 border-red-600 text-white" : "bg-white/90 border-gray-400"
+                      }`}
+                    >
+                      {isSelected && <Check size={12} strokeWidth={3} />}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => setDeleteTargets([item])}
+                      className="absolute top-1 right-1 bg-white/90 text-red-600 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+                      aria-label="Delete item"
+                      title="Delete item"
+                    >
+                      <Trash2 size={12} />
+                    </button>
+                    <button
+                      onClick={() => openAssign(item)}
+                      className="absolute top-1 left-1 bg-white/90 text-indigo-600 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+                      aria-label="Change project"
+                      title="Change project"
+                    >
+                      <Tag size={12} />
+                    </button>
+                  </>
+                )}
                 {item.projectSlug && (
                   <span
                     className="absolute top-1 left-7 right-7 bg-indigo-600/85 text-white text-[9px] xs:text-[10px] px-1.5 py-0.5 rounded truncate"
