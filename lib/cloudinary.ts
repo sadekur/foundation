@@ -4,7 +4,9 @@
 // format), so no manual field mapping is needed.
 import { v2 as cloudinary } from "cloudinary";
 
-cloudinary.config({ secure: true });
+if (process.env.CLOUDINARY_URL?.startsWith("cloudinary://")) {
+  cloudinary.config({ secure: true });
+}
 
 export { cloudinary };
 
