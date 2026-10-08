@@ -70,7 +70,7 @@ export const projectBanners: (ProjectBanner | null)[] = [
   { src: "/projects/banners/deeni-shiksha-o-dawah.jpg", position: "center top" }, // Islamic Education & Dawah
   "/projects/banners/quran-o-deeni-shikkhadan.jpg", // Qur'an & Islamic Teaching
   null, // Islamic Library & Publications
-  null, // Zakat & Sadaqah Projects
+  "/projects/banners/zakat-o-sadaka.jpg", // Zakat & Sadaqah Projects
   null, // Orphans, Students of Knowledge & the Poor
   null, // Tube Wells & Public Welfare
   null, // Tree Plantation & Eco-Friendly Activities
