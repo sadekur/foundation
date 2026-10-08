@@ -13,7 +13,7 @@ There is no test runner configured. The old CRA `App.test.js` (unmodified boiler
 
 `npm run build` overwrites the `.next/` directory a running `npm run dev` server is serving from, leaving that dev server in a broken state — if the user has a dev server up, tell them to restart it after any build.
 
-**Stale leftovers from the pre-migration CRA app — ignore them, don't edit them, and don't treat them as build output:** `build/` (the old CRA production bundle; untracked and gitignored) and `README.md` (CRA boilerplate plus a stale credentials scratchpad; **tracked in git**, not gitignored; this file, not the README, is the accurate description of the project).
+**Pre-migration CRA leftovers are gone** — the old `build/` bundle has been deleted, and `README.md` has been rewritten as an accurate project README (the stale credentials scratchpad it used to contain was removed). `README.md` covers the project overview, scripts, and env vars; this file remains the deep technical description of the codebase.
 
 ## Architecture
 
