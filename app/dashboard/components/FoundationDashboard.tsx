@@ -206,9 +206,13 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
     setProjects(updatedProjects);
     await saveToFirebase(updatedProjects);
 
-    // Update selected year to the transaction year if different
+    // Jump to wherever the new transaction landed so it's visible straight away
     if (parseInt(year) !== selectedYear) {
       setSelectedYear(parseInt(year));
+    }
+    const round = findRoundForDate(currentProjectData.rounds, transaction.date);
+    if (round) {
+      setSelectedRoundId(round.id);
     }
 
     setTransactionForm({ date: "", donor: "", amount: "" });
