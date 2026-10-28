@@ -410,6 +410,7 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                     {projectGroups.map((group) => {
                       const expandable = selectedYear === "all";
                       const isOpen = expandable && isExpanded(group.project);
+                      const rounds = getRounds(group.project);
                       return (
                         <Fragment key={group.project}>
                           <tr
