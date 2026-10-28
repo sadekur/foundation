@@ -15,7 +15,6 @@ import AddProjectModal from "./AddProjectModal";
 import EditProjectModal from "./EditProjectModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import TransactionFormModal from "./TransactionFormModal";
-import ImportProjectsModal from "./ImportProjectsModal";
 import YearlySummaryScreen from "./YearlySummaryScreen";
 import GalleryScreen from "./GalleryScreen";
 import { getProjectYears, calculateTotals, calculateProjectTotals, getAvailableYears } from "@/lib/utils/projectStats";
@@ -31,7 +30,6 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
   const [projects, setProjects] = useState<Projects>({});
   const [newProjectName, setNewProjectName] = useState("");
   const [showAddProject, setShowAddProject] = useState(false);
-  const [showImportProjects, setShowImportProjects] = useState(false);
   const [showEditProject, setShowEditProject] = useState(false);
   const [editProjectName, setEditProjectName] = useState("");
   const [showDeleteProjectConfirm, setShowDeleteProjectConfirm] = useState(false);
@@ -114,18 +112,6 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
       setNewProjectYear(new Date().getFullYear());
       setShowAddProject(false);
     }
-  };
-
-  // Imported projects replace same-named ones wholesale; every other project is kept as-is.
-  const importProjects = async (imported: Projects) => {
-    const updatedProjects: Projects = { ...projects, ...imported };
-
-    setProjects(updatedProjects);
-    await saveToFirebase(updatedProjects);
-
-    const firstImported = Object.keys(imported)[0];
-    if (firstImported) handleProjectChange(firstImported, updatedProjects);
-    setShowImportProjects(false);
   };
 
   const renameProject = async (oldName: string, newNameRaw: string) => {
@@ -247,12 +233,10 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
   const projectTotals = useMemo(() => calculateProjectTotals(projects, currentProject), [projects, currentProject]);
 
   // Handle project change - update year to most recent year with data
-  // `source` lets a caller that just rebuilt the projects object (e.g. importProjects) pick
-  // the year from that data, before the `projects` state update has rendered.
-  const handleProjectChange = (newProject: string, source: Projects = projects) => {
+  const handleProjectChange = (newProject: string) => {
     setCurrentProject(newProject);
-    if (source[newProject]) {
-      const projectYears = getProjectYears(source[newProject]);
+    if (projects[newProject]) {
+      const projectYears = getProjectYears(projects[newProject]);
       if (projectYears.length > 0) {
         setSelectedYear(Math.max(...projectYears));
       } else {
@@ -343,7 +327,6 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
             projects={projects}
             availableYears={availableYears}
             onAddProject={() => setShowAddProject(true)}
-            onImportProjects={() => setShowImportProjects(true)}
             onShowYearlySummary={handleShowYearlySummary}
             onShowGallery={handleShowGallery}
             onEditProject={handleEditProjectOpen}
@@ -450,13 +433,6 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
           setSelectedYear={setNewProjectYear}
           onAdd={addProject}
           onCancel={handleAddProjectCancel}
-        />
-
-        <ImportProjectsModal
-          show={showImportProjects}
-          existingProjects={projects}
-          onImport={importProjects}
-          onCancel={() => setShowImportProjects(false)}
         />
 
         <EditProjectModal
