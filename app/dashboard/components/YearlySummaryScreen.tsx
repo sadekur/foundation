@@ -285,6 +285,7 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                 {projectGroups.map((group) => {
                   const expandable = selectedYear === "all";
                   const isOpen = expandable && isExpanded(group.project);
+                  const rounds = getRounds(group.project);
                   return (
                     <div key={group.project} className="p-4 space-y-3">
                       <button
