@@ -296,6 +296,9 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
   // Handle project change - update year to most recent year with data
   const handleProjectChange = (newProject: string) => {
     setCurrentProject(newProject);
+    // Projects that run in rounds open on their latest round; the rest stay year-based
+    setViewMode(projects[newProject]?.rounds?.length ? "round" : "year");
+    setSelectedRoundId("");
     if (projects[newProject]) {
       const projectYears = getProjectYears(projects[newProject]);
       if (projectYears.length > 0) {
