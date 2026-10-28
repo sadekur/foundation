@@ -480,8 +480,8 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
               <div className="w-full">
                 <TransactionSection
                   type="income"
-                  title={`Income (${selectedYear})`}
-                  transactions={projects[currentProject]?.income?.[selectedYear.toString()] || {}}
+                  title={`Income (${period})`}
+                  transactions={periodIncome}
                   onDelete={(id) => deleteTransaction("income", id)}
                   onAddTransaction={() => setShowIncomeForm(true)}
                   buttonColor="green"
