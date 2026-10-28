@@ -343,6 +343,7 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
             projects={projects}
             availableYears={availableYears}
             onAddProject={() => setShowAddProject(true)}
+            onImportProjects={() => setShowImportProjects(true)}
             onShowYearlySummary={handleShowYearlySummary}
             onShowGallery={handleShowGallery}
             onEditProject={handleEditProjectOpen}
