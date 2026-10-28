@@ -272,6 +272,26 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
   );
   const availableYears = useMemo(() => getAvailableYears(projects, currentProject), [projects, currentProject]);
   const projectTotals = useMemo(() => calculateProjectTotals(projects, currentProject), [projects, currentProject]);
+  const roundSummaries = useMemo(() => calculateRoundSummaries(projects[currentProject]), [projects, currentProject]);
+
+  const currentRound =
+    roundSummaries.find((summary) => summary.round.id === selectedRoundId) ?? roundSummaries[roundSummaries.length - 1];
+  const roundView = viewMode === "round" && !!currentRound;
+
+  // Everything below the controls reads from these, so it works the same for a year or a round.
+  const period = roundView ? currentRound.round.name : String(selectedYear);
+  const periodTotals = roundView
+    ? { totalIncome: currentRound.totalIncome, totalExpenses: currentRound.totalExpenses, balance: currentRound.balance }
+    : { totalIncome, totalExpenses, balance };
+  const periodIncome = roundView ? currentRound.income : projects[currentProject]?.income?.[selectedYear.toString()] || {};
+  const periodExpenses = roundView
+    ? currentRound.expenses
+    : projects[currentProject]?.expenses?.[selectedYear.toString()] || {};
+
+  const handleSelectRound = (roundId: string) => {
+    setViewMode("round");
+    setSelectedRoundId(roundId);
+  };
 
   // Handle project change - update year to most recent year with data
   const handleProjectChange = (newProject: string) => {
