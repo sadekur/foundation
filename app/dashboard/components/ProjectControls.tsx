@@ -143,36 +143,77 @@ const ProjectControls = ({
             )}
           </div>
 
-          {/* Year Selection */}
+          {/* Year / Round Selection */}
           <div className="flex-1 min-w-0 sm:min-w-[180px]">
-            <label className="block text-xs xs:text-sm font-medium text-gray-700 mb-1 xs:mb-2">
-              <span>Viewing Year</span>
-              {currentProject && (
-                <span className="ml-1 text-xs text-gray-400 font-normal">
-                  ({availableYears.length} year{availableYears.length !== 1 ? "s" : ""})
-                </span>
-              )}
-            </label>
-            <select
-              value={selectedYear}
-              onChange={(e) => setSelectedYear(Number(e.target.value))}
-              className="w-full p-2 xs:p-2.5 sm:p-3 text-sm xs:text-base
-                        border border-gray-300 rounded-md xs:rounded-lg
-                        focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
-                        transition-all duration-200 hover:border-gray-400
-                        disabled:bg-gray-50 disabled:cursor-not-allowed"
-              disabled={!currentProject}
-            >
-              {availableYears.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                  {projectInfo && !projectInfo.years.includes(year) ? " (No data)" : ""}
-                </option>
-              ))}
-            </select>
+            <div className="flex items-center justify-between gap-2 mb-1 xs:mb-2">
+              <label className="block text-xs xs:text-sm font-medium text-gray-700">
+                <span>{roundView ? "Viewing Round" : "Viewing Year"}</span>
+                {currentProject && (
+                  <span className="ml-1 text-xs text-gray-400 font-normal">
+                    {roundView
+                      ? `(${roundSummaries.length} round${roundSummaries.length !== 1 ? "s" : ""})`
+                      : `(${availableYears.length} year${availableYears.length !== 1 ? "s" : ""})`}
+                  </span>
+                )}
+              </label>
 
-            {/* Year Help Text - Mobile Optimized */}
-            {currentProject && availableYears.length > 1 && (
+              {/* Only projects with rounds can switch; everything else stays year-only */}
+              {hasRounds && (
+                <div className="inline-flex rounded-md border border-gray-300 p-0.5 text-xs" role="group" aria-label="View by">
+                  {(["round", "year"] as const).map((mode) => (
+                    <button
+                      key={mode}
+                      type="button"
+                      onClick={() => setViewMode(mode)}
+                      className={`px-2 py-0.5 rounded transition-colors ${
+                        viewMode === mode ? "bg-indigo-600 text-white" : "text-gray-600 hover:bg-gray-100"
+                      }`}
+                      aria-pressed={viewMode === mode}
+                    >
+                      {mode === "round" ? "By Round" : "By Year"}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {roundView ? (
+              <select
+                value={selectedRoundId}
+                onChange={(e) => setSelectedRoundId(e.target.value)}
+                className="w-full p-2 xs:p-2.5 sm:p-3 text-sm xs:text-base
+                          border border-gray-300 rounded-md xs:rounded-lg
+                          focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                          transition-all duration-200 hover:border-gray-400"
+              >
+                {[...roundSummaries].reverse().map((summary) => (
+                  <option key={summary.round.id} value={summary.round.id}>
+                    {summary.round.name} ({formatRoundDates(summary)})
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <select
+                value={selectedYear}
+                onChange={(e) => setSelectedYear(Number(e.target.value))}
+                className="w-full p-2 xs:p-2.5 sm:p-3 text-sm xs:text-base
+                          border border-gray-300 rounded-md xs:rounded-lg
+                          focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                          transition-all duration-200 hover:border-gray-400
+                          disabled:bg-gray-50 disabled:cursor-not-allowed"
+                disabled={!currentProject}
+              >
+                {availableYears.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                    {projectInfo && !projectInfo.years.includes(year) ? " (No data)" : ""}
+                  </option>
+                ))}
+              </select>
+            )}
+
+            {/* Help Text - Mobile Optimized */}
+            {currentProject && !roundView && availableYears.length > 1 && (
               <div className="mt-1.5 xs:mt-2 text-xs text-gray-500 hidden sm:block">
                 Switch years to view different periods
               </div>
