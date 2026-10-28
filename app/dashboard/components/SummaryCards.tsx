@@ -22,7 +22,7 @@ const SummaryCards = ({ totalIncome, totalExpenses, balance, period }: SummaryCa
   };
 
   return (
-    <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-6 mb-6 xs:mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-6 mb-6 xs:mb-8">
 
       {/* Income Card */}
       <div className="bg-white rounded-lg shadow-sm p-3 xs:p-4 sm:p-6 border-l-4 border-green-500
@@ -75,7 +75,7 @@ const SummaryCards = ({ totalIncome, totalExpenses, balance, period }: SummaryCa
       {/* Balance Card */}
       <div className={`bg-white rounded-lg shadow-sm p-3 xs:p-4 sm:p-6 border-l-4
                        hover:shadow-md transition-shadow duration-200
-                       xs:col-span-2 lg:col-span-1 ${
+                       sm:col-span-2 lg:col-span-1 ${
         balance >= 0 ? "border-green-500" : "border-red-500"
       }`}>
         <div className="flex items-start xs:items-center justify-between gap-3">

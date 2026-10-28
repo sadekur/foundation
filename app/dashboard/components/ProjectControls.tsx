@@ -222,14 +222,15 @@ const ProjectControls = ({
         </div>
 
         {/* Right Section - Action Buttons */}
-        <div className="flex flex-col xs:flex-row gap-2 xs:gap-3 flex-shrink-0">
+        {/* Phones: three equal columns, icon above label, so no label has to wrap */}
+        <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-row sm:gap-3 flex-shrink-0">
 
           {/* Yearly Summary Button */}
           <button
             onClick={onShowYearlySummary}
-            className="flex items-center justify-center xs:justify-start gap-2
+            className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 whitespace-nowrap
                       bg-green-600 text-white
-                      px-3 xs:px-4 sm:px-5 py-2 xs:py-2.5
+                      px-2 sm:px-5 py-2 xs:py-2.5
                       text-sm xs:text-base font-medium
                       rounded-md xs:rounded-lg
                       hover:bg-green-700 active:bg-green-800
@@ -247,9 +248,9 @@ const ProjectControls = ({
           {/* Gallery Button */}
           <button
             onClick={onShowGallery}
-            className="flex items-center justify-center xs:justify-start gap-2
+            className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 whitespace-nowrap
                       bg-purple-600 text-white
-                      px-3 xs:px-4 sm:px-5 py-2 xs:py-2.5
+                      px-2 sm:px-5 py-2 xs:py-2.5
                       text-sm xs:text-base font-medium
                       rounded-md xs:rounded-lg
                       hover:bg-purple-700 active:bg-purple-800
@@ -267,9 +268,9 @@ const ProjectControls = ({
           {/* Add Project Button */}
           <button
             onClick={onAddProject}
-            className="flex items-center justify-center xs:justify-start gap-2
+            className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 whitespace-nowrap
                       bg-indigo-600 text-white
-                      px-3 xs:px-4 sm:px-5 py-2 xs:py-2.5
+                      px-2 sm:px-5 py-2 xs:py-2.5
                       text-sm xs:text-base font-medium
                       rounded-md xs:rounded-lg
                       hover:bg-indigo-700 active:bg-indigo-800

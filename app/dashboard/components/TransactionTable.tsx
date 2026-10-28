@@ -77,7 +77,7 @@ const TransactionTable = ({
         </div>
       )}
 
-      <table className="w-full min-w-[400px]">
+      <table className="w-full sm:min-w-[400px]">
         <thead>
           <tr className="border-b">
             <th className="text-left p-1.5 xs:p-2 sm:p-3 font-medium text-gray-700 text-xs xs:text-sm">
@@ -86,10 +86,10 @@ const TransactionTable = ({
             <th className="text-left p-1.5 xs:p-2 sm:p-3 font-medium text-gray-700 text-xs xs:text-sm">
               {type === "income" ? "Donor" : "Description"}
             </th>
-            <th className="text-left p-1.5 xs:p-2 sm:p-3 font-medium text-gray-700 text-xs xs:text-sm">
+            <th className="text-left p-1.5 xs:p-2 sm:p-3 font-medium text-gray-700 text-xs xs:text-sm whitespace-nowrap">
               Amount (৳)
             </th>
-            <th className="text-center p-1.5 xs:p-2 sm:p-3 font-medium text-gray-700 text-xs xs:text-sm w-16 xs:w-20">
+            <th className="text-center p-1.5 xs:p-2 sm:p-3 font-medium text-gray-700 text-xs xs:text-sm w-12 sm:w-20">
               Actions
             </th>
           </tr>

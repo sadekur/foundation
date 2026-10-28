@@ -95,8 +95,8 @@ const TransactionSection = ({
 
   return (
     <div className="bg-white rounded-lg shadow-sm">
-      <div className="p-6 border-b">
-        <div className="flex justify-between items-center">
+      <div className="p-4 sm:p-6 border-b">
+        <div className="flex justify-between items-center gap-3">
           <h2 className="text-base md:text-xl font-semibold text-gray-800">{title}</h2>
           <button
             onClick={onAddTransaction}
@@ -110,7 +110,7 @@ const TransactionSection = ({
       </div>
 
       {/* Search Bar */}
-      <div className="px-6 pt-4 pb-2">
+      <div className="px-4 sm:px-6 pt-4 pb-2">
         <div className="relative">
           <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           <input
@@ -123,7 +123,7 @@ const TransactionSection = ({
         </div>
       </div>
 
-      <div className="p-6 pt-2">
+      <div className="p-4 sm:p-6 pt-2 sm:pt-2">
         <TransactionTable
           transactions={paginatedTransactions}
           onDelete={onDelete}
