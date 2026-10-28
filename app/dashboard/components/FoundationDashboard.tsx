@@ -221,20 +221,46 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
   };
 
   const deleteTransaction = async (type: TransactionType, transactionId: string) => {
-    const year = selectedYear.toString();
+    // Look the year up from the transaction itself — in round view the list spans several years,
+    // so the selected year isn't necessarily the one it's stored under.
+    const yearsData = projects[currentProject]?.[type] || {};
+    const year = Object.keys(yearsData).find((y) => yearsData[y]?.[transactionId]);
+    if (!year) return;
 
     // Deep copy — shallow spread doesn't protect nested objects
     const updatedProjects: Projects = JSON.parse(JSON.stringify(projects));
 
-    if (updatedProjects[currentProject]?.[type]?.[year]) {
-      delete updatedProjects[currentProject][type][year][transactionId];
-      if (Object.keys(updatedProjects[currentProject][type][year]).length === 0) {
-        delete updatedProjects[currentProject][type][year];
-      }
+    delete updatedProjects[currentProject][type][year][transactionId];
+    if (Object.keys(updatedProjects[currentProject][type][year]).length === 0) {
+      delete updatedProjects[currentProject][type][year];
     }
 
     setProjects(updatedProjects);
     await saveToFirebase(updatedProjects);
+  };
+
+  const saveRounds = async (rounds: ProjectRound[]) => {
+    const updatedProjects: Projects = {
+      ...projects,
+      [currentProject]: { ...projects[currentProject], rounds },
+    };
+
+    setProjects(updatedProjects);
+    await saveToFirebase(updatedProjects);
+  };
+
+  const addRound = async (name: string, startDate: string) => {
+    const round: ProjectRound = { id: Date.now().toString(), name, startDate };
+    setViewMode("round");
+    setSelectedRoundId(round.id);
+    await saveRounds([...(projects[currentProject]?.rounds || []), round]);
+  };
+
+  // Only removes the round's definition — its transactions fall into the previous round.
+  const deleteRound = async (roundId: string) => {
+    const remaining = (projects[currentProject]?.rounds || []).filter((round) => round.id !== roundId);
+    if (remaining.length === 0) setViewMode("year");
+    await saveRounds(remaining);
   };
 
   // Derived stats — memoized so they only recompute when the underlying
