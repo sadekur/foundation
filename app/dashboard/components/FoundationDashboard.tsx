@@ -50,6 +50,12 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
   const [showGallery, setShowGallery] = useState(false);
   const [newProjectYear, setNewProjectYear] = useState(new Date().getFullYear());
 
+  // Round view — only for projects that have rounds (see lib/utils/projectRounds.ts).
+  // An empty/unknown selectedRoundId means "the latest round".
+  const [viewMode, setViewMode] = useState<ViewMode>("year");
+  const [selectedRoundId, setSelectedRoundId] = useState("");
+  const [showManageRounds, setShowManageRounds] = useState(false);
+
   // Realtime data listener — starts as soon as the dashboard mounts (parent already gated on auth)
   useEffect(() => {
     const foundationDocRef = doc(db, "foundations", "as-salsabil");
