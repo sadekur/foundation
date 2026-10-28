@@ -11,11 +11,22 @@ export interface Transaction {
 
 export type YearTransactions = Record<string, Transaction>;
 
+// One run of a recurring project (e.g. the 2nd conference). Transactions aren't tagged with a
+// round — each belongs to the latest round whose startDate is on or before its date (see
+// lib/utils/projectRounds.ts), so a new round only needs a name and a start date.
+export interface ProjectRound {
+  id: string;
+  name: string;
+  startDate: string; // YYYY-MM-DD, same format as Transaction.date
+}
+
 export interface ProjectData {
   income: Record<string, YearTransactions>;
   expenses: Record<string, YearTransactions>;
   createdAt?: string;
   createdYear?: number;
+  // Optional — only projects that run in rounds (like the conference fund) have any.
+  rounds?: ProjectRound[];
 }
 
 export type Projects = Record<string, ProjectData>;
