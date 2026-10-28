@@ -9,15 +9,6 @@ interface SummaryCardsProps {
 }
 
 const SummaryCards = ({ totalIncome, totalExpenses, balance, year }: SummaryCardsProps) => {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2,
-    }).format(amount);
-  };
-
   const getBalanceColor = (balance: number) => {
     if (balance > 0) return "text-green-600";
     if (balance < 0) return "text-red-600";
