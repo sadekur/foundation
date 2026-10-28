@@ -33,17 +33,17 @@ const SummaryCards = ({ totalIncome, totalExpenses, balance, year }: SummaryCard
               Total Income ({year})
             </h3>
             <p className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold text-green-600 break-words leading-tight">
-              {formatCurrency(totalIncome)}
+              {formatTaka(totalIncome)}
             </p>
             {totalIncome > 0 && (
               <div className="mt-1.5 xs:mt-2 flex items-center text-xs xs:text-sm text-green-600">
-                <DollarSign size={14} className="xs:w-4 xs:h-4 mr-1 flex-shrink-0" />
+                <Banknote size={14} className="xs:w-4 xs:h-4 mr-1 flex-shrink-0" />
                 <span className="truncate">Revenue Generated</span>
               </div>
             )}
           </div>
           <div className="p-2 xs:p-2.5 sm:p-3 bg-green-100 rounded-full flex-shrink-0">
-            <DollarSign size={18} className="xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-green-600" />
+            <Banknote size={18} className="xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-green-600" />
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@ const SummaryCards = ({ totalIncome, totalExpenses, balance, year }: SummaryCard
               Total Expenses ({year})
             </h3>
             <p className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold text-red-600 break-words leading-tight">
-              {formatCurrency(totalExpenses)}
+              {formatTaka(totalExpenses)}
             </p>
             {totalExpenses > 0 && (
               <div className="mt-1.5 xs:mt-2 flex items-center text-xs xs:text-sm text-red-600">
@@ -84,7 +84,7 @@ const SummaryCards = ({ totalIncome, totalExpenses, balance, year }: SummaryCard
               Net Balance ({year})
             </h3>
             <p className={`text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold break-words leading-tight ${getBalanceColor(balance)}`}>
-              {formatCurrency(balance)}
+              {formatTaka(balance)}
             </p>
             <div className="mt-1.5 xs:mt-2 flex items-center text-xs xs:text-sm">
               <span className="mr-1 flex-shrink-0">

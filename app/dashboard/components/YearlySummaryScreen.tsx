@@ -228,19 +228,19 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
           <div className="bg-white rounded-lg shadow-sm p-3 xs:p-4 sm:p-6">
             <h3 className="text-xs xs:text-sm font-medium text-gray-500 mb-1 xs:mb-2">Total Income</h3>
             <p className="text-lg xs:text-xl sm:text-2xl font-bold text-green-600 break-words">
-              {formatCurrency(grandTotals.income)}
+              {formatTaka(grandTotals.income)}
             </p>
           </div>
           <div className="bg-white rounded-lg shadow-sm p-3 xs:p-4 sm:p-6">
             <h3 className="text-xs xs:text-sm font-medium text-gray-500 mb-1 xs:mb-2">Total Expenses</h3>
             <p className="text-lg xs:text-xl sm:text-2xl font-bold text-red-600 break-words">
-              {formatCurrency(grandTotals.expenses)}
+              {formatTaka(grandTotals.expenses)}
             </p>
           </div>
           <div className="bg-white rounded-lg shadow-sm p-3 xs:p-4 sm:p-6">
             <h3 className="text-xs xs:text-sm font-medium text-gray-500 mb-1 xs:mb-2">Net Balance</h3>
             <p className={`text-lg xs:text-xl sm:text-2xl font-bold break-words ${grandTotals.balance >= 0 ? "text-green-600" : "text-red-600"}`}>
-              {formatCurrency(grandTotals.balance)}
+              {formatTaka(grandTotals.balance)}
             </p>
           </div>
           <div className="bg-white rounded-lg shadow-sm p-3 xs:p-4 sm:p-6">
@@ -307,16 +307,16 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                       <div className="grid grid-cols-2 gap-3 text-xs">
                         <div>
                           <span className="text-gray-500">Income:</span>
-                          <div className="font-medium text-green-600">{formatCurrency(group.totalIncome)}</div>
+                          <div className="font-medium text-green-600">{formatTaka(group.totalIncome)}</div>
                         </div>
                         <div>
                           <span className="text-gray-500">Expenses:</span>
-                          <div className="font-medium text-red-600">{formatCurrency(group.totalExpenses)}</div>
+                          <div className="font-medium text-red-600">{formatTaka(group.totalExpenses)}</div>
                         </div>
                         <div>
                           <span className="text-gray-500">Balance:</span>
                           <div className={`font-medium ${group.balance >= 0 ? "text-green-600" : "text-red-600"}`}>
-                            {formatCurrency(group.balance)}
+                            {formatTaka(group.balance)}
                           </div>
                         </div>
                         <div>
@@ -329,10 +329,10 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                           {group.rows.map((item) => (
                             <div key={item.year} className="grid grid-cols-4 gap-2 px-3 py-2">
                               <span className="font-medium text-gray-700">{item.year}</span>
-                              <span className="text-green-600">{formatCurrency(item.totalIncome)}</span>
-                              <span className="text-red-600">{formatCurrency(item.totalExpenses)}</span>
+                              <span className="text-green-600">{formatTaka(item.totalIncome)}</span>
+                              <span className="text-red-600">{formatTaka(item.totalExpenses)}</span>
                               <span className={item.balance >= 0 ? "text-green-600" : "text-red-600"}>
-                                {formatCurrency(item.balance)}
+                                {formatTaka(item.balance)}
                               </span>
                             </div>
                           ))}
@@ -343,10 +343,10 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                 })}
                 <div className="p-4 bg-gray-50 grid grid-cols-2 gap-3 text-xs font-semibold">
                   <div className="col-span-2 text-sm text-gray-900">Total</div>
-                  <div className="text-green-600">{formatCurrency(grandTotals.income)}</div>
-                  <div className="text-red-600">{formatCurrency(grandTotals.expenses)}</div>
+                  <div className="text-green-600">{formatTaka(grandTotals.income)}</div>
+                  <div className="text-red-600">{formatTaka(grandTotals.expenses)}</div>
                   <div className={grandTotals.balance >= 0 ? "text-green-600" : "text-red-600"}>
-                    {formatCurrency(grandTotals.balance)}
+                    {formatTaka(grandTotals.balance)}
                   </div>
                   <div>{grandTotals.transactions}</div>
                 </div>
@@ -405,17 +405,17 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                               {formatYearRange(group.years)}
                             </td>
                             <td className="px-3 sm:px-6 py-4 text-sm font-medium text-green-600 text-right whitespace-nowrap">
-                              {formatCurrency(group.totalIncome)}
+                              {formatTaka(group.totalIncome)}
                             </td>
                             <td className="px-3 sm:px-6 py-4 text-sm font-medium text-red-600 text-right whitespace-nowrap">
-                              {formatCurrency(group.totalExpenses)}
+                              {formatTaka(group.totalExpenses)}
                             </td>
                             <td
                               className={`px-3 sm:px-6 py-4 text-sm font-medium text-right whitespace-nowrap ${
                                 group.balance >= 0 ? "text-green-600" : "text-red-600"
                               }`}
                             >
-                              {formatCurrency(group.balance)}
+                              {formatTaka(group.balance)}
                             </td>
                             <td className="px-3 sm:px-6 py-4 text-sm text-gray-900 text-right">{group.totalTransactions}</td>
                           </tr>
@@ -425,17 +425,17 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                                 <td className="px-3 sm:px-6 py-2" />
                                 <td className="px-3 sm:px-6 py-2 font-medium text-gray-700">{item.year}</td>
                                 <td className="px-3 sm:px-6 py-2 text-green-600 text-right whitespace-nowrap">
-                                  {formatCurrency(item.totalIncome)}
+                                  {formatTaka(item.totalIncome)}
                                 </td>
                                 <td className="px-3 sm:px-6 py-2 text-red-600 text-right whitespace-nowrap">
-                                  {formatCurrency(item.totalExpenses)}
+                                  {formatTaka(item.totalExpenses)}
                                 </td>
                                 <td
                                   className={`px-3 sm:px-6 py-2 text-right whitespace-nowrap ${
                                     item.balance >= 0 ? "text-green-600" : "text-red-600"
                                   }`}
                                 >
-                                  {formatCurrency(item.balance)}
+                                  {formatTaka(item.balance)}
                                 </td>
                                 <td className="px-3 sm:px-6 py-2 text-gray-700 text-right">{item.totalTransactions}</td>
                               </tr>
@@ -450,17 +450,17 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                         Total ({projectGroups.length} project{projectGroups.length !== 1 ? "s" : ""})
                       </td>
                       <td className="px-3 sm:px-6 py-3 text-green-600 text-right whitespace-nowrap">
-                        {formatCurrency(grandTotals.income)}
+                        {formatTaka(grandTotals.income)}
                       </td>
                       <td className="px-3 sm:px-6 py-3 text-red-600 text-right whitespace-nowrap">
-                        {formatCurrency(grandTotals.expenses)}
+                        {formatTaka(grandTotals.expenses)}
                       </td>
                       <td
                         className={`px-3 sm:px-6 py-3 text-right whitespace-nowrap ${
                           grandTotals.balance >= 0 ? "text-green-600" : "text-red-600"
                         }`}
                       >
-                        {formatCurrency(grandTotals.balance)}
+                        {formatTaka(grandTotals.balance)}
                       </td>
                       <td className="px-3 sm:px-6 py-3 text-gray-900 text-right">{grandTotals.transactions}</td>
                     </tr>

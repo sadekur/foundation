@@ -357,19 +357,19 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
                 <div className="flex flex-col space-y-1">
                   <span className="text-blue-600 font-medium">Total Income:</span>
                   <span className="text-green-600 font-bold text-base lg:text-lg">
-                    ${projectTotals.totalIncome.toLocaleString()}
+                    {formatTaka(projectTotals.totalIncome)}
                   </span>
                 </div>
                 <div className="flex flex-col space-y-1">
                   <span className="text-blue-600 font-medium">Total Expenses:</span>
                   <span className="text-red-600 font-bold text-base lg:text-lg">
-                    ${projectTotals.totalExpenses.toLocaleString()}
+                    {formatTaka(projectTotals.totalExpenses)}
                   </span>
                 </div>
                 <div className="flex flex-col space-y-1">
                   <span className="text-blue-600 font-medium">Net Balance:</span>
                   <span className={`font-bold text-base lg:text-lg ${projectTotals.balance >= 0 ? "text-green-600" : "text-red-600"}`}>
-                    ${projectTotals.balance.toLocaleString()}
+                    {formatTaka(projectTotals.balance)}
                   </span>
                 </div>
               </div>
@@ -379,19 +379,19 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
                 <div className="flex justify-between items-center border-b border-blue-200 pb-2">
                   <span className="text-blue-600 font-medium text-sm">Total Income:</span>
                   <span className="text-green-600 font-bold text-base">
-                    ${projectTotals.totalIncome.toLocaleString()}
+                    {formatTaka(projectTotals.totalIncome)}
                   </span>
                 </div>
                 <div className="flex justify-between items-center border-b border-blue-200 pb-2">
                   <span className="text-blue-600 font-medium text-sm">Total Expenses:</span>
                   <span className="text-red-600 font-bold text-base">
-                    ${projectTotals.totalExpenses.toLocaleString()}
+                    {formatTaka(projectTotals.totalExpenses)}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-blue-600 font-medium text-sm">Net Balance:</span>
                   <span className={`font-bold text-base ${projectTotals.balance >= 0 ? "text-green-600" : "text-red-600"}`}>
-                    ${projectTotals.balance.toLocaleString()}
+                    {formatTaka(projectTotals.balance)}
                   </span>
                 </div>
               </div>
