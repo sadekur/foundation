@@ -267,7 +267,7 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
             <p className="text-xs xs:text-sm text-gray-600 mt-1">
               {selectedProject !== "all" && `Project: ${selectedProject} • `}
               {selectedYear === "all"
-                ? "Click a project to see its year-by-year breakdown"
+                ? "Click a project to see its year-by-year (or round-by-round) breakdown"
                 : `Showing each project's figures for ${selectedYear} only`}
             </p>
           </div>
