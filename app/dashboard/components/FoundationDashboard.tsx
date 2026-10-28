@@ -76,6 +76,7 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
               if (projectYears.length > 0) {
                 setSelectedYear(Math.max(...projectYears));
               }
+              setViewMode(loadedProjects[firstProject].rounds?.length ? "round" : "year");
               return firstProject;
             }
             return prev; // keep whatever is already selected
