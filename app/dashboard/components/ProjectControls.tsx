@@ -25,6 +25,7 @@ const ProjectControls = ({
   projects,
   availableYears,
   onAddProject,
+  onImportProjects,
   onShowYearlySummary,
   onShowGallery,
   onEditProject,
