@@ -2,6 +2,7 @@
 
 import { ArrowLeft, Calendar, ChevronDown, ChevronRight } from "lucide-react";
 import { Fragment, useState } from "react";
+import { formatTaka } from "@/lib/utils/formatTaka";
 import type { Projects } from "@/types";
 
 interface YearlySummaryScreenProps {
@@ -276,7 +277,7 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
               {/* Mobile Card View */}
               <div className="block sm:hidden divide-y divide-gray-200">
                 {projectGroups.map((group) => {
-                  const expandable = selectedYear === "all" && group.rows.length > 1;
+                  const expandable = selectedYear === "all";
                   const isOpen = expandable && isExpanded(group.project);
                   return (
                     <div key={group.project} className="p-4 space-y-3">
@@ -372,7 +373,7 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {projectGroups.map((group) => {
-                      const expandable = selectedYear === "all" && group.rows.length > 1;
+                      const expandable = selectedYear === "all";
                       const isOpen = expandable && isExpanded(group.project);
                       return (
                         <Fragment key={group.project}>
