@@ -116,6 +116,18 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
     }
   };
 
+  // Imported projects replace same-named ones wholesale; every other project is kept as-is.
+  const importProjects = async (imported: Projects) => {
+    const updatedProjects: Projects = { ...projects, ...imported };
+
+    setProjects(updatedProjects);
+    await saveToFirebase(updatedProjects);
+
+    const firstImported = Object.keys(imported)[0];
+    if (firstImported) handleProjectChange(firstImported, updatedProjects);
+    setShowImportProjects(false);
+  };
+
   const renameProject = async (oldName: string, newNameRaw: string) => {
     const newName = newNameRaw.trim();
     if (!newName || newName === oldName) {
