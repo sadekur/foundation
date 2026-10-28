@@ -1,6 +1,9 @@
-import { BarChart3, Images, Plus, Pencil, Trash2 } from "lucide-react";
+import { BarChart3, Images, Layers, Plus, Pencil, Trash2 } from "lucide-react";
 import { getProjectYearKeys } from "@/lib/utils/projectStats";
+import { formatRoundDates, type RoundSummary } from "@/lib/utils/projectRounds";
 import type { Projects } from "@/types";
+
+export type ViewMode = "year" | "round";
 
 interface ProjectControlsProps {
   currentProject: string;
@@ -9,11 +12,17 @@ interface ProjectControlsProps {
   setSelectedYear: (year: number) => void;
   projects: Projects;
   availableYears: number[];
+  roundSummaries: RoundSummary[];
+  viewMode: ViewMode;
+  setViewMode: (mode: ViewMode) => void;
+  selectedRoundId: string;
+  setSelectedRoundId: (roundId: string) => void;
   onAddProject: () => void;
   onShowYearlySummary: () => void;
   onShowGallery: () => void;
   onEditProject: () => void;
   onDeleteProject: () => void;
+  onManageRounds: () => void;
 }
 
 const ProjectControls = ({
