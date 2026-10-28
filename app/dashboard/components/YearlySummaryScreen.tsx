@@ -100,47 +100,7 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
     });
   };
 
-  const calculateProjectTotals = (): Record<string, ProjectTotalsRow> => {
-    const projectTotals: Record<string, ProjectTotalsRow> = {};
-
-    Object.keys(projects).forEach((projectName) => {
-      const project = projects[projectName];
-      const allYears = new Set([
-        ...Object.keys(project.income || {}),
-        ...Object.keys(project.expenses || {}),
-      ]);
-
-      let totalIncome = 0;
-      let totalExpenses = 0;
-      let totalIncomeTransactions = 0;
-      let totalExpenseTransactions = 0;
-
-      allYears.forEach((year) => {
-        const incomeData = project.income?.[year] || {};
-        const expenseData = project.expenses?.[year] || {};
-
-        totalIncome += Object.values(incomeData).reduce((sum, transaction) => sum + transaction.amount, 0);
-        totalExpenses += Object.values(expenseData).reduce((sum, transaction) => sum + transaction.amount, 0);
-        totalIncomeTransactions += Object.keys(incomeData).length;
-        totalExpenseTransactions += Object.keys(expenseData).length;
-      });
-
-      projectTotals[projectName] = {
-        totalIncome,
-        totalExpenses,
-        balance: totalIncome - totalExpenses,
-        years: Array.from(allYears).map(Number).sort((a, b) => b - a),
-        totalIncomeTransactions,
-        totalExpenseTransactions,
-        totalTransactions: totalIncomeTransactions + totalExpenseTransactions,
-      };
-    });
-
-    return projectTotals;
-  };
-
   const summaryData = calculateYearlySummaryData();
-  const projectTotals = calculateProjectTotals();
 
   // Filter data based on selections
   const filteredData = summaryData.filter((item) => {
@@ -148,6 +108,28 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
     const yearMatch = selectedYear === "all" || item.year === parseInt(selectedYear);
     return projectMatch && yearMatch;
   });
+
+  // Roll the filtered per-year rows up into one group per project (rows stay newest-first).
+  const projectGroups: ProjectGroup[] = Object.values(
+    filteredData.reduce<Record<string, ProjectGroup>>((groups, item) => {
+      const group = (groups[item.project] ??= {
+        project: item.project,
+        years: [],
+        rows: [],
+        totalIncome: 0,
+        totalExpenses: 0,
+        balance: 0,
+        totalTransactions: 0,
+      });
+      group.years.push(item.year);
+      group.rows.push(item);
+      group.totalIncome += item.totalIncome;
+      group.totalExpenses += item.totalExpenses;
+      group.balance += item.balance;
+      group.totalTransactions += item.totalTransactions;
+      return groups;
+    }, {})
+  ).sort((a, b) => a.project.localeCompare(b.project));
 
   // Calculate grand totals from filtered data
   const grandTotals = filteredData.reduce(
