@@ -247,10 +247,12 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
   const projectTotals = useMemo(() => calculateProjectTotals(projects, currentProject), [projects, currentProject]);
 
   // Handle project change - update year to most recent year with data
-  const handleProjectChange = (newProject: string) => {
+  // `source` lets a caller that just rebuilt the projects object (e.g. importProjects) pick
+  // the year from that data, before the `projects` state update has rendered.
+  const handleProjectChange = (newProject: string, source: Projects = projects) => {
     setCurrentProject(newProject);
-    if (projects[newProject]) {
-      const projectYears = getProjectYears(projects[newProject]);
+    if (source[newProject]) {
+      const projectYears = getProjectYears(source[newProject]);
       if (projectYears.length > 0) {
         setSelectedYear(Math.max(...projectYears));
       } else {
