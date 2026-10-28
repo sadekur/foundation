@@ -1,4 +1,5 @@
-import { CreditCard, DollarSign, Minus, TrendingDown, TrendingUp } from "lucide-react";
+import { Banknote, CreditCard, Minus, TrendingDown, TrendingUp } from "lucide-react";
+import { formatTaka } from "@/lib/utils/formatTaka";
 
 interface SummaryCardsProps {
   totalIncome: number;
