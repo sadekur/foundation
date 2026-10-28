@@ -20,19 +20,44 @@ interface SummaryRow {
   totalTransactions: number;
 }
 
-interface ProjectTotalsRow {
+interface ProjectGroup {
+  project: string;
+  years: number[];
+  rows: SummaryRow[];
   totalIncome: number;
   totalExpenses: number;
   balance: number;
-  years: number[];
-  totalIncomeTransactions: number;
-  totalExpenseTransactions: number;
   totalTransactions: number;
 }
+
+// "2023–2026 · 4 yrs" when the years are consecutive, otherwise a short list — keeps the
+// cell one line wide no matter how many years a project runs.
+const formatYearRange = (years: number[]) => {
+  if (years.length === 0) return "No data";
+  if (years.length === 1) return String(years[0]);
+  const sorted = [...years].sort((a, b) => a - b);
+  const first = sorted[0];
+  const last = sorted[sorted.length - 1];
+  const consecutive = last - first === sorted.length - 1;
+  return consecutive ? `${first}–${last} · ${sorted.length} yrs` : `${sorted.join(", ")}`;
+};
 
 const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => {
   const [selectedProject, setSelectedProject] = useState("all");
   const [selectedYear, setSelectedYear] = useState("all");
+  const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
+
+  const toggleProject = (project: string) => {
+    setExpandedProjects((prev) => {
+      const next = new Set(prev);
+      if (next.has(project)) next.delete(project);
+      else next.add(project);
+      return next;
+    });
+  };
+
+  // A single filtered project is shown already expanded — there's nothing else to look at.
+  const isExpanded = (project: string) => selectedProject === project || expandedProjects.has(project);
 
   const calculateYearlySummaryData = (): SummaryRow[] => {
     const summaryData: SummaryRow[] = [];
