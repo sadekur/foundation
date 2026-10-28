@@ -451,6 +451,35 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                             <td className="px-3 sm:px-6 py-4 text-sm text-gray-900 text-right">{group.totalTransactions}</td>
                           </tr>
                           {isOpen &&
+                            rounds.map((summary) => (
+                              <tr key={summary.round.id} className="bg-gray-50 text-xs">
+                                <td className="px-3 sm:px-6 py-2" />
+                                <td className="px-3 sm:px-6 py-2 whitespace-nowrap">
+                                  <span className="font-medium text-gray-700">{summary.round.name}</span>
+                                  <span className="ml-2 text-gray-500">{formatRoundDates(summary)}</span>
+                                </td>
+                                <td className="px-3 sm:px-6 py-2 text-green-600 text-right whitespace-nowrap">
+                                  {formatTaka(summary.totalIncome)}
+                                </td>
+                                <td className="px-3 sm:px-6 py-2 text-red-600 text-right whitespace-nowrap">
+                                  {formatTaka(summary.totalExpenses)}
+                                </td>
+                                <td className="px-3 sm:px-6 py-2 text-right whitespace-nowrap">
+                                  <div className={summary.balance >= 0 ? "text-green-600" : "text-red-600"}>
+                                    {formatTaka(summary.balance)}
+                                  </div>
+                                  <div className="text-gray-500">
+                                    after:{" "}
+                                    <span className={summary.runningBalance >= 0 ? "text-green-600" : "text-red-600"}>
+                                      {formatTaka(summary.runningBalance)}
+                                    </span>
+                                  </div>
+                                </td>
+                                <td className="px-3 sm:px-6 py-2 text-gray-700 text-right">{summary.transactionCount}</td>
+                              </tr>
+                            ))}
+                          {isOpen &&
+                            rounds.length === 0 &&
                             group.rows.map((item) => (
                               <tr key={item.year} className="bg-gray-50 text-xs">
                                 <td className="px-3 sm:px-6 py-2" />
