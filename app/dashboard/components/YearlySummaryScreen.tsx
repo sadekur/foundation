@@ -61,6 +61,11 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
   // A single filtered project is shown already expanded — there's nothing else to look at.
   const isExpanded = (project: string) => selectedProject === project || expandedProjects.has(project);
 
+  // Projects that run in rounds expand round by round (all years only — a round can span
+  // several years, so it can't be cut down to one); every other project expands by year.
+  const getRounds = (project: string): RoundSummary[] =>
+    selectedYear === "all" ? calculateRoundSummaries(projects[project]) : [];
+
   const calculateYearlySummaryData = (): SummaryRow[] => {
     const summaryData: SummaryRow[] = [];
 
