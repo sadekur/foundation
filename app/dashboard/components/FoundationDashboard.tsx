@@ -390,25 +390,39 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
             setSelectedYear={setSelectedYear}
             projects={projects}
             availableYears={availableYears}
+            roundSummaries={roundSummaries}
+            viewMode={viewMode}
+            setViewMode={setViewMode}
+            selectedRoundId={currentRound?.round.id ?? ""}
+            setSelectedRoundId={setSelectedRoundId}
             onAddProject={() => setShowAddProject(true)}
             onShowYearlySummary={handleShowYearlySummary}
             onShowGallery={handleShowGallery}
             onEditProject={handleEditProjectOpen}
             onDeleteProject={() => setShowDeleteProjectConfirm(true)}
+            onManageRounds={() => setShowManageRounds(true)}
           />
         </div>
 
         {currentProject && (
           <>
-            {/* Current Year Summary - Responsive */}
+            {/* Selected Year / Round Summary - Responsive */}
             <div className="mb-4 sm:mb-6">
               <SummaryCards
-                totalIncome={totalIncome}
-                totalExpenses={totalExpenses}
-                balance={balance}
-                year={selectedYear}
+                totalIncome={periodTotals.totalIncome}
+                totalExpenses={periodTotals.totalExpenses}
+                balance={periodTotals.balance}
+                period={period}
               />
             </div>
+
+            {roundSummaries.length > 0 && (
+              <RoundsOverview
+                roundSummaries={roundSummaries}
+                selectedRoundId={roundView ? currentRound.round.id : null}
+                onSelectRound={handleSelectRound}
+              />
+            )}
 
             {/* Project Total Summary (All Years) - Responsive */}
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 xs:p-4 sm:p-6 mb-4 sm:mb-6 overflow-x-auto">
