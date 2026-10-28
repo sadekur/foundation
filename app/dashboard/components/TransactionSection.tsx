@@ -100,10 +100,11 @@ const TransactionSection = ({
           <h2 className="text-base md:text-xl font-semibold text-gray-800">{title}</h2>
           <button
             onClick={onAddTransaction}
-            className={`flex items-center gap-2 text-sm md:text-lg text-white px-[6px] py-2 md:px-4 md:py-2 rounded-lg transition-colors ${colorClasses[buttonColor]}`}
+            className={`flex flex-shrink-0 items-center gap-2 whitespace-nowrap text-sm md:text-lg text-white px-[6px] py-2 md:px-4 md:py-2 rounded-lg transition-colors ${colorClasses[buttonColor]}`}
           >
             <Plus size={16} className="text-white" />
-            Add {title}
+            {/* The period is already in the heading — a long round name here would wrap the button */}
+            Add {type === "income" ? "Income" : "Expense"}
           </button>
         </div>
       </div>
