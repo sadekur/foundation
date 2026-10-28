@@ -328,7 +328,32 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                           <div className="font-medium">{group.totalTransactions}</div>
                         </div>
                       </div>
-                      {isOpen && (
+                      {isOpen && rounds.length > 0 && (
+                        <div className="rounded-md bg-gray-50 divide-y divide-gray-200 text-xs">
+                          {rounds.map((summary) => (
+                            <div key={summary.round.id} className="px-3 py-2 space-y-1">
+                              <div className="flex justify-between gap-2">
+                                <span className="font-medium text-gray-700">{summary.round.name}</span>
+                                <span className="text-gray-500">{formatRoundDates(summary)}</span>
+                              </div>
+                              <div className="grid grid-cols-3 gap-2">
+                                <span className="text-green-600">{formatTaka(summary.totalIncome)}</span>
+                                <span className="text-red-600">{formatTaka(summary.totalExpenses)}</span>
+                                <span className={summary.balance >= 0 ? "text-green-600" : "text-red-600"}>
+                                  {formatTaka(summary.balance)}
+                                </span>
+                              </div>
+                              <div className="text-gray-500">
+                                Fund balance after:{" "}
+                                <span className={summary.runningBalance >= 0 ? "text-green-600" : "text-red-600"}>
+                                  {formatTaka(summary.runningBalance)}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {isOpen && rounds.length === 0 && (
                         <div className="rounded-md bg-gray-50 divide-y divide-gray-200 text-xs">
                           {group.rows.map((item) => (
                             <div key={item.year} className="grid grid-cols-4 gap-2 px-3 py-2">
