@@ -32,12 +32,20 @@ const ProjectControls = ({
   setSelectedYear,
   projects,
   availableYears,
+  roundSummaries,
+  viewMode,
+  setViewMode,
+  selectedRoundId,
+  setSelectedRoundId,
   onAddProject,
   onShowYearlySummary,
   onShowGallery,
   onEditProject,
   onDeleteProject,
+  onManageRounds,
 }: ProjectControlsProps) => {
+  const hasRounds = roundSummaries.length > 0;
+  const roundView = hasRounds && viewMode === "round";
   // Helper function to get project info
   const getProjectInfo = (projectName: string) => {
     if (!projects[projectName]) return null;
