@@ -433,6 +433,7 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                             </td>
                             <td className="px-3 sm:px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
                               {formatYearRange(group.years)}
+                              {rounds.length > 0 && ` · ${rounds.length} rounds`}
                             </td>
                             <td className="px-3 sm:px-6 py-4 text-sm font-medium text-green-600 text-right whitespace-nowrap">
                               {formatTaka(group.totalIncome)}
