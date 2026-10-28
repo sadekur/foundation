@@ -452,6 +452,13 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
           onCancel={handleAddProjectCancel}
         />
 
+        <ImportProjectsModal
+          show={showImportProjects}
+          existingProjects={projects}
+          onImport={importProjects}
+          onCancel={() => setShowImportProjects(false)}
+        />
+
         <EditProjectModal
           show={showEditProject}
           projectName={editProjectName}
