@@ -106,6 +106,18 @@ const ProjectControls = ({
                   </button>
                   <button
                     type="button"
+                    onClick={onManageRounds}
+                    className="flex-shrink-0 p-2 xs:p-2.5 sm:p-3 border border-gray-300 rounded-md xs:rounded-lg
+                              text-gray-500 hover:text-indigo-600 hover:border-indigo-400 hover:bg-indigo-50
+                              transition-all duration-200
+                              focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                    aria-label="Manage rounds"
+                    title="Manage rounds (1st time, 2nd time, …)"
+                  >
+                    <Layers size={16} />
+                  </button>
+                  <button
+                    type="button"
                     onClick={onDeleteProject}
                     className="flex-shrink-0 p-2 xs:p-2.5 sm:p-3 border border-gray-300 rounded-md xs:rounded-lg
                               text-gray-500 hover:text-red-600 hover:border-red-400 hover:bg-red-50
