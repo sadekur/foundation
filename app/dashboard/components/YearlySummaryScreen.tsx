@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowLeft, Calendar } from "lucide-react";
-import { useState } from "react";
+import { ArrowLeft, Calendar, ChevronDown, ChevronRight } from "lucide-react";
+import { Fragment, useState } from "react";
 import type { Projects } from "@/types";
 
 interface YearlySummaryScreenProps {
