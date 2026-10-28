@@ -528,6 +528,15 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
           description={`Are you sure you want to delete "${currentProject}"? All of its income and expense records will be permanently deleted. This action cannot be undone.`}
         />
 
+        <ManageRoundsModal
+          show={showManageRounds}
+          projectName={currentProject}
+          roundSummaries={roundSummaries}
+          onAdd={addRound}
+          onDelete={deleteRound}
+          onClose={() => setShowManageRounds(false)}
+        />
+
         <TransactionFormModal
           show={showIncomeForm}
           type="income"
