@@ -250,124 +250,22 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
           </div>
         </div>
 
-        {/* Project Totals Summary - Responsive Table */}
-        {selectedProject === "all" && selectedYear === "all" && (
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden mb-6 xs:mb-8">
-            <div className="px-3 xs:px-4 sm:px-6 py-3 xs:py-4 border-b border-gray-200">
-              <h2 className="text-base xs:text-lg font-semibold text-gray-900">
-                Project Totals (All Years Combined)
-              </h2>
-            </div>
-
-            {/* Mobile Card View */}
-            <div className="block sm:hidden">
-              <div className="divide-y divide-gray-200">
-                {Object.entries(projectTotals).map(([projectName, totals]) => (
-                  <div key={projectName} className="p-4 space-y-3">
-                    <div className="font-medium text-gray-900 text-sm">{projectName}</div>
-                    <div className="grid grid-cols-2 gap-3 text-xs">
-                      <div>
-                        <span className="text-gray-500">Years:</span>
-                        <div className="font-medium">{totals.years.join(", ") || "No data"}</div>
-                      </div>
-                      <div>
-                        <span className="text-gray-500">Transactions:</span>
-                        <div className="font-medium">{totals.totalTransactions}</div>
-                      </div>
-                      <div>
-                        <span className="text-gray-500">Income:</span>
-                        <div className="font-medium text-green-600">{formatCurrency(totals.totalIncome)}</div>
-                      </div>
-                      <div>
-                        <span className="text-gray-500">Expenses:</span>
-                        <div className="font-medium text-red-600">{formatCurrency(totals.totalExpenses)}</div>
-                      </div>
-                      <div className="col-span-2">
-                        <span className="text-gray-500">Net Balance:</span>
-                        <div className={`font-medium text-base ${totals.balance >= 0 ? "text-green-600" : "text-red-600"}`}>
-                          {formatCurrency(totals.balance)}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Desktop Table View */}
-            <div className="hidden sm:block overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Project
-                    </th>
-                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Active Years
-                    </th>
-                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Total Income
-                    </th>
-                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Total Expenses
-                    </th>
-                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Net Balance
-                    </th>
-                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Transactions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {Object.entries(projectTotals).map(([projectName, totals], index) => (
-                    <tr key={projectName} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                      <td className="px-3 sm:px-6 py-4">
-                        <div className="text-sm font-medium text-gray-900">{projectName}</div>
-                      </td>
-                      <td className="px-3 sm:px-6 py-4">
-                        <div className="text-sm text-gray-900">{totals.years.join(", ") || "No data"}</div>
-                      </td>
-                      <td className="px-3 sm:px-6 py-4">
-                        <div className="text-sm font-medium text-green-600">{formatCurrency(totals.totalIncome)}</div>
-                      </td>
-                      <td className="px-3 sm:px-6 py-4">
-                        <div className="text-sm font-medium text-red-600">{formatCurrency(totals.totalExpenses)}</div>
-                      </td>
-                      <td className="px-3 sm:px-6 py-4">
-                        <div className={`text-sm font-medium ${totals.balance >= 0 ? "text-green-600" : "text-red-600"}`}>
-                          {formatCurrency(totals.balance)}
-                        </div>
-                      </td>
-                      <td className="px-3 sm:px-6 py-4">
-                        <div className="text-sm text-gray-900">{totals.totalTransactions}</div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
-        {/* Yearly Summary Table - Responsive */}
+        {/* Project Summary - one row per project; click a row to expand its year-by-year breakdown,
+            so the table grows with the number of projects, not projects × years. */}
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
           <div className="px-3 xs:px-4 sm:px-6 py-3 xs:py-4 border-b border-gray-200">
             <h2 className="text-base xs:text-lg font-semibold text-gray-900">
-              {selectedProject !== "all" || selectedYear !== "all"
-                ? "Filtered Results"
-                : "Project-wise Yearly Summary"}
+              {selectedYear === "all" ? "Project Summary (All Years)" : `Project Summary (${selectedYear})`}
             </h2>
-            {(selectedProject !== "all" || selectedYear !== "all") && (
-              <p className="text-xs xs:text-sm text-gray-600 mt-1">
-                {selectedProject !== "all" && `Project: ${selectedProject}`}
-                {selectedProject !== "all" && selectedYear !== "all" && " • "}
-                {selectedYear !== "all" && `Year: ${selectedYear}`}
-              </p>
-            )}
+            <p className="text-xs xs:text-sm text-gray-600 mt-1">
+              {selectedProject !== "all" && `Project: ${selectedProject} • `}
+              {selectedYear === "all"
+                ? "Click a project to see its year-by-year breakdown"
+                : `Showing each project's figures for ${selectedYear} only`}
+            </p>
           </div>
 
-          {filteredData.length === 0 ? (
+          {projectGroups.length === 0 ? (
             <div className="p-6 xs:p-8 text-center text-gray-500">
               <Calendar size={32} className="xs:w-12 xs:h-12 mx-auto mb-3 xs:mb-4 text-gray-400" />
               <h3 className="text-base xs:text-lg font-medium mb-2">No Data Available</h3>
@@ -376,36 +274,74 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
           ) : (
             <>
               {/* Mobile Card View */}
-              <div className="block sm:hidden">
-                <div className="divide-y divide-gray-200">
-                  {filteredData.map((item) => (
-                    <div key={`${item.project}-${item.year}`} className="p-4 space-y-3">
-                      <div className="flex justify-between items-start">
-                        <div className="font-medium text-gray-900 text-sm">{item.project}</div>
-                        <div className="text-sm font-medium text-gray-600">{item.year}</div>
-                      </div>
+              <div className="block sm:hidden divide-y divide-gray-200">
+                {projectGroups.map((group) => {
+                  const expandable = selectedYear === "all" && group.rows.length > 1;
+                  const isOpen = expandable && isExpanded(group.project);
+                  return (
+                    <div key={group.project} className="p-4 space-y-3">
+                      <button
+                        type="button"
+                        onClick={() => expandable && toggleProject(group.project)}
+                        className="w-full flex justify-between items-start gap-3 text-left"
+                        aria-expanded={expandable ? isOpen : undefined}
+                      >
+                        <div className="min-w-0">
+                          <div className="font-medium text-gray-900 text-sm">{group.project}</div>
+                          <div className="text-xs text-gray-500 mt-0.5">{formatYearRange(group.years)}</div>
+                        </div>
+                        {expandable && (
+                          <ChevronDown
+                            size={18}
+                            className={`flex-shrink-0 text-gray-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                          />
+                        )}
+                      </button>
                       <div className="grid grid-cols-2 gap-3 text-xs">
                         <div>
                           <span className="text-gray-500">Income:</span>
-                          <div className="font-medium text-green-600">{formatCurrency(item.totalIncome)}</div>
+                          <div className="font-medium text-green-600">{formatCurrency(group.totalIncome)}</div>
                         </div>
                         <div>
                           <span className="text-gray-500">Expenses:</span>
-                          <div className="font-medium text-red-600">{formatCurrency(item.totalExpenses)}</div>
+                          <div className="font-medium text-red-600">{formatCurrency(group.totalExpenses)}</div>
                         </div>
                         <div>
                           <span className="text-gray-500">Balance:</span>
-                          <div className={`font-medium ${item.balance >= 0 ? "text-green-600" : "text-red-600"}`}>
-                            {formatCurrency(item.balance)}
+                          <div className={`font-medium ${group.balance >= 0 ? "text-green-600" : "text-red-600"}`}>
+                            {formatCurrency(group.balance)}
                           </div>
                         </div>
                         <div>
                           <span className="text-gray-500">Transactions:</span>
-                          <div className="font-medium">{item.totalTransactions}</div>
+                          <div className="font-medium">{group.totalTransactions}</div>
                         </div>
                       </div>
+                      {isOpen && (
+                        <div className="rounded-md bg-gray-50 divide-y divide-gray-200 text-xs">
+                          {group.rows.map((item) => (
+                            <div key={item.year} className="grid grid-cols-4 gap-2 px-3 py-2">
+                              <span className="font-medium text-gray-700">{item.year}</span>
+                              <span className="text-green-600">{formatCurrency(item.totalIncome)}</span>
+                              <span className="text-red-600">{formatCurrency(item.totalExpenses)}</span>
+                              <span className={item.balance >= 0 ? "text-green-600" : "text-red-600"}>
+                                {formatCurrency(item.balance)}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  ))}
+                  );
+                })}
+                <div className="p-4 bg-gray-50 grid grid-cols-2 gap-3 text-xs font-semibold">
+                  <div className="col-span-2 text-sm text-gray-900">Total</div>
+                  <div className="text-green-600">{formatCurrency(grandTotals.income)}</div>
+                  <div className="text-red-600">{formatCurrency(grandTotals.expenses)}</div>
+                  <div className={grandTotals.balance >= 0 ? "text-green-600" : "text-red-600"}>
+                    {formatCurrency(grandTotals.balance)}
+                  </div>
+                  <div>{grandTotals.transactions}</div>
                 </div>
               </div>
 
@@ -418,48 +354,110 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                         Project
                       </th>
                       <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Year
+                        {selectedYear === "all" ? "Active Years" : "Year"}
                       </th>
-                      <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-3 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Income
                       </th>
-                      <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-3 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Expenses
                       </th>
-                      <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-3 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Balance
                       </th>
-                      <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-3 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Transactions
                       </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {filteredData.map((item, index) => (
-                      <tr key={`${item.project}-${item.year}`} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                        <td className="px-3 sm:px-6 py-4">
-                          <div className="text-sm font-medium text-gray-900">{item.project}</div>
-                        </td>
-                        <td className="px-3 sm:px-6 py-4">
-                          <div className="text-sm text-gray-900">{item.year}</div>
-                        </td>
-                        <td className="px-3 sm:px-6 py-4">
-                          <div className="text-sm font-medium text-green-600">{formatCurrency(item.totalIncome)}</div>
-                        </td>
-                        <td className="px-3 sm:px-6 py-4">
-                          <div className="text-sm font-medium text-red-600">{formatCurrency(item.totalExpenses)}</div>
-                        </td>
-                        <td className="px-3 sm:px-6 py-4">
-                          <div className={`text-sm font-medium ${item.balance >= 0 ? "text-green-600" : "text-red-600"}`}>
-                            {formatCurrency(item.balance)}
-                          </div>
-                        </td>
-                        <td className="px-3 sm:px-6 py-4">
-                          <div className="text-sm text-gray-900">{item.totalTransactions}</div>
-                        </td>
-                      </tr>
-                    ))}
+                    {projectGroups.map((group) => {
+                      const expandable = selectedYear === "all" && group.rows.length > 1;
+                      const isOpen = expandable && isExpanded(group.project);
+                      return (
+                        <Fragment key={group.project}>
+                          <tr
+                            onClick={() => expandable && toggleProject(group.project)}
+                            className={`${expandable ? "cursor-pointer hover:bg-indigo-50" : ""} ${isOpen ? "bg-indigo-50/60" : ""}`}
+                            aria-expanded={expandable ? isOpen : undefined}
+                          >
+                            <td className="px-3 sm:px-6 py-4">
+                              <div className="flex items-center gap-2 text-sm font-medium text-gray-900">
+                                {expandable ? (
+                                  <ChevronRight
+                                    size={16}
+                                    className={`flex-shrink-0 text-gray-400 transition-transform ${isOpen ? "rotate-90" : ""}`}
+                                  />
+                                ) : (
+                                  <span className="w-4 flex-shrink-0" />
+                                )}
+                                {group.project}
+                              </div>
+                            </td>
+                            <td className="px-3 sm:px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
+                              {formatYearRange(group.years)}
+                            </td>
+                            <td className="px-3 sm:px-6 py-4 text-sm font-medium text-green-600 text-right whitespace-nowrap">
+                              {formatCurrency(group.totalIncome)}
+                            </td>
+                            <td className="px-3 sm:px-6 py-4 text-sm font-medium text-red-600 text-right whitespace-nowrap">
+                              {formatCurrency(group.totalExpenses)}
+                            </td>
+                            <td
+                              className={`px-3 sm:px-6 py-4 text-sm font-medium text-right whitespace-nowrap ${
+                                group.balance >= 0 ? "text-green-600" : "text-red-600"
+                              }`}
+                            >
+                              {formatCurrency(group.balance)}
+                            </td>
+                            <td className="px-3 sm:px-6 py-4 text-sm text-gray-900 text-right">{group.totalTransactions}</td>
+                          </tr>
+                          {isOpen &&
+                            group.rows.map((item) => (
+                              <tr key={item.year} className="bg-gray-50 text-xs">
+                                <td className="px-3 sm:px-6 py-2" />
+                                <td className="px-3 sm:px-6 py-2 font-medium text-gray-700">{item.year}</td>
+                                <td className="px-3 sm:px-6 py-2 text-green-600 text-right whitespace-nowrap">
+                                  {formatCurrency(item.totalIncome)}
+                                </td>
+                                <td className="px-3 sm:px-6 py-2 text-red-600 text-right whitespace-nowrap">
+                                  {formatCurrency(item.totalExpenses)}
+                                </td>
+                                <td
+                                  className={`px-3 sm:px-6 py-2 text-right whitespace-nowrap ${
+                                    item.balance >= 0 ? "text-green-600" : "text-red-600"
+                                  }`}
+                                >
+                                  {formatCurrency(item.balance)}
+                                </td>
+                                <td className="px-3 sm:px-6 py-2 text-gray-700 text-right">{item.totalTransactions}</td>
+                              </tr>
+                            ))}
+                        </Fragment>
+                      );
+                    })}
                   </tbody>
+                  <tfoot className="bg-gray-100 border-t-2 border-gray-200">
+                    <tr className="text-sm font-semibold">
+                      <td className="px-3 sm:px-6 py-3 text-gray-900" colSpan={2}>
+                        Total ({projectGroups.length} project{projectGroups.length !== 1 ? "s" : ""})
+                      </td>
+                      <td className="px-3 sm:px-6 py-3 text-green-600 text-right whitespace-nowrap">
+                        {formatCurrency(grandTotals.income)}
+                      </td>
+                      <td className="px-3 sm:px-6 py-3 text-red-600 text-right whitespace-nowrap">
+                        {formatCurrency(grandTotals.expenses)}
+                      </td>
+                      <td
+                        className={`px-3 sm:px-6 py-3 text-right whitespace-nowrap ${
+                          grandTotals.balance >= 0 ? "text-green-600" : "text-red-600"
+                        }`}
+                      >
+                        {formatCurrency(grandTotals.balance)}
+                      </td>
+                      <td className="px-3 sm:px-6 py-3 text-gray-900 text-right">{grandTotals.transactions}</td>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
             </>
