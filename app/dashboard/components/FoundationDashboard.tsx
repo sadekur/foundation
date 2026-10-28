@@ -20,8 +20,9 @@ import TransactionFormModal from "./TransactionFormModal";
 import YearlySummaryScreen from "./YearlySummaryScreen";
 import GalleryScreen from "./GalleryScreen";
 import { getProjectYears, calculateTotals, calculateProjectTotals, getAvailableYears } from "@/lib/utils/projectStats";
+import { calculateRoundSummaries, findRoundForDate } from "@/lib/utils/projectRounds";
 import { formatTaka } from "@/lib/utils/formatTaka";
-import type { Projects, TransactionFormData, TransactionType } from "@/types";
+import type { ProjectRound, Projects, TransactionFormData, TransactionType } from "@/types";
 
 interface FoundationDashboardProps {
   user: User;
