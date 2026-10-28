@@ -58,7 +58,7 @@ const TransactionTable = ({
   if (totalItems === 0 && !isLoading) {
     return (
       <div className="text-center py-8 text-gray-500">
-        <p>No {type} records found for this year</p>
+        <p>No {type} records found for this period</p>
         <p className="text-sm mt-2">
           Add your first {type} entry using the button above
         </p>

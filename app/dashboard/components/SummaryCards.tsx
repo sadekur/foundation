@@ -5,10 +5,10 @@ interface SummaryCardsProps {
   totalIncome: number;
   totalExpenses: number;
   balance: number;
-  year: number;
+  period: string; // "2026", or a round name like "2nd time"
 }
 
-const SummaryCards = ({ totalIncome, totalExpenses, balance, year }: SummaryCardsProps) => {
+const SummaryCards = ({ totalIncome, totalExpenses, balance, period }: SummaryCardsProps) => {
   const getBalanceColor = (balance: number) => {
     if (balance > 0) return "text-green-600";
     if (balance < 0) return "text-red-600";
@@ -30,7 +30,7 @@ const SummaryCards = ({ totalIncome, totalExpenses, balance, year }: SummaryCard
         <div className="flex items-start xs:items-center justify-between gap-3">
           <div className="flex-1 min-w-0">
             <h3 className="text-xs xs:text-sm font-medium text-gray-500 mb-1 xs:mb-2 leading-tight">
-              Total Income ({year})
+              Total Income ({period})
             </h3>
             <p className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold text-green-600 break-words leading-tight">
               {formatTaka(totalIncome)}
@@ -54,7 +54,7 @@ const SummaryCards = ({ totalIncome, totalExpenses, balance, year }: SummaryCard
         <div className="flex items-start xs:items-center justify-between gap-3">
           <div className="flex-1 min-w-0">
             <h3 className="text-xs xs:text-sm font-medium text-gray-500 mb-1 xs:mb-2 leading-tight">
-              Total Expenses ({year})
+              Total Expenses ({period})
             </h3>
             <p className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold text-red-600 break-words leading-tight">
               {formatTaka(totalExpenses)}
@@ -81,7 +81,7 @@ const SummaryCards = ({ totalIncome, totalExpenses, balance, year }: SummaryCard
         <div className="flex items-start xs:items-center justify-between gap-3">
           <div className="flex-1 min-w-0">
             <h3 className="text-xs xs:text-sm font-medium text-gray-500 mb-1 xs:mb-2 leading-tight">
-              Net Balance ({year})
+              Net Balance ({period})
             </h3>
             <p className={`text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold break-words leading-tight ${getBalanceColor(balance)}`}>
               {formatTaka(balance)}
@@ -113,7 +113,7 @@ const SummaryCards = ({ totalIncome, totalExpenses, balance, year }: SummaryCard
           <div className="space-y-1 text-xs text-blue-700">
             <div className="flex justify-between">
               <span>Period:</span>
-              <span className="font-medium">{year}</span>
+              <span className="font-medium">{period}</span>
             </div>
             <div className="flex justify-between">
               <span>Status:</span>
