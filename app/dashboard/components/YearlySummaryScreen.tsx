@@ -296,7 +296,10 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                       >
                         <div className="min-w-0">
                           <div className="font-medium text-gray-900 text-sm">{group.project}</div>
-                          <div className="text-xs text-gray-500 mt-0.5">{formatYearRange(group.years)}</div>
+                          <div className="text-xs text-gray-500 mt-0.5">
+                            {formatYearRange(group.years)}
+                            {rounds.length > 0 && ` · ${rounds.length} rounds`}
+                          </div>
                         </div>
                         {expandable && (
                           <ChevronDown
