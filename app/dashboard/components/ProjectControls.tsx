@@ -10,6 +10,7 @@ interface ProjectControlsProps {
   projects: Projects;
   availableYears: number[];
   onAddProject: () => void;
+  onImportProjects: () => void;
   onShowYearlySummary: () => void;
   onShowGallery: () => void;
   onEditProject: () => void;
