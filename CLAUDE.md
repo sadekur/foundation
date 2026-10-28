@@ -96,7 +96,8 @@ Both route folders have a `layout.tsx` that sets `robots: { index: false, follow
     [projectName]: {
       income:   { [year]: { [transactionId]: { id, date, donor, amount, year, createdAt } } },
       expenses: { [year]: { [transactionId]: { ... } } },
-      createdAt, createdYear
+      createdAt, createdYear,
+      rounds?: [ { id, name, startDate } ]   // optional — see "Rounds" below
     }
   },
   lastUpdated
