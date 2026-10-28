@@ -31,6 +31,7 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
   const [projects, setProjects] = useState<Projects>({});
   const [newProjectName, setNewProjectName] = useState("");
   const [showAddProject, setShowAddProject] = useState(false);
+  const [showImportProjects, setShowImportProjects] = useState(false);
   const [showEditProject, setShowEditProject] = useState(false);
   const [editProjectName, setEditProjectName] = useState("");
   const [showDeleteProjectConfirm, setShowDeleteProjectConfirm] = useState(false);
