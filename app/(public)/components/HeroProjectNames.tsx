@@ -14,7 +14,7 @@ interface PillPlacement {
 
 // `left`/`right` centre a 13rem pill in the gutter beside the 48rem text column, so at xl and up the
 // names stay clear of the Qur'anic verse at every width. They have no effect below xl, where the
-// pills are static and wrap into a row under the buttons. Index-aligned with `home.heroProjects`.
+// pills are static and wrap into a row under the buttons. Index-aligned with `about.projects`.
 const GUTTER = "calc((100% - 48rem) / 4 - 6.5rem)";
 
 const PLACEMENTS: PillPlacement[] = [

@@ -15,6 +15,13 @@ export const siteConfig = {
   },
   facebook: { label: "As Salsabil-foundation", handle: "/As Salsabil-foundation", href: "" },
   blogUrl: "https://salsabilfoundation.blogspot.com/",
+  // Public copies of the root As-Salsabil Foundation.pdf, shown on the About page.
+  brochure: {
+    pdf: "/as-salsabil-foundation-brochure.pdf",
+    preview: "/as-salsabil-foundation-brochure-preview.jpg",
+    previewWidth: 910,
+    previewHeight: 1287,
+  },
   // Surah Fatir (35), ayah 29 — verified against quran.com/en/fatir/29.
   // Arabic script doesn't change between the bn/en language toggle.
   quranVerseArabic:

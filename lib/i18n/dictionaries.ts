@@ -15,7 +15,6 @@ export interface HomeDictionary {
   heroSubtitle: string;
   heroQuote: string;
   heroQuoteSource: string;
-  heroProjects: string[];
   ctaAbout: string;
   ctaProjects: string;
   ctaContact: string;
@@ -26,10 +25,29 @@ export interface HomeDictionary {
 
 export interface AboutDictionary {
   title: string;
+  introTitle: string;
   intro: string[];
   missionTitle: string;
   missionBody: string;
+  nameTitle: string;
+  nameBody: string;
+  valuesTitle: string;
   values: { title: string; body: string }[];
+  // The brochure's five project groups. Broader than `projects.categories`, and also the names
+  // that bounce around the home hero.
+  projectsTitle: string;
+  projects: { title: string; points: string[] }[];
+  projectsNote: string;
+  supportTitle: string;
+  supportBody: string[];
+  supportDua: string;
+  supportTagline: string;
+  ctaProjects: string;
+  ctaContact: string;
+  brochureTitle: string;
+  brochureBody: string;
+  brochureView: string;
+  brochureDownload: string;
 }
 
 export interface ProjectFaqItem {
@@ -213,13 +231,6 @@ export const dictionaries: Record<Language, Dictionary> = {
       heroQuote:
         "“যারা আল্লাহর কিতাব পাঠ করে, সালাত কায়েম করে এবং আমি যা দিয়েছি তা থেকে গোপনে ও প্রকাশ্যে ব্যয় করে, তারা এমন ব্যবসার আশা করে যাতে কখনও লোকসান হবে না।”",
       heroQuoteSource: "সূরা ফাতির, আয়াত ২৯",
-      heroProjects: [
-        "যাকাত, সাদাকাহ ও দরিদ্র সহায়তা",
-        "দ্বীনি শিক্ষা ও দাওয়াহ",
-        "মসজিদ, মাদরাসা ও দ্বীনি প্রতিষ্ঠান",
-        "পানি, চিকিৎসা ও পরিবেশ",
-        "পুনর্বাসন ও কর্মসংস্থান",
-      ],
       ctaAbout: "আমাদের সম্পর্কে জানুন",
       ctaProjects: "আমাদের প্রকল্পসমূহ",
       ctaContact: "যোগাযোগ করুন",
@@ -243,13 +254,19 @@ export const dictionaries: Record<Language, Dictionary> = {
     },
     about: {
       title: "আমাদের সম্পর্কে",
+      introTitle: "আমাদের পরিচিতি",
       intro: [
-        "সালসাবিল জান্নাতের একটি ঝর্ণাধারা। ফরজ ইবাদাত-আমলের পাশাপাশি সাদাকায়ে জারিয়াহ এমন একটি আমল, যার প্রতিদান মানুষ মৃত্যুর পরেও পেতে থাকে।",
-        "এই প্রতিদান দুনিয়া ও আখিরাতে অর্জনের লক্ষ্যে ২০২১ সালের ফেব্রুয়ারি মাসে “আস্-সালসাবিল ফাউন্ডেশন” প্রতিষ্ঠিত হয়েছে, যার কার্যক্রম সম্পূর্ণ অ-রাজনৈতিক।",
+        "মানবজীবনের সর্বোত্তম অর্জন হলো আল্লাহর সন্তুষ্টি লাভ। আর এমন কল্যাণকর কাজে অংশগ্রহণ করা, যার সুফল মানুষের মাঝে দীর্ঘদিন অব্যাহত থাকে, হতে পারে আখিরাতের পাথেয় অর্জনের একটি গুরুত্বপূর্ণ মাধ্যম।",
+        "এই প্রত্যয়কে সামনে রেখে ২০২১ সালের ফেব্রুয়ারি মাসে প্রতিষ্ঠিত হয় আস্-সালসাবিল ফাউন্ডেশন। পবিত্র কুরআন ও সহীহ সুন্নাহর নির্দেশনা অনুসরণ করে দ্বীনি শিক্ষা বিস্তার, বিশুদ্ধ আকীদাহ ও মানহাজের দাওয়াহ, অসহায় মানুষের সহযোগিতা এবং জনকল্যাণমূলক সাদকায়ে জারিয়ামূলক কার্যক্রম পরিচালনা করাই আমাদের অঙ্গীকার।",
+        "আমরা বিশ্বাস করি, দ্বীনের সঠিক শিক্ষা ও মানুষের কল্যাণে আন্তরিক প্রচেষ্টা একটি সুন্দর, সচেতন ও কল্যাণমুখী সমাজ গঠনে ভূমিকা রাখতে পারে। আলহামদুলিল্লাহ, এই লক্ষ্যেই আমাদের কার্যক্রম পরিচালিত হচ্ছে।",
       ],
-      missionTitle: "লক্ষ্য ও উদ্দেশ্য",
+      missionTitle: "আমাদের লক্ষ্য ও উদ্দেশ্য",
       missionBody:
-        "মৃত্যুর পরেও মানুষের আমলনামায় যুক্ত হবে এমন দীর্ঘস্থায়ী সাদাকায়ে জারিয়ামূলক প্রকল্প সামনে রেখে “আস্-সালসাবিল ফাউন্ডেশন” পরিচালিত হচ্ছে।",
+        "কুরআন ও সুন্নাহর আলোকে দ্বীনি জ্ঞান বিস্তার, বিশুদ্ধ আকীদাহ ও সহীহ মানহাজের দাওয়াহ প্রচার এবং মানবকল্যাণমূলক দীর্ঘস্থায়ী প্রকল্প বাস্তবায়নের মাধ্যমে আল্লাহর সন্তুষ্টি অর্জন করা।",
+      nameTitle: "সালসাবিল নামের তাৎপর্য",
+      nameBody:
+        "সালসাবিল জান্নাতের একটি ঝর্ণাধারা। ফরজ ইবাদাত-আমলের পাশাপাশি সাদাকায়ে জারিয়াহ এমন একটি আমল, যার প্রতিদান মানুষ মৃত্যুর পরেও পেতে থাকে।",
+      valuesTitle: "আমাদের মূলনীতি",
       values: [
         {
           title: "রাসুলের (সা.) সুন্নাহ অনুসরণ",
@@ -264,6 +281,68 @@ export const dictionaries: Record<Language, Dictionary> = {
           body: "সাদাকা/সাদাকায়ে জারিয়ার অর্থ সঠিকভাবে ও সুষ্ঠুভাবে নির্ধারিত খাতে ব্যয় করা হয়।",
         },
       ],
+      projectsTitle: "আমাদের চলমান ও পরিকল্পিত প্রকল্পসমূহ",
+      projects: [
+        {
+          title: "যাকাত, সাদাকাহ ও দরিদ্র সহায়তা",
+          points: [
+            "শরিয়াহসম্মত খাতে যাকাত বণ্টন",
+            "দরিদ্র, অসহায় ও মিসকিনদের সহায়তা",
+            "ইয়াতীম ও দরিদ্র তালিবে ইলমের পৃষ্ঠপোষকতা",
+          ],
+        },
+        {
+          title: "দ্বীনি শিক্ষা ও দাওয়াহ",
+          points: [
+            "মসজিদভিত্তিক শিশু ও বয়স্কদের কুরআন ও দ্বীনি শিক্ষা",
+            "মহিলাদের কুরআন ও দ্বীনি শিক্ষার ব্যবস্থা",
+            "দ্বীনি দারস, ইসলামী সেমিনার ও শিক্ষামূলক আয়োজন",
+            "বিশুদ্ধ আকীদাহ ও সহীহ মানহাজভিত্তিক দাওয়াহ",
+            "ইসলামী বই, লিফলেট ও দাওয়াহ-সামগ্রী প্রকাশ ও বিতরণ",
+          ],
+        },
+        {
+          title: "মসজিদ, মাদরাসা ও দ্বীনি প্রতিষ্ঠান",
+          points: [
+            "মসজিদ ও মাদরাসা নির্মাণে সহযোগিতা",
+            "দ্বীনি শিক্ষা ও পাঠাগার কার্যক্রমের প্রসার",
+            "বিনামূল্যে ইসলামী বই ও শিক্ষাসামগ্রী বিতরণ",
+          ],
+        },
+        {
+          title: "পানি, চিকিৎসা ও পরিবেশ",
+          points: [
+            "টিউবওয়েল স্থাপনের মাধ্যমে নিরাপদ পানির ব্যবস্থা",
+            "বিনামূল্যে চিকিৎসাসেবা কার্যক্রম",
+            "বৃক্ষরোপণ ও পরিবেশবান্ধব উদ্যোগ",
+          ],
+        },
+        {
+          title: "পুনর্বাসন ও কর্মসংস্থান",
+          points: [
+            "অসুস্থ, দরিদ্র ও অসহায় পরিবারের প্রয়োজনভিত্তিক সহায়তা",
+            "সামর্থ্য ও প্রয়োজন অনুযায়ী ঘর নির্মাণে সহযোগিতা",
+            "গৃহপালিত পশু বিতরণ ও কর্মসংস্থানের সুযোগ সৃষ্টিতে সহায়তা",
+            "জরুরি প্রয়োজনে এককালীন সহযোগিতা",
+          ],
+        },
+      ],
+      projectsNote:
+        "এ ছাড়া সাদাকাহ ও সাদকায়ে জারিয়ার অন্তর্ভুক্ত অন্যান্য কল্যাণমূলক কার্যক্রমও সামর্থ্য ও প্রয়োজন অনুযায়ী পরিচালিত হবে, ইনশাআল্লাহ।",
+      supportTitle: "আপনার সহযোগিতায় এগিয়ে যাবে কল্যাণের এই উদ্যোগ",
+      supportBody: [
+        "একটি আন্তরিক সহযোগিতা হতে পারে কারও দ্বীনি শিক্ষা অর্জনের অবলম্বন, একটি অসহায় পরিবারের স্বস্তি কিংবা দীর্ঘস্থায়ী কল্যাণের কোনো উদ্যোগের সহায়ক।",
+        "আসুন, দোয়া, পরামর্শ, স্বেচ্ছাসেবা ও আর্থিক সহযোগিতার মাধ্যমে আস্-সালসাবিল ফাউন্ডেশনের দ্বীনি ও মানবকল্যাণমূলক কার্যক্রমকে এগিয়ে নিতে পাশে থাকি।",
+      ],
+      supportDua:
+        "আল্লাহ তাআলা আমাদের সকলের নেক আমল কবুল করুন, দান-সাদাকাহতে বরকত দান করুন এবং এই প্রচেষ্টাকে তাঁর সন্তুষ্টি অর্জনের মাধ্যম হিসেবে কবুল করুন। আমীন।",
+      supportTagline: "দ্বীনি খেদমত ও মানবকল্যাণে—একটি আন্তরিক অঙ্গীকার।",
+      ctaProjects: "আমাদের প্রকল্পসমূহ দেখুন",
+      ctaContact: "যোগাযোগ করুন",
+      brochureTitle: "আমাদের ব্রোশিউর",
+      brochureBody: "ফাউন্ডেশনের পরিচিতি ও প্রকল্পসমূহের বিবরণ এক পাতায়।",
+      brochureView: "পিডিএফ দেখুন",
+      brochureDownload: "ডাউনলোড করুন",
     },
     projects: {
       title: "আমাদের পরিকল্পিত প্রকল্প সমূহ",
@@ -547,13 +626,6 @@ export const dictionaries: Record<Language, Dictionary> = {
       heroQuote:
         "“Those who recite the Book of Allah, establish prayer, and spend out of what We have provided for them, secretly and openly, can hope for a trade that will never perish.”",
       heroQuoteSource: "Surah Fatir, Verse 29",
-      heroProjects: [
-        "Zakat, Sadaqah & Poverty Relief",
-        "Islamic Education & Dawah",
-        "Mosques, Madrasas & Islamic Institutions",
-        "Water, Medical Care & Environment",
-        "Rehabilitation & Employment",
-      ],
       ctaAbout: "Learn About Us",
       ctaProjects: "Our Projects",
       ctaContact: "Get in Touch",
@@ -577,13 +649,19 @@ export const dictionaries: Record<Language, Dictionary> = {
     },
     about: {
       title: "About Us",
+      introTitle: "Who We Are",
       intro: [
-        "Salsabil is a spring in Paradise. Alongside obligatory worship, sadaqah jariyah (ongoing charity) is a deed whose reward keeps reaching a person even after death.",
-        "To pursue that reward in this life and the next, As-Salsabil Foundation was established in February 2021. Its work is entirely non-political.",
+        "The greatest achievement of a human life is earning the pleasure of Allah. Taking part in good works whose benefit continues among people for a long time can be an important means of gathering provision for the Hereafter.",
+        "With this conviction, As-Salsabil Foundation was established in February 2021. Following the guidance of the Holy Qur'an and the authentic Sunnah, our commitment is to spread Islamic education, carry out dawah on sound aqeedah and manhaj, support people in need, and run public-welfare sadaqah jariyah work.",
+        "We believe that sound teaching of the deen and sincere effort for the good of people can help build a beautiful, aware and caring society. Alhamdulillah, our work is carried out toward this goal.",
       ],
-      missionTitle: "Aim & Objectives",
+      missionTitle: "Our Aim & Objectives",
       missionBody:
-        "As-Salsabil Foundation is run with long-lasting sadaqah jariyah projects in mind — ones that keep adding to a person's record of good deeds even after death.",
+        "To earn the pleasure of Allah by spreading Islamic knowledge in the light of the Qur'an and Sunnah, calling to sound aqeedah and authentic manhaj, and carrying out long-lasting projects for the welfare of humanity.",
+      nameTitle: "The Meaning of Salsabil",
+      nameBody:
+        "Salsabil is a spring in Paradise. Alongside obligatory worship, sadaqah jariyah (ongoing charity) is a deed whose reward keeps reaching a person even after death.",
+      valuesTitle: "Our Principles",
       values: [
         {
           title: "Following the Prophet's Sunnah",
@@ -598,6 +676,68 @@ export const dictionaries: Record<Language, Dictionary> = {
           body: "Sadaqah and sadaqah jariyah funds are directed correctly and responsibly to their intended purpose.",
         },
       ],
+      projectsTitle: "Our Ongoing & Planned Projects",
+      projects: [
+        {
+          title: "Zakat, Sadaqah & Poverty Relief",
+          points: [
+            "Distributing zakat to its Shariah-approved recipients",
+            "Supporting the poor, the helpless and the needy",
+            "Sponsoring orphans and students of knowledge from poor families",
+          ],
+        },
+        {
+          title: "Islamic Education & Dawah",
+          points: [
+            "Mosque-based Qur'an and Islamic education for children and adults",
+            "Qur'an and Islamic education for women",
+            "Islamic lessons, seminars and educational programs",
+            "Dawah based on sound aqeedah and authentic manhaj",
+            "Publishing and distributing Islamic books, leaflets and dawah materials",
+          ],
+        },
+        {
+          title: "Mosques, Madrasas & Islamic Institutions",
+          points: [
+            "Supporting the construction of mosques and madrasas",
+            "Expanding Islamic education and library programs",
+            "Distributing Islamic books and study materials free of charge",
+          ],
+        },
+        {
+          title: "Water, Medical Care & Environment",
+          points: [
+            "Providing safe water by installing tube wells",
+            "Free medical care programs",
+            "Tree planting and eco-friendly initiatives",
+          ],
+        },
+        {
+          title: "Rehabilitation & Employment",
+          points: [
+            "Needs-based support for sick, poor and helpless families",
+            "Helping to build homes, according to need and available means",
+            "Distributing livestock and helping to create work opportunities",
+            "One-time assistance in urgent need",
+          ],
+        },
+      ],
+      projectsNote:
+        "Other charitable work that falls under sadaqah and sadaqah jariyah will also be carried out according to our means and the need, insha'Allah.",
+      supportTitle: "With Your Support, This Work of Goodness Moves Forward",
+      supportBody: [
+        "One sincere contribution can support someone's Islamic education, bring relief to a family in need, or help a long-lasting charitable effort.",
+        "Let us stand together to carry the foundation's Islamic and humanitarian work forward through dua, advice, volunteering and financial support.",
+      ],
+      supportDua:
+        "May Allah accept the good deeds of us all, bless our charity, and accept this effort as a means of earning His pleasure. Ameen.",
+      supportTagline: "For the service of the deen and the welfare of humanity: a sincere commitment.",
+      ctaProjects: "See Our Projects",
+      ctaContact: "Get in Touch",
+      brochureTitle: "Our Brochure",
+      brochureBody: "An introduction to the foundation and its projects on one page (in Bengali).",
+      brochureView: "View PDF",
+      brochureDownload: "Download",
     },
     projects: {
       title: "Our Planned Projects",

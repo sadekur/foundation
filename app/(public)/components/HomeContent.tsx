@@ -15,7 +15,7 @@ const PILLAR_ICONS = [HandCoins, BookOpenText, HeartHandshake];
 export const HomeContent = () => {
   const { language } = useLanguage();
   const dictionary = getDictionary(language);
-  const { home } = dictionary;
+  const { home, about } = dictionary;
 
   return (
     <div>
@@ -71,7 +71,7 @@ export const HomeContent = () => {
           </FadeIn>
         </div>
 
-        <HeroProjectNames names={home.heroProjects} />
+        <HeroProjectNames names={about.projects.map((project) => project.title)} />
         <HeroWave />
       </section>
 
