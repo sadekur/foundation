@@ -26,7 +26,7 @@ const PLACEMENTS: PillPlacement[] = [
 ];
 
 const StarIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-3 h-3 shrink-0 text-amber-400" fill="currentColor" aria-hidden="true">
+  <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 shrink-0 text-amber-400" fill="currentColor" aria-hidden="true">
     <rect x="5" y="5" width="14" height="14" />
     <rect x="5" y="5" width="14" height="14" transform="rotate(45 12 12)" />
   </svg>
