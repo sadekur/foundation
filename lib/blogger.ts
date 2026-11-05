@@ -46,7 +46,25 @@ const BLOG_REVALIDATE_SECONDS = 300;
 
 const EXCERPT_LENGTH = 160;
 
-const stripHtml = (html: string) => html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+const HTML_ENTITIES: Record<string, string> = {
+  nbsp: " ",
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+};
+
+// One pass, so "&amp;nbsp;" correctly becomes the literal text "&nbsp;". Unknown names are left as they are.
+const decodeHtmlEntities = (text: string) =>
+  text.replace(/&(?:#(\d+)|#x([\da-f]+)|(\w+));/gi, (entity, decimal, hex, name) => {
+    if (name) return HTML_ENTITIES[name.toLowerCase()] ?? entity;
+    const codePoint = decimal ? Number(decimal) : parseInt(hex, 16);
+    return codePoint <= 0x10ffff ? String.fromCodePoint(codePoint) : entity;
+  });
+
+const stripHtml = (html: string) =>
+  decodeHtmlEntities(html.replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
 
 const truncate = (text: string, length: number) =>
   text.length > length ? `${text.slice(0, length).trimEnd()}…` : text;
