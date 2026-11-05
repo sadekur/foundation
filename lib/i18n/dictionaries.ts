@@ -20,7 +20,15 @@ export interface HomeDictionary {
   ctaContact: string;
   introTitle: string;
   introBody: string;
-  pillars: { title: string; body: string }[];
+  aboutLink: string;
+  projectsTitle: string;
+  projectsIntro: string;
+  projectsViewAll: string;
+  activitiesTitle: string;
+  activitiesIntro: string;
+  activitiesViewAll: string;
+  supportWays: string[];
+  donateLabel: string;
 }
 
 export interface AboutDictionary {
@@ -237,20 +245,15 @@ export const dictionaries: Record<Language, Dictionary> = {
       introTitle: "পরিচিতি",
       introBody:
         "কুরআন মাজীদের উপরোক্ত আয়াতটি স্লোগান করে ২০২১ সালের ফেব্রুয়ারি মাসে “আস্-সালসাবিল ফাউন্ডেশন” প্রতিষ্ঠিত হয়েছে। যার মাধ্যমে রাসুল (সাল্লাল্লাহু আলাইহি ওয়া সাল্লাম) এর সুন্নাহ ও নির্দেশনা অনুসরণ করে সাদাকায়ে জারিয়ামূলক প্রকল্পসমূহ পরিচালিত হয়, যা সম্পূর্ণ অ-রাজনৈতিক।",
-      pillars: [
-        {
-          title: "যাকাত প্রকল্প",
-          body: "কুরআন মাজীদে বর্ণিত যাকাতের ৮টি খাতে অগ্রাধিকার ভিত্তিতে সঠিকভাবে বণ্টন।",
-        },
-        {
-          title: "সাদাকায়ে জারিয়ামূলক প্রকল্প",
-          body: "দ্বীনি শিক্ষা, ইয়াতিম ও গরিব তালিবুল ইলমের পৃষ্ঠপোষকতা, চিকিৎসা ও কূপ স্থাপন, মসজিদ-মাদরাসা নির্মাণ সহযোগিতা।",
-        },
-        {
-          title: "পুনর্বাসন প্রকল্প",
-          body: "দুস্থ ও অসহায়দের গৃহ নির্মাণ, গৃহপালিত পশু বিতরণ ও কর্মসংস্থানের ব্যবস্থা।",
-        },
-      ],
+      aboutLink: "আমাদের সম্পর্কে আরও জানুন",
+      projectsTitle: "আমাদের প্রকল্পসমূহ",
+      projectsIntro: "দ্বীনি শিক্ষা থেকে শুরু করে মানবকল্যাণ পর্যন্ত আমাদের চলমান ও পরিকল্পিত কয়েকটি কার্যক্রম।",
+      projectsViewAll: "সকল প্রকল্প দেখুন",
+      activitiesTitle: "সাম্প্রতিক কার্যক্রম",
+      activitiesIntro: "আমাদের কার্যক্রম ও আয়োজনের সর্বশেষ প্রতিবেদন।",
+      activitiesViewAll: "সকল কার্যক্রম দেখুন",
+      supportWays: ["দোয়া", "পরামর্শ", "স্বেচ্ছাসেবা", "আর্থিক সহযোগিতা"],
+      donateLabel: "বিকাশ / নগদ",
     },
     about: {
       title: "আমাদের সম্পর্কে",
@@ -632,20 +635,15 @@ export const dictionaries: Record<Language, Dictionary> = {
       introTitle: "Introduction",
       introBody:
         "Taking the verse above as its motto, As-Salsabil Foundation was established in February 2021. Following the Sunnah and guidance of the Prophet (peace be upon him), it runs ongoing charitable (sadaqah jariyah) projects, and its work is entirely non-political.",
-      pillars: [
-        {
-          title: "Zakat Project",
-          body: "Correct, priority-based distribution of Zakat across the eight categories named in the Qur'an.",
-        },
-        {
-          title: "Sadaqah Jariyah Projects",
-          body: "Deeni education, support for orphan and poor students of Islamic knowledge, medical camps and tube-wells, and support for mosque/madrasa construction.",
-        },
-        {
-          title: "Rehabilitation Project",
-          body: "Housing for the distressed and poor, livestock distribution, and setting up livelihoods.",
-        },
-      ],
+      aboutLink: "Learn more about us",
+      projectsTitle: "Our Projects",
+      projectsIntro: "Some of our ongoing and planned work, from Islamic education to the welfare of humanity.",
+      projectsViewAll: "View all projects",
+      activitiesTitle: "Recent Activities",
+      activitiesIntro: "The latest reports from our work and events.",
+      activitiesViewAll: "View all activities",
+      supportWays: ["Dua", "Advice", "Volunteering", "Financial support"],
+      donateLabel: "bKash / Nagad",
     },
     about: {
       title: "About Us",

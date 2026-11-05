@@ -27,7 +27,7 @@ Firebase (Auth + Firestore) remains the backend for the admin half, unchanged fr
 ### Route map
 
 ```
-/                      Home (public)
+/                      Home — hero, introduction, six featured projects, the 3 latest blog posts, and a support section (public)
 /about                 About Us — introduction, aim, principles, the brochure's five project groups, ways to help, and the brochure PDF (public)
 /projects              Our Projects — alternating showcase cards, one per category, plus a Gallery (uploaded media + YouTube playlists) (public)
 /projects/[slug]       One project category's detail page — static params, one per entry in dictionaries.ts's `projects.categories` (public)
@@ -62,6 +62,7 @@ Each page is a **Server Component** (`page.tsx`) that exports Next's `metadata` 
 - `app/(public)/components/` — `Navbar` (nav links + `LanguageToggle`, its own file here), `Footer`, and `HomeContent` (the group-root page's content, colocated here since it lives directly in `app/(public)/`). `Navbar`/`Footer` are shared by every page in the group via `app/(public)/layout.tsx`.
 - `app/(public)/about/components/AboutContent.tsx`, `app/(public)/activities/components/ActivitiesContent.tsx`, `app/(public)/contact/components/ContactContent.tsx` — one content component per nested route, colocated with its own `page.tsx`. `app/(public)/projects/components/` has more than one file — see Gallery below.
 - `siteConfig.brochure` points at the About page's public copy of the brochure (`public/as-salsabil-foundation-brochure.pdf`) and its preview image. They're copies of the root `As-Salsabil Foundation.pdf`, so regenerate both when the brochure changes.
+- `app/(public)/components/ActivityCard.tsx` — one blog post card, shared by Our Activities and the home page. `app/(public)/page.tsx` fetches the 3 latest posts with `getBlogPosts()`; the home page hides that section when the feed is empty.
 - `app/(public)/components/HeroProjectNames.tsx` and `HeroWave.tsx` — the home hero's looping CSS animations (keyframes in `tailwind.config.js`, off under `prefers-reduced-motion`). The bouncing names come from `about.projects`, the brochure's five project groups (also listed on the About page), which are a separate list from the ten `projects.categories`. `HeroProjectNames`' `PLACEMENTS` is index-aligned with that list: at `xl` and up the pills sit in the gutters beside the text column so they never cross the Qur'anic verse; below `xl` they wrap into a row under the buttons.
 - `app/(public)/components/FadeIn.tsx` and `SectionDivider.tsx` — small presentational helpers shared across public pages: `FadeIn` is a scroll-reveal wrapper (`IntersectionObserver` + CSS transition, no animation library); `SectionDivider` is a decorative rule used between sections.
 
