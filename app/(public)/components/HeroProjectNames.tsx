@@ -7,7 +7,7 @@ interface HeroProjectNamesProps {
 
 interface PillPlacement {
   position: CSSProperties;
-  className?: string;
+  className: string;
   durationSeconds: number;
   delaySeconds: number;
 }
@@ -18,11 +18,11 @@ interface PillPlacement {
 const GUTTER = "calc((100% - 48rem) / 4 - 6.5rem)";
 
 const PLACEMENTS: PillPlacement[] = [
-  { position: { top: "20%", left: GUTTER }, durationSeconds: 6, delaySeconds: 0 },
-  { position: { top: "22%", right: GUTTER }, durationSeconds: 6.8, delaySeconds: -2.2 },
-  { position: { top: "62%", left: GUTTER }, durationSeconds: 7.2, delaySeconds: -4.1 },
-  { position: { top: "60%", right: GUTTER }, durationSeconds: 6.4, delaySeconds: -1.3 },
-  { position: { bottom: "5rem", left: "50%" }, className: "xl:-translate-x-1/2", durationSeconds: 7, delaySeconds: -3.2 },
+  { position: { top: "20%", left: GUTTER }, className: "xl:w-52", durationSeconds: 6, delaySeconds: 0 },
+  { position: { top: "22%", right: GUTTER }, className: "xl:w-52", durationSeconds: 6.8, delaySeconds: -2.2 },
+  { position: { top: "62%", left: GUTTER }, className: "xl:w-52", durationSeconds: 7.2, delaySeconds: -4.1 },
+  { position: { top: "60%", right: GUTTER }, className: "xl:w-52", durationSeconds: 6.4, delaySeconds: -1.3 },
+  { position: { bottom: "5rem", left: "50%" }, className: "xl:w-max xl:-translate-x-1/2", durationSeconds: 7, delaySeconds: -3.2 },
 ];
 
 const StarIcon = () => (
@@ -44,7 +44,7 @@ export const HeroProjectNames = ({ names }: HeroProjectNamesProps) => (
         return (
           <li
             key={name}
-            className={`xl:absolute xl:w-52 xl:flex xl:justify-center ${placement.className ?? ""}`}
+            className={`xl:absolute xl:flex xl:justify-center ${placement.className}`}
             style={placement.position}
           >
             <span
