@@ -7,6 +7,8 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { siteConfig } from "@/lib/siteConfig";
 import { SectionDivider } from "./SectionDivider";
 import { FadeIn } from "./FadeIn";
+import { HeroProjectNames } from "./HeroProjectNames";
+import { HeroWave } from "./HeroWave";
 
 const PILLAR_ICONS = [HandCoins, BookOpenText, HeartHandshake];
 
