@@ -69,14 +69,8 @@ export const HomeContent = () => {
           </FadeIn>
         </div>
 
-        <svg
-          className="block w-full text-stone-50"
-          viewBox="0 0 1440 48"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path fill="currentColor" d="M0,32 C240,0 480,48 720,32 C960,16 1200,48 1440,16 L1440,48 L0,48 Z" />
-        </svg>
+        <HeroProjectNames names={home.heroProjects} />
+        <HeroWave />
       </section>
 
       <section className="bg-stone-50">
