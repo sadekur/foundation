@@ -82,7 +82,7 @@ const ProjectControls = ({
                           transition-all duration-200 hover:border-gray-400"
               >
                 <option value="">Select a project</option>
-                {Object.keys(projects).map((project) => (
+                {Object.keys(projects).sort((a, b) => a.localeCompare(b)).map((project) => (
                   <option key={project} value={project}>{project}</option>
                 ))}
               </select>

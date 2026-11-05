@@ -34,7 +34,10 @@ Firebase (Auth + Firestore) remains the backend for the admin half, unchanged fr
 /activities            Our Activities — posts pulled from the foundation's Blogger blog, link out to the original post (public)
 /contact               Contact Us — office, phone/bKash/Nagad, email, socials (public)
 /salsabilownerlogin    Admin login
-/dashboard             Admin dashboard (auth-gated): donation/expense tracker + Gallery manager
+/dashboard             Redirects to /dashboard/finance
+/dashboard/finance     Admin: donation/expense tracker (auth-gated by app/dashboard/components/AdminShell)
+/dashboard/summary     Admin: yearly summary across all projects (read-only)
+/dashboard/gallery     Admin: Gallery manager
 /api/contact           POST — sends the Contact Us form via email (public, server-only)
 /api/activities        GET — paginates the Our Activities Blogger feed (public, server-only proxy)
 /api/youtube/playlists GET — proxies the YouTube Data API v3 for the Gallery's playlists tab (public, server-only proxy)
@@ -86,11 +89,11 @@ Each page is a **Server Component** (`page.tsx`) that exports Next's `metadata` 
 
 Firebase Auth is client-only, so both routes are Client Components that call `onAuthStateChanged` directly and redirect with `next/navigation`'s `useRouter().replace(...)`:
 - `/salsabilownerlogin` → already authenticated? redirect to `/dashboard`. Otherwise render `LoginScreen` (`app/salsabilownerlogin/components/LoginScreen.tsx`).
-- `/dashboard` → not authenticated? redirect to `/salsabilownerlogin`. Otherwise render `FoundationDashboard` (`app/dashboard/components/FoundationDashboard.tsx`).
+- `/dashboard/*` → `app/dashboard/layout.tsx` wraps every admin route in `AdminShell` (`app/dashboard/components/AdminShell.tsx`), which does the auth gate (not authenticated? redirect to `/salsabilownerlogin`), renders the sidebar (a slide-in menu below `lg`) and exposes the user through `useAdminUser()`.
 
 Both route folders have a `layout.tsx` that sets `robots: { index: false, follow: false }` and `export const dynamic = "force-dynamic"` — Client Component pages can't export `metadata` themselves, and `force-dynamic` stops Next from statically prerendering these auth-gated pages at build time (prerendering them requires calling Firebase's `getAuth()` during the build, which throws `auth/invalid-api-key` if env vars aren't present in that build environment). `public/robots.txt` also disallows both paths.
 
-**`app/dashboard/components/FoundationDashboard.tsx`** is the old `App.jsx` (`FoundationApp`) body, unchanged in behavior: all state lives here (`useState`/`useEffect`, no state library), and every other dashboard component (also under `app/dashboard/components/`) is presentational, receiving data/callbacks as props. Besides the donation/expense tracker, it also renders `GalleryScreen` as a full-screen view toggled by `showGallery` state, the same pattern used by `showYearlySummary` (not a route — see below).
+**`app/dashboard/components/FoundationDashboard.tsx`** (rendered by `/dashboard/finance`) is the old `App.jsx` (`FoundationApp`) body: all tracker state lives here (`useState`/`useEffect`, no state library), and the tracker's other components (also under `app/dashboard/components/`) are presentational, receiving data/callbacks as props. **It renders nothing until the first real snapshot arrives (`dataLoaded`):** every save overwrites the whole document, so saving from the empty initial state would erase all projects. Don't add a write path that can run before that. The selected project is kept in `localStorage`, since it's lost when navigating between admin routes and Firestore map keys have no stable order.
 
 **Data model**: the entire foundation's donation/expense data is a single Firestore document at `foundations/as-salsabil`, shaped as:
 ```
@@ -122,7 +125,7 @@ The Gallery has its own, separate Firestore collection, `gallery` (one document 
   3. Deletion (`GalleryScreen`'s trash button → `DeleteConfirmationModal`) calls `POST /api/gallery/delete` (also bearer-token-authenticated) to remove the Cloudinary asset by `publicId`, then deletes the Firestore doc client-side — the API route only ever touches Cloudinary, never Firestore. Bulk delete ("Select" mode in the grid) reuses that same single-item path, one item at a time in sequence; items that fail stay selected for retry, and changing the project filter clears the selection.
   Both `/api/gallery/*` routes are the only server code in the app holding a secret that Firestore security rules can't protect (the Cloudinary API secret), so they're gated by `lib/firebaseAdmin.ts`'s `verifyAdminRequest()`, which verifies the bearer token via the Firebase Admin SDK. The app has exactly one admin and no role system anywhere (matches `/salsabilownerlogin`'s "logged in == admin" model), so any valid token from this Firebase project is sufficient — no extra role/claim check.
 
-**`app/dashboard/components/`** — besides `FoundationDashboard`, notable pieces: `Header`/`Footer` are the *admin* chrome (distinct from `app/(public)/components/Navbar`/`Footer`), and `galleryProjectOptions.ts` (the Gallery's project-tag choices) lives here too. `TransactionSection` owns search/sort/pagination (10 items/page) over the transactions object it's handed for the current project+year+type; `DeleteConfirmationModal` is reused for per-transaction, per-project, *and* per-gallery-item deletes. `YearlySummaryScreen` is a separate full-screen view (toggled via `showYearlySummary` state inside `FoundationDashboard`, not a route) that aggregates totals across all years/projects.
+**`app/dashboard/components/`** — besides `FoundationDashboard`, notable pieces: `AdminShell`/`Footer` are the *admin* chrome (distinct from `app/(public)/components/Navbar`/`Footer`), `PageHeader` is each admin page's title row, and `galleryProjectOptions.ts` (the Gallery's project-tag choices) lives here too. `TransactionSection` owns search/sort/pagination (10 items/page) over the transactions object it's handed for the current project+year+type; `DeleteConfirmationModal` is reused for per-transaction, per-project, *and* per-gallery-item deletes. `YearlySummaryScreen` (rendered by `/dashboard/summary`, which has its own read-only `onSnapshot`) aggregates totals across all years/projects.
 
 **`app/salsabilownerlogin/components/LoginScreen.tsx`** — the login form; only used by that one route.
 

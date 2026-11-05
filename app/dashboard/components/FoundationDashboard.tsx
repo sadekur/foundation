@@ -21,6 +21,16 @@ import { calculateRoundSummaries, findRoundForDate } from "@/lib/utils/projectRo
 import { formatTaka } from "@/lib/utils/formatTaka";
 import type { ProjectRound, Projects, TransactionFormData, TransactionType } from "@/types";
 
+const SELECTED_PROJECT_KEY = "as-salsabil-admin-project";
+
+const readSavedProject = () => {
+  try {
+    return window.localStorage.getItem(SELECTED_PROJECT_KEY);
+  } catch {
+    return null;
+  }
+};
+
 const FoundationDashboard = () => {
   const [currentProject, setCurrentProject] = useState("");
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -70,7 +80,13 @@ const FoundationDashboard = () => {
           // Functional update — no stale closure on currentProject
           setCurrentProject((prev) => {
             if (!prev && Object.keys(loadedProjects).length > 0) {
-              const firstProject = Object.keys(loadedProjects)[0];
+              // Firestore doesn't keep map keys in a stable order, so reopen the last project
+              // rather than whichever comes first.
+              const savedProject = readSavedProject();
+              const firstProject =
+                savedProject && loadedProjects[savedProject]
+                  ? savedProject
+                  : Object.keys(loadedProjects).sort((a, b) => a.localeCompare(b))[0];
               const projectYears = getProjectYears(loadedProjects[firstProject]);
               if (projectYears.length > 0) {
                 setSelectedYear(Math.max(...projectYears));
@@ -90,6 +106,15 @@ const FoundationDashboard = () => {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    if (!currentProject) return;
+    try {
+      window.localStorage.setItem(SELECTED_PROJECT_KEY, currentProject);
+    } catch {
+      // Storage unavailable — the project just won't be remembered.
+    }
+  }, [currentProject]);
 
   const saveToFirebase = async (updatedProjects: Projects) => {
     try {
