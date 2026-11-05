@@ -1,26 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
 import { Loader } from "lucide-react";
-import { db } from "@/lib/firebase";
-import type { Projects } from "@/types";
+import { useFoundationProjects } from "../components/useFoundationProjects";
 import YearlySummaryScreen from "../components/YearlySummaryScreen";
 
 export default function SummaryPage() {
-  const [projects, setProjects] = useState<Projects | null>(null);
-  const [loadFailed, setLoadFailed] = useState(false);
-
-  useEffect(() => {
-    return onSnapshot(
-      doc(db, "foundations", "as-salsabil"),
-      (docSnap) => {
-        if (!docSnap.exists() && docSnap.metadata.fromCache) return;
-        setProjects(docSnap.data()?.projects ?? {});
-      },
-      () => setLoadFailed(true)
-    );
-  }, []);
+  const { projects, loadFailed } = useFoundationProjects();
 
   if (loadFailed) {
     return <p className="py-16 text-center text-sm text-red-600">Couldn&apos;t load the data. Please refresh the page.</p>;

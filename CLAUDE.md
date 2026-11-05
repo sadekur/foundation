@@ -34,7 +34,7 @@ Firebase (Auth + Firestore) remains the backend for the admin half, unchanged fr
 /activities            Our Activities — posts pulled from the foundation's Blogger blog, link out to the original post (public)
 /contact               Contact Us — office, phone/bKash/Nagad, email, socials (public)
 /salsabilownerlogin    Admin login
-/dashboard             Redirects to /dashboard/finance
+/dashboard             Admin: overview of all projects, totals and recent transactions (read-only)
 /dashboard/finance     Admin: donation/expense tracker (auth-gated by app/dashboard/components/AdminShell)
 /dashboard/summary     Admin: yearly summary across all projects (read-only)
 /dashboard/gallery     Admin: Gallery manager
@@ -125,7 +125,7 @@ The Gallery has its own, separate Firestore collection, `gallery` (one document 
   3. Deletion (`GalleryScreen`'s trash button → `DeleteConfirmationModal`) calls `POST /api/gallery/delete` (also bearer-token-authenticated) to remove the Cloudinary asset by `publicId`, then deletes the Firestore doc client-side — the API route only ever touches Cloudinary, never Firestore. Bulk delete ("Select" mode in the grid) reuses that same single-item path, one item at a time in sequence; items that fail stay selected for retry, and changing the project filter clears the selection.
   Both `/api/gallery/*` routes are the only server code in the app holding a secret that Firestore security rules can't protect (the Cloudinary API secret), so they're gated by `lib/firebaseAdmin.ts`'s `verifyAdminRequest()`, which verifies the bearer token via the Firebase Admin SDK. The app has exactly one admin and no role system anywhere (matches `/salsabilownerlogin`'s "logged in == admin" model), so any valid token from this Firebase project is sufficient — no extra role/claim check.
 
-**`app/dashboard/components/`** — besides `FoundationDashboard`, notable pieces: `AdminShell`/`Footer` are the *admin* chrome (distinct from `app/(public)/components/Navbar`/`Footer`), `PageHeader` is each admin page's title row, and `galleryProjectOptions.ts` (the Gallery's project-tag choices) lives here too. `TransactionSection` owns search/sort/pagination (10 items/page) over the transactions object it's handed for the current project+year+type; `DeleteConfirmationModal` is reused for per-transaction, per-project, *and* per-gallery-item deletes. `YearlySummaryScreen` (rendered by `/dashboard/summary`, which has its own read-only `onSnapshot`) aggregates totals across all years/projects.
+**`app/dashboard/components/`** — besides `FoundationDashboard`, notable pieces: `AdminShell`/`Footer` are the *admin* chrome (distinct from `app/(public)/components/Navbar`/`Footer`), `PageHeader` is each admin page's title row, `useFoundationProjects` is the read-only live data hook behind the Overview and Yearly Summary pages, and `galleryProjectOptions.ts` (the Gallery's project-tag choices) lives here too. `TransactionSection` owns search/sort/pagination (10 items/page) over the transactions object it's handed for the current project+year+type; `DeleteConfirmationModal` is reused for per-transaction, per-project, *and* per-gallery-item deletes. `YearlySummaryScreen` (rendered by `/dashboard/summary`, which has its own read-only `onSnapshot`) aggregates totals across all years/projects.
 
 **`app/salsabilownerlogin/components/LoginScreen.tsx`** — the login form; only used by that one route.
 

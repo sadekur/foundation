@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { onAuthStateChanged, signOut, type User } from "firebase/auth";
-import { BarChart3, ExternalLink, Images, LogOut, Menu, Wallet, X, type LucideIcon } from "lucide-react";
+import { BarChart3, ExternalLink, Images, LayoutDashboard, LogOut, Menu, Wallet, X, type LucideIcon } from "lucide-react";
 import { auth } from "@/lib/firebase";
 import LoadingScreen from "@/components/LoadingScreen";
 import Footer from "./Footer";
@@ -16,6 +16,10 @@ interface NavGroup {
 }
 
 const NAV_GROUPS: NavGroup[] = [
+  {
+    label: "General",
+    items: [{ href: "/dashboard", label: "Overview", icon: LayoutDashboard }],
+  },
   {
     label: "Finance",
     items: [

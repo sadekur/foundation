@@ -6,6 +6,7 @@ import { Loader } from "lucide-react";
 import { db } from "@/lib/firebase";
 
 import PageHeader from "./PageHeader";
+import { readSelectedProject, saveSelectedProject } from "./selectedProject";
 import SyncIndicator from "./SyncIndicator";
 import ProjectControls, { type ViewMode } from "./ProjectControls";
 import SummaryCards from "./SummaryCards";
@@ -20,16 +21,6 @@ import { getProjectYears, calculateTotals, calculateProjectTotals, getAvailableY
 import { calculateRoundSummaries, findRoundForDate } from "@/lib/utils/projectRounds";
 import { formatTaka } from "@/lib/utils/formatTaka";
 import type { ProjectRound, Projects, TransactionFormData, TransactionType } from "@/types";
-
-const SELECTED_PROJECT_KEY = "as-salsabil-admin-project";
-
-const readSavedProject = () => {
-  try {
-    return window.localStorage.getItem(SELECTED_PROJECT_KEY);
-  } catch {
-    return null;
-  }
-};
 
 const FoundationDashboard = () => {
   const [currentProject, setCurrentProject] = useState("");
@@ -82,7 +73,7 @@ const FoundationDashboard = () => {
             if (!prev && Object.keys(loadedProjects).length > 0) {
               // Firestore doesn't keep map keys in a stable order, so reopen the last project
               // rather than whichever comes first.
-              const savedProject = readSavedProject();
+              const savedProject = readSelectedProject();
               const firstProject =
                 savedProject && loadedProjects[savedProject]
                   ? savedProject
@@ -108,12 +99,7 @@ const FoundationDashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (!currentProject) return;
-    try {
-      window.localStorage.setItem(SELECTED_PROJECT_KEY, currentProject);
-    } catch {
-      // Storage unavailable — the project just won't be remembered.
-    }
+    if (currentProject) saveSelectedProject(currentProject);
   }, [currentProject]);
 
   const saveToFirebase = async (updatedProjects: Projects) => {

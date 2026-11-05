@@ -1,7 +1,7 @@
 // Pure helpers for deriving stats from the { income, expenses } project data shape.
 // Kept free of component state so they're reusable and easy to memoize.
 
-import type { Projects, ProjectData, YearTransactions } from "@/types";
+import type { Projects, ProjectData, Transaction, TransactionType, YearTransactions } from "@/types";
 
 export const getProjectYearKeys = (projectData?: ProjectData): Set<string> =>
   new Set([
@@ -83,3 +83,28 @@ export const getAvailableYears = (projects: Projects, currentProject: string): n
   const projectYears = getProjectYears(projects[currentProject]);
   return projectYears.length > 0 ? projectYears : [new Date().getFullYear()];
 };
+
+export interface RecentTransaction {
+  project: string;
+  type: TransactionType;
+  transaction: Transaction;
+}
+
+const toTime = (date: string) => new Date(date).getTime() || 0;
+
+// Newest first across every project; transactions on the same date go by when they were entered.
+export const getRecentTransactions = (projects: Projects, limit: number): RecentTransaction[] =>
+  Object.entries(projects)
+    .flatMap(([project, data]) =>
+      (["income", "expenses"] as const).flatMap((type) =>
+        Object.values(data[type] || {}).flatMap((year) =>
+          Object.values(year).map((transaction) => ({ project, type, transaction }))
+        )
+      )
+    )
+    .sort(
+      (a, b) =>
+        toTime(b.transaction.date) - toTime(a.transaction.date) ||
+        toTime(b.transaction.createdAt) - toTime(a.transaction.createdAt)
+    )
+    .slice(0, limit);
