@@ -20,6 +20,24 @@ module.exports = {
       'wide': '1400px',     // Wide screens
     },
     extend: {
+      keyframes: {
+        // A soft double bounce that settles, then rests before repeating.
+        'hero-bounce': {
+          '0%, 84%, 100%': { transform: 'translateY(0)' },
+          '28%': { transform: 'translateY(-14px)' },
+          '50%': { transform: 'translateY(0)' },
+          '68%': { transform: 'translateY(-6px)' },
+        },
+        'hero-wave': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        'hero-bounce': 'hero-bounce 6s ease-in-out infinite',
+        'hero-wave': 'hero-wave 28s linear infinite',
+        'hero-wave-slow': 'hero-wave 40s linear infinite',
+      },
       fontFamily: {
         amiri: ['var(--font-amiri)', 'serif'],
         bengali: ['var(--font-bengali)', 'system-ui', 'sans-serif'],
