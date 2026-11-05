@@ -15,6 +15,7 @@ export interface HomeDictionary {
   heroSubtitle: string;
   heroQuote: string;
   heroQuoteSource: string;
+  heroProjects: string[];
   ctaAbout: string;
   ctaProjects: string;
   ctaContact: string;
