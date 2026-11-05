@@ -108,9 +108,9 @@ const SummaryCards = ({ totalIncome, totalExpenses, balance, period }: SummaryCa
       {/* Mobile-Only Additional Info Cards */}
       <div className="xs:hidden col-span-1 space-y-3">
         {/* Quick Stats Card */}
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-3 border border-blue-200">
-          <h4 className="text-xs font-medium text-blue-800 mb-2">Quick Stats</h4>
-          <div className="space-y-1 text-xs text-blue-700">
+        <div className="bg-gradient-to-r from-emerald-50 to-emerald-50 rounded-lg p-3 border border-emerald-200">
+          <h4 className="text-xs font-medium text-emerald-800 mb-2">Quick Stats</h4>
+          <div className="space-y-1 text-xs text-emerald-700">
             <div className="flex justify-between">
               <span>Period:</span>
               <span className="font-medium">{period}</span>

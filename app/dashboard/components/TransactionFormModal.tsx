@@ -44,7 +44,7 @@ const TransactionFormModal = ({
               type="date"
               value={formData.date}
               onChange={(e) => handleInputChange("date", e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
               required
             />
           </div>
@@ -58,7 +58,7 @@ const TransactionFormModal = ({
               value={formData.donor}
               onChange={(e) => handleInputChange("donor", e.target.value)}
               placeholder={isIncome ? "Enter donor name" : "Enter expense description"}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
               required
             />
           </div>
@@ -70,7 +70,7 @@ const TransactionFormModal = ({
               value={formData.amount}
               onChange={(e) => handleInputChange("amount", e.target.value)}
               placeholder="Enter amount"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
               min="0"
               step="0.01"
               required

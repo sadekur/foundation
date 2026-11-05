@@ -1,14 +1,14 @@
 "use client";
 
-import { ArrowLeft, Calendar, ChevronDown, ChevronRight } from "lucide-react";
+import { Calendar, ChevronDown, ChevronRight } from "lucide-react";
 import { Fragment, useState } from "react";
 import { formatTaka } from "@/lib/utils/formatTaka";
 import { calculateRoundSummaries, formatRoundDates, type RoundSummary } from "@/lib/utils/projectRounds";
 import type { Projects } from "@/types";
+import PageHeader from "./PageHeader";
 
 interface YearlySummaryScreenProps {
   projects: Projects;
-  onBack: () => void;
 }
 
 interface SummaryRow {
@@ -44,7 +44,7 @@ const formatYearRange = (years: number[]) => {
   return consecutive ? `${first}–${last} · ${sorted.length} yrs` : `${sorted.join(", ")}`;
 };
 
-const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => {
+const YearlySummaryScreen = ({ projects }: YearlySummaryScreenProps) => {
   const [selectedProject, setSelectedProject] = useState("all");
   const [selectedYear, setSelectedYear] = useState("all");
   const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
@@ -154,31 +154,8 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
   const allProjects = [...new Set(summaryData.map((item) => item.project))].sort();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header - Responsive */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="w-full max-w-none sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-3 xs:py-4 sm:py-6">
-          <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-3 xs:gap-4">
-            <div className="flex flex-col xs:flex-row xs:items-center gap-2 xs:gap-4">
-              <button
-                onClick={onBack}
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors
-                          p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500
-                          w-fit"
-              >
-                <ArrowLeft size={16} className="xs:w-5 xs:h-5" />
-                <span className="text-sm xs:text-base">Back to Dashboard</span>
-              </button>
-              <h1 className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
-                Foundation Yearly Summary
-              </h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content Container */}
-      <div className="w-full max-w-none sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-4 xs:py-6 sm:py-8">
+    <>
+      <PageHeader title="Yearly Summary" description="Totals across all projects and years." />
 
         {/* Filters - Responsive */}
         <div className="bg-white rounded-lg shadow-sm p-3 xs:p-4 sm:p-6 mb-4 xs:mb-6">
@@ -192,7 +169,7 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                 onChange={(e) => setSelectedProject(e.target.value)}
                 className="w-full p-2 xs:p-2.5 sm:p-3 text-sm xs:text-base
                           border border-gray-300 rounded-md xs:rounded-lg
-                          focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                          focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500
                           transition-all duration-200"
               >
                 <option value="all">All Projects</option>
@@ -211,7 +188,7 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                 onChange={(e) => setSelectedYear(e.target.value)}
                 className="w-full p-2 xs:p-2.5 sm:p-3 text-sm xs:text-base
                           border border-gray-300 rounded-md xs:rounded-lg
-                          focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                          focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500
                           transition-all duration-200"
               >
                 <option value="all">All Years</option>
@@ -245,13 +222,13 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
           </div>
           <div className="bg-white rounded-lg shadow-sm p-3 xs:p-4 sm:p-6">
             <h3 className="text-xs xs:text-sm font-medium text-gray-500 mb-1 xs:mb-2">Total Projects</h3>
-            <p className="text-lg xs:text-xl sm:text-2xl font-bold text-blue-600">
+            <p className="text-lg xs:text-xl sm:text-2xl font-bold text-emerald-600">
               {Object.keys(projects).length}
             </p>
           </div>
           <div className="bg-white rounded-lg shadow-sm p-3 xs:p-4 sm:p-6 xs:col-span-2 sm:col-span-3 lg:col-span-1">
             <h3 className="text-xs xs:text-sm font-medium text-gray-500 mb-1 xs:mb-2">Total Transactions</h3>
-            <p className="text-lg xs:text-xl sm:text-2xl font-bold text-purple-600">
+            <p className="text-lg xs:text-xl sm:text-2xl font-bold text-emerald-600">
               {grandTotals.transactions}
             </p>
           </div>
@@ -415,7 +392,7 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
                         <Fragment key={group.project}>
                           <tr
                             onClick={() => expandable && toggleProject(group.project)}
-                            className={`${expandable ? "cursor-pointer hover:bg-indigo-50" : ""} ${isOpen ? "bg-indigo-50/60" : ""}`}
+                            className={`${expandable ? "cursor-pointer hover:bg-emerald-50" : ""} ${isOpen ? "bg-emerald-50/60" : ""}`}
                             aria-expanded={expandable ? isOpen : undefined}
                           >
                             <td className="px-3 sm:px-6 py-4">
@@ -530,8 +507,7 @@ const YearlySummaryScreen = ({ projects, onBack }: YearlySummaryScreenProps) => 
             </>
           )}
         </div>
-      </div>
-    </div>
+    </>
   );
 };
 

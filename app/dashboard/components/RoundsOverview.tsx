@@ -23,7 +23,7 @@ const RoundsOverview = ({ roundSummaries, selectedRoundId, onSelectRound }: Roun
             type="button"
             onClick={() => onSelectRound(summary.round.id)}
             className={`text-left rounded-lg border p-3 sm:p-4 transition-colors ${
-              isSelected ? "border-indigo-500 bg-indigo-50 ring-1 ring-indigo-500" : "border-gray-200 hover:border-indigo-300 hover:bg-gray-50"
+              isSelected ? "border-emerald-500 bg-emerald-50 ring-1 ring-emerald-500" : "border-gray-200 hover:border-emerald-300 hover:bg-gray-50"
             }`}
             aria-pressed={isSelected}
           >

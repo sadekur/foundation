@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, Check, CheckSquare, EyeOff, ImagePlus, Tag, Trash2 } from "lucide-react";
+import { Check, CheckSquare, EyeOff, ImagePlus, Tag, Trash2 } from "lucide-react";
 import type { User } from "firebase/auth";
 import {
   addDoc,
@@ -20,6 +20,7 @@ import type { GalleryItem } from "@/types";
 import AddGalleryItemModal from "./AddGalleryItemModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import GalleryProjectChecklist from "./GalleryProjectChecklist";
+import PageHeader from "./PageHeader";
 import { GALLERY_PROJECT_OPTIONS, getGalleryProjectTitle } from "./galleryProjectOptions";
 
 // "all" shows everything, "" shows untagged (general) items, anything else is a project slug.
@@ -29,10 +30,9 @@ const HIDDEN_FROM_MAIN = "hidden-from-main";
 
 interface GalleryScreenProps {
   user: User;
-  onBack: () => void;
 }
 
-const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
+const GalleryScreen = ({ user }: GalleryScreenProps) => {
   const [items, setItems] = useState<GalleryItem[]>([]);
   const [showAddModal, setShowAddModal] = useState(false);
   // One array for both the single trash button ([item]) and bulk delete (the selection).
@@ -185,36 +185,22 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white shadow-sm border-b">
-        <div className="w-full max-w-none sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-3 xs:py-4 sm:py-6">
-          <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-3 xs:gap-4">
-            <div className="flex flex-col xs:flex-row xs:items-center gap-2 xs:gap-4">
-              <button
-                onClick={onBack}
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors
-                          p-2 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500
-                          w-fit"
-              >
-                <ArrowLeft size={16} className="xs:w-5 xs:h-5" />
-                <span className="text-sm xs:text-base">Back to Dashboard</span>
-              </button>
-              <h1 className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
-                Gallery
-              </h1>
-            </div>
-            <button
-              onClick={() => setShowAddModal(true)}
-              className="flex items-center justify-center gap-2 bg-purple-600 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-purple-700 transition-colors w-fit"
-            >
-              <ImagePlus size={16} />
-              Add Media
-            </button>
-          </div>
-        </div>
-      </div>
+    <>
+      <PageHeader
+        title="Gallery"
+        description="Photos and videos shown on the website."
+        actions={
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-emerald-700 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-emerald-800 transition-colors"
+          >
+            <ImagePlus size={16} />
+            Add Media
+          </button>
+        }
+      />
 
-      <div className="w-full max-w-none sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-4 xs:py-6 sm:py-8">
+      <div>
         <div className="mb-4 flex flex-col xs:flex-row xs:items-center gap-2">
           <label htmlFor="gallery-project-filter" className="text-sm font-medium text-gray-700">
             Show:
@@ -227,7 +213,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
               // Don't let "Delete selected" reach items the new filter hides.
               setSelectedIds(new Set());
             }}
-            className="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-indigo-500 w-full xs:w-auto"
+            className="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-emerald-500 w-full xs:w-auto"
           >
             <option value={ALL_PROJECTS}>All media ({items.length})</option>
             <option value="">General only — no project</option>
@@ -328,7 +314,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
                     </button>
                     <button
                       onClick={() => openAssign(item)}
-                      className="absolute top-1 left-1 bg-white/90 text-indigo-600 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
+                      className="absolute top-1 left-1 bg-white/90 text-emerald-600 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
                       aria-label="Change projects"
                       title="Change projects"
                     >
@@ -341,7 +327,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
                   if (titles.length === 0) return null;
                   return (
                     <span
-                      className="absolute top-1 left-7 right-7 bg-indigo-600/85 text-white text-[9px] xs:text-[10px] px-1.5 py-0.5 rounded truncate"
+                      className="absolute top-1 left-7 right-7 bg-emerald-600/85 text-white text-[9px] xs:text-[10px] px-1.5 py-0.5 rounded truncate"
                       title={titles.join(", ")}
                     >
                       {titles.length > 1 ? `${titles[0]} +${titles.length - 1}` : titles[0]}
@@ -391,7 +377,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
               <button
                 onClick={handleAssignConfirm}
                 disabled={isAssigning}
-                className="flex-1 bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-60"
+                className="flex-1 bg-emerald-600 text-white p-3 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-60"
               >
                 {isAssigning ? "Saving…" : "Save"}
               </button>
@@ -423,7 +409,7 @@ const GalleryScreen = ({ user, onBack }: GalleryScreenProps) => {
               : `Are you sure you want to delete this ${deleteTargets[0]?.type ?? "item"}? This action cannot be undone.`
         }
       />
-    </div>
+    </>
   );
 };
 

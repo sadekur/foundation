@@ -33,7 +33,7 @@ const GalleryProjectChecklist = ({
           checked={inMainGallery}
           onChange={(e) => onMainGalleryChange(e.target.checked)}
           disabled={disabled}
-          className="h-4 w-4 accent-indigo-600"
+          className="h-4 w-4 accent-emerald-600"
         />
         General (main gallery slider)
       </label>
@@ -45,7 +45,7 @@ const GalleryProjectChecklist = ({
               checked={selected.includes(option.slug)}
               onChange={() => toggle(option.slug)}
               disabled={disabled}
-              className="h-4 w-4 accent-indigo-600"
+              className="h-4 w-4 accent-emerald-600"
             />
             {option.title}
           </label>

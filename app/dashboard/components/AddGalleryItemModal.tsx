@@ -243,7 +243,7 @@ const AddGalleryItemModal = ({
               accept="image/*,video/*"
               multiple
               onChange={(e) => handleFilesSelected(e.target.files)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
               required
               disabled={uploading}
             />
@@ -270,7 +270,7 @@ const AddGalleryItemModal = ({
               value={caption}
               onChange={(e) => setCaption(e.target.value)}
               placeholder="Enter a caption"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
               disabled={uploading}
             />
           </div>
@@ -293,7 +293,7 @@ const AddGalleryItemModal = ({
                   {(q.status === "uploading" || q.status === "done") && (
                     <div className="w-full bg-gray-200 rounded-full h-1.5">
                       <div
-                        className="bg-indigo-600 h-1.5 rounded-full transition-all"
+                        className="bg-emerald-600 h-1.5 rounded-full transition-all"
                         style={{ width: `${q.progress}%` }}
                       />
                     </div>
@@ -307,7 +307,7 @@ const AddGalleryItemModal = ({
             <button
               type="submit"
               disabled={queue.length === 0 || uploading}
-              className="flex-1 bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="flex-1 bg-emerald-600 text-white p-3 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {uploading ? "Uploading…" : queue.length > 1 ? `Upload ${queue.length} files` : "Upload"}
             </button>

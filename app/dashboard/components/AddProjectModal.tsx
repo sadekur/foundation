@@ -43,7 +43,7 @@ const AddProjectModal = ({
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
               placeholder="Enter project name"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
               autoFocus
               required
             />
@@ -54,7 +54,7 @@ const AddProjectModal = ({
             <select
               value={selectedYear}
               onChange={(e) => setSelectedYear(Number(e.target.value))}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
             >
               {yearOptions.map((year) => (
                 <option key={year} value={year}>
@@ -67,7 +67,7 @@ const AddProjectModal = ({
           <div className="flex gap-3">
             <button
               type="submit"
-              className="flex-1 bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition-colors"
+              className="flex-1 bg-emerald-600 text-white p-3 rounded-lg hover:bg-emerald-700 transition-colors"
             >
               Add Project
             </button>

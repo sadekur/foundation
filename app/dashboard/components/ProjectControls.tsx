@@ -1,4 +1,4 @@
-import { BarChart3, Images, Layers, Plus, Pencil, Trash2 } from "lucide-react";
+import { Layers, Plus, Pencil, Trash2 } from "lucide-react";
 import { getProjectYearKeys } from "@/lib/utils/projectStats";
 import { formatRoundDates, type RoundSummary } from "@/lib/utils/projectRounds";
 import type { Projects } from "@/types";
@@ -18,8 +18,6 @@ interface ProjectControlsProps {
   selectedRoundId: string;
   setSelectedRoundId: (roundId: string) => void;
   onAddProject: () => void;
-  onShowYearlySummary: () => void;
-  onShowGallery: () => void;
   onEditProject: () => void;
   onDeleteProject: () => void;
   onManageRounds: () => void;
@@ -38,8 +36,6 @@ const ProjectControls = ({
   selectedRoundId,
   setSelectedRoundId,
   onAddProject,
-  onShowYearlySummary,
-  onShowGallery,
   onEditProject,
   onDeleteProject,
   onManageRounds,
@@ -82,7 +78,7 @@ const ProjectControls = ({
                 onChange={(e) => setCurrentProject(e.target.value)}
                 className="flex-1 min-w-0 p-2 xs:p-2.5 sm:p-3 text-sm xs:text-base
                           border border-gray-300 rounded-md xs:rounded-lg
-                          focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                          focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500
                           transition-all duration-200 hover:border-gray-400"
               >
                 <option value="">Select a project</option>
@@ -96,9 +92,9 @@ const ProjectControls = ({
                     type="button"
                     onClick={onEditProject}
                     className="flex-shrink-0 p-2 xs:p-2.5 sm:p-3 border border-gray-300 rounded-md xs:rounded-lg
-                              text-gray-500 hover:text-indigo-600 hover:border-indigo-400 hover:bg-indigo-50
+                              text-gray-500 hover:text-emerald-600 hover:border-emerald-400 hover:bg-emerald-50
                               transition-all duration-200
-                              focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                              focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50"
                     aria-label="Edit project"
                     title="Edit project"
                   >
@@ -108,9 +104,9 @@ const ProjectControls = ({
                     type="button"
                     onClick={onManageRounds}
                     className="flex-shrink-0 p-2 xs:p-2.5 sm:p-3 border border-gray-300 rounded-md xs:rounded-lg
-                              text-gray-500 hover:text-indigo-600 hover:border-indigo-400 hover:bg-indigo-50
+                              text-gray-500 hover:text-emerald-600 hover:border-emerald-400 hover:bg-emerald-50
                               transition-all duration-200
-                              focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+                              focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50"
                     aria-label="Manage rounds"
                     title="Manage rounds (1st time, 2nd time, …)"
                   >
@@ -166,7 +162,7 @@ const ProjectControls = ({
                       type="button"
                       onClick={() => setViewMode(mode)}
                       className={`px-2 py-0.5 rounded transition-colors ${
-                        viewMode === mode ? "bg-indigo-600 text-white" : "text-gray-600 hover:bg-gray-100"
+                        viewMode === mode ? "bg-emerald-600 text-white" : "text-gray-600 hover:bg-gray-100"
                       }`}
                       aria-pressed={viewMode === mode}
                     >
@@ -183,7 +179,7 @@ const ProjectControls = ({
                 onChange={(e) => setSelectedRoundId(e.target.value)}
                 className="w-full p-2 xs:p-2.5 sm:p-3 text-sm xs:text-base
                           border border-gray-300 rounded-md xs:rounded-lg
-                          focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                          focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500
                           transition-all duration-200 hover:border-gray-400"
               >
                 {[...roundSummaries].reverse().map((summary) => (
@@ -198,7 +194,7 @@ const ProjectControls = ({
                 onChange={(e) => setSelectedYear(Number(e.target.value))}
                 className="w-full p-2 xs:p-2.5 sm:p-3 text-sm xs:text-base
                           border border-gray-300 rounded-md xs:rounded-lg
-                          focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                          focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500
                           transition-all duration-200 hover:border-gray-400
                           disabled:bg-gray-50 disabled:cursor-not-allowed"
                 disabled={!currentProject}
@@ -221,68 +217,22 @@ const ProjectControls = ({
           </div>
         </div>
 
-        {/* Right Section - Action Buttons */}
-        {/* Phones: three equal columns, icon above label, so no label has to wrap */}
-        <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-row sm:gap-3 flex-shrink-0">
-
-          {/* Yearly Summary Button */}
-          <button
-            onClick={onShowYearlySummary}
-            className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 whitespace-nowrap
-                      bg-green-600 text-white
-                      px-2 sm:px-5 py-2 xs:py-2.5
-                      text-sm xs:text-base font-medium
-                      rounded-md xs:rounded-lg
-                      hover:bg-green-700 active:bg-green-800
-                      transition-all duration-200 ease-in-out
-                      focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50
-                      transform hover:scale-105 active:scale-95
-                      shadow-sm hover:shadow-md
-                      min-h-[40px] xs:min-h-[44px]"
-            aria-label="View yearly summary"
-          >
-            <BarChart3 size={16} className="md:w-5 md:h-5 flex-shrink-0" />
-            <span className="text-[12px] md:text-base">Yearly Summary</span>
-          </button>
-
-          {/* Gallery Button */}
-          <button
-            onClick={onShowGallery}
-            className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 whitespace-nowrap
-                      bg-purple-600 text-white
-                      px-2 sm:px-5 py-2 xs:py-2.5
-                      text-sm xs:text-base font-medium
-                      rounded-md xs:rounded-lg
-                      hover:bg-purple-700 active:bg-purple-800
-                      transition-all duration-200 ease-in-out
-                      focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50
-                      transform hover:scale-105 active:scale-95
-                      shadow-sm hover:shadow-md
-                      min-h-[40px] xs:min-h-[44px]"
-            aria-label="Manage gallery"
-          >
-            <Images size={16} className="md:w-5 md:h-5 flex-shrink-0" />
-            <span className="text-[12px] md:text-base">Gallery</span>
-          </button>
-
-          {/* Add Project Button */}
+        <div className="flex-shrink-0">
           <button
             onClick={onAddProject}
-            className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 whitespace-nowrap
-                      bg-indigo-600 text-white
-                      px-2 sm:px-5 py-2 xs:py-2.5
+            className="w-full lg:w-auto flex items-center justify-center gap-2 whitespace-nowrap
+                      bg-emerald-600 text-white
+                      px-5 py-2.5
                       text-sm xs:text-base font-medium
                       rounded-md xs:rounded-lg
-                      hover:bg-indigo-700 active:bg-indigo-800
+                      hover:bg-emerald-700 active:bg-emerald-800
                       transition-all duration-200 ease-in-out
-                      focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50
-                      transform hover:scale-105 active:scale-95
-                      shadow-sm hover:shadow-md
-                      min-h-[40px] xs:min-h-[44px]"
+                      focus:outline-none focus:ring-4 focus:ring-emerald-500 focus:ring-opacity-50
+                      shadow-sm hover:shadow-md"
             aria-label="Add new project"
           >
-            <Plus size={16} className="md:w-5 md:h-5 flex-shrink-0" />
-            <span className="text-[12px] md:text-base">Add Project</span>
+            <Plus size={18} className="flex-shrink-0" />
+            <span className="text-sm xs:text-base">Add Project</span>
           </button>
         </div>
       </div>

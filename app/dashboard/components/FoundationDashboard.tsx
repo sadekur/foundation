@@ -1,12 +1,11 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import type { User } from "firebase/auth";
 import { doc, setDoc, onSnapshot } from "firebase/firestore";
+import { Loader } from "lucide-react";
 import { db } from "@/lib/firebase";
 
-import Header from "./Header";
-import Footer from "./Footer";
+import PageHeader from "./PageHeader";
 import SyncIndicator from "./SyncIndicator";
 import ProjectControls, { type ViewMode } from "./ProjectControls";
 import SummaryCards from "./SummaryCards";
@@ -17,21 +16,19 @@ import AddProjectModal from "./AddProjectModal";
 import EditProjectModal from "./EditProjectModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import TransactionFormModal from "./TransactionFormModal";
-import YearlySummaryScreen from "./YearlySummaryScreen";
-import GalleryScreen from "./GalleryScreen";
 import { getProjectYears, calculateTotals, calculateProjectTotals, getAvailableYears } from "@/lib/utils/projectStats";
 import { calculateRoundSummaries, findRoundForDate } from "@/lib/utils/projectRounds";
 import { formatTaka } from "@/lib/utils/formatTaka";
 import type { ProjectRound, Projects, TransactionFormData, TransactionType } from "@/types";
 
-interface FoundationDashboardProps {
-  user: User;
-}
-
-const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
+const FoundationDashboard = () => {
   const [currentProject, setCurrentProject] = useState("");
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [projects, setProjects] = useState<Projects>({});
+  // Every save overwrites the whole document, so nothing may be saved until the real data has
+  // arrived: saving from the empty initial state would erase every project.
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [loadFailed, setLoadFailed] = useState(false);
   const [newProjectName, setNewProjectName] = useState("");
   const [showAddProject, setShowAddProject] = useState(false);
   const [showEditProject, setShowEditProject] = useState(false);
@@ -46,8 +43,6 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
     donor: "",
     amount: "",
   });
-  const [showYearlySummary, setShowYearlySummary] = useState(false);
-  const [showGallery, setShowGallery] = useState(false);
   const [newProjectYear, setNewProjectYear] = useState(new Date().getFullYear());
 
   // Round view — only for projects that have rounds (see lib/utils/projectRounds.ts).
@@ -63,6 +58,10 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
     const unsubscribe = onSnapshot(
       foundationDocRef,
       (docSnap) => {
+        // Offline, a missing doc only means "not in the cache", not that it doesn't exist.
+        if (!docSnap.exists() && docSnap.metadata.fromCache) return;
+        setDataLoaded(true);
+
         if (docSnap.exists()) {
           const data = docSnap.data();
           const loadedProjects: Projects = data.projects || {};
@@ -85,6 +84,7 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
       },
       (error) => {
         console.error("Error listening to document:", error);
+        setLoadFailed(true);
       }
     );
 
@@ -338,19 +338,6 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
     deleteProject(currentProject);
   };
 
-  const handleShowYearlySummary = () => {
-    setShowYearlySummary(true);
-  };
-
-  const handleBackToDashboard = () => {
-    setShowYearlySummary(false);
-    setShowGallery(false);
-  };
-
-  const handleShowGallery = () => {
-    setShowGallery(true);
-  };
-
   const handleTransactionFormCancel = () => {
     setShowIncomeForm(false);
     setShowExpenseForm(false);
@@ -362,24 +349,21 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
     addTransaction(type);
   };
 
-  if (showYearlySummary) {
-    return <YearlySummaryScreen projects={projects} onBack={handleBackToDashboard} />;
+  if (loadFailed) {
+    return <p className="py-16 text-center text-sm text-red-600">Couldn&apos;t load the data. Please refresh the page.</p>;
   }
 
-  if (showGallery) {
-    return <GalleryScreen user={user} onBack={handleBackToDashboard} />;
+  if (!dataLoaded) {
+    return <Loader className="animate-spin h-8 w-8 text-emerald-600 mx-auto my-16" />;
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header user={user} />
-
-      {/* Main Container - Responsive padding and max-width */}
-      <div className="w-full max-w-none sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-4 xs:py-6 sm:py-8">
-        {/* Sync Indicator */}
-        <div className="mb-4 sm:mb-6">
-          <SyncIndicator />
-        </div>
+    <>
+      <PageHeader
+        title="Income & Expenses"
+        description="Manage projects and record donations and spending."
+        actions={<SyncIndicator />}
+      />
 
         {/* Project Controls - Responsive */}
         <div className="mb-6 sm:mb-8">
@@ -396,8 +380,6 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
             selectedRoundId={currentRound?.round.id ?? ""}
             setSelectedRoundId={setSelectedRoundId}
             onAddProject={() => setShowAddProject(true)}
-            onShowYearlySummary={handleShowYearlySummary}
-            onShowGallery={handleShowGallery}
             onEditProject={handleEditProjectOpen}
             onDeleteProject={() => setShowDeleteProjectConfirm(true)}
             onManageRounds={() => setShowManageRounds(true)}
@@ -425,27 +407,27 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
             )}
 
             {/* Project Total Summary (All Years) - Responsive */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 xs:p-4 sm:p-6 mb-4 sm:mb-6 overflow-x-auto">
-              <h3 className="text-sm sm:text-base font-medium text-blue-800 mb-3 sm:mb-4">
+            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 xs:p-4 sm:p-6 mb-4 sm:mb-6 overflow-x-auto">
+              <h3 className="text-sm sm:text-base font-medium text-emerald-800 mb-3 sm:mb-4">
                 &quot;{currentProject}&quot; (All Years: {projectTotals.years.join(", ") || "No data"})
               </h3>
 
               {/* Desktop Layout (3 columns) */}
               <div className="hidden sm:grid sm:grid-cols-3 gap-4 text-sm">
                 <div className="flex flex-col space-y-1">
-                  <span className="text-blue-600 font-medium">Total Income:</span>
+                  <span className="text-emerald-600 font-medium">Total Income:</span>
                   <span className="text-green-600 font-bold text-base lg:text-lg">
                     {formatTaka(projectTotals.totalIncome)}
                   </span>
                 </div>
                 <div className="flex flex-col space-y-1">
-                  <span className="text-blue-600 font-medium">Total Expenses:</span>
+                  <span className="text-emerald-600 font-medium">Total Expenses:</span>
                   <span className="text-red-600 font-bold text-base lg:text-lg">
                     {formatTaka(projectTotals.totalExpenses)}
                   </span>
                 </div>
                 <div className="flex flex-col space-y-1">
-                  <span className="text-blue-600 font-medium">Net Balance:</span>
+                  <span className="text-emerald-600 font-medium">Net Balance:</span>
                   <span className={`font-bold text-base lg:text-lg ${projectTotals.balance >= 0 ? "text-green-600" : "text-red-600"}`}>
                     {formatTaka(projectTotals.balance)}
                   </span>
@@ -454,20 +436,20 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
 
               {/* Mobile Layout (Stacked) */}
               <div className="sm:hidden space-y-3">
-                <div className="flex justify-between items-center border-b border-blue-200 pb-2">
-                  <span className="text-blue-600 font-medium text-sm">Total Income:</span>
+                <div className="flex justify-between items-center border-b border-emerald-200 pb-2">
+                  <span className="text-emerald-600 font-medium text-sm">Total Income:</span>
                   <span className="text-green-600 font-bold text-base">
                     {formatTaka(projectTotals.totalIncome)}
                   </span>
                 </div>
-                <div className="flex justify-between items-center border-b border-blue-200 pb-2">
-                  <span className="text-blue-600 font-medium text-sm">Total Expenses:</span>
+                <div className="flex justify-between items-center border-b border-emerald-200 pb-2">
+                  <span className="text-emerald-600 font-medium text-sm">Total Expenses:</span>
                   <span className="text-red-600 font-bold text-base">
                     {formatTaka(projectTotals.totalExpenses)}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-blue-600 font-medium text-sm">Net Balance:</span>
+                  <span className="text-emerald-600 font-medium text-sm">Net Balance:</span>
                   <span className={`font-bold text-base ${projectTotals.balance >= 0 ? "text-green-600" : "text-red-600"}`}>
                     {formatTaka(projectTotals.balance)}
                   </span>
@@ -476,7 +458,7 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
             </div>
 
             {/* Transaction Sections - Responsive Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
               <div className="w-full">
                 <TransactionSection
                   type="income"
@@ -554,9 +536,7 @@ const FoundationDashboard = ({ user }: FoundationDashboardProps) => {
           onSubmit={handleTransactionSubmit}
           onCancel={handleTransactionFormCancel}
         />
-      </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 

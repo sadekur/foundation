@@ -74,7 +74,7 @@ const ManageRoundsModal = ({ show, projectName, roundSummaries, onAdd, onDelete,
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. 4th Conference"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
                 required
               />
             </div>
@@ -84,7 +84,7 @@ const ManageRoundsModal = ({ show, projectName, roundSummaries, onAdd, onDelete,
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
                 required
               />
             </div>
@@ -93,7 +93,7 @@ const ManageRoundsModal = ({ show, projectName, roundSummaries, onAdd, onDelete,
           <div className="flex gap-3">
             <button
               type="submit"
-              className="flex-1 bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition-colors"
+              className="flex-1 bg-emerald-600 text-white p-3 rounded-lg hover:bg-emerald-700 transition-colors"
             >
               Add Round
             </button>
