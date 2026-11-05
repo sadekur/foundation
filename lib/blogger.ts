@@ -110,9 +110,9 @@ export const getBlogPosts = async ({
         link,
         publishedAt: entry.published.$t,
         excerpt: truncate(stripHtml(html), EXCERPT_LENGTH),
-        thumbnail: rawThumbnail ? upsizeImage(rawThumbnail) : null,
+        thumbnail: rawThumbnail ? await upsizeThumbnail(rawThumbnail) : null,
       };
-    });
+    }));
 
     return { posts, total };
   } catch {
