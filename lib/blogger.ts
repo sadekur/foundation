@@ -99,7 +99,7 @@ export const getBlogPosts = async ({
     const entries = data.feed.entry ?? [];
     const total = Number(data.feed.openSearch$totalResults?.$t ?? entries.length);
 
-    const posts = entries.map((entry) => {
+    const posts = await Promise.all(entries.map(async (entry) => {
       const link = entry.link.find((l) => l.rel === "alternate")?.href ?? siteConfig.blogUrl;
       const html = entry.content?.$t ?? entry.summary?.$t ?? "";
       const rawThumbnail = entry.media$thumbnail?.url ?? extractFirstImage(html);
