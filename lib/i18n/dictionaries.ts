@@ -547,6 +547,13 @@ export const dictionaries: Record<Language, Dictionary> = {
       heroQuote:
         "“Those who recite the Book of Allah, establish prayer, and spend out of what We have provided for them, secretly and openly, can hope for a trade that will never perish.”",
       heroQuoteSource: "Surah Fatir, Verse 29",
+      heroProjects: [
+        "Zakat, Sadaqah & Poverty Relief",
+        "Islamic Education & Dawah",
+        "Mosques, Madrasas & Islamic Institutions",
+        "Water, Medical Care & Environment",
+        "Rehabilitation & Employment",
+      ],
       ctaAbout: "Learn About Us",
       ctaProjects: "Our Projects",
       ctaContact: "Get in Touch",
