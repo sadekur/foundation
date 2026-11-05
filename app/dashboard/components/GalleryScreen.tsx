@@ -201,7 +201,7 @@ const GalleryScreen = ({ user }: GalleryScreenProps) => {
       />
 
       <div>
-        <div className="mb-4 flex flex-col xs:flex-row xs:items-center gap-2">
+        <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-2">
           <label htmlFor="gallery-project-filter" className="text-sm font-medium text-gray-700">
             Show:
           </label>
@@ -213,7 +213,7 @@ const GalleryScreen = ({ user }: GalleryScreenProps) => {
               // Don't let "Delete selected" reach items the new filter hides.
               setSelectedIds(new Set());
             }}
-            className="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-emerald-500 w-full xs:w-auto"
+            className="p-2 border border-gray-300 rounded-lg text-sm bg-white focus:ring-2 focus:ring-emerald-500 w-full sm:w-auto sm:max-w-xs"
           >
             <option value={ALL_PROJECTS}>All media ({items.length})</option>
             <option value="">General only — no project</option>
@@ -226,7 +226,7 @@ const GalleryScreen = ({ user }: GalleryScreenProps) => {
           </select>
           {items.length > 0 &&
             (selectMode ? (
-              <div className="flex flex-wrap items-center gap-2 xs:ml-auto">
+              <div className="flex flex-wrap items-center gap-2 sm:ml-auto">
                 <span className="text-sm text-gray-700 font-medium">{selectedIds.size} selected</span>
                 <button
                   onClick={toggleSelectAllVisible}
@@ -253,7 +253,7 @@ const GalleryScreen = ({ user }: GalleryScreenProps) => {
             ) : (
               <button
                 onClick={() => setSelectMode(true)}
-                className="flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 w-fit xs:ml-auto"
+                className="flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 w-fit sm:ml-auto"
               >
                 <CheckSquare size={14} />
                 Select
