@@ -58,7 +58,7 @@ const extractFirstImage = (html: string): string | null => {
 
 // Blogger image URLs carry a size segment just before the filename (e.g. "/s320/", "/s72-c/",
 // "/s72-w554-h269-c/"), and the feed's thumbnails are only 72px, so swap it for a large one.
-const upsizeBloggerImage = (url: string) => url.replace(/\/[swh]\d+[^/]*(?=\/[^/]+$)/, "/s1600/");
+const upsizeBloggerImage = (url: string) => url.replace(/\/[swh]\d+[^/]*(?=\/[^/]+$)/, "/s1600");
 
 const YOUTUBE_THUMBNAIL = /^(https?:\/\/img\.youtube\.com\/vi\/[^/]+)\/[^/]+\.jpg$/;
 
