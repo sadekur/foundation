@@ -80,9 +80,9 @@ const OverviewScreen = ({ projects }: OverviewScreenProps) => {
         title="Overview"
         description="All projects, all years, at a glance."
         actions={
-          <div className="flex flex-col xs:flex-row xs:items-center gap-2">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-2">
             <SyncIndicator />
-            <div className="grid grid-cols-2 xs:flex gap-2">
+            <div className="w-full md:w-auto grid grid-cols-2 md:flex gap-2">
               <Link href="/dashboard/finance" className={`${LINK_BUTTON_CLASS} bg-emerald-700 text-white hover:bg-emerald-800`}>
                 <Wallet size={16} />
                 Finances
@@ -99,20 +99,36 @@ const OverviewScreen = ({ projects }: OverviewScreenProps) => {
         }
       />
 
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 mb-4 sm:mb-6">
-        <StatCard label="Total Income" value={formatTaka(allTime.totalIncome)} valueClass="text-green-600" />
-        <StatCard label="Total Expenses" value={formatTaka(allTime.totalExpenses)} valueClass="text-red-600" />
+      <div className="grid grid-cols-2 sm:grid-cols-6 lg:grid-cols-5 gap-3 sm:gap-4 mb-4 sm:mb-6">
+        <StatCard
+          label="Total Income"
+          value={formatTaka(allTime.totalIncome)}
+          valueClass="text-green-600"
+          className="sm:col-span-2 lg:col-span-1"
+        />
+        <StatCard
+          label="Total Expenses"
+          value={formatTaka(allTime.totalExpenses)}
+          valueClass="text-red-600"
+          className="sm:col-span-2 lg:col-span-1"
+        />
         <StatCard
           label="Net Balance"
           value={formatTaka(allTime.balance)}
           valueClass={balanceColor(allTime.balance)}
           className="col-span-2 lg:col-span-1"
         />
-        <StatCard label="Projects" value={String(projectRows.length)} valueClass="text-gray-900" />
+        <StatCard
+          label="Projects"
+          value={String(projectRows.length)}
+          valueClass="text-gray-900"
+          className="sm:col-span-3 lg:col-span-1"
+        />
         <StatCard
           label="Gallery Items"
           value={galleryCount === null ? "—" : String(galleryCount)}
           valueClass="text-gray-900"
+          className="sm:col-span-3 lg:col-span-1"
         />
       </div>
 
