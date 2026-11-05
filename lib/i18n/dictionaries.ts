@@ -342,7 +342,7 @@ export const dictionaries: Record<Language, Dictionary> = {
       brochureTitle: "আমাদের ব্রোশিউর",
       brochureBody: "ফাউন্ডেশনের পরিচিতি ও প্রকল্পসমূহের বিবরণ এক পাতায়।",
       brochureView: "পিডিএফ দেখুন",
-      brochureDownload: "ডাউনলোড করুন",
+      brochureDownload: "ডাউনলোড",
     },
     projects: {
       title: "আমাদের পরিকল্পিত প্রকল্প সমূহ",
