@@ -56,9 +56,29 @@ const extractFirstImage = (html: string): string | null => {
   return match ? match[1] : null;
 };
 
-// Blogger image URLs embed a size segment (e.g. "/s320/", "/s72-c/") that can be swapped
-// for a larger one to get a decent card thumbnail instead of a thumbnail-sized crop.
-const upsizeImage = (url: string) => url.replace(/\/s\d+(-c)?\//, "/s600/");
+// Blogger image URLs carry a size segment just before the filename (e.g. "/s320/", "/s72-c/",
+// "/s72-w554-h269-c/"), and the feed's thumbnails are only 72px, so swap it for a large one.
+const upsizeBloggerImage = (url: string) => url.replace(/\/[swh]\d+[^/]*(?=\/[^/]+$)/, "/s1600/");
+
+const YOUTUBE_THUMBNAIL = /^(https?:\/\/img\.youtube\.com\/vi\/[^/]+)\/[^/]+\.jpg$/;
+
+// The feed gives YouTube's 120x90 default.jpg. maxresdefault doesn't exist for every video, so
+// check for it and fall back to hqdefault, which always does.
+const upsizeYouTubeThumbnail = async (videoBase: string) => {
+  const maxRes = `${videoBase}/maxresdefault.jpg`;
+  try {
+    const res = await fetch(maxRes, { method: "HEAD", next: { revalidate: BLOG_REVALIDATE_SECONDS } });
+    if (res.ok) return maxRes;
+  } catch {
+    // Fall through to the size that's always available.
+  }
+  return `${videoBase}/hqdefault.jpg`;
+};
+
+const upsizeThumbnail = async (url: string) => {
+  const youtube = url.match(YOUTUBE_THUMBNAIL);
+  return youtube ? upsizeYouTubeThumbnail(youtube[1]) : upsizeBloggerImage(url);
+};
 
 interface GetBlogPostsOptions {
   startIndex?: number;
