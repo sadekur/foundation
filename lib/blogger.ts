@@ -41,6 +41,9 @@ export interface BlogPostsResult {
 
 export const ACTIVITIES_PAGE_SIZE = 9;
 
+// How long a saved copy of the feed is served, so a new post appears within about this long.
+const BLOG_REVALIDATE_SECONDS = 300;
+
 const EXCERPT_LENGTH = 160;
 
 const stripHtml = (html: string) => html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
@@ -69,7 +72,7 @@ export const getBlogPosts = async ({
 }: GetBlogPostsOptions = {}): Promise<BlogPostsResult> => {
   try {
     const feedUrl = `${siteConfig.blogUrl}feeds/posts/default?alt=json&start-index=${startIndex}&max-results=${maxResults}`;
-    const res = await fetch(feedUrl, { next: { revalidate: 3600 } });
+    const res = await fetch(feedUrl, { next: { revalidate: BLOG_REVALIDATE_SECONDS } });
     if (!res.ok) return { posts: [], total: 0 };
 
     const data: BloggerFeedResponse = await res.json();
