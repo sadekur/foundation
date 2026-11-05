@@ -339,7 +339,7 @@ export const dictionaries: Record<Language, Dictionary> = {
       supportTagline: "দ্বীনি খেদমত ও মানবকল্যাণে—একটি আন্তরিক অঙ্গীকার।",
       ctaProjects: "আমাদের প্রকল্পসমূহ দেখুন",
       ctaContact: "যোগাযোগ করুন",
-      brochureTitle: "আমাদের ব্রোশিউর",
+      brochureTitle: "আমাদের পরিচিতিপত্র",
       brochureBody: "ফাউন্ডেশনের পরিচিতি ও প্রকল্পসমূহের বিবরণ এক পাতায়।",
       brochureView: "পিডিএফ দেখুন",
       brochureDownload: "ডাউনলোড",
