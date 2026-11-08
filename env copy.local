@@ -1,0 +1,24 @@
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyCCKkFADRBxCntebH1isPYrKrHB0qpN26I
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyCCKkFADRBxCntebH1isPYrKrHB0qpN26I
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=as-salsabil-foundation.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=as-salsabil-foundation
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=as-salsabil-foundation.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=589960728860
+NEXT_PUBLIC_FIREBASE_APP_ID=1:589960728860:web:49ada3445fdbcf92672ad9
+
+# Fill in CONTACT_EMAIL_APP_PASSWORD yourself — a Gmail App Password for
+# salsabilfoundation1@gmail.com (Google Account -> Security -> 2-Step
+# Verification -> App Passwords). Never commit a real password here.
+CONTACT_EMAIL_USER=salsabilfoundation1@gmail.com
+CONTACT_EMAIL_APP_PASSWORD=ohejtplllbcvxncg
+CONTACT_TO_EMAIL=salsabilfoundation1@gmail.com
+
+# Cloudinary — used by lib/cloudinary.ts for the Gallery admin upload/delete flow.
+# Key "as-salsabil-gallery" (Master Admin role), created via Cloudinary Console -> Settings ->
+# API Keys. The prior "Root" key's secret was exposed in chat and has since been deactivated.
+CLOUDINARY_URL=cloudinary://451512156912753:H8X7ioaRrKTpuA8PYieveqXrRiM@oc0mwnrj
+
+# Firebase Admin SDK service account — used by lib/firebaseAdmin.ts to verify the
+# admin's ID token on the Gallery API routes (app/api/gallery/sign, app/api/gallery/delete).
+# Downloaded from Firebase Console -> Project Settings -> Service Accounts -> Generate new private key.
+FIREBASE_SERVICE_ACCOUNT_KEY='{"type":"service_account","project_id":"as-salsabil-foundation","private_key_id":"3af4716f08d081997ff2e9ca7c3a170bf70871eb","private_key":"-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDTOiqYgkPMqlNJ\nrb5atR6MNvc/k7zOJctjTOEcSbjvDjTimQCwviwQJewAtgzF/83k8OIaf351okpk\nNrXwRDUrs+8f1MJueHnPlhkxV/ZSB4YlnCoTywzUeFkJ0KkK/iLrFRsGu2j23lVu\n5lj1hjAF88PaTTjrf0hDORdfokZVpxDSrdYzKDcuCqhKACSQZ6KGKrgdF7VzmG9q\nQFvopiPU/c4CAPrxF/cLpzsmCjrp58d0rgcdD8HMzIzGJbg+ML5fRPwMO/ISaF4Y\nCoPn4pAWiqlhNkDAH5WfuUVbD1QHgMi4PL+0FK1Q2Tir4P5Ws7RWrsbqMRck0N8B\nZBJg5oY1AgMBAAECggEAMaS2TaUx/5hZXlPoDOQMA6rIdegIRBAEavhu4Mnf3cli\nOw54J9HuQ7ZR7wHaYy+hiajmjxE/XLDRmJd2L7usHnMZ5IqJztJgWJ4/mgYBJZrQ\nl6bKCeBbSdVmIcUpcaS0erk5Yp3px7mN7TRUnJHW2BNISNaE5e5CgtAYcvjN3IOr\ndYUc0d33Exdm4bBQ1/YXn3tjPSW9ZtZ+Vmj2muU0p7DL0GhbHnVnEpRapAR7RWF9\n7+TlrhpzBWB9TN90UWCxt8ds3oM2sO9gzEjANWRiV4BrVRl54JqsnelvpHUpNIZw\nX449goQewpsi/tD6O173gAnlCLPszgd1OAvhO+VTyQKBgQD6y4TQh69g4HxaqB/Q\nIkIWIrkcAhuVXOsZkopRZ3f0j2J4ZZEKGt1jSk3qcKwlx9PBubbAjLrvKLb7oObA\nckWwBfNV22tTRRUuKen6us0SQWSO7e6lZOOI4ldSrL2QM9JZFHqE5rrGy/VS5raY\nbU4gjU8K70QoY4XDxlQZDlXPDQKBgQDXnGw7zHVzoXw0Pj8B5rMgwOIwSLl+SaDy\nMDFyg2ki66ZNxnvsc76FnJGzU+p2SB0iJiMXB4ff3pmyP1Cj/a3zFFRTpo6CXtCQ\nRZdXwdGFy7If7SodRLrMJ9TPiwIptxeGQ6lqEguZ7bIyWXhQUwZFCw4vX8IQd1Yl\ngZbm7F2JyQKBgBwO0NkTlQddlgv+azC55HLdh6AejD91mcfOoTLiRIVT1Uxq8IMU\n5lfJZFYqLNg9Nu+he1SnafJ/t5kHM0msfydmQwcD+UnjnK8BeW/XnkHAlyN2cxCF\n7P7Pc72IHd0YLxxQMjTUK2k6QEP6E8uRzv/NT16FzjZGjByO/7Gd7POxAoGBALMa\nVS43YTl0Y2BidKR3p0UF9N53Ct9E+lU0g17EmolPhw4EWtzIKPOEY+O7SYCH1uuP\nEocG0m+80Z+nyKzxBZZuxL3YFXlmmYm+xUE413t1AbpToDA/74u3aqgcqOdOGFSH\n0Cs0Yj6znNsGR1MyJHsl+9qOiP50ozL0uw2IOwtBAoGAQi21VVx041CDv5EBTZzy\nI/hp2waC+yxDJV4zSIsQYd29Uj+6xtWJka2jD5g7MMWcH+BTPSzLgqSKtAWdSwGX\nwxRNp5CzrXxWoAgEuokuN4859jYSp5axMmQxZXMXV/BDy7DKaHK73/AiQGe33qsH\nlxGXlK8i/z+QchhzF/+ml1o=\n-----END PRIVATE KEY-----\n","client_email":"firebase-adminsdk-fbsvc@as-salsabil-foundation.iam.gserviceaccount.com","client_id":"100773287975889824942","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_x509_cert_url":"https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40as-salsabil-foundation.iam.gserviceaccount.com","universe_domain":"googleapis.com"}'
