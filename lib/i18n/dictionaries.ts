@@ -431,8 +431,8 @@ export const dictionaries: Record<Language, Dictionary> = {
           duration: "নিয়মিত ও চলমান কার্যক্রম",
           faq: PROJECT_FAQ_BN,
           impactStats: [
-            { value: "২০+", label: "পরিচালিত মক্তব" },
-            { value: "৩০০+", label: "উপকৃত শিক্ষার্থী" },
+            { value: "৩০+", label: "পরিচালিত মক্তব" },
+            { value: "৩৫০+", label: "উপকৃত শিক্ষার্থী" },
             { value: "১০০%", label: "বিনামূল্যে শিক্ষা কার্যক্রম" },
           ],
         },
