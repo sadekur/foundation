@@ -988,6 +988,11 @@ export const dictionaries: Record<Language, Dictionary> = {
           blurb: "Tree plantation drives for environmental protection and greening.",
           description:
             "Tree plantation drives are carried out in various areas to protect the environment and build a greener community, helping preserve ecological balance and raise public awareness over the long term.",
+          support: {
+            title: "Your Support Can Help Build a Greener Community",
+            body:
+              "Financial support is needed to buy saplings, manage transport and planting, and care for and maintain the trees planted during plantation drives in various areas.\n\nTrees planted through your donation can help preserve ecological balance and raise public awareness over the long term.\n\n**Come, let us take part together in protecting the environment and greening our communities. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+          },
           objectives: [
             "Protect the environment and promote greening",
             "Raise public awareness on tree plantation",
