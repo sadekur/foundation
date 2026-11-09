@@ -832,6 +832,11 @@ export const dictionaries: Record<Language, Dictionary> = {
           blurb: "Mosque-based Qur'an and Islamic education for elders and women.",
           description:
             "Under As-Salsabil Foundation's supervision, the Maktab education program already runs **20+ maktabs across the area.** These maktabs teach children, teenagers, and students of all ages **Qur'an, Aqidah, and essential Islamic knowledge grounded in correct religious understanding and sound methodology (manhaj).** To improve and expand this program, **there are plans to launch dedicated training for teachers to sharpen their skills and teaching quality, along with the necessary guidelines** — to be rolled out as sufficient funding is secured. Today, **around 300+ students** — young and old, men and women — have all of their education costs and course fees covered completely free of charge. Students are also given **free Qur'ans and the study materials they need.** Participation in this Islamic education program is open to everyone, entirely free. Even your small contribution can help support a child's journey in Islamic education — a good deed whose reward, in sha Allah, may continue for you as an ongoing **sadaqah jariyah.**",
+          support: {
+            title: "Your Support Will Carry This Journey of Islamic Learning Forward",
+            body:
+              "Regular financial support is needed to keep free education running for 300+ students across 20+ maktabs, provide teacher honorariums, distribute Qur'ans and study materials, and launch teacher training and guidelines.\n\nEven a small donation can ease a student's path in learning the Qur'an and the deen — a good deed whose reward, in sha Allah, may continue for you as an ongoing sadaqah jariyah.\n\n**Come, let us take part together in this work of Qur'an and Islamic education. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+          },
           objectives: [
             "Teach correct Qur'an recitation",
             "Separate classes for women",
