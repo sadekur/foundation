@@ -966,6 +966,11 @@ export const dictionaries: Record<Language, Dictionary> = {
           blurb: "Installing tube wells to resolve safe drinking water shortages, and other welfare initiatives.",
           description:
             "Tube wells are installed in areas facing a shortage of safe drinking water, alongside other public welfare initiatives as needed by local communities.",
+          support: {
+            title: "Your Support Can Bring Safe, Clean Water",
+            body:
+              "Financial support is needed for tube well materials, labor and installation, maintenance, and other welfare initiatives according to local needs in water-scarce areas.\n\nA tube well installed through your donation can help meet a community's need for safe drinking water — a good deed whose reward, in sha Allah, may continue for you as an ongoing sadaqah jariyah.\n\n**Come, let us take part together in easing water shortages. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+          },
           objectives: [
             "Resolve safe drinking water shortages",
             "Install tube wells where needed",
