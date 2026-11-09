@@ -944,6 +944,11 @@ export const dictionaries: Record<Language, Dictionary> = {
           blurb: "Sponsoring orphans and poor students of Islamic knowledge, and supporting the poor and needy.",
           description:
             "Orphans and poor students of Islamic knowledge are sponsored for their education and upkeep, while poor and needy members of society receive support according to their needs.",
+          support: {
+            title: "Stand Beside Orphans, Students of Knowledge & the Poor",
+            body:
+              "Regular financial support is needed to cover the education and upkeep of orphans and poor students of Islamic knowledge, provide regular monthly assistance, and meet the urgent needs of the poor and needy.\n\nYour donation can help with an orphan's education, a student of knowledge's upkeep, or the needs of a poor family.\n\n**Come, let us take part together in this long-term project. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+          },
           objectives: [
             "Sponsor orphaned students",
             "Support upkeep of students of knowledge",
