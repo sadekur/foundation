@@ -922,6 +922,11 @@ export const dictionaries: Record<Language, Dictionary> = {
           blurb: "Prioritized, accurate distribution of zakat across the 8 categories described in the Qur'an.",
           description:
             "Following the 8 categories of zakat recipients described in the Qur'an, zakat and sadaqah funds are distributed accurately and on a priority basis to those who are entitled.",
+          support: {
+            title: "Let Your Zakat & Sadaqah Reach Those Truly Entitled",
+            body:
+              "This project follows the 8 categories of zakat recipients described in the Qur'an, verifying genuine recipients, setting priorities, and distributing funds transparently and accountably.\n\nYour zakat and sadaqah are distributed as cash or needed goods among eligible families in designated areas.\n\n**Come, let us stand beside those who are entitled through our zakat and sadaqah. May Allah accept the giving of all of us and grant us the best reward. Ameen.**",
+          },
           objectives: [
             "Distribute zakat correctly across its 8 categories",
             "Verify genuine recipients and set priorities",
