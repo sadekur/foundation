@@ -900,6 +900,11 @@ export const dictionaries: Record<Language, Dictionary> = {
           blurb: "Establishing Islamic libraries and distributing free books based on correct aqeedah.",
           description:
             "Islamic libraries grounded in correct aqeedah and manhaj are set up in various mosques, and free Islamic books, leaflets, and dua charts are published and distributed to help people easily access authentic religious knowledge.",
+          support: {
+            title: "Your Support Will Carry Authentic Knowledge to More People",
+            body:
+              "Financial support is needed to set up Islamic libraries grounded in correct aqeedah and manhaj in various mosques, and to print and distribute free Islamic books, leaflets, and dua charts.\n\nEven one book or leaflet published through your donation can make it easier for someone to gain knowledge of the deen — a good deed whose reward, in sha Allah, may continue for you as an ongoing sadaqah jariyah.\n\n**Come, let us take part together in spreading authentic religious knowledge. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+          },
           objectives: [
             "Set up mosque-based libraries",
             "Distribute free Islamic books and leaflets",
