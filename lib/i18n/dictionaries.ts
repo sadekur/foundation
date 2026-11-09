@@ -1032,6 +1032,11 @@ export const dictionaries: Record<Language, Dictionary> = {
           blurb: "Financial support for building and renovating mosques and madrasas.",
           description:
             "Financial support is provided for constructing or renovating mosques and madrasas in various areas, helping ensure a proper environment for worship and Islamic education.",
+          support: {
+            title: "Help Build a Proper Environment for Worship and Learning",
+            body:
+              "Financial support is needed for construction and renovation materials, labor, and project oversight for mosques and madrasas in various areas.\n\nYour donation can help ensure a proper environment for worship and Islamic education — a good deed whose reward, in sha Allah, may continue for you as an ongoing sadaqah jariyah.\n\n**Come, let us take part together in building and renovating mosques and madrasas. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+          },
           objectives: [
             "Financial support for mosque-madrasa construction",
             "Support for necessary renovation work",
