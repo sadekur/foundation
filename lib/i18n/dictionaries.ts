@@ -889,8 +889,8 @@ export const dictionaries: Record<Language, Dictionary> = {
           duration: "Ongoing, regular program",
           faq: PROJECT_FAQ_EN,
           impactStats: [
-            { value: "20+", label: "Maktabs running" },
-            { value: "300+", label: "Students benefited" },
+            { value: "30+", label: "Maktabs run" },
+            { value: "350+", label: "Students benefited" },
             { value: "100%", label: "Free of charge" },
           ],
         },
