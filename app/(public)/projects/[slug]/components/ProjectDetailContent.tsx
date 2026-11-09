@@ -142,7 +142,27 @@ export const ProjectDetailContent = ({
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 xs:gap-8">
           <FadeIn className="lg:col-span-3">
             <h2 className="text-lg xs:text-xl font-bold text-emerald-950 mb-4">{projectDetail.descriptionTitle}</h2>
-            <p className="text-sm xs:text-base text-gray-700 leading-relaxed">{renderWithBold(category.description)}</p>
+            <div className="space-y-4">
+              {category.description.split("\n\n").map((paragraph) => (
+                <p key={paragraph} className="text-sm xs:text-base text-gray-700 leading-relaxed">
+                  {renderWithBold(paragraph)}
+                </p>
+              ))}
+            </div>
+
+            {category.highlights && (
+              <div className="mt-8 bg-emerald-50 border border-emerald-100 rounded-2xl p-5 xs:p-6">
+                <h3 className="text-base xs:text-lg font-bold text-emerald-950 mb-4">{category.highlights.title}</h3>
+                <ul className="space-y-2.5">
+                  {category.highlights.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm xs:text-base text-gray-700 leading-relaxed">
+                      <Check size={16} className="mt-1 flex-shrink-0 text-amber-500" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </FadeIn>
 
           <FadeIn delayMs={100} className="lg:col-span-2">
@@ -220,10 +240,20 @@ export const ProjectDetailContent = ({
 
         <FadeIn delayMs={100}>
           <div className="mt-10 xs:mt-12 rounded-2xl bg-emerald-950 pattern-lattice-light text-center px-5 xs:px-8 py-8 xs:py-10">
-            <h2 className="text-lg xs:text-xl font-bold text-white">{projects.ctaTitle}</h2>
-            <p className="mt-3 text-sm xs:text-base text-emerald-100 max-w-2xl mx-auto leading-relaxed">
-              {projects.ctaBody}
-            </p>
+            <h2 className="text-lg xs:text-xl font-bold text-white">{category.support?.title ?? projects.ctaTitle}</h2>
+            {category.support ? (
+              <div className="mt-3 max-w-3xl mx-auto space-y-3">
+                {category.support.body.split("\n\n").map((paragraph) => (
+                  <p key={paragraph} className="text-sm xs:text-base text-emerald-100 leading-relaxed [&_strong]:text-amber-300">
+                    {renderWithBold(paragraph)}
+                  </p>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-3 text-sm xs:text-base text-emerald-100 max-w-2xl mx-auto leading-relaxed">
+                {projects.ctaBody}
+              </p>
+            )}
             <Link
               href="/contact"
               className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber-500 text-emerald-950 text-sm xs:text-base font-bold hover:bg-amber-400 transition-colors"

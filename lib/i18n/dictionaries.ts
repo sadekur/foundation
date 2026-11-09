@@ -68,15 +68,6 @@ export interface ProjectImpactStat {
   label: string;
 }
 
-// `slug` is the language-independent routing key for /projects/[slug] (see PROJECT_CATEGORY_SLUGS
-// below) — kept identical between the bn and en entry at the same array index. Every other field
-// is real brochure-derived copy for the summary card; `description` through `faq` back the detail
-// page and are placeholder/generic copy until the foundation supplies real per-project figures
-// (objectives, budget, area, duration are safe generic statements — deliberately no invented
-// numbers or stats). `impactStats` is optional and left unset for most categories, which keeps the
-// detail page's impact section on `ProjectDetailDictionary.impactComingSoon`; set it once the
-// foundation supplies real figures for that category (see `galleryComingSoon` for the still-unbuilt
-// per-category gallery).
 export interface ProjectHighlights {
   title: string;
   items: string[];
@@ -90,6 +81,16 @@ export interface ProjectSupportSection {
 // `description` and `support.body` may hold several paragraphs separated by a blank line ("\n\n"),
 // and each paragraph supports **bold** markers. `highlights` and `support` are optional extras
 // rendered by the detail page only when present.
+//
+// `slug` is the language-independent routing key for /projects/[slug] (see PROJECT_CATEGORY_SLUGS
+// below) — kept identical between the bn and en entry at the same array index. Every other field
+// is real brochure-derived copy for the summary card; `description` through `faq` back the detail
+// page and are placeholder/generic copy until the foundation supplies real per-project figures
+// (objectives, budget, area, duration are safe generic statements — deliberately no invented
+// numbers or stats). `impactStats` is optional and left unset for most categories, which keeps the
+// detail page's impact section on `ProjectDetailDictionary.impactComingSoon`; set it once the
+// foundation supplies real figures for that category (see `galleryComingSoon` for the still-unbuilt
+// per-category gallery).
 export interface ProjectCategory {
   slug: string;
   title: string;
