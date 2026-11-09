@@ -1054,6 +1054,11 @@ export const dictionaries: Record<Language, Dictionary> = {
           blurb: "Building homes, distributing livestock, and arranging employment for the destitute.",
           description:
             "Homes are built as needed for the destitute, poor, and helpless, alongside livestock distribution and employment arrangements to help them become self-reliant.",
+          support: {
+            title: "Help a Struggling Family Become Self-Reliant",
+            body:
+              "Financial support is needed for home construction materials, purchasing livestock, and employment training and support for destitute, poor, and helpless families.\n\nYour donation can help a family build a home or secure a livelihood, easing their path to self-reliance.\n\n**Come, let us take part together in helping those in need become self-reliant. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+          },
           objectives: [
             "Build homes as needed",
             "Enable self-reliance through livestock distribution",
