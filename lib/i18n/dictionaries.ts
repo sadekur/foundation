@@ -1010,6 +1010,11 @@ export const dictionaries: Record<Language, Dictionary> = {
           blurb: "Providing free medical care and humanitarian assistance when needed.",
           description:
             "Free medical care is arranged for those who cannot afford it, and necessary humanitarian assistance is provided during emergencies or disasters.",
+          support: {
+            title: "Stand Beside the Sick and Those Affected by Disaster",
+            body:
+              "Financial support is needed for treatment and medicine for patients who cannot afford them, for organizing medical camps, and for relief supplies during disasters and emergencies.\n\nYour donation can help with a patient's treatment or meet the needs of people affected by disaster.\n\n**Come, let us take part together in standing beside people in their time of need. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+          },
           objectives: [
             "Free medical care for those in financial need",
             "Humanitarian aid during emergencies",
