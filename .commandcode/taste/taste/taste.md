@@ -6,4 +6,6 @@
 - Prefers text centered/middle in content areas. Confidence: 0.6
 - Communicates by pasting a screenshot or raw output plus a terse message — for bug reports (e.g. "whats wrong there?", "why this not starting?") and for visual/change requests (e.g. a screenshot with "create a image and use its banner image, give update code") — expecting the agent to inspect the context and act autonomously rather than being given step-by-step instructions. Confidence: 0.7
 - Prefers the agent to reuse the user's existing authenticated sessions (e.g., a logged-in browser profile) to fetch configuration/secrets from external services directly, rather than asking the user to re-authenticate or paste values. Confidence: 0.6
+- For bulk data-entry tasks (e.g. loading spreadsheet data into the app), wants the data added via scripts/seed data using the same method as normal entry, not a new user-facing "Import" feature/button; results must match the source sheet exactly. Confidence: 0.6
+- Prefers UI that stays compact as data grows (e.g. one expandable row per project instead of repeated per-year columns), and wants currency shown as ৳ (Taka) consistently everywhere. Confidence: 0.6
 - Prefers environment variables/secrets needed for local builds to be stored in the project (e.g., `.env.local`). Confidence: 0.6
