@@ -77,11 +77,26 @@ export interface ProjectImpactStat {
 // detail page's impact section on `ProjectDetailDictionary.impactComingSoon`; set it once the
 // foundation supplies real figures for that category (see `galleryComingSoon` for the still-unbuilt
 // per-category gallery).
+export interface ProjectHighlights {
+  title: string;
+  items: string[];
+}
+
+export interface ProjectSupportSection {
+  title: string;
+  body: string;
+}
+
+// `description` and `support.body` may hold several paragraphs separated by a blank line ("\n\n"),
+// and each paragraph supports **bold** markers. `highlights` and `support` are optional extras
+// rendered by the detail page only when present.
 export interface ProjectCategory {
   slug: string;
   title: string;
   blurb: string;
   description: string;
+  highlights?: ProjectHighlights;
+  support?: ProjectSupportSection;
   objectives: string[];
   targetAudience: string;
   budgetItems: string[];
@@ -357,16 +372,39 @@ export const dictionaries: Record<Language, Dictionary> = {
           title: "দ্বীনী শিক্ষা ও দাওয়াহ",
           blurb: "দ্বীনি দারস, ইসলামী সেমিনার ও দাওয়াহ কার্যক্রমের মাধ্যমে দ্বীন শিক্ষাদান।",
           description:
-            "কুরআন ও সুন্নাহ ভিত্তিক সঠিক আকিদা ও মানহাজ প্রচারের লক্ষ্যে আস্-সালসাবিল ফাউন্ডেশন নিয়মিত দ্বীনি দারস, ইসলামী সেমিনার ও দাওয়াহ কার্যক্রম পরিচালনা করে। সমাজের সর্বস্তরের মানুষের কাছে দ্বীনের সঠিক জ্ঞান পৌঁছে দেওয়াই এই প্রকল্পের মূল উদ্দেশ্য।",
+            "আলহামদুলিল্লাহ! আস্-সালসাবিল ফাউন্ডেশন প্রতিষ্ঠালগ্ন থেকেই পবিত্র কুরআন ও সহীহ সুন্নাহর আলোকে বিশুদ্ধ দ্বীনের জ্ঞান প্রচার, দাওয়াহ কার্যক্রম পরিচালনা এবং সমাজে ইসলামী মূল্যবোধ প্রতিষ্ঠার লক্ষ্যে কাজ করে যাচ্ছে।\n\n**২০২১ সাল থেকে নিয়মিত মাসিক তালীমী বৈঠক আয়োজনের মাধ্যমে আমাদের দাওয়াতী কার্যক্রমের ধারাবাহিক যাত্রা শুরু হয়।** এসব বৈঠকে কুরআন-সুন্নাহভিত্তিক আলোচনা, বিশুদ্ধ আকিদাহ, সহীহ মানহাজ, আত্মশুদ্ধি, আমল-আখলাক এবং সমসাময়িক দ্বীনি ও সামাজিক বিষয়ে দিকনির্দেশনা প্রদান করা হয়।\n\nনিয়মিত মাসিক তালীমী বৈঠকের পাশাপাশি প্রতিবছর **সুধী সমাবেশ ও সালসাবিল কনফারেন্স** আয়োজনের মাধ্যমে বৃহত্তর পরিসরে দ্বীনের দাওয়াত পৌঁছে দেওয়ার প্রচেষ্টা অব্যাহত রয়েছে। এসব আয়োজনের মাধ্যমে আলেম-উলামা, দ্বীনি ব্যক্তিত্ব, শিক্ষার্থী, যুবসমাজ এবং সর্বস্তরের ধর্মপ্রাণ মানুষের মধ্যে দ্বীনি সচেতনতা, পারস্পরিক ভ্রাতৃত্ব ও ইসলামী মূল্যবোধ জাগ্রত করার উদ্যোগ নেওয়া হয়।",
+          highlights: {
+            title: "আমাদের দাওয়াতী কার্যক্রমের উল্লেখযোগ্য দিক",
+            items: [
+              "নিয়মিত মাসিক তালীমী বৈঠক ও দ্বীনি আলোচনা আয়োজন।",
+              "প্রতিবছর সুধী সমাবেশ ও বার্ষিক সালসাবিল কনফারেন্স আয়োজন।",
+              "কুরআন ও সহীহ সুন্নাহভিত্তিক বিশুদ্ধ জ্ঞান প্রচার।",
+              "বিশুদ্ধ আকিদাহ ও সহীহ মানহাজ সম্পর্কে সচেতনতা তৈরি।",
+              "যুবসমাজ ও সাধারণ মানুষের মাঝে দ্বীনি সচেতনতা বৃদ্ধি।",
+              "সামাজিক যোগাযোগমাধ্যম ও অনলাইন প্রচারমাধ্যমে দ্বীনি আলোচনা ও শিক্ষামূলক কনটেন্ট প্রচার।",
+              "সমাজে ইসলামী মূল্যবোধ, ভ্রাতৃত্ব ও কল্যাণমূলক কর্মকাণ্ডের প্রসার।",
+            ],
+          },
+          support: {
+            title: "আপনার সহযোগিতা আমাদের পথচলাকে এগিয়ে নেবে",
+            body:
+              "এই ধারাবাহিক দাওয়াতী কার্যক্রম পরিচালনা, মাসিক তালীমী বৈঠক আয়োজন, বার্ষিক সুধী সমাবেশ ও সালসাবিল কনফারেন্স বাস্তবায়ন এবং দাওয়াহ কার্যক্রমকে আরও বিস্তৃত করার জন্য নিয়মিত আর্থিক সহযোগিতা প্রয়োজন।\n\nআমরা বিশ্বাস করি, দ্বীনের সঠিক জ্ঞান প্রচার ও মানুষের কাছে ইসলামের সৌন্দর্য পৌঁছে দেওয়ার এই প্রচেষ্টায় আপনার আন্তরিক অংশগ্রহণ হতে পারে একটি মূল্যবান অবদান।\n\n**আসুন, দ্বীনের প্রচার ও প্রসারে একসঙ্গে কাজ করি। আপনার স্বেচ্ছাধীন আর্থিক সহযোগিতা ও আন্তরিক অংশগ্রহণের মাধ্যমে এই মহৎ উদ্যোগের অংশীদার হোন। আল্লাহ তাআলা আমাদের সকলের প্রচেষ্টাকে কবুল করুন এবং উত্তম প্রতিদান দান করুন। আমিন।**",
+          },
           objectives: [
             "সহীহ আকিদা ও মানহাজ ভিত্তিক দ্বীনি শিক্ষার প্রসার",
-            "নিয়মিত দারস ও সেমিনারের আয়োজন",
-            "স্থানীয় পর্যায়ে দাওয়াহ কার্যক্রম সম্প্রসারণ",
+            "২০২১ সাল থেকে চলমান নিয়মিত মাসিক তালীমী বৈঠক আয়োজন",
+            "প্রতিবছর সুধী সমাবেশ ও সালসাবিল কনফারেন্স আয়োজন",
+            "অনলাইন ও সামাজিক যোগাযোগমাধ্যমে শিক্ষামূলক কনটেন্ট প্রচার",
           ],
-          targetAudience: "সাধারণ মুসল্লি ও এলাকাবাসী",
-          budgetItems: ["বক্তা ও শিক্ষকদের সম্মানী", "ভেন্যু ও আয়োজন ব্যবস্থাপনা", "প্রচার সামগ্রী"],
-          area: "প্রয়োজন অনুযায়ী নির্ধারিত এলাকা",
-          duration: "নিয়মিত ও চলমান কার্যক্রম",
+          targetAudience: "আলেম-উলামা, শিক্ষার্থী, যুবসমাজ ও সর্বস্তরের ধর্মপ্রাণ মানুষ",
+          budgetItems: [
+            "মাসিক তালীমী বৈঠকের আয়োজন ব্যয়",
+            "বার্ষিক সুধী সমাবেশ ও সালসাবিল কনফারেন্স বাস্তবায়ন",
+            "বক্তা ও শিক্ষকদের সম্মানী",
+            "অনলাইন কনটেন্ট ও প্রচার সামগ্রী",
+          ],
+          area: "প্রয়োজন অনুযায়ী নির্ধারিত এলাকা ও অনলাইন",
+          duration: "২০২১ সাল থেকে নিয়মিত ও চলমান কার্যক্রম",
           faq: PROJECT_FAQ_BN,
         },
         {
@@ -747,16 +785,39 @@ export const dictionaries: Record<Language, Dictionary> = {
           title: "Islamic Education & Dawah",
           blurb: "Religious classes, Islamic seminars, and dawah programs spreading correct Islamic knowledge.",
           description:
-            "As-Salsabil Foundation regularly organizes religious classes, Islamic seminars, and dawah programs grounded in the Qur'an and Sunnah, aiming to spread authentic Islamic knowledge to all sections of society.",
+            "Alhamdulillah! Since its founding, As-Salsabil Foundation has worked to spread pure knowledge of the deen in the light of the Holy Qur'an and the authentic Sunnah, to carry out dawah activities, and to establish Islamic values in society.\n\n**Since 2021, our dawah journey has continued steadily through regular monthly ta'limi gatherings.** These gatherings offer discussions based on the Qur'an and Sunnah, sound aqeedah, authentic manhaj, self-purification, righteous deeds and character, and guidance on contemporary religious and social issues.\n\nAlongside the regular monthly ta'limi gatherings, we continue to carry the message of the deen to a wider audience each year through the **Sudhi Somabesh (Gathering of Well-Wishers) and the Salsabil Conference**. These events aim to awaken religious awareness, mutual brotherhood and Islamic values among scholars, religious figures, students, the youth, and devout people from all walks of life.",
+          highlights: {
+            title: "Highlights of Our Dawah Activities",
+            items: [
+              "Organizing regular monthly ta'limi gatherings and religious discussions.",
+              "Holding the Sudhi Somabesh and the annual Salsabil Conference every year.",
+              "Spreading pure knowledge based on the Qur'an and authentic Sunnah.",
+              "Raising awareness of sound aqeedah and authentic manhaj.",
+              "Increasing religious awareness among the youth and the general public.",
+              "Sharing religious talks and educational content on social media and online platforms.",
+              "Promoting Islamic values, brotherhood and welfare-oriented activities in society.",
+            ],
+          },
+          support: {
+            title: "Your Support Will Carry Our Journey Forward",
+            body:
+              "Regular financial support is needed to run these ongoing dawah activities, organize the monthly ta'limi gatherings, hold the annual Sudhi Somabesh and Salsabil Conference, and expand our dawah work further.\n\nWe believe your sincere participation in this effort to spread correct knowledge of the deen and share the beauty of Islam with people can be a valuable contribution.\n\n**Come, let us work together to spread and uphold the deen. Become a partner in this noble initiative through your voluntary financial support and sincere participation. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+          },
           objectives: [
             "Spread Islamic knowledge based on correct aqeedah and manhaj",
-            "Organize regular classes and seminars",
-            "Expand local dawah activities",
+            "Hold regular monthly ta'limi gatherings, ongoing since 2021",
+            "Organize the Sudhi Somabesh and Salsabil Conference every year",
+            "Share educational content on social media and online platforms",
           ],
-          targetAudience: "General worshippers and local residents",
-          budgetItems: ["Honorarium for speakers and teachers", "Venue and event management", "Promotional materials"],
-          area: "Locations as needed",
-          duration: "Ongoing, regular program",
+          targetAudience: "Scholars, students, the youth, and devout people from all walks of life",
+          budgetItems: [
+            "Running costs of the monthly ta'limi gatherings",
+            "Hosting the annual Sudhi Somabesh and Salsabil Conference",
+            "Honorarium for speakers and teachers",
+            "Online content and promotional materials",
+          ],
+          area: "Locations as needed, and online",
+          duration: "Regular, ongoing program since 2021",
           faq: PROJECT_FAQ_EN,
         },
         {
