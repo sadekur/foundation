@@ -875,7 +875,7 @@ export const dictionaries: Record<Language, Dictionary> = {
           support: {
             title: "Your Support Will Carry This Journey of Islamic Learning Forward",
             body:
-              "Regular financial support is needed to keep free education running for 300+ students across 20+ maktabs, provide teacher honorariums, distribute Qur'ans and study materials, and launch teacher training and guidelines.\n\nEven a small donation can ease a student's path in learning the Qur'an and the deen — a good deed whose reward, in sha Allah, may continue for you as an ongoing sadaqah jariyah.\n\n**Come, let us take part together in this work of Qur'an and Islamic education. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+              "Regular financial support is needed to keep free education running at the 5 current maktabs, expand the number of maktabs, provide teacher honorariums, distribute Qur'ans and study materials, and launch teacher training and guidelines.\n\nEven a small donation can ease a student's path in learning the Qur'an and the deen — a good deed whose reward, in sha Allah, may continue for you as an ongoing sadaqah jariyah.\n\n**Come, let us take part together in this work of Qur'an and Islamic education. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
           },
           objectives: [
             "Teach correct Qur'an recitation",
