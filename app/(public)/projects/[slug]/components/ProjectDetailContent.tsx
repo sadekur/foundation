@@ -42,7 +42,7 @@ import {
   ShieldCheck,
   HeartHandshake,
   Siren,
-  Infinity,
+  Infinity as InfinityIcon,
   Droplets,
   Wrench,
   Handshake,
