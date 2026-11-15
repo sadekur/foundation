@@ -69,3 +69,24 @@ export interface GalleryItem {
 export interface GalleryItemFormData {
   caption: string;
 }
+
+// Website analytics — one bucket per Bangladesh-time day (`analytics_daily/{YYYY-MM-DD}`) and one
+// per month (`analytics_monthly/{YYYY-MM}`), written by lib/analyticsStore.ts. Counts only, no
+// per-visitor records: nothing personal (IP, user agent, cookies) is ever stored.
+export type AnalyticsBreakdown = "pages" | "sources" | "referrers" | "countries" | "cities" | "devices" | "browsers";
+
+export interface AnalyticsPeriod {
+  key: string; // "2026-11-15" or "2026-11"
+  views: number; // every page view
+  visits: number; // browser-tab sessions — the breakdowns below except `pages` count these
+  visitors: number; // unique browsers within this one day / month
+  // pages: page path -> views. sources: "Facebook", "Google", "Direct"... -> visits.
+  // referrers: linking website host -> visits. countries: ISO code ("BD") -> visits.
+  // cities: "Dhaka, BD" -> visits. devices: mobile/tablet/desktop -> visits. browsers -> visits.
+  breakdowns: Record<AnalyticsBreakdown, Record<string, number>>;
+}
+
+export interface AnalyticsResponse {
+  days: AnalyticsPeriod[]; // only days that had traffic, oldest first
+  months: AnalyticsPeriod[]; // only months that had traffic, oldest first
+}
