@@ -198,6 +198,7 @@ export interface ContactDictionary {
 export interface FooterDictionary {
   tagline: string;
   rights: string;
+  backToTop: string;
 }
 
 export interface Dictionary {
