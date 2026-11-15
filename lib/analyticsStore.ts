@@ -7,7 +7,7 @@
 // Each doc holds views/visits/visitors totals plus count maps (see AnalyticsPeriod in types/).
 // A dashboard load therefore reads one doc per day shown (≤ 90) plus 12 monthly docs, however
 // many visitors the site gets. Nothing personal is stored — no IP, user agent or visitor ID.
-import { FieldValue } from "firebase-admin/firestore";
+import { FieldValue, type DocumentData } from "firebase-admin/firestore";
 import { getAdminDb } from "@/lib/firebaseAdmin";
 import { PROJECT_CATEGORY_SLUGS } from "@/lib/siteConfig";
 import { OTHER_PAGE, dhakaDayKey, dhakaMonthKey, recentMonthKeys, type AnalyticsHitPayload } from "@/lib/utils/analytics";
