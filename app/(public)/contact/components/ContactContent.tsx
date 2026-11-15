@@ -75,14 +75,24 @@ export const ContactContent = () => {
               <div className="bg-white rounded-xl shadow-sm p-5 border-l-4 border-amber-400">
                 <h2 className="text-sm font-semibold text-emerald-950 mb-3">{contact.socialTitle}</h2>
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <a
+                    href={siteConfig.youtube.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-fit items-center gap-2 text-sm text-gray-600 hover:text-red-600 transition-colors"
+                  >
                     <Youtube size={18} className="text-red-600 flex-shrink-0" />
-                    <span>{siteConfig.youtube.label}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <span className="underline-offset-2 hover:underline">{siteConfig.youtube.label}</span>
+                  </a>
+                  <a
+                    href={siteConfig.facebook.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-fit items-center gap-2 text-sm text-gray-600 hover:text-blue-600 transition-colors"
+                  >
                     <Facebook size={18} className="text-blue-600 flex-shrink-0" />
-                    <span>{siteConfig.facebook.label}</span>
-                  </div>
+                    <span className="underline-offset-2 hover:underline">{siteConfig.facebook.label}</span>
+                  </a>
                 </div>
               </div>
 
