@@ -442,6 +442,9 @@ export const dictionaries: Record<Language, Dictionary> = {
             { icon: "conference", value: "বার্ষিক", label: "সালসাবিল কনফারেন্স", description: "বিশুদ্ধ আকিদাহ ও সহীহ মানহাজের দাওয়াত" },
             { icon: "youtube", value: "ইউটিউব", label: "আস্-সালসাবিল টিভি", description: "ইউটিউবভিত্তিক দ্বীনি প্রচার" },
             { icon: "facebook", value: "ফেসবুক", label: "আস্-সালসাবিল ফাউন্ডেশন", description: "ফেসবুকভিত্তিক দাওয়াতী কার্যক্রম" },
+            { icon: "books", value: "বই", label: "ইসলামী বই প্রকাশনা", description: "দ্বীনি জ্ঞানচর্চায় সহায়ক বই প্রকাশ" },
+            { icon: "dua", value: "চার্ট", label: "দোয়া ও যিকিরের চার্ট", description: "দৈনন্দিন আমল ও সুন্নাহ পালনে উৎসাহিত করা" },
+            { icon: "publication", value: "উপকরণ", label: "শিক্ষামূলক প্রকাশনা", description: "ইসলামী শিক্ষা ছড়িয়ে দিতে বিভিন্ন উপকরণ তৈরি ও বিতরণ" },
           ],
         },
         {
