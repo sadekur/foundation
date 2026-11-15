@@ -285,17 +285,63 @@ export const ProjectDetailContent = ({
             <h2 className="text-xl xs:text-2xl font-bold text-emerald-950">{projectDetail.impactTitle}</h2>
             <SectionDivider className="mt-4 mb-6" />
           </div>
-          {category.impactStats && category.impactStats.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {category.impactStats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-2xl bg-emerald-50 border border-emerald-100 py-6 xs:py-8 px-4 text-center"
-                >
-                  <p className="text-2xl xs:text-3xl font-bold text-emerald-800">{stat.value}</p>
-                  <p className="mt-1.5 text-sm text-emerald-900/70">{stat.label}</p>
+          {category.impactIntro && (
+            <div className="relative overflow-hidden mb-8 rounded-2xl bg-white border border-emerald-100 shadow-sm">
+              <div className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-amber-400 to-emerald-600" aria-hidden="true" />
+              <div className="px-5 xs:px-8 py-6 xs:py-8">
+                <h3 className="text-lg xs:text-xl font-bold text-emerald-950">{category.impactIntro.title}</h3>
+                <SectionDivider className="mt-3 mb-5" align="start" />
+                <div className="space-y-4">
+                  {category.impactIntro.body.split("\n\n").map((paragraph) => (
+                    <p key={paragraph} className="text-sm xs:text-base text-gray-700 leading-relaxed">
+                      {renderWithBold(paragraph)}
+                    </p>
+                  ))}
                 </div>
-              ))}
+              </div>
+            </div>
+          )}
+          {category.impactStats && category.impactStats.length > 0 ? (
+            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4">
+              {category.impactStats.map((stat) => {
+                const StatIcon = stat.icon ? IMPACT_ICONS[stat.icon] : null;
+                const href = stat.icon ? IMPACT_LINKS[stat.icon] : undefined;
+                const card = (
+                  <>
+                    {StatIcon && (
+                      <span className="mx-auto mb-3 flex items-center justify-center w-12 h-12 rounded-full bg-emerald-900 text-amber-400 ring-4 ring-amber-400/15 transition-transform group-hover:scale-105">
+                        <StatIcon size={22} />
+                      </span>
+                    )}
+                    <p className="text-2xl xs:text-3xl font-bold text-emerald-800">{stat.value}</p>
+                    <p className="mt-1.5 text-sm xs:text-base font-semibold text-emerald-950">{stat.label}</p>
+                    {stat.description && (
+                      <p className="mt-1 text-xs xs:text-sm text-gray-600 leading-relaxed">{stat.description}</p>
+                    )}
+                    {href && (
+                      <ExternalLink size={14} className="absolute top-4 right-4 text-emerald-400 group-hover:text-amber-500 transition-colors" />
+                    )}
+                  </>
+                );
+                // A lone last card in the 2-column layout spans the full row instead of sitting half-empty.
+                const cardClass =
+                  "group relative block rounded-2xl bg-emerald-50 border border-emerald-100 border-b-4 border-b-amber-400/70 py-6 xs:py-7 px-5 text-center xs:last:odd:col-span-2 lg:last:odd:col-span-1";
+                return href ? (
+                  <a
+                    key={stat.label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${cardClass} hover:bg-white hover:shadow-md transition-all`}
+                  >
+                    {card}
+                  </a>
+                ) : (
+                  <div key={stat.label} className={cardClass}>
+                    {card}
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <div className="rounded-2xl bg-gray-50 border border-gray-200 py-10 xs:py-14 flex flex-col items-center justify-center gap-2">
