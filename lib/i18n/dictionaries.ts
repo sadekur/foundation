@@ -64,9 +64,29 @@ export interface ProjectFaqItem {
   answer: string;
 }
 
+// Icon keys for impact cards, mapped to lucide icons in ProjectDetailContent's IMPACT_ICONS.
+// "youtube"/"facebook" cards also link to siteConfig's channel/page when its href is set.
+export type ProjectImpactIcon =
+  | "milestone"
+  | "monthly"
+  | "gathering"
+  | "conference"
+  | "youtube"
+  | "facebook";
+
+// `value` is the big headline (a number, a year, or a short word like "Monthly"), `label` names
+// the activity, and the optional `description` adds one short supporting line.
 export interface ProjectImpactStat {
   value: string;
   label: string;
+  description?: string;
+  icon?: ProjectImpactIcon;
+}
+
+// Optional narrative shown above the impact cards. `body` is multi-paragraph ("\n\n") with **bold**.
+export interface ProjectImpactIntro {
+  title: string;
+  body: string;
 }
 
 export interface ProjectHighlights {
