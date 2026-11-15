@@ -1417,7 +1417,7 @@ export const dictionaries: Record<Language, Dictionary> = {
       durationTitle: "Duration",
       galleryTitle: "Gallery",
       galleryComingSoon: "Photos and videos for this project are coming soon.",
-      impactTitle: "Impact Statistics",
+      impactTitle: "Our Impact & Activities",
       impactComingSoon: "Statistics for this project are coming soon.",
       faqTitle: "Frequently Asked Questions",
       notFoundTitle: "Project Not Found",
