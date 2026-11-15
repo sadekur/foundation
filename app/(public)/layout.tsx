@@ -2,6 +2,7 @@ import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { AnalyticsTracker } from "./components/AnalyticsTracker";
+import { ScrollToTopButton } from "./components/ScrollToTopButton";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,6 +13,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         <main className="flex-1">{children}</main>
         <Footer />
       </div>
+      <ScrollToTopButton />
     </LanguageProvider>
   );
 }
