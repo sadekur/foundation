@@ -1155,6 +1155,7 @@ export const dictionaries: Record<Language, Dictionary> = {
     footer: {
       tagline: "As-Salsabil Foundation — ongoing charitable (sadaqah jariyah) work, established 2021.",
       rights: "All rights reserved.",
+      backToTop: "Back to top",
     },
   },
 };
