@@ -40,6 +40,10 @@ export const MONTH_KEY_PATTERN = /^\d{4}-\d{2}$/;
 // whenever the admin is signed in, so the foundation's own browsing doesn't inflate the numbers.
 export const ANALYTICS_IGNORE_KEY = "analytics:ignore";
 
+// The `pages` breakdown key every path that isn't one of the site's real public routes collapses
+// into (lib/analyticsStore.ts's normalizePage), so the admin page can label it.
+export const OTHER_PAGE = "(other)";
+
 /** Sent by AnalyticsTracker to POST /api/analytics/collect. */
 export interface AnalyticsHitPayload {
   path: string;
