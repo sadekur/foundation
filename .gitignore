@@ -23,6 +23,10 @@ next-env.d.ts
 .env.development.local
 .env.test.local
 .env.production.local
+# Any *.local file, and copies like "env copy.local" that don't start with a dot (one leaked every secret in Nov 2026).
+*.local
+env*
+!.env.example
 
 npm-debug.log*
 yarn-debug.log*
