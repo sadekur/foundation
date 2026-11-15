@@ -662,7 +662,7 @@ export const dictionaries: Record<Language, Dictionary> = {
           },
           impactStats: [
             { icon: "water", value: "টিউবওয়েল", label: "টিউবওয়েল স্থাপন", description: "পানির সংকটপূর্ণ এলাকায়" },
-            { icon: "verify", value: "নিরাপদ", label: "বিশুদ্ধ পানি", description: "পানির সংকট নিরসন" },
+            { icon: "transparency", value: "নিরাপদ", label: "বিশুদ্ধ পানি", description: "পানির সংকট নিরসন" },
             { icon: "maintenance", value: "রক্ষণাবেক্ষণ", label: "নিয়মিত তদারকি", description: "স্থাপিত টিউবওয়েলের যত্ন" },
             { icon: "welfare", value: "জনকল্যাণ", label: "অন্যান্য উদ্যোগ", description: "এলাকাবাসীর প্রয়োজন অনুযায়ী" },
             { icon: "community", value: "এলাকাবাসী", label: "উপকারভোগী", description: "পানির সংকটে থাকা জনগোষ্ঠী" },
