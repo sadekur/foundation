@@ -12,6 +12,7 @@ import { SectionDivider } from "./SectionDivider";
 import { FadeIn } from "./FadeIn";
 import { HeroProjectNames } from "./HeroProjectNames";
 import { HeroWave } from "./HeroWave";
+import { HeroHeading } from "./HeroHeading";
 import { ActivityCard } from "./ActivityCard";
 
 const FEATURED_PROJECT_COUNT = 6;
