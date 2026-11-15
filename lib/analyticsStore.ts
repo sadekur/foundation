@@ -33,7 +33,6 @@ const decodeKey = (key: string) => {
 // Only the site's real public routes are kept as-is; anything else (typos, 404s, junk sent to the
 // public endpoint) collapses into one bucket so the pages map can't grow without bound.
 const STATIC_PAGES = new Set(["/", "/about", "/projects", "/activities", "/contact"]);
-export const OTHER_PAGE = "(other)";
 
 const normalizePage = (raw: string) => {
   const path = raw.split(/[?#]/)[0].replace(/\/+$/, "") || "/";
