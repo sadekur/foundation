@@ -1278,6 +1278,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Roadsides and open spaces in designated areas",
           duration: "Annual, ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey Toward a Greener Community",
+            body:
+              "To protect the environment and build a greener community, **tree plantation drives** are carried out along roadsides and in open spaces in various areas.\n\nIt isn't only about planting: **caring for and maintaining** the trees planted and **raising public awareness** about tree plantation are part of the work, helping preserve ecological balance over the long term.\n\n**Our aim is to build a greener society for the next generation through sustainable, eco-friendly initiatives.**",
+          },
+          impactStats: [
+            { icon: "tree", value: "Plantation", label: "Tree plantation drives", description: "Saplings planted in various areas" },
+            { icon: "greening", value: "Greening", label: "Environmental protection", description: "Preserving ecological balance" },
+            { icon: "awareness", value: "Awareness", label: "Public awareness", description: "Encouraging tree plantation" },
+            { icon: "care", value: "Care", label: "Caring for planted trees", description: "Ongoing care and maintenance" },
+            { icon: "sustainable", value: "Sustainable", label: "Eco-friendly initiatives", description: "Long-term environmental improvement" },
+            { icon: "ongoing", value: "Annual", label: "Ongoing program", description: "Along roadsides and in open spaces" },
+          ],
         },
         {
           slug: "free-chikitsha-o-manobik-sahajjo",
