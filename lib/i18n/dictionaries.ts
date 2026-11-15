@@ -1173,6 +1173,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Eligible families in designated areas",
           duration: "Annual, ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Principles in Distributing Zakat & Sadaqah",
+            body:
+              "Following the **8 categories of zakat** described in the Qur'an, zakat and sadaqah funds are distributed accurately and on a priority basis to those who are entitled.\n\nBefore each distribution, **genuine recipients are verified** and priorities are set, and cash or needed goods reach eligible families in designated areas through a **transparent and accountable** process.\n\n**Our aim is that every zakat and sadaqah you give reaches the right category and the person truly entitled to it.**",
+          },
+          impactStats: [
+            { icon: "scale", value: "8", label: "Categories of zakat", description: "As described in the Qur'an" },
+            { icon: "verify", value: "Verified", label: "Genuine recipients", description: "Selected through careful verification" },
+            { icon: "priority", value: "Priority", label: "Needs-based distribution", description: "Those in greatest need first" },
+            { icon: "transparency", value: "Transparent", label: "Accountable implementation", description: "Transparent, accountable distribution" },
+            { icon: "giving", value: "Cash & goods", label: "Direct distribution", description: "Straight into eligible families' hands" },
+            { icon: "ongoing", value: "Annual", label: "Ongoing activity", description: "An annual, ongoing project" },
+          ],
         },
         {
           slug: "yatim-talibe-ilm-o-daridro",
