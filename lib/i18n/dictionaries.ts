@@ -1138,6 +1138,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Designated mosque-based areas",
           duration: "Ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey in Spreading Authentic Knowledge",
+            body:
+              "**Islamic libraries grounded in correct aqeedah and manhaj** are set up in various mosques, giving worshippers and general readers easy access to reliable Islamic books.\n\nAlongside this, **free Islamic books, leaflets and dua charts** are published and distributed so that people can easily gain authentic knowledge of the deen.\n\n**Our aim is to bring the light of authentic religious knowledge into every home and mosque.**",
+          },
+          impactStats: [
+            { icon: "library", value: "Libraries", label: "Mosque-based Islamic libraries", description: "Grounded in correct aqeedah and manhaj" },
+            { icon: "books", value: "Free", label: "Islamic books", description: "Published and distributed at no cost" },
+            { icon: "publication", value: "Free", label: "Leaflets", description: "The correct message of the deen, simply put" },
+            { icon: "dua", value: "Charts", label: "Dua charts", description: "Publications that support daily worship" },
+            { icon: "readers", value: "Open", label: "Worshippers & general readers", description: "A chance for everyone to learn the deen" },
+            { icon: "ongoing", value: "Ongoing", label: "Regular activity", description: "In designated mosque-based areas" },
+          ],
         },
         {
           slug: "zakat-o-sadaka",
