@@ -696,6 +696,7 @@ export const dictionaries: Record<Language, Dictionary> = {
     footer: {
       tagline: "আস্-সালসাবিল ফাউন্ডেশন — সাদাকায়ে জারিয়ামূলক কার্যক্রম, প্রতিষ্ঠিত ২০২১।",
       rights: "সর্বস্বত্ব সংরক্ষিত।",
+      backToTop: "উপরে যান",
     },
   },
   en: {
