@@ -1348,6 +1348,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Identified mosque-madrasa locations",
           duration: "As-needed project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey in Building Places of Worship & Learning",
+            body:
+              "Financial support is provided for **constructing or renovating mosques and madrasas** in various areas, helping ensure a proper environment for worship and Islamic education.\n\nWorking with local **mosque and madrasa committees**, we cover construction and renovation materials and labor, and make sure the work is properly **overseen**.\n\n**Our aim is to build a beautiful, proper environment for worship and Islamic learning in every community.**",
+          },
+          impactStats: [
+            { icon: "mosque", value: "Mosques", label: "Mosque construction support", description: "Financial support in various areas" },
+            { icon: "madrasa", value: "Madrasas", label: "Madrasa construction support", description: "Better settings for Islamic learning" },
+            { icon: "renovation", value: "Renovation", label: "Necessary renovation", description: "Support for renovation work" },
+            { icon: "oversight", value: "Oversight", label: "Project oversight", description: "Managing construction and renovation" },
+            { icon: "committee", value: "Committees", label: "With local committees", description: "In coordination with mosque and madrasa committees" },
+            { icon: "sadaqahJariyah", value: "Sadaqah jariyah", label: "Continuing reward", description: "A lasting reward, in sha Allah" },
+          ],
         },
         {
           slug: "punorbashon-o-kormosangsthan",
