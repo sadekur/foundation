@@ -903,6 +903,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Locations as needed, and online",
           duration: "Regular, ongoing program since 2021",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey in Dawah and Religious Work",
+            body:
+              "**Since 2021,** As-Salsabil Foundation has worked steadily to carry the call to sound aqeedah and authentic manhaj, in the light of the Qur'an and Sunnah, to the people.\n\nAs part of our regular work, a **monthly dars and ta'limi gathering** is held every month. In addition, during the blessed month of Ramadan, a **Sudhi Somabesh** (Gathering of Well-Wishers) and religious talks are organized with renowned scholars and da'is from across the country.\n\nAlongside these organized events, our dawah continues online. Our YouTube channel, **As-Salsabil TV**, carries the correct message of Islam to a wider audience through Jumu'ah khutbahs, religious talks and educational videos. Religious content is likewise shared regularly through the **As-Salsabil Foundation** Facebook page.\n\nIn addition, through an Islamic conference held every year, the **Salsabil Conference**, we strive to play a special role in spreading the call to sound aqeedah, authentic manhaj and a way of life based on the Qur'an and Sunnah.\n\n**Our aim is to awaken a pure religious consciousness in the individual, the family and society, and to contribute to building a model society in the light of the Qur'an and Sunnah.**",
+          },
+          impactStats: [
+            { icon: "milestone", value: "2021", label: "On the path since our founding", description: "Continuous dawah activities" },
+            { icon: "monthly", value: "Monthly", label: "Dars & ta'limi gathering", description: "Regular religious learning and discussion" },
+            { icon: "gathering", value: "Annual", label: "Sudhi Somabesh", description: "Special religious program in Ramadan" },
+            { icon: "conference", value: "Annual", label: "Salsabil Conference", description: "The call to sound aqeedah and authentic manhaj" },
+            { icon: "youtube", value: "YouTube", label: "As-Salsabil TV", description: "Religious outreach on YouTube" },
+            { icon: "facebook", value: "Facebook", label: "As-Salsabil Foundation", description: "Dawah activities on Facebook" },
+          ],
         },
         {
           slug: "quran-o-deeni-shikkhadan",
