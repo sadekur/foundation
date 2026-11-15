@@ -12,6 +12,7 @@ export interface NavDictionary {
 export interface HomeDictionary {
   heroEyebrow: string;
   heroTitle: string;
+  heroLocation: string;
   heroSubtitle: string;
   heroQuote: string;
   heroQuoteSource: string;
