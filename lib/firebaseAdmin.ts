@@ -7,6 +7,7 @@
 // so any valid token from this Firebase project is sufficient — no extra role/claim check.
 import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
+import { getFirestore, type Firestore } from "firebase-admin/firestore";
 
 const getAdminApp = (): App => {
   if (getApps().length) return getApps()[0];
