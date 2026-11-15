@@ -32,8 +32,13 @@ module.exports = {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-50%)' },
         },
+        'hero-star-spin': {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
+        'hero-star-spin': 'hero-star-spin 120s linear infinite',
         'hero-bounce': 'hero-bounce 6s ease-in-out infinite',
         'hero-wave': 'hero-wave 28s linear infinite',
         'hero-wave-slow': 'hero-wave 40s linear infinite',

@@ -12,6 +12,7 @@ export interface NavDictionary {
 export interface HomeDictionary {
   heroEyebrow: string;
   heroTitle: string;
+  heroLocation: string;
   heroSubtitle: string;
   heroQuote: string;
   heroQuoteSource: string;
@@ -63,9 +64,75 @@ export interface ProjectFaqItem {
   answer: string;
 }
 
+// Icon keys for impact cards, mapped to lucide icons in ProjectDetailContent's IMPACT_ICONS.
+// "youtube"/"facebook" cards also link to siteConfig's channel/page when its href is set.
+export type ProjectImpactIcon =
+  | "milestone"
+  | "monthly"
+  | "gathering"
+  | "conference"
+  | "youtube"
+  | "facebook"
+  | "books"
+  | "dua"
+  | "publication"
+  | "maktab"
+  | "classroom"
+  | "students"
+  | "free"
+  | "quran"
+  | "teacher"
+  | "library"
+  | "readers"
+  | "ongoing"
+  | "scale"
+  | "verify"
+  | "priority"
+  | "transparency"
+  | "giving"
+  | "orphan"
+  | "scholar"
+  | "family"
+  | "emergency"
+  | "longTerm"
+  | "water"
+  | "maintenance"
+  | "welfare"
+  | "community"
+  | "sadaqahJariyah"
+  | "tree"
+  | "greening"
+  | "awareness"
+  | "care"
+  | "sustainable"
+  | "medical"
+  | "medicine"
+  | "camp"
+  | "relief"
+  | "mosque"
+  | "madrasa"
+  | "renovation"
+  | "oversight"
+  | "committee"
+  | "house"
+  | "livestock"
+  | "employment"
+  | "training"
+  | "selfReliance";
+
+// `value` is the big headline (a number, a year, or a short word like "Monthly"), `label` names
+// the activity, and the optional `description` adds one short supporting line.
 export interface ProjectImpactStat {
   value: string;
   label: string;
+  description?: string;
+  icon?: ProjectImpactIcon;
+}
+
+// Optional narrative shown above the impact cards. `body` is multi-paragraph ("\n\n") with **bold**.
+export interface ProjectImpactIntro {
+  title: string;
+  body: string;
 }
 
 export interface ProjectHighlights {
@@ -87,10 +154,9 @@ export interface ProjectSupportSection {
 // is real brochure-derived copy for the summary card; `description` through `faq` back the detail
 // page and are placeholder/generic copy until the foundation supplies real per-project figures
 // (objectives, budget, area, duration are safe generic statements — deliberately no invented
-// numbers or stats). `impactStats` is optional and left unset for most categories, which keeps the
-// detail page's impact section on `ProjectDetailDictionary.impactComingSoon`; set it once the
-// foundation supplies real figures for that category (see `galleryComingSoon` for the still-unbuilt
-// per-category gallery).
+// numbers or stats). `impactIntro` + `impactStats` (six icon cards) are set for every category so the
+// impact sections stay consistent; their copy only restates facts already in that category's
+// description/objectives/budget. A new category without them falls back to `impactComingSoon`.
 export interface ProjectCategory {
   slug: string;
   title: string;
@@ -104,6 +170,7 @@ export interface ProjectCategory {
   area: string;
   duration: string;
   faq: ProjectFaqItem[];
+  impactIntro?: ProjectImpactIntro;
   impactStats?: ProjectImpactStat[];
 }
 
@@ -197,6 +264,7 @@ export interface ContactDictionary {
 export interface FooterDictionary {
   tagline: string;
   rights: string;
+  backToTop: string;
 }
 
 export interface Dictionary {
@@ -250,8 +318,8 @@ export const dictionaries: Record<Language, Dictionary> = {
     home: {
       heroEyebrow: "প্রতিষ্ঠিত ২০২১",
       heroTitle: "আস্-সালসাবিল ফাউন্ডেশন",
-      heroSubtitle:
-        "মুকুন্দপুর (কানাইপাড়া), কোচাশহর, গোবিন্দগঞ্জ, গাইবান্ধা — সাদাকায়ে জারিয়ামূলক কার্যক্রমের মাধ্যমে দ্বীন ও মানবতার সেবা",
+      heroLocation: "আনন্দবাজার, কোচাশহর, গোবিন্দগঞ্জ, গাইবান্ধা",
+      heroSubtitle: "সাদাকায়ে জারিয়ামূলক কার্যক্রমের মাধ্যমে দ্বীন ও মানবতার সেবা",
       heroQuote:
         "“যারা আল্লাহর কিতাব পাঠ করে, সালাত কায়েম করে এবং আমি যা দিয়েছি তা থেকে গোপনে ও প্রকাশ্যে ব্যয় করে, তারা এমন ব্যবসার আশা করে যাতে কখনও লোকসান হবে না।”",
       heroQuoteSource: "সূরা ফাতির, আয়াত ২৯",
@@ -407,6 +475,22 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "প্রয়োজন অনুযায়ী নির্ধারিত এলাকা ও অনলাইন",
           duration: "২০২১ সাল থেকে নিয়মিত ও চলমান কার্যক্রম",
           faq: PROJECT_FAQ_BN,
+          impactIntro: {
+            title: "দাওয়াত ও দ্বীনি কার্যক্রমে আমাদের পথচলা",
+            body:
+              "**২০২১ সাল থেকে** আস্-সালসাবিল ফাউন্ডেশন কুরআন ও সুন্নাহর আলোকে বিশুদ্ধ আকিদাহ ও সহীহ মানহাজের দাওয়াত মানুষের মাঝে পৌঁছে দিতে ধারাবাহিকভাবে কাজ করে যাচ্ছে।\n\nআমাদের নিয়মিত কার্যক্রমের অংশ হিসেবে প্রতি মাসে **মাসিক দারস ও তালীমী বৈঠক** আয়োজন করা হয়। পাশাপাশি পবিত্র রমজান মাসে দেশের খ্যাতনামা আলেম ও দাঈদের অংশগ্রহণে **সুধী সমাবেশ** ও দ্বীনি আলোচনা অনুষ্ঠানের আয়োজন করা হয়ে থাকে।\n\nপ্রাতিষ্ঠানিক আয়োজনের পাশাপাশি অনলাইন মাধ্যমেও আমাদের দাওয়াতী কার্যক্রম অব্যাহত রয়েছে। আমাদের ইউটিউব চ্যানেল **‘আস্-সালসাবিল টিভি’**-তে জুমার খুতবা, দ্বীনি আলোচনা ও শিক্ষামূলক ভিডিও প্রকাশের মাধ্যমে বৃহত্তর জনগোষ্ঠীর কাছে ইসলামের সঠিক বার্তা পৌঁছে দেওয়া হচ্ছে। একইভাবে **‘আস্-সালসাবিল ফাউন্ডেশন’** ফেসবুক পেজের মাধ্যমেও নিয়মিত দ্বীনি কনটেন্ট প্রচার করা হচ্ছে।\n\nএছাড়া প্রতি বছর **‘সালসাবিল কনফারেন্স’** নামে ইসলামি সম্মেলন আয়োজনের মাধ্যমে বিশুদ্ধ আকিদাহ, সহীহ মানহাজ ও কুরআন-সুন্নাহভিত্তিক জীবনব্যবস্থার দাওয়াত প্রচার ও প্রসারে বিশেষ ভূমিকা রাখার প্রচেষ্টা চালানো হচ্ছে।\n\nএছাড়া দ্বীনি জ্ঞানচর্চা ও ইসলামী শিক্ষার প্রসারে ফাউন্ডেশনের উদ্যোগে **বই প্রকাশ, দোয়া ও যিকিরের চার্ট প্রস্তুত ও বিতরণসহ বিভিন্ন শিক্ষামূলক প্রকাশনা** কার্যক্রম চলমান রয়েছে। এসব উদ্যোগের মাধ্যমে ব্যক্তি ও পরিবার পর্যায়ে ইসলামী জ্ঞানচর্চা সহজতর করা এবং দৈনন্দিন জীবনে কুরআন-সুন্নাহর শিক্ষা বাস্তবায়নে উৎসাহিত করা হচ্ছে।\n\n**আমাদের লক্ষ্য—ব্যক্তি, পরিবার ও সমাজে বিশুদ্ধ দ্বীনি চেতনা জাগ্রত করা এবং কুরআন ও সুন্নাহর আলোকে একটি আদর্শ সমাজ বিনির্মাণে অবদান রাখা।**",
+          },
+          impactStats: [
+            { icon: "milestone", value: "২০২১", label: "প্রতিষ্ঠালগ্ন থেকে পথচলা", description: "ধারাবাহিক দাওয়াতী কার্যক্রম" },
+            { icon: "monthly", value: "মাসিক", label: "দারস ও তালীমী বৈঠক", description: "নিয়মিত দ্বীনি শিক্ষা ও আলোচনা" },
+            { icon: "gathering", value: "বার্ষিক", label: "সুধী সমাবেশ", description: "রমজানে বিশেষ দ্বীনি আয়োজন" },
+            { icon: "conference", value: "বার্ষিক", label: "সালসাবিল কনফারেন্স", description: "বিশুদ্ধ আকিদাহ ও সহীহ মানহাজের দাওয়াত" },
+            { icon: "youtube", value: "ইউটিউব", label: "আস্-সালসাবিল টিভি", description: "ইউটিউবভিত্তিক দ্বীনি প্রচার" },
+            { icon: "facebook", value: "ফেসবুক", label: "আস্-সালসাবিল ফাউন্ডেশন", description: "ফেসবুকভিত্তিক দাওয়াতী কার্যক্রম" },
+            { icon: "books", value: "বই", label: "ইসলামী বই প্রকাশনা", description: "দ্বীনি জ্ঞানচর্চায় সহায়ক বই প্রকাশ" },
+            { icon: "dua", value: "চার্ট", label: "দোয়া ও যিকিরের চার্ট", description: "দৈনন্দিন আমল ও সুন্নাহ পালনে উৎসাহিত করা" },
+            { icon: "publication", value: "উপকরণ", label: "শিক্ষামূলক প্রকাশনা", description: "ইসলামী শিক্ষা ছড়িয়ে দিতে বিভিন্ন উপকরণ তৈরি ও বিতরণ" },
+          ],
         },
         {
           slug: "quran-o-deeni-shikkhadan",
@@ -430,10 +514,18 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "মসজিদ ভিত্তিক নির্ধারিত এলাকা",
           duration: "নিয়মিত ও চলমান কার্যক্রম",
           faq: PROJECT_FAQ_BN,
+          impactIntro: {
+            title: "কুরআন ও দ্বীনী শিক্ষায় আমাদের পথচলা",
+            body:
+              "আস্-সালসাবিল ফাউন্ডেশনের তত্ত্বাবধানে পরিচালিত মক্তব শিক্ষা কার্যক্রমের মাধ্যমে ইতোমধ্যে অত্র অঞ্চলে **প্রায় ৩০টির অধিক মক্তব** পরিচালিত হয়েছে এবং **বর্তমানে ৫টি মক্তব** চলমান রয়েছে। এসব মক্তবে শিশু-কিশোরসহ বিভিন্ন বয়সী শিক্ষার্থীদের সঠিক দ্বীন ও সহীহ মানহাজের ভিত্তিতে কুরআন, আকীদাহ ও প্রয়োজনীয় দ্বীনী শিক্ষা প্রদান করা হয়।\n\nছোট-বড়, পুরুষ-মহিলা মিলিয়ে **প্রায় ৩৫০-এর অধিক শিক্ষার্থীর** শিক্ষা কার্যক্রমের যাবতীয় ব্যয় ও কোর্স ফি সম্পূর্ণ বিনামূল্যে পরিচালনা করা হয়েছে, যা চলমান রয়েছে। পাশাপাশি শিক্ষার্থীদের মাঝে **বিনামূল্যে কুরআন ও প্রয়োজনীয় পড়ালেখার সরঞ্জামাদি** বিতরণ করা হয়।\n\nশিক্ষার মানোন্নয়ন ও মক্তবের সংখ্যা সম্প্রসারণের লক্ষ্যে **শিক্ষকদের প্রশিক্ষণ ও গাইডলাইন প্রদানের পরিকল্পনা** রয়েছে, যা পর্যাপ্ত আর্থিক সহযোগিতা প্রাপ্তির ভিত্তিতে বাস্তবায়ন করা হবে।\n\n**আমাদের লক্ষ্য—প্রতিটি শিশু ও প্রাপ্তবয়স্ক যেন সহীহভাবে কুরআন পড়তে শেখে এবং দ্বীনের সঠিক জ্ঞান নিয়ে বেড়ে ওঠে।**",
+          },
           impactStats: [
-            { value: "৩০+", label: "পরিচালিত মক্তব" },
-            { value: "৩৫০+", label: "উপকৃত শিক্ষার্থী" },
-            { value: "১০০%", label: "বিনামূল্যে শিক্ষা কার্যক্রম" },
+            { icon: "maktab", value: "৩০+", label: "পরিচালিত মক্তব", description: "অত্র অঞ্চলে ইতোমধ্যে পরিচালিত" },
+            { icon: "classroom", value: "৫টি", label: "চলমান মক্তব", description: "বর্তমানে নিয়মিত পাঠদান চলছে" },
+            { icon: "students", value: "৩৫০+", label: "উপকৃত শিক্ষার্থী", description: "ছোট-বড়, পুরুষ-মহিলা মিলিয়ে" },
+            { icon: "free", value: "১০০%", label: "বিনামূল্যে শিক্ষা", description: "শিক্ষা ব্যয় ও কোর্স ফি সম্পূর্ণ ফ্রি" },
+            { icon: "quran", value: "ফ্রি", label: "কুরআন ও শিক্ষা সরঞ্জাম", description: "শিক্ষার্থীদের মাঝে বিনামূল্যে বিতরণ" },
+            { icon: "teacher", value: "পরিকল্পিত", label: "শিক্ষক প্রশিক্ষণ", description: "পাঠদানের মানোন্নয়নে প্রশিক্ষণ ও গাইডলাইন" },
           ],
         },
         {
@@ -457,6 +549,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "নির্ধারিত মসজিদভিত্তিক এলাকা",
           duration: "চলমান প্রকল্প",
           faq: PROJECT_FAQ_BN,
+          impactIntro: {
+            title: "সঠিক দ্বীনি জ্ঞান ছড়িয়ে দেওয়ার পথচলা",
+            body:
+              "বিভিন্ন মসজিদে **বিশুদ্ধ আকিদা ও মানহাজ ভিত্তিক ইসলামী পাঠাগার** স্থাপন করা হয়, যেখানে মুসল্লি ও সাধারণ পাঠকেরা সহজে নির্ভরযোগ্য দ্বীনি বই পড়ার সুযোগ পান।\n\nপাশাপাশি **ফ্রি ইসলামী বই, লিফলেট ও দোয়ার চার্ট** প্রকাশ ও বিতরণ করা হয়, যাতে সাধারণ মানুষ সহজে সঠিক দ্বীনি জ্ঞান অর্জন করতে পারেন।\n\n**আমাদের লক্ষ্য—প্রতিটি ঘরে ও মসজিদে বিশুদ্ধ দ্বীনি জ্ঞানের আলো পৌঁছে দেওয়া।**",
+          },
+          impactStats: [
+            { icon: "library", value: "পাঠাগার", label: "মসজিদভিত্তিক ইসলামী পাঠাগার", description: "বিশুদ্ধ আকিদা ও মানহাজ ভিত্তিক" },
+            { icon: "books", value: "ফ্রি", label: "ইসলামী বই", description: "বিনামূল্যে প্রকাশ ও বিতরণ" },
+            { icon: "publication", value: "ফ্রি", label: "লিফলেট", description: "সহজ ভাষায় দ্বীনের সঠিক বার্তা" },
+            { icon: "dua", value: "চার্ট", label: "দোয়ার চার্ট", description: "দৈনন্দিন আমলের সহায়ক প্রকাশনা" },
+            { icon: "readers", value: "উন্মুক্ত", label: "মুসল্লি ও সাধারণ পাঠক", description: "সবার জন্য দ্বীনি জ্ঞান অর্জনের সুযোগ" },
+            { icon: "ongoing", value: "চলমান", label: "নিয়মিত কার্যক্রম", description: "নির্ধারিত মসজিদভিত্তিক এলাকায়" },
+          ],
         },
         {
           slug: "zakat-o-sadaka",
@@ -479,6 +584,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "নির্ধারিত এলাকার হকদার পরিবার",
           duration: "বার্ষিক ও চলমান প্রকল্প",
           faq: PROJECT_FAQ_BN,
+          impactIntro: {
+            title: "যাকাত ও সাদকা বণ্টনে আমাদের নীতি",
+            body:
+              "কুরআন মাজীদে বর্ণিত **যাকাতের ৮টি খাত** অনুসরণ করে অগ্রাধিকার ভিত্তিতে হকদারদের মাঝে যাকাত ও সাদকার অর্থ সঠিকভাবে বণ্টন করা হয়।\n\nপ্রতিটি বণ্টনের আগে **প্রকৃত হকদার যাচাই-বাছাই** ও অগ্রাধিকার নির্ধারণ করা হয়, এবং **স্বচ্ছ ও জবাবদিহিমূলক** প্রক্রিয়ায় নগদ অর্থ বা প্রয়োজনীয় সামগ্রী নির্ধারিত এলাকার হকদার পরিবারের হাতে পৌঁছে দেওয়া হয়।\n\n**আমাদের লক্ষ্য—আপনার প্রতিটি যাকাত ও সাদকা যেন সঠিক খাতে, প্রকৃত হকদারের কাছে পৌঁছায়।**",
+          },
+          impactStats: [
+            { icon: "scale", value: "৮টি", label: "যাকাতের খাত", description: "কুরআন মাজীদে বর্ণিত খাত অনুসরণ" },
+            { icon: "verify", value: "যাচাই", label: "প্রকৃত হকদার নির্বাচন", description: "যাচাই-বাছাইয়ের মাধ্যমে নির্ধারণ" },
+            { icon: "priority", value: "অগ্রাধিকার", label: "প্রয়োজনভিত্তিক বণ্টন", description: "সবচেয়ে প্রয়োজনগ্রস্তদের আগে" },
+            { icon: "transparency", value: "স্বচ্ছ", label: "জবাবদিহিমূলক বাস্তবায়ন", description: "স্বচ্ছ ও জবাবদিহিমূলক বণ্টন" },
+            { icon: "giving", value: "নগদ ও সামগ্রী", label: "সরাসরি বিতরণ", description: "হকদার পরিবারের হাতে সরাসরি" },
+            { icon: "ongoing", value: "বার্ষিক", label: "চলমান কার্যক্রম", description: "বার্ষিক ও চলমান প্রকল্প" },
+          ],
         },
         {
           slug: "yatim-talibe-ilm-o-daridro",
@@ -501,6 +619,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "নির্ধারিত এলাকার উপকারভোগী পরিবার",
           duration: "দীর্ঘমেয়াদী ও চলমান প্রকল্প",
           faq: PROJECT_FAQ_BN,
+          impactIntro: {
+            title: "ইয়াতীম, তালিবে ইলম ও দরিদ্রদের পাশে আমাদের পথচলা",
+            body:
+              "**ইয়াতিম ও গরিব তালিবুল ইলমদের** শিক্ষা ও ভরণপোষণের দায়িত্ব নিয়ে তাদের পৃষ্ঠপোষকতা করা হয়, যাতে আর্থিক অসচ্ছলতা তাদের দ্বীনি শিক্ষার পথে বাধা না হয়।\n\nপাশাপাশি সমাজের **দরিদ্র ও মিসকিন মানুষদের** প্রয়োজন অনুযায়ী সহযোগিতা প্রদান করা হয়—নিয়মিত মাসিক সহায়তা থেকে শুরু করে জরুরি প্রয়োজনে পাশে দাঁড়ানো পর্যন্ত।\n\n**আমাদের লক্ষ্য—কোনো ইয়াতিম শিশু বা তালিবুল ইলম যেন অভাবের কারণে শিক্ষা থেকে বঞ্চিত না হয়।**",
+          },
+          impactStats: [
+            { icon: "orphan", value: "পৃষ্ঠপোষকতা", label: "ইয়াতিম শিক্ষার্থী", description: "শিক্ষা ও ভরণপোষণের দায়িত্ব" },
+            { icon: "scholar", value: "সহায়তা", label: "গরিব তালিবুল ইলম", description: "ভরণপোষণে সহযোগিতা" },
+            { icon: "monthly", value: "মাসিক", label: "নিয়মিত সহায়তা", description: "নিয়মিত মাসিক সহায়তা প্রদান" },
+            { icon: "family", value: "প্রয়োজনভিত্তিক", label: "দরিদ্র ও মিসকিন", description: "প্রয়োজন অনুযায়ী সহযোগিতা" },
+            { icon: "emergency", value: "জরুরি", label: "জরুরি সহায়তা", description: "বিপদের সময় পাশে দাঁড়ানো" },
+            { icon: "longTerm", value: "দীর্ঘমেয়াদী", label: "চলমান প্রকল্প", description: "ধারাবাহিক পৃষ্ঠপোষকতা" },
+          ],
         },
         {
           slug: "tube-well-o-jonokollan",
@@ -523,6 +654,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "পানির সংকটপূর্ণ নির্ধারিত এলাকা",
           duration: "প্রয়োজন ভিত্তিক প্রকল্প",
           faq: PROJECT_FAQ_BN,
+          impactIntro: {
+            title: "বিশুদ্ধ পানি ও জনকল্যাণে আমাদের উদ্যোগ",
+            body:
+              "নিরাপদ ও বিশুদ্ধ পানির সংকট নিরসনে প্রয়োজনীয় এলাকায় **টিউবওয়েল স্থাপন** করা হয় এবং স্থাপিত টিউবওয়েলের **রক্ষণাবেক্ষণ** নিশ্চিত করা হয়।\n\nপাশাপাশি এলাকাবাসীর প্রয়োজন অনুযায়ী **অন্যান্য জনকল্যাণমূলক কার্যক্রম** পরিচালিত হয়।\n\n**আমাদের লক্ষ্য—পানির সংকটে থাকা প্রতিটি এলাকায় নিরাপদ পানির ব্যবস্থা করা, যা ইনশাআল্লাহ দাতার জন্য সদকায়ে জারিয়া হয়ে থাকবে।**",
+          },
+          impactStats: [
+            { icon: "water", value: "টিউবওয়েল", label: "টিউবওয়েল স্থাপন", description: "পানির সংকটপূর্ণ এলাকায়" },
+            { icon: "transparency", value: "নিরাপদ", label: "বিশুদ্ধ পানি", description: "পানির সংকট নিরসন" },
+            { icon: "maintenance", value: "রক্ষণাবেক্ষণ", label: "নিয়মিত তদারকি", description: "স্থাপিত টিউবওয়েলের যত্ন" },
+            { icon: "welfare", value: "জনকল্যাণ", label: "অন্যান্য উদ্যোগ", description: "এলাকাবাসীর প্রয়োজন অনুযায়ী" },
+            { icon: "community", value: "এলাকাবাসী", label: "উপকারভোগী", description: "পানির সংকটে থাকা জনগোষ্ঠী" },
+            { icon: "sadaqahJariyah", value: "সদকায়ে জারিয়া", label: "চলমান সওয়াব", description: "ইনশাআল্লাহ দীর্ঘস্থায়ী প্রতিদান" },
+          ],
         },
         {
           slug: "brikkhoropon",
@@ -545,6 +689,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "নির্ধারিত এলাকার রাস্তা ও উন্মুক্ত জায়গা",
           duration: "বার্ষিক ও চলমান প্রকল্প",
           faq: PROJECT_FAQ_BN,
+          impactIntro: {
+            title: "সবুজ প্রকৃতি গড়ার পথচলা",
+            body:
+              "পরিবেশ সুরক্ষা ও সবুজ প্রকৃতি গড়ে তুলতে বিভিন্ন এলাকার রাস্তা ও উন্মুক্ত জায়গায় **বৃক্ষরোপণ কর্মসূচি** পরিচালনা করা হয়।\n\nশুধু চারা রোপণই নয়—রোপিত গাছের **পরিচর্যা ও রক্ষণাবেক্ষণ** এবং বৃক্ষরোপণে **জনসচেতনতা বৃদ্ধি** এই কার্যক্রমের অংশ, যা দীর্ঘমেয়াদে পরিবেশের ভারসাম্য রক্ষায় ভূমিকা রাখে।\n\n**আমাদের লক্ষ্য—টেকসই ও পরিবেশবান্ধব উদ্যোগের মাধ্যমে আগামী প্রজন্মের জন্য একটি সবুজ সমাজ গড়ে তোলা।**",
+          },
+          impactStats: [
+            { icon: "tree", value: "বৃক্ষরোপণ", label: "বৃক্ষরোপণ কর্মসূচি", description: "বিভিন্ন এলাকায় চারা রোপণ" },
+            { icon: "greening", value: "সবুজায়ন", label: "পরিবেশ সুরক্ষা", description: "পরিবেশের ভারসাম্য রক্ষা" },
+            { icon: "awareness", value: "সচেতনতা", label: "জনসচেতনতা বৃদ্ধি", description: "বৃক্ষরোপণে উৎসাহ প্রদান" },
+            { icon: "care", value: "পরিচর্যা", label: "রোপিত গাছের যত্ন", description: "পরিচর্যা ও রক্ষণাবেক্ষণ" },
+            { icon: "sustainable", value: "টেকসই", label: "পরিবেশবান্ধব উদ্যোগ", description: "দীর্ঘমেয়াদী পরিবেশ উন্নয়ন" },
+            { icon: "ongoing", value: "বার্ষিক", label: "চলমান কর্মসূচি", description: "রাস্তা ও উন্মুক্ত জায়গায়" },
+          ],
         },
         {
           slug: "free-chikitsha-o-manobik-sahajjo",
@@ -567,6 +724,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "নির্ধারিত এলাকার অসচ্ছল পরিবার",
           duration: "প্রয়োজন ভিত্তিক ও চলমান প্রকল্প",
           faq: PROJECT_FAQ_BN,
+          impactIntro: {
+            title: "অসুস্থ ও দুর্গত মানুষের পাশে আমাদের পথচলা",
+            body:
+              "আর্থিকভাবে অসচ্ছল মানুষদের জন্য **ফ্রি চিকিৎসা সেবা** ও **চিকিৎসা-ঔষধের খরচে সহায়তার** ব্যবস্থা করা হয় এবং প্রয়োজন অনুযায়ী **মেডিকেল ক্যাম্প** আয়োজন করা হয়।\n\nদুর্যোগ বা জরুরি পরিস্থিতিতে ক্ষতিগ্রস্ত মানুষের মাঝে **প্রয়োজনীয় ত্রাণ ও মানবিক সহায়তা** পৌঁছে দেওয়া হয়, পাশাপাশি স্বাস্থ্যসচেতনতামূলক কার্যক্রমও পরিচালিত হয়।\n\n**আমাদের লক্ষ্য—অর্থের অভাবে কেউ যেন চিকিৎসা থেকে বঞ্চিত না হয় এবং বিপদের সময় কেউ যেন একা না থাকে।**",
+          },
+          impactStats: [
+            { icon: "medical", value: "ফ্রি", label: "চিকিৎসা সেবা", description: "আর্থিকভাবে অসচ্ছলদের জন্য" },
+            { icon: "medicine", value: "ঔষধ", label: "চিকিৎসা ও ঔষধ খরচ", description: "অসচ্ছল রোগীদের সহায়তা" },
+            { icon: "camp", value: "ক্যাম্প", label: "মেডিকেল ক্যাম্প", description: "প্রয়োজন অনুযায়ী আয়োজন" },
+            { icon: "relief", value: "ত্রাণ", label: "জরুরি মানবিক সহায়তা", description: "দুর্যোগ ও জরুরি পরিস্থিতিতে" },
+            { icon: "awareness", value: "সচেতনতা", label: "স্বাস্থ্যসচেতনতা", description: "স্বাস্থ্যসচেতনতামূলক কার্যক্রম" },
+            { icon: "ongoing", value: "চলমান", label: "প্রয়োজনভিত্তিক প্রকল্প", description: "যখন প্রয়োজন, তখনই পাশে" },
+          ],
         },
         {
           slug: "masjid-madrasa-nirman",
@@ -589,6 +759,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "চিহ্নিত মসজিদ-মাদরাসা এলাকা",
           duration: "প্রয়োজন ভিত্তিক প্রকল্প",
           faq: PROJECT_FAQ_BN,
+          impactIntro: {
+            title: "ইবাদত ও দ্বীনি শিক্ষার পরিবেশ গড়ার পথচলা",
+            body:
+              "বিভিন্ন এলাকায় **মসজিদ ও মাদরাসা নির্মাণ কিংবা সংস্কার** কাজে আর্থিক সহযোগিতা প্রদান করা হয়, যাতে দ্বীনি শিক্ষা ও ইবাদতের সুষ্ঠু পরিবেশ নিশ্চিত করা যায়।\n\nস্থানীয় **মসজিদ ও মাদরাসা কমিটির** সাথে সমন্বয় করে নির্মাণ ও সংস্কার সামগ্রী, শ্রমিক ব্যয় এবং কাজের **তদারকি** নিশ্চিত করা হয়।\n\n**আমাদের লক্ষ্য—প্রতিটি এলাকায় ইবাদত ও দ্বীনি শিক্ষার একটি সুন্দর ও সুষ্ঠু পরিবেশ গড়ে তোলা।**",
+          },
+          impactStats: [
+            { icon: "mosque", value: "মসজিদ", label: "মসজিদ নির্মাণে সহায়তা", description: "বিভিন্ন এলাকায় আর্থিক সহযোগিতা" },
+            { icon: "madrasa", value: "মাদরাসা", label: "মাদরাসা নির্মাণে সহায়তা", description: "দ্বীনি শিক্ষার পরিবেশ উন্নয়ন" },
+            { icon: "renovation", value: "সংস্কার", label: "প্রয়োজনীয় সংস্কার", description: "সংস্কার কাজে সহযোগিতা" },
+            { icon: "oversight", value: "তদারকি", label: "কাজের তদারকি", description: "নির্মাণ ও সংস্কার ব্যবস্থাপনা" },
+            { icon: "committee", value: "কমিটি", label: "স্থানীয় কমিটির সাথে", description: "মসজিদ ও মাদরাসা কমিটির সমন্বয়ে" },
+            { icon: "sadaqahJariyah", value: "সদকায়ে জারিয়া", label: "চলমান সওয়াব", description: "ইনশাআল্লাহ দীর্ঘস্থায়ী প্রতিদান" },
+          ],
         },
         {
           slug: "punorbashon-o-kormosangsthan",
@@ -611,6 +794,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "নির্ধারিত এলাকার উপকারভোগী পরিবার",
           duration: "দীর্ঘমেয়াদী ও চলমান প্রকল্প",
           faq: PROJECT_FAQ_BN,
+          impactIntro: {
+            title: "অসহায় পরিবারকে স্বাবলম্বী করার পথচলা",
+            body:
+              "দুস্থ, দরিদ্র ও অসহায় মানুষদের প্রয়োজন অনুযায়ী **ঘর নির্মাণ** করে দেওয়া হয়, যাতে তারা নিরাপদ আশ্রয় পান।\n\nপাশাপাশি **গৃহপালিত পশু বিতরণ** এবং **কর্মসংস্থান প্রশিক্ষণ ও সহায়তার** মাধ্যমে তাদের আয়ের পথ তৈরি করা হয়, যাতে তারা নিজের পায়ে দাঁড়াতে পারেন।\n\n**আমাদের লক্ষ্য—সাময়িক সাহায্যের বদলে অসহায় পরিবারগুলোকে দীর্ঘমেয়াদে স্বাবলম্বী করে তোলা।**",
+          },
+          impactStats: [
+            { icon: "house", value: "ঘর", label: "ঘর নির্মাণ", description: "প্রয়োজন অনুযায়ী আশ্রয়ের ব্যবস্থা" },
+            { icon: "livestock", value: "পশু", label: "গৃহপালিত পশু বিতরণ", description: "আয়ের টেকসই উৎস" },
+            { icon: "employment", value: "কর্মসংস্থান", label: "কাজের সুযোগ", description: "কর্মসংস্থানের ব্যবস্থা" },
+            { icon: "training", value: "প্রশিক্ষণ", label: "কর্মসংস্থান প্রশিক্ষণ", description: "দক্ষতা বৃদ্ধিতে সহায়তা" },
+            { icon: "selfReliance", value: "স্বাবলম্বী", label: "পরিবারের স্বনির্ভরতা", description: "দুস্থ, দরিদ্র ও অসহায় পরিবার" },
+            { icon: "longTerm", value: "দীর্ঘমেয়াদী", label: "চলমান প্রকল্প", description: "ধারাবাহিক সহায়তা" },
+          ],
         },
       ],
       closingNote:
@@ -632,7 +828,7 @@ export const dictionaries: Record<Language, Dictionary> = {
       durationTitle: "মেয়াদ",
       galleryTitle: "গ্যালারি",
       galleryComingSoon: "এই প্রকল্পের ছবি ও ভিডিও শীঘ্রই যুক্ত হবে।",
-      impactTitle: "ইমপ্যাক্ট পরিসংখ্যান",
+      impactTitle: "আমাদের প্রভাব ও কার্যক্রম",
       impactComingSoon: "এই প্রকল্পের পরিসংখ্যান শীঘ্রই যুক্ত হবে।",
       faqTitle: "সাধারণ জিজ্ঞাসা",
       notFoundTitle: "প্রকল্পটি খুঁজে পাওয়া যায়নি",
@@ -694,6 +890,7 @@ export const dictionaries: Record<Language, Dictionary> = {
     footer: {
       tagline: "আস্-সালসাবিল ফাউন্ডেশন — সাদাকায়ে জারিয়ামূলক কার্যক্রম, প্রতিষ্ঠিত ২০২১।",
       rights: "সর্বস্বত্ব সংরক্ষিত।",
+      backToTop: "উপরে যান",
     },
   },
   en: {
@@ -708,8 +905,9 @@ export const dictionaries: Record<Language, Dictionary> = {
     home: {
       heroEyebrow: "Established 2021",
       heroTitle: "As-Salsabil Foundation",
+      heroLocation: "Anandabazar, Kochashahar, Gobindaganj, Gaibandha",
       heroSubtitle:
-        "Mukundapur (Kanaipara), Kochashahar, Gobindaganj, Gaibandha — serving the faith and humanity through ongoing charitable (sadaqah jariyah) work",
+        "Serving the faith and humanity through ongoing charitable (sadaqah jariyah) work",
       heroQuote:
         "“Those who recite the Book of Allah, establish prayer, and spend out of what We have provided for them, secretly and openly, can hope for a trade that will never perish.”",
       heroQuoteSource: "Surah Fatir, Verse 29",
@@ -865,6 +1063,22 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Locations as needed, and online",
           duration: "Regular, ongoing program since 2021",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey in Dawah and Religious Work",
+            body:
+              "**Since 2021,** As-Salsabil Foundation has worked steadily to carry the call to sound aqeedah and authentic manhaj, in the light of the Qur'an and Sunnah, to the people.\n\nAs part of our regular work, a **monthly dars and ta'limi gathering** is held every month. In addition, during the blessed month of Ramadan, a **Sudhi Somabesh** (Gathering of Well-Wishers) and religious talks are organized with renowned scholars and da'is from across the country.\n\nAlongside these organized events, our dawah continues online. Our YouTube channel, **As-Salsabil TV**, carries the correct message of Islam to a wider audience through Jumu'ah khutbahs, religious talks and educational videos. Religious content is likewise shared regularly through the **As-Salsabil Foundation** Facebook page.\n\nIn addition, through an Islamic conference held every year, the **Salsabil Conference**, we strive to play a special role in spreading the call to sound aqeedah, authentic manhaj and a way of life based on the Qur'an and Sunnah.\n\nTo further religious learning and Islamic education, the Foundation also runs ongoing **publishing work, including books, prepared and distributed dua and dhikr charts, and other educational publications**. Through these initiatives, we aim to make Islamic learning easier for individuals and families and to encourage putting the teachings of the Qur'an and Sunnah into practice in daily life.\n\n**Our aim is to awaken a pure religious consciousness in the individual, the family and society, and to contribute to building a model society in the light of the Qur'an and Sunnah.**",
+          },
+          impactStats: [
+            { icon: "milestone", value: "2021", label: "On the path since our founding", description: "Continuous dawah activities" },
+            { icon: "monthly", value: "Monthly", label: "Dars & ta'limi gathering", description: "Regular religious learning and discussion" },
+            { icon: "gathering", value: "Annual", label: "Sudhi Somabesh", description: "Special religious program in Ramadan" },
+            { icon: "conference", value: "Annual", label: "Salsabil Conference", description: "The call to sound aqeedah and authentic manhaj" },
+            { icon: "youtube", value: "YouTube", label: "As-Salsabil TV", description: "Religious outreach on YouTube" },
+            { icon: "facebook", value: "Facebook", label: "As-Salsabil Foundation", description: "Dawah activities on Facebook" },
+            { icon: "books", value: "Books", label: "Islamic book publishing", description: "Publishing books that support religious learning" },
+            { icon: "dua", value: "Charts", label: "Dua & dhikr charts", description: "Encouraging daily acts of worship and following the Sunnah" },
+            { icon: "publication", value: "Materials", label: "Educational publications", description: "Creating and distributing materials to spread Islamic education" },
+          ],
         },
         {
           slug: "quran-o-deeni-shikkhadan",
@@ -888,10 +1102,18 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Mosque-based, designated areas",
           duration: "Ongoing, regular program",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey in Qur'an & Islamic Teaching",
+            body:
+              "Through the Maktab education program run under As-Salsabil Foundation's supervision, **more than 30 maktabs** have already been run across the area, and **5 maktabs are running today**. These maktabs teach children, teenagers and students of all ages the Qur'an, aqidah and essential Islamic knowledge, grounded in correct religious understanding and sound manhaj.\n\nAll education costs and course fees for **more than 350 students**, young and old, men and women, have been covered completely free of charge, and this continues today. Students also receive **free Qur'ans and the study materials they need**.\n\nTo raise teaching quality and expand the number of maktabs, there are **plans for teacher training and guidelines**, to be carried out as sufficient funding is secured.\n\n**Our aim is that every child and adult learns to recite the Qur'an correctly and grows up with sound knowledge of the deen.**",
+          },
           impactStats: [
-            { value: "30+", label: "Maktabs run" },
-            { value: "350+", label: "Students benefited" },
-            { value: "100%", label: "Free of charge" },
+            { icon: "maktab", value: "30+", label: "Maktabs run", description: "Already run across the area" },
+            { icon: "classroom", value: "5", label: "Active maktabs", description: "Regular classes running today" },
+            { icon: "students", value: "350+", label: "Students benefited", description: "Young and old, men and women" },
+            { icon: "free", value: "100%", label: "Free education", description: "Education costs and course fees fully covered" },
+            { icon: "quran", value: "Free", label: "Qur'ans & study materials", description: "Distributed to students at no cost" },
+            { icon: "teacher", value: "Planned", label: "Teacher training", description: "Training and guidelines to raise teaching quality" },
           ],
         },
         {
@@ -915,6 +1137,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Designated mosque-based areas",
           duration: "Ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey in Spreading Authentic Knowledge",
+            body:
+              "**Islamic libraries grounded in correct aqeedah and manhaj** are set up in various mosques, giving worshippers and general readers easy access to reliable Islamic books.\n\nAlongside this, **free Islamic books, leaflets and dua charts** are published and distributed so that people can easily gain authentic knowledge of the deen.\n\n**Our aim is to bring the light of authentic religious knowledge into every home and mosque.**",
+          },
+          impactStats: [
+            { icon: "library", value: "Libraries", label: "Mosque-based Islamic libraries", description: "Grounded in correct aqeedah and manhaj" },
+            { icon: "books", value: "Free", label: "Islamic books", description: "Published and distributed at no cost" },
+            { icon: "publication", value: "Free", label: "Leaflets", description: "The correct message of the deen, simply put" },
+            { icon: "dua", value: "Charts", label: "Dua charts", description: "Publications that support daily worship" },
+            { icon: "readers", value: "Open", label: "Worshippers & general readers", description: "A chance for everyone to learn the deen" },
+            { icon: "ongoing", value: "Ongoing", label: "Regular activity", description: "In designated mosque-based areas" },
+          ],
         },
         {
           slug: "zakat-o-sadaka",
@@ -937,6 +1172,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Eligible families in designated areas",
           duration: "Annual, ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Principles in Distributing Zakat & Sadaqah",
+            body:
+              "Following the **8 categories of zakat** described in the Qur'an, zakat and sadaqah funds are distributed accurately and on a priority basis to those who are entitled.\n\nBefore each distribution, **genuine recipients are verified** and priorities are set, and cash or needed goods reach eligible families in designated areas through a **transparent and accountable** process.\n\n**Our aim is that every zakat and sadaqah you give reaches the right category and the person truly entitled to it.**",
+          },
+          impactStats: [
+            { icon: "scale", value: "8", label: "Categories of zakat", description: "As described in the Qur'an" },
+            { icon: "verify", value: "Verified", label: "Genuine recipients", description: "Selected through careful verification" },
+            { icon: "priority", value: "Priority", label: "Needs-based distribution", description: "Those in greatest need first" },
+            { icon: "transparency", value: "Transparent", label: "Accountable implementation", description: "Transparent, accountable distribution" },
+            { icon: "giving", value: "Cash & goods", label: "Direct distribution", description: "Straight into eligible families' hands" },
+            { icon: "ongoing", value: "Annual", label: "Ongoing activity", description: "An annual, ongoing project" },
+          ],
         },
         {
           slug: "yatim-talibe-ilm-o-daridro",
@@ -959,6 +1207,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Beneficiary families in designated areas",
           duration: "Long-term, ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey Beside Orphans, Students of Knowledge & the Poor",
+            body:
+              "**Orphans and poor students of Islamic knowledge** are sponsored for their education and upkeep, so that financial hardship does not stand in the way of their religious learning.\n\nAlongside this, **poor and needy members of society** receive support according to their needs, from regular monthly assistance to standing beside them in emergencies.\n\n**Our aim is that no orphan or student of knowledge is kept from learning because of poverty.**",
+          },
+          impactStats: [
+            { icon: "orphan", value: "Sponsorship", label: "Orphaned students", description: "Education and upkeep covered" },
+            { icon: "scholar", value: "Support", label: "Poor students of knowledge", description: "Help with their upkeep" },
+            { icon: "monthly", value: "Monthly", label: "Regular assistance", description: "Regular monthly support" },
+            { icon: "family", value: "As needed", label: "The poor & needy", description: "Support according to need" },
+            { icon: "emergency", value: "Emergency", label: "Emergency assistance", description: "Standing beside people in hard times" },
+            { icon: "longTerm", value: "Long-term", label: "Ongoing project", description: "Continuous sponsorship" },
+          ],
         },
         {
           slug: "tube-well-o-jonokollan",
@@ -981,6 +1242,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Designated water-scarce areas",
           duration: "As-needed project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Work for Safe Water & Public Welfare",
+            body:
+              "To ease shortages of safe drinking water, **tube wells are installed** in the areas that need them, and their **maintenance** is looked after.\n\nAlongside this, **other public welfare initiatives** are carried out according to local needs.\n\n**Our aim is to bring safe water to every water-scarce community, a good deed that, in sha Allah, remains a sadaqah jariyah for the donor.**",
+          },
+          impactStats: [
+            { icon: "water", value: "Tube wells", label: "Tube well installation", description: "In water-scarce areas" },
+            { icon: "transparency", value: "Safe", label: "Clean drinking water", description: "Easing water shortages" },
+            { icon: "maintenance", value: "Maintenance", label: "Regular upkeep", description: "Care for installed tube wells" },
+            { icon: "welfare", value: "Welfare", label: "Other initiatives", description: "According to local needs" },
+            { icon: "community", value: "Communities", label: "Beneficiaries", description: "People facing water shortages" },
+            { icon: "sadaqahJariyah", value: "Sadaqah jariyah", label: "Continuing reward", description: "A lasting reward, in sha Allah" },
+          ],
         },
         {
           slug: "brikkhoropon",
@@ -1003,6 +1277,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Roadsides and open spaces in designated areas",
           duration: "Annual, ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey Toward a Greener Community",
+            body:
+              "To protect the environment and build a greener community, **tree plantation drives** are carried out along roadsides and in open spaces in various areas.\n\nIt isn't only about planting: **caring for and maintaining** the trees planted and **raising public awareness** about tree plantation are part of the work, helping preserve ecological balance over the long term.\n\n**Our aim is to build a greener society for the next generation through sustainable, eco-friendly initiatives.**",
+          },
+          impactStats: [
+            { icon: "tree", value: "Plantation", label: "Tree plantation drives", description: "Saplings planted in various areas" },
+            { icon: "greening", value: "Greening", label: "Environmental protection", description: "Preserving ecological balance" },
+            { icon: "awareness", value: "Awareness", label: "Public awareness", description: "Encouraging tree plantation" },
+            { icon: "care", value: "Care", label: "Caring for planted trees", description: "Ongoing care and maintenance" },
+            { icon: "sustainable", value: "Sustainable", label: "Eco-friendly initiatives", description: "Long-term environmental improvement" },
+            { icon: "ongoing", value: "Annual", label: "Ongoing program", description: "Along roadsides and in open spaces" },
+          ],
         },
         {
           slug: "free-chikitsha-o-manobik-sahajjo",
@@ -1025,6 +1312,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Underprivileged families in designated areas",
           duration: "As-needed, ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey Beside the Sick & Those Affected by Disaster",
+            body:
+              "For those who cannot afford it, **free medical care** and **help with treatment and medicine costs** are arranged, and **medical camps** are organized as needed.\n\nDuring disasters and emergencies, **relief and humanitarian assistance** is delivered to affected people, and health-awareness programs are carried out as well.\n\n**Our aim is that no one goes without treatment for lack of money, and no one is left alone in a time of crisis.**",
+          },
+          impactStats: [
+            { icon: "medical", value: "Free", label: "Medical care", description: "For those in financial need" },
+            { icon: "medicine", value: "Medicine", label: "Treatment & medicine costs", description: "Support for patients in need" },
+            { icon: "camp", value: "Camps", label: "Medical camps", description: "Organized as needed" },
+            { icon: "relief", value: "Relief", label: "Emergency humanitarian aid", description: "During disasters and emergencies" },
+            { icon: "awareness", value: "Awareness", label: "Health awareness", description: "Health-awareness programs" },
+            { icon: "ongoing", value: "Ongoing", label: "Needs-based project", description: "There whenever help is needed" },
+          ],
         },
         {
           slug: "masjid-madrasa-nirman",
@@ -1047,6 +1347,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Identified mosque-madrasa locations",
           duration: "As-needed project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey in Building Places of Worship & Learning",
+            body:
+              "Financial support is provided for **constructing or renovating mosques and madrasas** in various areas, helping ensure a proper environment for worship and Islamic education.\n\nWorking with local **mosque and madrasa committees**, we cover construction and renovation materials and labor, and make sure the work is properly **overseen**.\n\n**Our aim is to build a beautiful, proper environment for worship and Islamic learning in every community.**",
+          },
+          impactStats: [
+            { icon: "mosque", value: "Mosques", label: "Mosque construction support", description: "Financial support in various areas" },
+            { icon: "madrasa", value: "Madrasas", label: "Madrasa construction support", description: "Better settings for Islamic learning" },
+            { icon: "renovation", value: "Renovation", label: "Necessary renovation", description: "Support for renovation work" },
+            { icon: "oversight", value: "Oversight", label: "Project oversight", description: "Managing construction and renovation" },
+            { icon: "committee", value: "Committees", label: "With local committees", description: "In coordination with mosque and madrasa committees" },
+            { icon: "sadaqahJariyah", value: "Sadaqah jariyah", label: "Continuing reward", description: "A lasting reward, in sha Allah" },
+          ],
         },
         {
           slug: "punorbashon-o-kormosangsthan",
@@ -1069,6 +1382,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Beneficiary families in designated areas",
           duration: "Long-term, ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey in Helping Families Become Self-Reliant",
+            body:
+              "**Homes are built** as needed for the destitute, poor and helpless, so that they have safe shelter.\n\nAlongside this, **livestock distribution** and **employment training and support** open a path to an income, so they can stand on their own feet.\n\n**Our aim is not short-term help, but making struggling families self-reliant over the long term.**",
+          },
+          impactStats: [
+            { icon: "house", value: "Homes", label: "Home construction", description: "Shelter built as needed" },
+            { icon: "livestock", value: "Livestock", label: "Livestock distribution", description: "A sustainable source of income" },
+            { icon: "employment", value: "Employment", label: "Work opportunities", description: "Employment arranged" },
+            { icon: "training", value: "Training", label: "Employment training", description: "Help building skills" },
+            { icon: "selfReliance", value: "Self-reliant", label: "Family self-reliance", description: "Destitute, poor and helpless families" },
+            { icon: "longTerm", value: "Long-term", label: "Ongoing project", description: "Continuous support" },
+          ],
         },
       ],
       closingNote:
@@ -1090,7 +1416,7 @@ export const dictionaries: Record<Language, Dictionary> = {
       durationTitle: "Duration",
       galleryTitle: "Gallery",
       galleryComingSoon: "Photos and videos for this project are coming soon.",
-      impactTitle: "Impact Statistics",
+      impactTitle: "Our Impact & Activities",
       impactComingSoon: "Statistics for this project are coming soon.",
       faqTitle: "Frequently Asked Questions",
       notFoundTitle: "Project Not Found",
@@ -1151,6 +1477,7 @@ export const dictionaries: Record<Language, Dictionary> = {
     footer: {
       tagline: "As-Salsabil Foundation — ongoing charitable (sadaqah jariyah) work, established 2021.",
       rights: "All rights reserved.",
+      backToTop: "Back to top",
     },
   },
 };

@@ -22,6 +22,7 @@ export const siteConfig = {
     previewWidth: 910,
     previewHeight: 1287,
   },
+  bismillahArabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
   // Surah Fatir (35), ayah 29 — verified against quran.com/en/fatir/29.
   // Arabic script doesn't change between the bn/en language toggle.
   quranVerseArabic:
