@@ -59,7 +59,9 @@ export const HeroHeading = ({ eyebrow, title, location, subtitle }: HeroHeadingP
         <span className="h-px w-8 xs:w-12 bg-gradient-to-l from-transparent to-amber-400/60" aria-hidden="true" />
       </div>
 
-      <h1 className="mt-5 py-1 text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold leading-snug bg-gradient-to-b from-amber-50 via-amber-200 to-amber-400 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(251,191,36,0.25)]">
+      {/* Extra line-height + padding: bg-clip-text only paints inside the box, and
+          Bengali vowel signs (ি, ী, ৈ) rise above it, so tight leading clips their tops. */}
+      <h1 className="mt-3 pt-4 pb-2 text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.5] bg-gradient-to-b from-amber-50 via-amber-200 to-amber-400 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(251,191,36,0.25)]">
         {title}
       </h1>
 
