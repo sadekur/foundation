@@ -1383,6 +1383,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Beneficiary families in designated areas",
           duration: "Long-term, ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey in Helping Families Become Self-Reliant",
+            body:
+              "**Homes are built** as needed for the destitute, poor and helpless, so that they have safe shelter.\n\nAlongside this, **livestock distribution** and **employment training and support** open a path to an income, so they can stand on their own feet.\n\n**Our aim is not short-term help, but making struggling families self-reliant over the long term.**",
+          },
+          impactStats: [
+            { icon: "house", value: "Homes", label: "Home construction", description: "Shelter built as needed" },
+            { icon: "livestock", value: "Livestock", label: "Livestock distribution", description: "A sustainable source of income" },
+            { icon: "employment", value: "Employment", label: "Work opportunities", description: "Employment arranged" },
+            { icon: "training", value: "Training", label: "Employment training", description: "Help building skills" },
+            { icon: "selfReliance", value: "Self-reliant", label: "Family self-reliance", description: "Destitute, poor and helpless families" },
+            { icon: "longTerm", value: "Long-term", label: "Ongoing project", description: "Continuous support" },
+          ],
         },
       ],
       closingNote:
