@@ -1,6 +1,7 @@
-// Server-only Firebase Admin SDK setup. Used exclusively to verify the admin's Firebase ID
-// token on the two Gallery API routes that touch Cloudinary (app/api/gallery/sign,
-// app/api/gallery/delete) — those routes hold a secret (the Cloudinary API secret) that
+// Server-only Firebase Admin SDK setup. Used to verify the admin's Firebase ID token on the
+// admin-only API routes (the two Gallery routes that touch Cloudinary, app/api/gallery/sign and
+// app/api/gallery/delete, plus app/api/analytics), and for the website analytics' Firestore
+// reads/writes (getAdminDb below). The Gallery routes hold a secret (the Cloudinary API secret) that
 // Firestore's own security rules can't protect, unlike ordinary Firestore reads/writes, which
 // this app already leaves to console-managed rules (see CLAUDE.md). This app has exactly one
 // admin and no role system anywhere (matches /salsabilownerlogin's "logged in == admin" model),
