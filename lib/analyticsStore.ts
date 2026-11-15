@@ -93,11 +93,11 @@ const classifyEntry = (entry: NonNullable<AnalyticsHitPayload["entry"]>, ownHost
   }
 
   // Tagged links beat the referrer; Facebook/Google ad click IDs beat a missing one.
-  if (utm) source = UTM_ALIASES[utm] ?? utm.replace(/[^a-z0-9 ._-]/g, "") ?? source;
+  if (utm) source = UTM_ALIASES[utm] ?? (utm.replace(/[^a-z0-9 ._-]/g, "") || source);
   else if (source === DIRECT_SOURCE && params.has("fbclid")) source = "Facebook";
   else if (source === DIRECT_SOURCE && params.has("gclid")) source = "Google";
 
-  return { source: source || DIRECT_SOURCE, referrerHost };
+  return { source, referrerHost };
 };
 
 const detectDevice = (ua: string) => {
