@@ -27,6 +27,11 @@ const getAdminApp = (): App => {
   });
 };
 
+// Server-side Firestore, used only by the website analytics (lib/analyticsStore.ts): page views
+// are written by the public /api/analytics/collect route and read by the admin-only
+// /api/analytics route, so the analytics collections need no Firestore security rules at all.
+export const getAdminDb = (): Firestore => getFirestore(getAdminApp());
+
 // Returns the verified uid on success, or null if the request isn't from an authenticated admin.
 export const verifyAdminRequest = async (request: Request): Promise<string | null> => {
   const authHeader = request.headers.get("authorization");
