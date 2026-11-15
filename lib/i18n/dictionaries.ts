@@ -829,7 +829,7 @@ export const dictionaries: Record<Language, Dictionary> = {
       durationTitle: "মেয়াদ",
       galleryTitle: "গ্যালারি",
       galleryComingSoon: "এই প্রকল্পের ছবি ও ভিডিও শীঘ্রই যুক্ত হবে।",
-      impactTitle: "ইমপ্যাক্ট পরিসংখ্যান",
+      impactTitle: "আমাদের প্রভাব ও কার্যক্রম",
       impactComingSoon: "এই প্রকল্পের পরিসংখ্যান শীঘ্রই যুক্ত হবে।",
       faqTitle: "সাধারণ জিজ্ঞাসা",
       notFoundTitle: "প্রকল্পটি খুঁজে পাওয়া যায়নি",
