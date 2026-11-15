@@ -46,6 +46,24 @@ const CATEGORY_ICONS = [
   Home,
 ];
 
+const IMPACT_ICONS: Record<ProjectImpactIcon, LucideIcon> = {
+  milestone: Flag,
+  monthly: CalendarDays,
+  gathering: UsersRound,
+  conference: MicVocal,
+  youtube: Youtube,
+  facebook: Facebook,
+  books: BookOpenText,
+  dua: ScrollText,
+  publication: Newspaper,
+};
+
+// Social cards link out only once siteConfig has a real URL (facebook.href is still "").
+const IMPACT_LINKS: Partial<Record<ProjectImpactIcon, string>> = {
+  youtube: siteConfig.youtube.href || undefined,
+  facebook: siteConfig.facebook.href || undefined,
+};
+
 interface ProjectDetailContentProps {
   slug: string;
   galleryItems: GalleryItem[];
