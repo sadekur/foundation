@@ -1243,6 +1243,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Designated water-scarce areas",
           duration: "As-needed project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Work for Safe Water & Public Welfare",
+            body:
+              "To ease shortages of safe drinking water, **tube wells are installed** in the areas that need them, and their **maintenance** is looked after.\n\nAlongside this, **other public welfare initiatives** are carried out according to local needs.\n\n**Our aim is to bring safe water to every water-scarce community, a good deed that, in sha Allah, remains a sadaqah jariyah for the donor.**",
+          },
+          impactStats: [
+            { icon: "water", value: "Tube wells", label: "Tube well installation", description: "In water-scarce areas" },
+            { icon: "transparency", value: "Safe", label: "Clean drinking water", description: "Easing water shortages" },
+            { icon: "maintenance", value: "Maintenance", label: "Regular upkeep", description: "Care for installed tube wells" },
+            { icon: "welfare", value: "Welfare", label: "Other initiatives", description: "According to local needs" },
+            { icon: "community", value: "Communities", label: "Beneficiaries", description: "People facing water shortages" },
+            { icon: "sadaqahJariyah", value: "Sadaqah jariyah", label: "Continuing reward", description: "A lasting reward, in sha Allah" },
+          ],
         },
         {
           slug: "brikkhoropon",
