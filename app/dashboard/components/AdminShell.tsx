@@ -30,7 +30,10 @@ const NAV_GROUPS: NavGroup[] = [
   },
   {
     label: "Website",
-    items: [{ href: "/dashboard/gallery", label: "Gallery", icon: Images }],
+    items: [
+      { href: "/dashboard/gallery", label: "Gallery", icon: Images },
+      { href: "/dashboard/analytics", label: "Analytics", icon: ChartLine },
+    ],
   },
 ];
 
