@@ -38,6 +38,9 @@ Firebase (Auth + Firestore) remains the backend for the admin half, unchanged fr
 /dashboard/finance     Admin: donation/expense tracker (auth-gated by app/dashboard/components/AdminShell)
 /dashboard/summary     Admin: yearly summary across all projects (read-only)
 /dashboard/gallery     Admin: Gallery manager
+/dashboard/analytics   Admin: website analytics (views/visits/visitors, sources, pages, geo, devices)
+/api/analytics/collect POST — public page-view beacon, bumps pre-aggregated counters (always 204)
+/api/analytics         GET — admin-only, returns daily counters for ?from=&to= plus the last 12 months
 /api/contact           POST — sends the Contact Us form via email (public, server-only)
 /api/activities        GET — paginates the Our Activities Blogger feed (public, server-only proxy)
 /api/youtube/playlists GET — proxies the YouTube Data API v3 for the Gallery's playlists tab (public, server-only proxy)
