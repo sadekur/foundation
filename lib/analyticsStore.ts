@@ -10,7 +10,7 @@
 import { FieldValue } from "firebase-admin/firestore";
 import { getAdminDb } from "@/lib/firebaseAdmin";
 import { PROJECT_CATEGORY_SLUGS } from "@/lib/siteConfig";
-import { dhakaDayKey, dhakaMonthKey, recentMonthKeys, type AnalyticsHitPayload } from "@/lib/utils/analytics";
+import { OTHER_PAGE, dhakaDayKey, dhakaMonthKey, recentMonthKeys, type AnalyticsHitPayload } from "@/lib/utils/analytics";
 import type { AnalyticsBreakdown, AnalyticsPeriod } from "@/types";
 
 const DAILY = "analytics_daily";
