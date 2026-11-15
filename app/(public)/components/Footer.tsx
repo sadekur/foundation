@@ -47,9 +47,20 @@ export const Footer = () => {
           <span>
             {siteConfig.email} &middot; {siteConfig.phones.join(" / ")}
           </span>
-          <span className="text-emerald-400">
-            &copy; {new Date().getFullYear()} {dictionary.nav.brand}. {dictionary.footer.rights}
-          </span>
+          <div className="flex items-center justify-between xs:justify-end gap-4">
+            <span className="text-emerald-400">
+              &copy; {new Date().getFullYear()} {dictionary.nav.brand}. {dictionary.footer.rights}
+            </span>
+            <button
+              type="button"
+              onClick={scrollToTop}
+              aria-label={dictionary.footer.backToTop}
+              title={dictionary.footer.backToTop}
+              className="flex-shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-full border border-amber-400/40 text-amber-300 hover:bg-amber-400 hover:text-emerald-950 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            >
+              <ArrowUp size={16} />
+            </button>
+          </div>
         </div>
       </div>
     </footer>
