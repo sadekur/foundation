@@ -45,7 +45,7 @@ const AnalyticsBreakdownCard = ({
             <thead>
               <tr className="text-[11px] uppercase tracking-wide text-gray-400">
                 <th scope="col" className="px-4 sm:px-5 pt-2.5 pb-1 text-left font-medium">Name</th>
-                <th scope="col" className="w-20 px-2 pt-2.5 pb-1 text-right font-medium capitalize">{unit}</th>
+                <th scope="col" className="w-20 px-2 pt-2.5 pb-1 text-right font-medium">{unit}</th>
                 <th scope="col" className="w-16 pl-2 pr-4 sm:pr-5 pt-2.5 pb-1 text-right font-medium">Share</th>
               </tr>
             </thead>
