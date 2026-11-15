@@ -171,7 +171,7 @@ export const recordHit = async (hit: AnalyticsHitPayload, context: HitContext) =
   await batch.commit();
 };
 
-const toPeriod = (data: FirebaseFirestore.DocumentData): AnalyticsPeriod => {
+const toPeriod = (data: DocumentData): AnalyticsPeriod => {
   const breakdowns = {} as AnalyticsPeriod["breakdowns"];
   for (const name of BREAKDOWNS) {
     const raw = (data[name] ?? {}) as Record<string, number>;
