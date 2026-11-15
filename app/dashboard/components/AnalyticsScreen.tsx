@@ -347,7 +347,7 @@ const AnalyticsScreen = ({ user }: AnalyticsScreenProps) => {
         </p>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <AnalyticsBreakdownCard title="Traffic sources" unit="visits" counts={breakdowns.sources} />
         <AnalyticsBreakdownCard title="Pages" unit="views" counts={breakdowns.pages} formatLabel={pageLabel} />
         <AnalyticsBreakdownCard
