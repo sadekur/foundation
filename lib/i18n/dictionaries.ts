@@ -1313,6 +1313,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Underprivileged families in designated areas",
           duration: "As-needed, ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey Beside the Sick & Those Affected by Disaster",
+            body:
+              "For those who cannot afford it, **free medical care** and **help with treatment and medicine costs** are arranged, and **medical camps** are organized as needed.\n\nDuring disasters and emergencies, **relief and humanitarian assistance** is delivered to affected people, and health-awareness programs are carried out as well.\n\n**Our aim is that no one goes without treatment for lack of money, and no one is left alone in a time of crisis.**",
+          },
+          impactStats: [
+            { icon: "medical", value: "Free", label: "Medical care", description: "For those in financial need" },
+            { icon: "medicine", value: "Medicine", label: "Treatment & medicine costs", description: "Support for patients in need" },
+            { icon: "camp", value: "Camps", label: "Medical camps", description: "Organized as needed" },
+            { icon: "relief", value: "Relief", label: "Emergency humanitarian aid", description: "During disasters and emergencies" },
+            { icon: "awareness", value: "Awareness", label: "Health awareness", description: "Health-awareness programs" },
+            { icon: "ongoing", value: "Ongoing", label: "Needs-based project", description: "There whenever help is needed" },
+          ],
         },
         {
           slug: "masjid-madrasa-nirman",
