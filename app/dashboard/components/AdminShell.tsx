@@ -78,6 +78,17 @@ export const AdminShell = ({ children }: { children: ReactNode }) => {
     }
   }, [checkingAuth, user, router]);
 
+  // Once the admin has signed in on a browser, stop counting that browser's visits to the
+  // public site in the website analytics (app/(public)/components/AnalyticsTracker.tsx).
+  useEffect(() => {
+    if (!user) return;
+    try {
+      localStorage.setItem(ANALYTICS_IGNORE_KEY, "1");
+    } catch {
+      // Storage blocked — the admin's visits just get counted.
+    }
+  }, [user]);
+
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
