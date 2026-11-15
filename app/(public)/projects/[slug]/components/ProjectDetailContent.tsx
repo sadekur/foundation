@@ -139,7 +139,7 @@ const IMPACT_ICONS: Record<ProjectImpactIcon, LucideIcon> = {
   selfReliance: BadgeCheck,
 };
 
-// Social cards link out only once siteConfig has a real URL (facebook.href is still "").
+// Social cards link out to siteConfig's URLs (skipped if an href is ever blanked).
 const IMPACT_LINKS: Partial<Record<ProjectImpactIcon, string>> = {
   youtube: siteConfig.youtube.href || undefined,
   facebook: siteConfig.facebook.href || undefined,
