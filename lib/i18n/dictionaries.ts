@@ -918,6 +918,9 @@ export const dictionaries: Record<Language, Dictionary> = {
             { icon: "conference", value: "Annual", label: "Salsabil Conference", description: "The call to sound aqeedah and authentic manhaj" },
             { icon: "youtube", value: "YouTube", label: "As-Salsabil TV", description: "Religious outreach on YouTube" },
             { icon: "facebook", value: "Facebook", label: "As-Salsabil Foundation", description: "Dawah activities on Facebook" },
+            { icon: "books", value: "Books", label: "Islamic book publishing", description: "Publishing books that support religious learning" },
+            { icon: "dua", value: "Charts", label: "Dua & dhikr charts", description: "Encouraging daily acts of worship and following the Sunnah" },
+            { icon: "publication", value: "Materials", label: "Educational publications", description: "Creating and distributing materials to spread Islamic education" },
           ],
         },
         {
