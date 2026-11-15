@@ -125,6 +125,7 @@ export interface ProjectCategory {
   area: string;
   duration: string;
   faq: ProjectFaqItem[];
+  impactIntro?: ProjectImpactIntro;
   impactStats?: ProjectImpactStat[];
 }
 
