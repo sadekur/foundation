@@ -5,6 +5,12 @@ import Image from "next/image";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { siteConfig } from "@/lib/siteConfig";
+import { ArrowUp } from "lucide-react";
+
+const scrollToTop = () => {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+};
 
 export const Footer = () => {
   const { language } = useLanguage();
