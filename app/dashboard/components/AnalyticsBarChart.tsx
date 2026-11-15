@@ -57,11 +57,17 @@ const AnalyticsBarChart = ({ title, bars, labelEvery = 1, selectedKey = null, on
           <div className="absolute inset-x-0 top-1/2 border-t border-gray-100" aria-hidden />
           <div className="absolute inset-x-0 bottom-0 border-t border-gray-300" aria-hidden />
 
-          <div className="absolute inset-0 flex items-end" style={{ gap }} aria-hidden>
+          {/* Selectable bars are real keyboard buttons; plain ones are hover-only and the hidden table carries their numbers. */}
+          <div className="absolute inset-0 flex items-end" style={{ gap }} aria-hidden={onSelect ? undefined : true}>
             {bars.map((bar, index) => (
               <div
                 key={bar.key}
-                tabIndex={0}
+                {...(onSelect && {
+                  tabIndex: 0,
+                  role: "button",
+                  "aria-pressed": bar.key === selectedKey,
+                  "aria-label": `${bar.tooltip.join(", ")}. Show this period.`,
+                })}
                 className={`group relative flex-1 min-w-0 h-full flex items-end outline-none ${onSelect ? "cursor-pointer" : ""}`}
                 onMouseEnter={() => setActive(index)}
                 onFocus={() => setActive(index)}
