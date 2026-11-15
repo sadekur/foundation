@@ -122,7 +122,7 @@ const IMPACT_ICONS: Record<ProjectImpactIcon, LucideIcon> = {
   greening: Leaf,
   awareness: Megaphone,
   care: Sprout,
-  sustainable: Infinity,
+  sustainable: InfinityIcon,
   medical: Stethoscope,
   medicine: Pill,
   camp: Tent,
