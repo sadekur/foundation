@@ -709,8 +709,9 @@ export const dictionaries: Record<Language, Dictionary> = {
     home: {
       heroEyebrow: "Established 2021",
       heroTitle: "As-Salsabil Foundation",
+      heroLocation: "Anandabazar, Kochashahar, Gobindaganj, Gaibandha",
       heroSubtitle:
-        "Anandabazar, Kochashahar, Gobindaganj, Gaibandha —serving the faith and humanity through ongoing charitable (sadaqah jariyah) work",
+        "Serving the faith and humanity through ongoing charitable (sadaqah jariyah) work",
       heroQuote:
         "“Those who recite the Book of Allah, establish prayer, and spend out of what We have provided for them, secretly and openly, can hope for a trade that will never perish.”",
       heroQuoteSource: "Surah Fatir, Verse 29",
