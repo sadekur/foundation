@@ -1103,10 +1103,18 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Mosque-based, designated areas",
           duration: "Ongoing, regular program",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey in Qur'an & Islamic Teaching",
+            body:
+              "Through the Maktab education program run under As-Salsabil Foundation's supervision, **more than 30 maktabs** have already been run across the area, and **5 maktabs are running today**. These maktabs teach children, teenagers and students of all ages the Qur'an, aqidah and essential Islamic knowledge, grounded in correct religious understanding and sound manhaj.\n\nAll education costs and course fees for **more than 350 students**, young and old, men and women, have been covered completely free of charge, and this continues today. Students also receive **free Qur'ans and the study materials they need**.\n\nTo raise teaching quality and expand the number of maktabs, there are **plans for teacher training and guidelines**, to be carried out as sufficient funding is secured.\n\n**Our aim is that every child and adult learns to recite the Qur'an correctly and grows up with sound knowledge of the deen.**",
+          },
           impactStats: [
-            { value: "30+", label: "Maktabs run" },
-            { value: "350+", label: "Students benefited" },
-            { value: "100%", label: "Free of charge" },
+            { icon: "maktab", value: "30+", label: "Maktabs run", description: "Already run across the area" },
+            { icon: "classroom", value: "5", label: "Active maktabs", description: "Regular classes running today" },
+            { icon: "students", value: "350+", label: "Students benefited", description: "Young and old, men and women" },
+            { icon: "free", value: "100%", label: "Free education", description: "Education costs and course fees fully covered" },
+            { icon: "quran", value: "Free", label: "Qur'ans & study materials", description: "Distributed to students at no cost" },
+            { icon: "teacher", value: "Planned", label: "Teacher training", description: "Training and guidelines to raise teaching quality" },
           ],
         },
         {
