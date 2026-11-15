@@ -1208,6 +1208,19 @@ export const dictionaries: Record<Language, Dictionary> = {
           area: "Beneficiary families in designated areas",
           duration: "Long-term, ongoing project",
           faq: PROJECT_FAQ_EN,
+          impactIntro: {
+            title: "Our Journey Beside Orphans, Students of Knowledge & the Poor",
+            body:
+              "**Orphans and poor students of Islamic knowledge** are sponsored for their education and upkeep, so that financial hardship does not stand in the way of their religious learning.\n\nAlongside this, **poor and needy members of society** receive support according to their needs, from regular monthly assistance to standing beside them in emergencies.\n\n**Our aim is that no orphan or student of knowledge is kept from learning because of poverty.**",
+          },
+          impactStats: [
+            { icon: "orphan", value: "Sponsorship", label: "Orphaned students", description: "Education and upkeep covered" },
+            { icon: "scholar", value: "Support", label: "Poor students of knowledge", description: "Help with their upkeep" },
+            { icon: "monthly", value: "Monthly", label: "Regular assistance", description: "Regular monthly support" },
+            { icon: "family", value: "As needed", label: "The poor & needy", description: "Support according to need" },
+            { icon: "emergency", value: "Emergency", label: "Emergency assistance", description: "Standing beside people in hard times" },
+            { icon: "longTerm", value: "Long-term", label: "Ongoing project", description: "Continuous sponsorship" },
+          ],
         },
         {
           slug: "tube-well-o-jonokollan",
