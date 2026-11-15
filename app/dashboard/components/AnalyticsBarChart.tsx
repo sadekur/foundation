@@ -117,17 +117,20 @@ const AnalyticsBarChart = ({ title, bars, labelEvery = 1, selectedKey = null, on
         ))}
       </div>
 
-      <table className="sr-only">
-        <caption>{title}</caption>
-        <tbody>
-          {bars.map((bar) => (
-            <tr key={bar.key}>
-              <th scope="row">{bar.tooltip[0]}</th>
-              <td>{bar.tooltip.slice(1).join(", ")}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {/* sr-only goes on a wrapper: a <table> sizes to its content and ignores the 1px width, overflowing the page. */}
+      <div className="sr-only">
+        <table>
+          <caption>{title}</caption>
+          <tbody>
+            {bars.map((bar) => (
+              <tr key={bar.key}>
+                <th scope="row">{bar.tooltip[0]}</th>
+                <td>{bar.tooltip.slice(1).join(", ")}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
