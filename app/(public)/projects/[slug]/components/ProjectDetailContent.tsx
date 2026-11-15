@@ -112,7 +112,7 @@ const IMPACT_ICONS: Record<ProjectImpactIcon, LucideIcon> = {
   scholar: GraduationCap,
   family: Users,
   emergency: Siren,
-  longTerm: Infinity,
+  longTerm: InfinityIcon,
   water: Droplets,
   maintenance: Wrench,
   welfare: Handshake,
