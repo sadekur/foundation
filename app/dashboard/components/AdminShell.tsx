@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { onAuthStateChanged, signOut, type User } from "firebase/auth";
-import { BarChart3, ExternalLink, Images, LayoutDashboard, LogOut, Menu, Wallet, X, type LucideIcon } from "lucide-react";
+import { BarChart3, ChartLine, ExternalLink, Images, LayoutDashboard, LogOut, Menu, Wallet, X, type LucideIcon } from "lucide-react";
 import { auth } from "@/lib/firebase";
+import { ANALYTICS_IGNORE_KEY } from "@/lib/utils/analytics";
 import LoadingScreen from "@/components/LoadingScreen";
 import Footer from "./Footer";
 
