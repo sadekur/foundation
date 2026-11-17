@@ -50,7 +50,7 @@ export const projectMedia: ProjectMedia[] = [
   { image: "/projects/deen-shiksha-o-dawah-mahfil.png", video: null }, // Islamic Education & Dawah
   { image: "/projects/islamic-education-dawah.jpg", video: null }, // Qur'an & Islamic Teaching
   { image: "/projects/islami-pathagar-o-prokashona.png", video: null }, // Islamic Library & Publications
-  { image: "/projects/zakat-o-sadaka.png", video: null }, // Zakat & Sadaqah Projects
+  { image: "/projects/zakat-o-sadaka.png", video: null }, // Zakat & Sadaqah Distribution
   { image: "/projects/yatim-talibe-ilm-o-daridro.png", video: null }, // Orphans, Students of Knowledge & the Poor
   { image: "/projects/tube-well-o-jonokollan.png", video: null }, // Tube Wells & Public Welfare
   { image: "/projects/brikkhoropon.png", video: null }, // Tree Plantation & Eco-Friendly Activities
@@ -83,7 +83,7 @@ export const projectBanners: (ProjectBanner | null)[] = [
   "/projects/banners/quran-o-deeni-shikkhadan.jpg", // Qur'an & Islamic Teaching
   // 16:9 source with its caption along the bottom edge — a centered crop cuts the caption off.
   { src: "/projects/banners/islami-pathagar-o-prokashona.png", position: "center bottom" }, // Islamic Library & Publications
-  "/projects/banners/zakat-o-sadaka.jpg", // Zakat & Sadaqah Projects
+  "/projects/banners/zakat-o-sadaka.jpg", // Zakat & Sadaqah Distribution
   null, // Orphans, Students of Knowledge & the Poor
   null, // Tube Wells & Public Welfare
   null, // Tree Plantation & Eco-Friendly Activities
