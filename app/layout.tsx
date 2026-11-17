@@ -16,7 +16,27 @@ const notoBengali = Noto_Sans_Bengali({
   display: "swap",
 });
 
+// Absolute base for og:image and other metadata URLs. Vercel sets VERCEL_PROJECT_PRODUCTION_URL
+// (host only, no protocol) at build time; the fallback is the current production domain.
+const SITE_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "https://salsabil-foundation.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  // Link previews (WhatsApp, Facebook, Messenger…). Pages that don't set their own openGraph
+  // inherit this; og:title/og:description fall back to each page's <title>/description.
+  openGraph: {
+    type: "website",
+    siteName: "As-Salsabil Foundation",
+    locale: "bn_BD",
+    alternateLocale: ["en_US"],
+    images: [{ url: "/logo512.png", width: 512, height: 512, alt: "As-Salsabil Foundation" }],
+  },
+  twitter: {
+    card: "summary",
+    images: ["/logo512.png"],
+  },
   title: {
     default: "As-Salsabil Foundation",
     template: "%s | As-Salsabil Foundation",

@@ -13,7 +13,11 @@ export const siteConfig = {
     // (which the Gallery's YouTube tab fetches live). Replace with the real resolved ID.
     channelId: "",
   },
-  facebook: { label: "As Salsabil-foundation", handle: "/As Salsabil-foundation", href: "" },
+  facebook: {
+    label: "As Salsabil-foundation",
+    handle: "/As Salsabil-foundation",
+    href: "https://www.facebook.com/assalsabilfoundation",
+  },
   blogUrl: "https://salsabilfoundation.blogspot.com/",
   // Public copies of the root As-Salsabil Foundation.pdf, shown on the About page.
   brochure: {
@@ -22,6 +26,7 @@ export const siteConfig = {
     previewWidth: 910,
     previewHeight: 1287,
   },
+  bismillahArabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
   // Surah Fatir (35), ayah 29 — verified against quran.com/en/fatir/29.
   // Arabic script doesn't change between the bn/en language toggle.
   quranVerseArabic:

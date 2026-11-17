@@ -12,6 +12,7 @@ import { SectionDivider } from "./SectionDivider";
 import { FadeIn } from "./FadeIn";
 import { HeroProjectNames } from "./HeroProjectNames";
 import { HeroWave } from "./HeroWave";
+import { HeroHeading } from "./HeroHeading";
 import { ActivityCard } from "./ActivityCard";
 
 const FEATURED_PROJECT_COUNT = 6;
@@ -52,15 +53,12 @@ export const HomeContent = ({ latestPosts }: HomeContentProps) => {
         <div className="absolute inset-0 pattern-lattice-light pointer-events-none" aria-hidden="true" />
         <div className="relative w-full max-w-none xs:max-w-sm sm:max-w-3xl md:max-w-5xl lg:max-w-7xl xl:max-w-8xl 2xl:max-w-9xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8 py-14 xs:py-20 sm:py-28 text-center">
           <FadeIn>
-            <span className="inline-block text-xs xs:text-sm font-semibold tracking-wide text-emerald-950 bg-amber-400 rounded-full px-3 py-1 mb-6">
-              {home.heroEyebrow}
-            </span>
-            <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-              {home.heroTitle}
-            </h1>
-            <p className="mt-4 text-sm xs:text-base sm:text-lg text-emerald-100 max-w-3xl mx-auto">
-              {home.heroSubtitle}
-            </p>
+            <HeroHeading
+              eyebrow={home.heroEyebrow}
+              title={home.heroTitle}
+              location={home.heroLocation}
+              subtitle={home.heroSubtitle}
+            />
           </FadeIn>
 
           <FadeIn delayMs={150}>

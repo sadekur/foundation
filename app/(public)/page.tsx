@@ -3,7 +3,9 @@ import { getBlogPosts } from "@/lib/blogger";
 import { HomeContent } from "./components/HomeContent";
 
 export const metadata: Metadata = {
-  title: "Home",
+  // `absolute` skips the root "%s | As-Salsabil Foundation" template: a "Home | …" prefix
+  // adds nothing in search results or link previews, so the home page shows the bilingual name.
+  title: { absolute: "আস্-সালসাবিল ফাউন্ডেশন | As-Salsabil Foundation" },
   description:
     "As-Salsabil Foundation runs Zakat, sadaqah jariyah, and rehabilitation projects in Gobindaganj, Gaibandha, following the Sunnah of the Prophet (peace be upon him).",
 };
