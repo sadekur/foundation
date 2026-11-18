@@ -1465,36 +1465,54 @@ export const dictionaries: Record<Language, Dictionary> = {
         {
           slug: "brikkhoropon",
           title: "Tree Plantation & Eco-Friendly Activities",
-          blurb: "Tree plantation drives for environmental protection and greening.",
+          blurb: "Protecting the environment and greening communities by planting trees at madrasas, along roadsides and in open spaces.",
           description:
-            "Tree plantation drives are carried out in various areas to protect the environment and build a greener community, helping preserve ecological balance and raise public awareness over the long term.",
+            "To protect the environment and build a greener community, As-Salsabil Foundation runs **tree plantation drives** that help preserve ecological balance and raise public awareness over the long term.\n\nAlhamdulillah, **every year trees are planted at one madrasa or another.** Our purpose is to make the surroundings of these places of learning more beautiful, and to plant trees **whose shade, fruit or other benefits students and the general public can enjoy.**\n\nIn particular, we want madrasa students, whom we lovingly call **the birds of the Qur'an**, to have a beautiful environment to study in. This too is part of our thinking.\n\nAlongside this, saplings are planted along roadsides and in open spaces in various areas, and **the trees planted are cared for and maintained.**",
           support: {
             title: "Your Support Can Help Build a Greener Community",
             body:
-              "Financial support is needed to buy saplings, manage transport and planting, and care for and maintain the trees planted during plantation drives in various areas.\n\nTrees planted through your donation can help preserve ecological balance and raise public awareness over the long term.\n\n**Come, let us take part together in protecting the environment and greening our communities. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+              "Financial support is needed to buy saplings, manage transport and planting, and care for and maintain the trees planted at madrasas and in various areas.\n\nThe shade, fruit and other benefits of a tree planted through your donation can serve students and the general public for years to come.\n\n**Come, let us take part together in protecting the environment and greening our communities. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
           },
           objectives: [
             "Protect the environment and promote greening",
+            "Beautify the surroundings of madrasas and other places of learning",
+            "Benefit students and the public by planting shade and fruit trees",
             "Raise public awareness on tree plantation",
             "Undertake sustainable eco-friendly initiatives",
           ],
-          targetAudience: "Local communities and the environment",
+          targetAudience: "Madrasa students, local communities and the environment",
           budgetItems: ["Purchasing saplings", "Transport and planting logistics", "Ongoing care and maintenance"],
-          area: "Roadsides and open spaces in designated areas",
+          area: "Areas within and around Gobindaganj",
           duration: "Annual, ongoing project",
-          faq: PROJECT_FAQ_EN,
+          faq: [
+            {
+              question: "Where are trees planted?",
+              answer:
+                "Every year trees are planted at one madrasa or another, and saplings are also planted along roadsides and in open spaces in various areas. This work is not limited to Gobindaganj Upazila; as needs and means allow, we plan to continue it both within Gobindaganj and in other regions beyond it.",
+            },
+            {
+              question: "What kind of trees are planted?",
+              answer:
+                "We try to plant trees whose shade, fruit or other benefits students and the general public can enjoy, and that make the surroundings of places of learning more beautiful.",
+            },
+            {
+              question: "What is my donation spent on?",
+              answer: "Buying saplings, transport and planting logistics, and caring for and maintaining the trees planted.",
+            },
+            ...PROJECT_FAQ_EN,
+          ],
           impactIntro: {
             title: "Our Journey Toward a Greener Community",
             body:
-              "To protect the environment and build a greener community, **tree plantation drives** are carried out along roadsides and in open spaces in various areas.\n\nIt isn't only about planting: **caring for and maintaining** the trees planted and **raising public awareness** about tree plantation are part of the work, helping preserve ecological balance over the long term.\n\n**Our aim is to build a greener society for the next generation through sustainable, eco-friendly initiatives.**",
+              "To protect the environment and build a greener community, As-Salsabil Foundation runs **tree plantation drives**.\n\nAlhamdulillah, **every year trees are planted at one madrasa or another**, and saplings are also planted along roadsides and in open spaces in various areas. **Caring for and maintaining** the trees planted and **raising public awareness** about tree plantation are part of the work too.\n\nThis work is not limited to Gobindaganj Upazila; as needs and means allow, we plan to continue tree plantation **both within Gobindaganj and in other regions beyond it**.\n\n**Our aim is to plant trees whose shade, fruit and benefits students and the general public can enjoy for years to come.**",
           },
           impactStats: [
-            { icon: "tree", value: "Plantation", label: "Tree plantation drives", description: "Saplings planted in various areas" },
-            { icon: "greening", value: "Greening", label: "Environmental protection", description: "Preserving ecological balance" },
+            { icon: "tree", value: "Plantation", label: "Tree plantation drives", description: "At madrasas, roadsides and open spaces" },
+            { icon: "madrasa", value: "Every year", label: "Planting at madrasas", description: "Beautifying places of learning" },
+            { icon: "greening", value: "Shade & fruit", label: "Useful trees", description: "For students and the public" },
             { icon: "awareness", value: "Awareness", label: "Public awareness", description: "Encouraging tree plantation" },
             { icon: "care", value: "Care", label: "Caring for planted trees", description: "Ongoing care and maintenance" },
-            { icon: "sustainable", value: "Sustainable", label: "Eco-friendly initiatives", description: "Long-term environmental improvement" },
-            { icon: "ongoing", value: "Annual", label: "Ongoing program", description: "Along roadsides and in open spaces" },
+            { icon: "ongoing", value: "Annual", label: "Ongoing program", description: "In Gobindaganj and beyond" },
           ],
         },
         {
