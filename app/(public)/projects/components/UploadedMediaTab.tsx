@@ -113,7 +113,18 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
               tabIndex={i === currentIndex ? 0 : -1}
             >
               {item.type === "video" ? (
-                <video src={item.url} muted playsInline className="w-full h-full object-contain" />
+                <>
+                  <video src={item.url} muted playsInline className="w-full h-full object-contain" />
+                  {/* The slide only shows the first frame; the badge tells visitors it opens as a video. */}
+                  <span
+                    className="pointer-events-none absolute inset-0 flex items-center justify-center"
+                    aria-hidden="true"
+                  >
+                    <span className="flex items-center justify-center w-16 h-16 xs:w-20 xs:h-20 rounded-full bg-black/50 ring-2 ring-white/80 backdrop-blur-sm text-white shadow-lg transition-transform group-hover:scale-110">
+                      <Play size={32} className="ml-1 fill-current" />
+                    </span>
+                  </span>
+                </>
               ) : (
                 <Image
                   src={item.url}
