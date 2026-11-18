@@ -112,9 +112,19 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
               aria-hidden={i !== currentIndex}
               tabIndex={i === currentIndex ? 0 : -1}
             >
-              {item.type === "video" ? (
+              {item.type !== "image" ? (
                 <>
-                  <video src={item.url} muted playsInline className="w-full h-full object-contain" />
+                  {item.type === "youtube" && item.youtubeId ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- i.ytimg.com isn't in next.config's image allowlist; YouTube already serves a sized JPEG
+                    <img
+                      src={getYouTubeThumbnailUrl(item.youtubeId)}
+                      alt={item.caption ?? ""}
+                      className="w-full h-full object-cover"
+                      loading={i === 0 ? "eager" : "lazy"}
+                    />
+                  ) : (
+                    <video src={item.url} muted playsInline className="w-full h-full object-contain" />
+                  )}
                   {/* The slide only shows the first frame; the badge tells visitors it opens as a video. */}
                   <span
                     className="pointer-events-none absolute inset-0 flex items-center justify-center"
