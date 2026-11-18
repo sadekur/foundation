@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import type { User } from "firebase/auth";
 import type { GalleryItem, GalleryItemType } from "@/types";
+import { getYouTubeThumbnailUrl, getYouTubeWatchUrl, parseYouTubeVideoId } from "@/lib/youtubeVideo";
 import GalleryProjectChecklist from "./GalleryProjectChecklist";
+
+type AddMode = "upload" | "youtube";
 
 interface AddGalleryItemModalProps {
   show: boolean;
