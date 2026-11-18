@@ -154,6 +154,11 @@ const GalleryScreen = ({ user }: GalleryScreenProps) => {
   };
 
   const deleteOne = async (item: GalleryItem, idToken: string) => {
+    // YouTube links have no Cloudinary asset, only the Firestore doc.
+    if (item.type === "youtube") {
+      await deleteDoc(doc(db, "gallery", item.id));
+      return;
+    }
     const res = await fetch("/api/gallery/delete", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` },
