@@ -172,6 +172,7 @@ export interface ProjectCategory {
   blurb: string;
   description: string;
   highlights?: ProjectHighlights;
+  programs?: ProjectPrograms;
   support?: ProjectSupportSection;
   objectives: string[];
   targetAudience: string;
