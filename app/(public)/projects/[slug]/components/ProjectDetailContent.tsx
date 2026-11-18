@@ -59,6 +59,8 @@ import {
   HousePlus,
   PawPrint,
   Briefcase,
+  Snowflake,
+  Moon,
   type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
