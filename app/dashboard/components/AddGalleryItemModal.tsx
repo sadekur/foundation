@@ -319,21 +319,82 @@ const AddGalleryItemModal = ({
       <div className="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
         <h3 className="text-lg font-semibold mb-4">Add Media</h3>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Photo or Video (multiple allowed)</label>
-            <input
-              type="file"
-              accept="image/*,video/*"
-              multiple
-              onChange={(e) => handleFilesSelected(e.target.files)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
-              required
-              disabled={uploading}
-            />
-            <p className="text-xs text-gray-500 mt-1">
-              Images over 1MB are automatically compressed before upload.
-            </p>
+          <div className="mb-4 grid grid-cols-2 gap-1 p-1 bg-gray-100 rounded-lg" role="tablist">
+            {(
+              [
+                ["upload", "Upload files"],
+                ["youtube", "YouTube links"],
+              ] as const
+            ).map(([value, label]) => (
+              <button
+                key={value}
+                type="button"
+                role="tab"
+                aria-selected={mode === value}
+                onClick={() => setMode(value)}
+                disabled={uploading}
+                className={`py-2 text-sm font-medium rounded-md transition-colors ${
+                  mode === value ? "bg-white text-emerald-700 shadow-sm" : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
           </div>
+
+          {mode === "upload" ? (
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Photo or Video (multiple allowed)</label>
+              <input
+                type="file"
+                accept="image/*,video/*"
+                multiple
+                onChange={(e) => handleFilesSelected(e.target.files)}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500"
+                required
+                disabled={uploading}
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Images over 1MB are automatically compressed before upload.
+              </p>
+            </div>
+          ) : (
+            <div className="mb-4">
+              <label htmlFor="youtube-links" className="block text-sm font-medium text-gray-700 mb-2">
+                YouTube video links (one per line)
+              </label>
+              <textarea
+                id="youtube-links"
+                value={youtubeText}
+                onChange={(e) => {
+                  setYoutubeText(e.target.value);
+                  setYoutubeError("");
+                }}
+                rows={4}
+                placeholder={"https://www.youtube.com/watch?v=...\nhttps://youtu.be/..."}
+                className="w-full p-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500"
+                required
+                disabled={uploading}
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Watch, youtu.be and Shorts links all work. The video plays from YouTube; nothing is uploaded.
+              </p>
+              {youtubeParsed.ids.length > 0 && (
+                <div className="mt-3 grid grid-cols-3 gap-2">
+                  {youtubeParsed.ids.map((id) => (
+                    // eslint-disable-next-line @next/next/no-img-element -- i.ytimg.com isn't in next.config's image allowlist; a plain preview is enough here
+                    <img
+                      key={id}
+                      src={getYouTubeThumbnailUrl(id)}
+                      alt=""
+                      className="w-full aspect-video object-cover rounded-md bg-gray-100"
+                    />
+                  ))}
+                </div>
+              )}
+              {youtubeError && <p className="text-xs text-red-600 mt-2">{youtubeError}</p>}
+            </div>
+          )}
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">Show in (applied to all)</label>
