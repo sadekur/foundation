@@ -1470,9 +1470,9 @@ export const dictionaries: Record<Language, Dictionary> = {
         {
           slug: "brikkhoropon",
           title: "Tree Plantation & Eco-Friendly Activities",
-          blurb: "Protecting the environment and greening communities by planting trees at madrasas, along roadsides and in open spaces.",
+          blurb: "Building a green, beautiful and eco-friendly society by planting trees at madrasas, schools, roadsides and open spaces.",
           description:
-            "To protect the environment and build a greener community, As-Salsabil Foundation runs **tree plantation drives** that help preserve ecological balance and raise public awareness over the long term.\n\nAlhamdulillah, **every year trees are planted at one madrasa or another.** Our purpose is to make the surroundings of these places of learning more beautiful, and to plant trees **whose shade, fruit or other benefits students and the general public can enjoy.**\n\nIn particular, we want madrasa students, whom we lovingly call **the birds of the Qur'an**, to have a beautiful environment to study in. This too is part of our thinking.\n\nAlongside this, saplings are planted along roadsides and in open spaces in various areas, and **the trees planted are cared for and maintained.**",
+            "To preserve ecological balance, extend greening, and secure a beautiful, livable environment for future generations, As-Salsabil Foundation runs regular tree plantation drives.\n\nAlhamdulillah, every year trees are planted under this programme at various madrasas and other places of learning. Special importance is given to planting shade and fruit trees, so that students, teachers and local people can benefit from their shade, fruit and other uses for years to come.\n\nIn particular, we want our beloved birds of the Qur'an, the madrasa students, to gain their religious education in a clean, beautiful and pleasant environment. This too is one of the main considerations of this initiative.\n\nOur effort is not limited to planting trees; through caring for and maintaining the trees and building public awareness about tree plantation, it also hopes to help build a green, eco-friendly society.",
           support: {
             title: "Your Support Can Help Build a Greener Community",
             body:
