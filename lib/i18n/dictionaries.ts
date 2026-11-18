@@ -1403,18 +1403,40 @@ export const dictionaries: Record<Language, Dictionary> = {
             "Install tube wells where needed",
             "Undertake other welfare initiatives",
           ],
-          targetAudience: "Communities facing water shortages",
+          targetAudience: "Poor families and communities without safe water",
           budgetItems: ["Tube well installation materials", "Labor and installation costs", "Maintenance"],
-          area: "Designated water-scarce areas",
+          area: "Water-scarce areas, including Mukundapur, Fulbera and Jagadishpur",
           duration: "As-needed project",
-          faq: PROJECT_FAQ_EN,
+          faq: [
+            {
+              question: "Where have tube wells been installed so far?",
+              answer:
+                "Alhamdulillah, tube wells have already been installed for poor people in the Mukundapur, Fulbera and Jagadishpur areas. We continue working to extend this programme as needs and means allow.",
+            },
+            {
+              question: "Who benefits from these tube wells?",
+              answer:
+                "Families who have to travel far for safe water, people who suffer without clean water, and communities waiting for a reliable water source, especially the poor.",
+            },
+            {
+              question: "Can donating for a tube well be a sadaqah jariyah?",
+              answer:
+                "The Prophet (peace be upon him) said: “When a person dies, their deeds come to an end except for three: an ongoing charity (sadaqah jariyah), knowledge that benefits others, or a righteous child who prays for them.” (Sahih Muslim, hadith 1631). If the benefit of a good initiative continues among people, it can be hoped to count as a sadaqah jariyah, and Allah knows best.",
+            },
+            {
+              question: "What is my donation spent on?",
+              answer:
+                "Tube well materials, labor and installation costs, maintenance of installed tube wells, and other public welfare initiatives according to local needs.",
+            },
+            ...PROJECT_FAQ_EN,
+          ],
           impactIntro: {
-            title: "Our Work for Safe Water & Public Welfare",
+            title: "The Value of a Drop of Water",
             body:
-              "To ease shortages of safe drinking water, **tube wells are installed** in the areas that need them, and their **maintenance** is looked after.\n\nAlongside this, **other public welfare initiatives** are carried out according to local needs.\n\n**Our aim is to bring safe water to every water-scarce community, a good deed that, in sha Allah, remains a sadaqah jariyah for the donor.**",
+              "With families who must travel far for safe water in mind, As-Salsabil Foundation runs a **tube well installation programme**. Alhamdulillah, tube wells have already been installed for poor people in **Mukundapur, Fulbera and Jagadishpur**, and their **maintenance** is looked after.\n\nAlongside this, **other public welfare initiatives** are carried out according to local needs.\n\n**Our aim is that no family feels helpless for water when it needs it.**",
           },
           impactStats: [
-            { icon: "water", value: "Tube wells", label: "Tube well installation", description: "In water-scarce areas" },
+            { icon: "water", value: "3 areas", label: "Tube wells installed", description: "Mukundapur, Fulbera and Jagadishpur" },
             { icon: "transparency", value: "Safe", label: "Clean drinking water", description: "Easing water shortages" },
             { icon: "maintenance", value: "Maintenance", label: "Regular upkeep", description: "Care for installed tube wells" },
             { icon: "welfare", value: "Welfare", label: "Other initiatives", description: "According to local needs" },
