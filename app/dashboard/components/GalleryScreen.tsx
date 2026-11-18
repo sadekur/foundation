@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Check, CheckSquare, EyeOff, ImagePlus, Tag, Trash2 } from "lucide-react";
+import { Check, CheckSquare, Download, EyeOff, ImagePlus, Tag, Trash2 } from "lucide-react";
 import type { User } from "firebase/auth";
 import {
   addDoc,
