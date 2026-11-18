@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { getGalleryItemProjectSlugs } from "@/lib/gallery";
+import { getYouTubeThumbnailUrl } from "@/lib/youtubeVideo";
 import type { GalleryItem } from "@/types";
 import AddGalleryItemModal from "./AddGalleryItemModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
