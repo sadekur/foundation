@@ -1433,7 +1433,7 @@ export const dictionaries: Record<Language, Dictionary> = {
           impactIntro: {
             title: "The Value of a Drop of Water",
             body:
-              "With families who must travel far for safe water in mind, As-Salsabil Foundation runs a **tube well installation programme**. Alhamdulillah, tube wells have already been installed for poor people in **Mukundapur, Fulbera and Jagadishpur**, and their **maintenance** is looked after.\n\nAlongside this, **other public welfare initiatives** are carried out according to local needs.\n\n**Our aim is that no family feels helpless for water when it needs it.**",
+              "To make safe water easily available, As-Salsabil Foundation runs a **tube well installation programme** for helpless and poor families.\n\nAlhamdulillah, tube wells have already been installed for poor people in **various areas, including Mukundapur, Fulbera and Jagadishpur**. We also give importance to the **regular maintenance and working order** of the installed tube wells.\n\nThis work is not limited to Gobindaganj Upazila; as needs and means allow, we plan to continue it **both within Gobindaganj and in other regions beyond it**.\n\nAlongside this, **other public welfare initiatives** are taken up according to local demand and need.\n\n**Our aim is that no family feels helpless for lack of safe water when it needs it.**",
           },
           impactStats: [
             { icon: "water", value: "3 areas", label: "Tube wells installed", description: "Mukundapur, Fulbera and Jagadishpur" },
