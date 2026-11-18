@@ -1,8 +1,42 @@
 "use client";
 
-import { useEffect } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight, Play, X } from "lucide-react";
 import type { GalleryItem } from "@/types";
+
+// Shows a play button over the video whenever it's paused: before playback starts, after the
+// visitor pauses, or when the browser blocks autoplay-with-sound. The button only covers the
+// middle of the frame, so the native controls along the bottom stay clickable.
+const LightboxVideo = ({ src }: { src: string }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  return (
+    <div className="relative">
+      <video
+        ref={videoRef}
+        src={src}
+        controls
+        autoPlay
+        playsInline
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onEnded={() => setIsPlaying(false)}
+        className="max-h-[80vh] max-w-full rounded-lg"
+      />
+      {!isPlaying && (
+        <button
+          type="button"
+          onClick={() => void videoRef.current?.play().catch(() => {})}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-20 h-20 rounded-full bg-black/50 ring-2 ring-white/80 backdrop-blur-sm text-white shadow-lg transition-transform hover:scale-110"
+          aria-label="Play video"
+        >
+          <Play size={36} className="ml-1 fill-current" />
+        </button>
+      )}
+    </div>
+  );
+};
 
 interface MediaLightboxProps {
   items: GalleryItem[];
