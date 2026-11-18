@@ -255,6 +255,14 @@ const GalleryScreen = ({ user }: GalleryScreenProps) => {
                   {allVisibleSelected ? "Deselect all" : "Select all"}
                 </button>
                 <button
+                  onClick={() => downloadItems(items.filter((item) => selectedIds.has(item.id)))}
+                  disabled={selectedIds.size === 0}
+                  className="flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 disabled:opacity-50"
+                >
+                  <Download size={14} />
+                  Download selected
+                </button>
+                <button
                   onClick={() => setDeleteTargets(items.filter((item) => selectedIds.has(item.id)))}
                   disabled={selectedIds.size === 0}
                   className="flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
