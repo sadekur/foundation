@@ -1392,7 +1392,7 @@ export const dictionaries: Record<Language, Dictionary> = {
           title: "Tube Wells & Public Welfare Projects",
           blurb: "Installing tube wells to resolve safe drinking water shortages, and other welfare initiatives.",
           description:
-            "Tube wells are installed in areas facing a shortage of safe drinking water, alongside other public welfare initiatives as needed by local communities.",
+            "Sometimes the benefit of a small initiative can be far greater than we imagine. **Take a single tube well.** For a family that has to travel far for safe water, for someone who suffers without clean water, or for a community waiting for a reliable water source, only they can truly feel how much one tube well matters.\n\nWith this need in mind, As-Salsabil Foundation runs a **tube well installation programme**. Alhamdulillah, **tube wells have already been installed for poor people in the Mukundapur, Fulbera and Jagadishpur areas.** Alongside this, other public welfare initiatives are carried out according to local needs.\n\n**We want this effort to meet people's basic needs to grow further, so that a community has access to safe water and no family feels helpless for water when it needs it. Within our means, that is the effort we want to continue.**",
           support: {
             title: "Your Support Can Bring Safe, Clean Water",
             body:
