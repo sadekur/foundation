@@ -26,6 +26,9 @@ import { FadeIn } from "../../components/FadeIn";
 import { GallerySection } from "./GallerySection";
 
 // Same order as dictionaries.ts's `projects.categories` / siteConfig's `projectMedia`.
+// Six fills three rows of the two-column list at xl, which fits the card's 380px height.
+const MAX_CARD_OBJECTIVES = 6;
+
 const CATEGORY_ICONS = [
   GraduationCap,
   BookOpenText,
