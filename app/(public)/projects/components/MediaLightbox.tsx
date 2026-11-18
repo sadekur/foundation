@@ -105,7 +105,8 @@ export const MediaLightbox = ({ items, index, onClose, onNavigate }: MediaLightb
         onClick={(event) => event.stopPropagation()}
       >
         {item.type === "video" ? (
-          <video src={item.url} controls autoPlay className="max-h-[80vh] max-w-full rounded-lg" />
+          // Keyed so the play state resets when navigating between videos.
+          <LightboxVideo key={item.id} src={item.url} />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element -- lightbox shows the original Cloudinary asset, not a fixed next/image layout
           <img
