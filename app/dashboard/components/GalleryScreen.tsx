@@ -260,7 +260,10 @@ const GalleryScreen = ({ user }: GalleryScreenProps) => {
                   {allVisibleSelected ? "Deselect all" : "Select all"}
                 </button>
                 <button
-                  onClick={() => downloadItems(items.filter((item) => selectedIds.has(item.id)))}
+                  // YouTube links aren't files we host, so they're skipped.
+                  onClick={() =>
+                    downloadItems(items.filter((item) => selectedIds.has(item.id) && item.type !== "youtube"))
+                  }
                   disabled={selectedIds.size === 0}
                   className="flex items-center gap-1.5 px-3 py-2 text-sm rounded-lg bg-emerald-700 text-white hover:bg-emerald-800 disabled:opacity-50"
                 >
