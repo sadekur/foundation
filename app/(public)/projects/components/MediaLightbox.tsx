@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Play, X } from "lucide-react";
 import type { GalleryItem } from "@/types";
+import { getYouTubeEmbedUrl } from "@/lib/youtubeVideo";
 
 // Shows a play button over the video whenever it's paused: before playback starts, after the
 // visitor pauses, or when the browser blocks autoplay-with-sound. The button only covers the
