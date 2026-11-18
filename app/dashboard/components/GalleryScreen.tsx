@@ -28,6 +28,25 @@ const ALL_PROJECTS = "all";
 // Filter value for items hidden from the public main gallery slider.
 const HIDDEN_FROM_MAIN = "hidden-from-main";
 
+// The `download` attribute is ignored for cross-origin URLs (browsers just open the file), so
+// ask Cloudinary for a Content-Disposition: attachment response via its fl_attachment flag.
+const getDownloadUrl = (url: string) => url.replace("/upload/", "/upload/fl_attachment/");
+
+// One hidden link click per file, spaced out so the browser treats them as separate downloads
+// (it may ask once to allow multiple downloads from this site).
+const downloadItems = (targets: GalleryItem[]) => {
+  targets.forEach((item, i) => {
+    setTimeout(() => {
+      const link = document.createElement("a");
+      link.href = getDownloadUrl(item.url);
+      link.rel = "noopener";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }, i * 500);
+  });
+};
+
 interface GalleryScreenProps {
   user: User;
 }
