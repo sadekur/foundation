@@ -1405,7 +1405,7 @@ export const dictionaries: Record<Language, Dictionary> = {
           ],
           targetAudience: "Poor families and communities without safe water",
           budgetItems: ["Tube well installation materials", "Labor and installation costs", "Maintenance"],
-          area: "Water-scarce areas, including Mukundapur, Fulbera and Jagadishpur",
+          area: "Gobindaganj and surrounding areas",
           duration: "As-needed project",
           faq: [
             {
