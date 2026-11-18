@@ -1405,7 +1405,7 @@ export const dictionaries: Record<Language, Dictionary> = {
           ],
           targetAudience: "Poor families and communities without safe water",
           budgetItems: ["Tube well installation materials", "Labor and installation costs", "Maintenance"],
-          area: "Gobindaganj and surrounding areas",
+          area: "Areas within and around Gobindaganj",
           duration: "As-needed project",
           faq: [
             {
