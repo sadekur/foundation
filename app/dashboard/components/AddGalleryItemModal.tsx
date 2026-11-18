@@ -162,6 +162,9 @@ const AddGalleryItemModal = ({
   onUploaded,
   onCancel,
 }: AddGalleryItemModalProps) => {
+  const [mode, setMode] = useState<AddMode>("upload");
+  const [youtubeText, setYoutubeText] = useState("");
+  const [youtubeError, setYoutubeError] = useState("");
   const [queue, setQueue] = useState<QueueItem[]>([]);
   const [caption, setCaption] = useState("");
   const [projectSlugs, setProjectSlugs] = useState<string[]>(defaultProjectSlugs);
