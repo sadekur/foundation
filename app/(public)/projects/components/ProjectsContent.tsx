@@ -74,9 +74,10 @@ export const ProjectsContent = ({ initialGalleryItems, initialGalleryCursor }: P
                 <div
                   className={`flex flex-col ${
                     reversed ? "lg:flex-row-reverse" : "lg:flex-row"
-                  } items-stretch bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-emerald-100 lg:h-[380px]`}
+                  } items-stretch bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-emerald-100 lg:min-h-[380px]`}
                 >
-                  <div className="relative w-full lg:w-1/2 aspect-[4/3] sm:aspect-video lg:aspect-auto lg:h-full min-h-[220px] bg-gradient-to-br from-emerald-900 to-emerald-950">
+                  {/* No explicit height at lg: the row's items-stretch sizes it to the card, which can grow past 380px for long content. */}
+                  <div className="relative w-full lg:w-1/2 aspect-[4/3] sm:aspect-video lg:aspect-auto min-h-[220px] bg-gradient-to-br from-emerald-900 to-emerald-950">
                     {media.video ? (
                       <video
                         src={media.video}
