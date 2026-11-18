@@ -419,7 +419,7 @@ const AddGalleryItemModal = ({
             />
           </div>
 
-          {queue.length > 0 && (
+          {mode === "upload" && queue.length > 0 && (
             <div className="mb-4 space-y-2">
               {queue.map((q, i) => (
                 <div key={`${q.file.name}-${i}`} className="text-xs">
