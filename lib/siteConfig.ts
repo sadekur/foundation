@@ -83,7 +83,8 @@ export const projectBanners: (ProjectBanner | null)[] = [
   "/projects/banners/quran-o-deeni-shikkhadan.jpg", // Qur'an & Islamic Teaching
   // 16:9 source with its caption along the bottom edge — a centered crop cuts the caption off.
   { src: "/projects/banners/islami-pathagar-o-prokashona.png", position: "center bottom" }, // Islamic Library & Publications
-  "/projects/banners/zakat-o-sadaka.jpg", // Zakat & Sadaqah Distribution
+  // 16:9 poster with its title in the top third — a centered crop cuts the title off.
+  { src: "/projects/banners/zakat-o-sadaka.png", position: "center top" }, // Zakat & Sadaqah Distribution
   null, // Orphans, Students of Knowledge & the Poor
   null, // Tube Wells & Public Welfare
   null, // Tree Plantation & Eco-Friendly Activities
