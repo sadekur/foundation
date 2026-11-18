@@ -184,9 +184,19 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
                 aria-label={`Go to slide ${i + 1}`}
                 aria-current={i === currentIndex}
               >
-                {item.type === "video" ? (
+                {item.type !== "image" ? (
                   <>
-                    <video src={item.url} muted playsInline className="w-full h-full object-cover pointer-events-none" />
+                    {item.type === "youtube" && item.youtubeId ? (
+                      // eslint-disable-next-line @next/next/no-img-element -- see the slide above
+                      <img
+                        src={getYouTubeThumbnailUrl(item.youtubeId)}
+                        alt=""
+                        className="w-full h-full object-cover pointer-events-none"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <video src={item.url} muted playsInline className="w-full h-full object-cover pointer-events-none" />
+                    )}
                     <span
                       className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/20"
                       aria-hidden="true"
