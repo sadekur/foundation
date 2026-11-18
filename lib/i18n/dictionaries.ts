@@ -95,6 +95,8 @@ export type ProjectImpactIcon =
   | "family"
   | "emergency"
   | "longTerm"
+  | "winter"
+  | "eid"
   | "water"
   | "maintenance"
   | "welfare"
