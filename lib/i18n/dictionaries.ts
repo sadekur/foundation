@@ -1518,7 +1518,7 @@ export const dictionaries: Record<Language, Dictionary> = {
           },
           impactStats: [
             { icon: "tree", value: "Plantation", label: "Tree plantation drives", description: "At madrasas, roadsides and open spaces" },
-            { icon: "madrasa", value: "Every year", label: "Planting at madrasas", description: "Beautifying places of learning" },
+            { icon: "madrasa", value: "Every year", label: "At madrasas and schools", description: "Beautiful, pleasant surroundings" },
             { icon: "greening", value: "Shade & fruit", label: "Useful trees", description: "For students and the public" },
             { icon: "awareness", value: "Awareness", label: "Public awareness", description: "Encouraging tree plantation" },
             { icon: "care", value: "Care", label: "Caring for planted trees", description: "Ongoing care and maintenance" },
