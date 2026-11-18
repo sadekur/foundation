@@ -113,6 +113,8 @@ const IMPACT_ICONS: Record<ProjectImpactIcon, LucideIcon> = {
   family: Users,
   emergency: Siren,
   longTerm: InfinityIcon,
+  winter: Snowflake,
+  eid: Moon,
   water: Droplets,
   maintenance: Wrench,
   welfare: Handshake,
