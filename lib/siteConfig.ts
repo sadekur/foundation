@@ -85,7 +85,8 @@ export const projectBanners: (ProjectBanner | null)[] = [
   { src: "/projects/banners/islami-pathagar-o-prokashona.png", position: "center bottom" }, // Islamic Library & Publications
   // 16:9 poster with its title in the top third — a centered crop cuts the title off.
   { src: "/projects/banners/zakat-o-sadaka.png", position: "center top" }, // Zakat & Sadaqah Distribution
-  null, // Orphans, Students of Knowledge & the Poor
+  // 4:3 photo with windows along the top — anchor below center so the crop shows the relief packs.
+  { src: "/projects/banners/yatim-talibe-ilm-o-daridro.jpg", position: "center 60%" }, // Orphans, Students of Knowledge & the Poor
   null, // Tube Wells & Public Welfare
   null, // Tree Plantation & Eco-Friendly Activities
   null, // Free Medical Care & Humanitarian Aid
