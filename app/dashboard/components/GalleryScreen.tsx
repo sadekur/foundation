@@ -347,6 +347,17 @@ const GalleryScreen = ({ user }: GalleryScreenProps) => {
                     >
                       <Tag size={12} />
                     </button>
+                    <a
+                      href={getDownloadUrl(item.url)}
+                      rel="noopener"
+                      className={`absolute left-1 bg-white/90 text-emerald-700 p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white ${
+                        item.caption ? "bottom-6" : "bottom-1"
+                      }`}
+                      aria-label={`Download ${item.type}`}
+                      title={`Download ${item.type}`}
+                    >
+                      <Download size={12} />
+                    </a>
                   </>
                 )}
                 {(() => {
