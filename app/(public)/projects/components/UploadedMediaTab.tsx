@@ -175,7 +175,17 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
                 aria-current={i === currentIndex}
               >
                 {item.type === "video" ? (
-                  <video src={item.url} muted playsInline className="w-full h-full object-cover pointer-events-none" />
+                  <>
+                    <video src={item.url} muted playsInline className="w-full h-full object-cover pointer-events-none" />
+                    <span
+                      className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/20"
+                      aria-hidden="true"
+                    >
+                      <span className="flex items-center justify-center w-7 h-7 rounded-full bg-black/55 ring-1 ring-white/80 text-white">
+                        <Play size={13} className="ml-0.5 fill-current" />
+                      </span>
+                    </span>
+                  </>
                 ) : (
                   <Image src={item.url} alt="" fill sizes="80px" className="object-cover" />
                 )}
