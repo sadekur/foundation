@@ -317,7 +317,25 @@ const GalleryScreen = ({ user }: GalleryScreenProps) => {
                   selectMode ? "cursor-pointer" : ""
                 } ${isSelected ? "border-red-500 ring-2 ring-red-500" : "border-gray-200"}`}
               >
-                {item.type === "video" ? (
+                {item.type === "youtube" && item.youtubeId ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element -- admin-only preview grid, not worth next/image here */}
+                    <img
+                      src={getYouTubeThumbnailUrl(item.youtubeId)}
+                      alt={item.caption ?? ""}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <span
+                      className="pointer-events-none absolute inset-0 flex items-center justify-center"
+                      aria-hidden="true"
+                    >
+                      <span className="flex items-center justify-center w-7 h-5 rounded-md bg-red-600 text-white shadow">
+                        <Play size={11} className="ml-0.5 fill-current" />
+                      </span>
+                    </span>
+                  </>
+                ) : item.type === "video" ? (
                   <video src={item.url} className="w-full h-full object-cover" />
                 ) : (
                   // eslint-disable-next-line @next/next/no-img-element -- admin-only preview grid, not worth next/image here
