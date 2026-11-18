@@ -485,7 +485,9 @@ const GalleryScreen = ({ user }: GalleryScreenProps) => {
               : "Deleting..."
             : deleteTargets.length > 1
               ? `Are you sure you want to delete these ${deleteTargets.length} items? This action cannot be undone.`
-              : `Are you sure you want to delete this ${deleteTargets[0]?.type ?? "item"}? This action cannot be undone.`
+              : deleteTargets[0]?.type === "youtube"
+                ? "Remove this YouTube video from the gallery? The video itself stays on YouTube."
+                : `Are you sure you want to delete this ${deleteTargets[0]?.type ?? "item"}? This action cannot be undone.`
         }
       />
     </>
