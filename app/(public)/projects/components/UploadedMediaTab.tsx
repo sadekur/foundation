@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, ImageOff, Loader2, Play } from "lucide-react
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getGalleryItems } from "@/lib/gallery";
+import { getYouTubeThumbnailUrl } from "@/lib/youtubeVideo";
 import type { GalleryItem } from "@/types";
 import { MediaLightbox } from "./MediaLightbox";
 
