@@ -341,6 +341,38 @@ export const ProjectDetailContent = ({
           </FadeIn>
         </div>
 
+        {category.programs && (
+          <FadeIn delayMs={100}>
+            <div className="mt-10 xs:mt-12 text-center">
+              <h2 className="text-xl xs:text-2xl font-bold text-emerald-950">{category.programs.title}</h2>
+              <SectionDivider className="mt-4 mb-6" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 xs:gap-6">
+              {category.programs.items.map((program, programIndex) => {
+                const ProgramIcon = IMPACT_ICONS[program.icon];
+                return (
+                  <div
+                    key={program.title}
+                    className="relative overflow-hidden rounded-2xl bg-white border border-emerald-100 shadow-sm px-5 xs:px-6 pt-6 pb-7 border-t-4 border-t-amber-400"
+                  >
+                    <span
+                      className="absolute top-3 right-4 text-4xl font-bold text-emerald-900/10 select-none"
+                      aria-hidden="true"
+                    >
+                      {String(programIndex + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex items-center justify-center w-14 h-14 rounded-full bg-emerald-900 text-amber-400 ring-4 ring-amber-400/15">
+                      <ProgramIcon size={26} />
+                    </span>
+                    <h3 className="mt-4 text-base xs:text-lg font-bold text-emerald-950">{program.title}</h3>
+                    <p className="mt-2 text-sm xs:text-base text-gray-600 leading-relaxed">{program.body}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </FadeIn>
+        )}
+
         <FadeIn delayMs={100}>
           <div className="mt-10 xs:mt-12 rounded-2xl bg-emerald-950 pattern-lattice-light text-center px-5 xs:px-8 py-8 xs:py-10">
             <h2 className="text-lg xs:text-xl font-bold text-white">{category.support?.title ?? projects.ctaTitle}</h2>
