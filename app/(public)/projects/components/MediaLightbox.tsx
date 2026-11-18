@@ -104,7 +104,19 @@ export const MediaLightbox = ({ items, index, onClose, onNavigate }: MediaLightb
         className="max-w-4xl max-h-full w-full flex flex-col items-center"
         onClick={(event) => event.stopPropagation()}
       >
-        {item.type === "video" ? (
+        {item.type === "youtube" && item.youtubeId ? (
+          // YouTube's own player, so no custom play button. Keyed so switching videos reloads the iframe.
+          <div key={item.id} className="w-full aspect-video max-h-[80vh] rounded-lg overflow-hidden bg-black">
+            <iframe
+              src={getYouTubeEmbedUrl(item.youtubeId)}
+              title={item.caption || "YouTube video"}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              className="w-full h-full border-0"
+            />
+          </div>
+        ) : item.type === "video" ? (
           // Keyed so the play state resets when navigating between videos.
           <LightboxVideo key={item.id} src={item.url} />
         ) : (
