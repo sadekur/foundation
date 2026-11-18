@@ -107,7 +107,7 @@ export const UploadedMediaTab = ({ initialItems, initialCursor }: UploadedMediaT
               type="button"
               key={item.id}
               onClick={() => setLightboxIndex(i)}
-              className="relative w-full shrink-0 aspect-[4/3] xs:aspect-[16/10] sm:aspect-[16/9] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-inset"
+              className="group relative w-full shrink-0 aspect-[4/3] xs:aspect-[16/10] sm:aspect-[16/9] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-inset"
               aria-label={item.caption || "View media"}
               aria-hidden={i !== currentIndex}
               tabIndex={i === currentIndex ? 0 : -1}
