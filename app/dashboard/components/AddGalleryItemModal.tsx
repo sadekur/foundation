@@ -274,6 +274,10 @@ const AddGalleryItemModal = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (mode === "youtube") {
+      await handleYouTubeSubmit();
+      return;
+    }
     if (queue.length === 0) return;
 
     setUploading(true);
