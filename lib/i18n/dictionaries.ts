@@ -1479,30 +1479,35 @@ export const dictionaries: Record<Language, Dictionary> = {
               "Financial support is needed to buy saplings, manage transport and planting, and care for and maintain the trees planted at madrasas and in various areas.\n\nThe shade, fruit and other benefits of a tree planted through your donation can serve students and the general public for years to come.\n\n**Come, let us take part together in protecting the environment and greening our communities. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
           },
           objectives: [
-            "Protect the environment and promote greening",
-            "Beautify the surroundings of madrasas and other places of learning",
-            "Benefit students and the public by planting shade and fruit trees",
-            "Raise public awareness on tree plantation",
-            "Undertake sustainable eco-friendly initiatives",
+            "Preserve ecological balance and extend greening",
+            "Make the surroundings of madrasas and schools beautiful and pleasant",
+            "Benefit students and the public through shade and fruit trees",
+            "Raise public awareness of tree plantation and environmental conservation",
+            "Carry out sustainable eco-friendly work through caring for and maintaining trees",
           ],
-          targetAudience: "Madrasa students, local communities and the environment",
-          budgetItems: ["Purchasing saplings", "Transport and planting logistics", "Ongoing care and maintenance"],
-          area: "Areas within and around Gobindaganj",
-          duration: "Annual, ongoing project",
+          targetAudience: "Students and teachers of madrasas and schools, local communities, and the environment as a whole",
+          budgetItems: [
+            "Buying saplings of various species",
+            "Transporting and planting saplings",
+            "Tree care, necessary materials and maintenance",
+          ],
+          area: "Gobindaganj Upazila, and gradually various surrounding regions",
+          duration: "Annual, ongoing programme",
           faq: [
             {
               question: "Where are trees planted?",
               answer:
-                "Every year trees are planted at one madrasa or another, and saplings are also planted along roadsides and in open spaces in various areas. This work is not limited to Gobindaganj Upazila; as needs and means allow, we plan to continue it both within Gobindaganj and in other regions beyond it.",
+                "Every year trees are planted at various madrasas and other places of learning, and saplings are also planted along roadsides and in open spaces. The programme runs in Gobindaganj Upazila, with plans to extend it gradually to various surrounding regions.",
             },
             {
               question: "What kind of trees are planted?",
               answer:
-                "We try to plant trees whose shade, fruit or other benefits students and the general public can enjoy, and that make the surroundings of places of learning more beautiful.",
+                "Special importance is given to shade and fruit trees, so that students, teachers and local people can benefit from their shade, fruit and other uses for years to come.",
             },
             {
               question: "What is my donation spent on?",
-              answer: "Buying saplings, transport and planting logistics, and caring for and maintaining the trees planted.",
+              answer:
+                "Buying saplings of various species, transporting and planting them, and tree care, necessary materials and maintenance.",
             },
             ...PROJECT_FAQ_EN,
           ],
