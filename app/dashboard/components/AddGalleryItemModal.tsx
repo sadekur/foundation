@@ -450,10 +450,20 @@ const AddGalleryItemModal = ({
           <div className="flex gap-3">
             <button
               type="submit"
-              disabled={queue.length === 0 || uploading}
+              disabled={(mode === "upload" ? queue.length === 0 : youtubeParsed.ids.length === 0) || uploading}
               className="flex-1 bg-emerald-600 text-white p-3 rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {uploading ? "Uploading…" : queue.length > 1 ? `Upload ${queue.length} files` : "Upload"}
+              {mode === "youtube"
+                ? uploading
+                  ? "Saving…"
+                  : youtubeParsed.ids.length > 1
+                    ? `Add ${youtubeParsed.ids.length} videos`
+                    : "Add video"
+                : uploading
+                  ? "Uploading…"
+                  : queue.length > 1
+                    ? `Upload ${queue.length} files`
+                    : "Upload"}
             </button>
             <button
               type="button"
