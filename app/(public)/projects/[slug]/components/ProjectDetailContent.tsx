@@ -359,7 +359,7 @@ export const ProjectDetailContent = ({
                       className="absolute top-3 right-4 text-4xl font-bold text-emerald-900/10 select-none"
                       aria-hidden="true"
                     >
-                      {String(programIndex + 1).padStart(2, "0")}
+                      {(programIndex + 1).toLocaleString(language === "bn" ? "bn-BD" : "en-US", { minimumIntegerDigits: 2 })}
                     </span>
                     <span className="flex items-center justify-center w-14 h-14 rounded-full bg-emerald-900 text-amber-400 ring-4 ring-amber-400/15">
                       <ProgramIcon size={26} />
