@@ -71,6 +71,44 @@ const buildItemPayload = (
   return item;
 };
 
+// Same rule as above: only keys with values, since addDoc() rejects undefined fields.
+const buildYouTubePayload = (
+  youtubeId: string,
+  caption: string,
+  projectSlugs: string[],
+  inMainGallery: boolean,
+  user: User
+): Omit<GalleryItem, "id"> => {
+  const item: Omit<GalleryItem, "id"> = {
+    type: "youtube",
+    url: getYouTubeWatchUrl(youtubeId),
+    youtubeId,
+    createdAt: new Date().toISOString(),
+    createdBy: user.email ?? "",
+  };
+  const trimmedCaption = caption.trim();
+  if (trimmedCaption) item.caption = trimmedCaption;
+  if (projectSlugs.length > 0) item.projectSlugs = projectSlugs;
+  if (!inMainGallery) item.hideFromMainGallery = true;
+  return item;
+};
+
+// One link per line; blank lines ignored, duplicates collapsed.
+const parseYouTubeLines = (text: string) => {
+  const lines = text
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const ids: string[] = [];
+  const invalid: string[] = [];
+  for (const line of lines) {
+    const id = parseYouTubeVideoId(line);
+    if (!id) invalid.push(line);
+    else if (!ids.includes(id)) ids.push(id);
+  }
+  return { ids, invalid };
+};
+
 // Re-encodes an oversized image as JPEG, stepping quality down and then dimensions down, until
 // it fits under maxBytes (or gives up after a fixed number of attempts and returns the last
 // result). Videos are left untouched — client-side video compression needs a much heavier tool
