@@ -37,13 +37,17 @@ export interface TransactionFormData {
   amount: string;
 }
 
-export type GalleryItemType = "image" | "video";
+// "youtube" items are links to YouTube videos, not Cloudinary uploads: `url` is the watch URL,
+// `youtubeId` the video ID, and the Cloudinary-only fields (publicId, bytes, format) are absent.
+export type GalleryItemType = "image" | "video" | "youtube";
 
 export interface GalleryItem {
   id: string;
   type: GalleryItemType;
   url: string;
-  publicId: string;
+  // Cloudinary asset ID — set for image/video, absent for youtube.
+  publicId?: string;
+  youtubeId?: string;
   caption?: string;
   // Slugs from siteConfig's PROJECT_CATEGORY_SLUGS — also shows the item on each of those
   // projects' detail pages. The sitewide /projects gallery shows every item regardless;
