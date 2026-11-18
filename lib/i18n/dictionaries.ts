@@ -1304,6 +1304,26 @@ export const dictionaries: Record<Language, Dictionary> = {
           blurb: "Humanitarian support for the education, upkeep and wellbeing of orphans, students of Islamic knowledge, and the helpless and destitute in society.",
           description:
             "In the villages and communities around us live countless **destitute, helpless and underprivileged people** whose silent hardship and want go unknown to many of us. Some cannot meet their family's daily needs because of poverty, some pass the winter suffering without warm clothes, and some families are left out of the joy of Eid. There are also many talented and eager students of Islamic knowledge who struggle to continue their studies and meet their basic upkeep because of financial hardship.\n\nTo stand beside these people and bring them help according to their needs, As-Salsabil Foundation runs a range of humanitarian and public-welfare activities under this project.\n\nAlhamdulillah! As part of this work, **warm clothes are distributed to the helpless and poor every winter.** On the occasions of **Eid al-Fitr and Eid al-Adha**, **Eid gifts are distributed** to poor families as far as our means allow, so that they too can share the joy of Eid with their loved ones.\n\nAlongside this, **every month a number of poor and helpless families** are supported with money and essential goods as far as possible, based on their real circumstances and needs. Special effort is made to stand beside families who cannot meet their daily needs and are in severe financial crisis.\n\nAnother important part of this project is **sponsoring orphaned children and poor students of Islamic knowledge.** We do what we can to help them continue their religious education, cover their study costs and upkeep, and remove the financial barriers on their path to Islamic knowledge.\n\n**In this way, through seasonal aid as well as regular, long-term sponsorship, our effort to stand beside the neglected, helpless and underprivileged members of society continues.**",
+          programs: {
+            title: "Where Your Support Goes",
+            items: [
+              {
+                icon: "orphan",
+                title: "Sponsoring Orphans & Students of Knowledge",
+                body: "Helping orphaned children and poor students of knowledge continue their religious education, with their study costs and upkeep.",
+              },
+              {
+                icon: "monthly",
+                title: "Monthly Support for the Poor",
+                body: "Every month, a number of poor and helpless families receive money and essential goods based on their real needs.",
+              },
+              {
+                icon: "winter",
+                title: "Warm Clothes & Eid Gifts",
+                body: "Warm clothes every winter, and Eid gifts for poor families on Eid al-Fitr and Eid al-Adha.",
+              },
+            ],
+          },
           support: {
             title: "Your Support Can Change the Story of a Helpless Life",
             body:
