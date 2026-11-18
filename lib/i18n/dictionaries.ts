@@ -1497,7 +1497,7 @@ export const dictionaries: Record<Language, Dictionary> = {
             {
               question: "Where are trees planted?",
               answer:
-                "Every year trees are planted at various madrasas and other places of learning, and saplings are also planted along roadsides and in open spaces. The programme runs in Gobindaganj Upazila, with plans to extend it gradually to various surrounding regions.",
+                "Every year trees are planted at various madrasas and other places of learning. The programme runs in Gobindaganj Upazila, with plans to extend it gradually to various surrounding regions.",
             },
             {
               question: "What kind of trees are planted?",
