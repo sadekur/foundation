@@ -142,6 +142,13 @@ export interface ProjectHighlights {
   items: string[];
 }
 
+// Optional row of visual cards, one per activity the project funds, shown full-width between the
+// description/sidebar and the donate CTA so donors see where their money goes.
+export interface ProjectPrograms {
+  title: string;
+  items: { icon: ProjectImpactIcon; title: string; body: string }[];
+}
+
 export interface ProjectSupportSection {
   title: string;
   body: string;
