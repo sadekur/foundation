@@ -185,7 +185,42 @@ const AddGalleryItemModal = ({
   const resetAndClose = () => {
     setQueue([]);
     setCaption("");
+    setYoutubeText("");
+    setYoutubeError("");
+    setMode("upload");
     onCancel();
+  };
+
+  const youtubeParsed = parseYouTubeLines(youtubeText);
+
+  // No Cloudinary step for links: each one is just a Firestore doc, written in order so the
+  // saved items keep the same relative createdAt order as the pasted lines.
+  const handleYouTubeSubmit = async () => {
+    if (youtubeParsed.invalid.length > 0) {
+      setYoutubeError(`Not a YouTube video link: ${youtubeParsed.invalid.join(", ")}`);
+      return;
+    }
+    if (youtubeParsed.ids.length === 0) return;
+
+    setUploading(true);
+    setYoutubeError("");
+    const failed: string[] = [];
+    for (const id of youtubeParsed.ids) {
+      try {
+        await onUploaded(buildYouTubePayload(id, caption, projectSlugs, inMainGallery, user));
+      } catch (err) {
+        console.error(`Failed to save YouTube video ${id}:`, err);
+        failed.push(id);
+      }
+    }
+    setUploading(false);
+
+    if (failed.length > 0) {
+      setYoutubeText(failed.map(getYouTubeWatchUrl).join("\n"));
+      setYoutubeError(`Failed to save ${failed.length} link(s). They are left in the box — try again.`);
+    } else {
+      resetAndClose();
+    }
   };
 
   const updateQueueItem = (index: number, patch: Partial<QueueItem>) => {
