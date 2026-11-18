@@ -64,8 +64,8 @@ export interface GalleryItem {
   width?: number;
   height?: number;
   duration?: number;
-  bytes: number;
-  format: string;
+  bytes?: number;
+  format?: string;
   createdAt: string;
   createdBy: string;
 }
