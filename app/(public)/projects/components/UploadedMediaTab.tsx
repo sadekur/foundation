@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, ImageOff, Loader2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, ImageOff, Loader2, Play } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getGalleryItems } from "@/lib/gallery";
