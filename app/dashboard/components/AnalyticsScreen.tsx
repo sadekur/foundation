@@ -364,10 +364,12 @@ const AnalyticsScreen = ({ user }: AnalyticsScreenProps) => {
 
       <p className="mt-6 flex items-start gap-2 text-xs text-gray-400">
         <Info size={14} className="shrink-0 mt-px" />
-        Counts the public website only, in Bangladesh time, from the live site (not local development). No cookies or
-        personal data are stored. Browsers you&apos;ve signed in to this dashboard on aren&apos;t counted. Most WhatsApp and
-        Messenger links hide where they came from and show up as Direct — add <code>?utm_source=whatsapp</code> to links you
-        share to track them.
+        <span>
+          Counts the public website only, in Bangladesh time, from the live site (not local development). No cookies or
+          personal data are stored. Browsers you&apos;ve signed in to this dashboard on aren&apos;t counted. Every visit is
+          counted, but most WhatsApp and Messenger links hide where they came from, so those visits show up as Direct —
+          add <code>?utm_source=whatsapp</code> to links you share to label them.
+        </span>
       </p>
     </>
   );
