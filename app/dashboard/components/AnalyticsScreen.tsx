@@ -362,6 +362,8 @@ const AnalyticsScreen = ({ user }: AnalyticsScreenProps) => {
         <AnalyticsBreakdownCard title="Browsers" unit="visits" counts={breakdowns.browsers} />
       </div>
 
+      <ShareLinkCard />
+
       <p className="mt-6 flex items-start gap-2 text-xs text-gray-400">
         <Info size={14} className="shrink-0 mt-px" />
         <span>
