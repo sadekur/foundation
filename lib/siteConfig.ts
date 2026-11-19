@@ -90,7 +90,7 @@ export const projectBanners: (ProjectBanner | null)[] = [
   // 4:3 photo with windows along the top — anchor below center so the crop shows the relief packs.
   { src: "/projects/banners/yatim-talibe-ilm-o-daridro.jpg", position: "center 60%" }, // Orphans, Students of Knowledge & the Poor
   "/projects/banners/tube-well-o-jonokollan.png", // Tube Wells & Public Welfare
-  null, // Tree Plantation & Eco-Friendly Activities
+  "/projects/banners/brikkhoropon.jpg", // Tree Plantation & Eco-Friendly Activities
   null, // Free Medical Care & Humanitarian Aid
   null, // Mosque & Madrasa Construction Support
   null, // Rehabilitation & Employment Support
