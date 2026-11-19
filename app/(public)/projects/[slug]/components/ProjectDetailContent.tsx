@@ -349,7 +349,12 @@ export const ProjectDetailContent = ({
               <h2 className="text-xl xs:text-2xl font-bold text-emerald-950">{category.programs.title}</h2>
               <SectionDivider className="mt-4 mb-6" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 xs:gap-6">
+            <div
+              className={`grid grid-cols-1 gap-4 xs:gap-6 ${
+                // Four cards would leave one orphan on a 3-column row, so lay them out 2×2, then 4 across.
+                category.programs.items.length === 4 ? "md:grid-cols-2 xl:grid-cols-4" : "md:grid-cols-3"
+              }`}
+            >
               {category.programs.items.map((program, programIndex) => {
                 const ProgramIcon = IMPACT_ICONS[program.icon];
                 return (
