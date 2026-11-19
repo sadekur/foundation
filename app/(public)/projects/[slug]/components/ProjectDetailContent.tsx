@@ -61,6 +61,7 @@ import {
   Briefcase,
   Snowflake,
   Moon,
+  Heart,
   type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
