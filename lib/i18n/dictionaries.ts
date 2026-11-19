@@ -1788,36 +1788,89 @@ export const dictionaries: Record<Language, Dictionary> = {
         {
           slug: "punorbashon-o-kormosangsthan",
           title: "Rehabilitation & Employment Support",
-          blurb: "Building homes, distributing livestock, and arranging employment for the destitute.",
+          blurb: "A long-term plan of housing, employment, livestock and marriage support for families in need — to begin in stages once funding is secured.",
           description:
-            "Homes are built as needed for the destitute, poor, and helpless, alongside livestock distribution and employment arrangements to help them become self-reliant.",
+            "Poverty and financial hardship are among the biggest obstacles to a normal life, social dignity and becoming self-reliant. Many destitute, poor and helpless families in our society cannot afford safe housing, a livelihood, or the important needs of their family. Financial hardship even leaves many families unable to arrange the marriage of their grown children. To stand beside these people and help improve their lives, As-Salsabil Foundation has adopted **a long-term plan for rehabilitation and humanitarian support**.\n\nUnder this project, we plan to identify families who are truly helpless and in need, and — according to our means and their needs — **support them in building homes, distribute livestock, and arrange income-generating employment**. Alongside this, for suitable brides and grooms whose marriages have become difficult because of financial hardship, we will also help — as far as our means allow, and in light of their needs and circumstances — with **the necessary arrangements and related costs of the marriage**.\n\nIn particular, for families who have long struggled with poverty and financial crisis, one of the main aims of this initiative is to create lasting livelihoods, arrange safe housing, and help meet their social and family needs.\n\n**Current status and future plans:** Because of limited financial resources and an insufficient budget, the project's work has not yet been able to begin. In sha Allah, once the necessary funding and support are secured, the project will be implemented in stages.",
+          programs: {
+            title: "The Project's Four Planned Areas of Support",
+            items: [
+              {
+                icon: "house",
+                title: "Housing Support",
+                body: "Help with building a home, according to our means and their needs, for truly helpless families who cannot afford safe housing.",
+              },
+              {
+                icon: "employment",
+                title: "Creating Employment",
+                body: "Income-generating employment and lasting livelihoods for families who have long struggled with poverty.",
+              },
+              {
+                icon: "livestock",
+                title: "Livestock Distribution",
+                body: "Distributing livestock to families in need, to help them earn a living and become self-reliant.",
+              },
+              {
+                icon: "marriage",
+                title: "Marriage Support for Families in Need",
+                body: "Help, as far as our means allow, with the necessary arrangements and related costs for suitable brides and grooms whose marriages have become difficult because of financial hardship.",
+              },
+            ],
+          },
           support: {
-            title: "Help a Struggling Family Become Self-Reliant",
+            title: "Take Part in Making This Noble Initiative Happen",
             body:
-              "Financial support is needed for home construction materials, purchasing livestock, and employment training and support for destitute, poor, and helpless families.\n\nYour donation can help a family build a home or secure a livelihood, easing their path to self-reliance.\n\n**Come, let us take part together in helping those in need become self-reliant. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+              "Because of limited financial resources and an insufficient budget, the project's work has not yet been able to begin. Once the necessary funding is secured through your donations and support, in sha Allah, housing support, employment, livestock distribution and marriage support can begin in stages.\n\nWe believe that helping people only temporarily is not enough; creating opportunities for them to become self-reliant, helping them live safely, and standing beside them in fulfilling necessary social responsibilities are also an important part of lasting humanitarian work.\n\n**May Allah grant us the ability to carry out these noble initiatives and accept everyone's support and efforts. Ameen.**",
           },
           objectives: [
-            "Build homes as needed",
-            "Enable self-reliance through livestock distribution",
-            "Create employment opportunities",
+            "Identify truly helpless families in need and help arrange safe housing",
+            "Create income-generating employment and lasting livelihoods",
+            "Help families become self-reliant through livestock distribution",
+            "Support the marriages of suitable brides and grooms from families in need",
+            "Stand beside families in meeting their social and family needs",
           ],
-          targetAudience: "Destitute, poor, and helpless families",
-          budgetItems: ["Home construction materials", "Purchasing livestock", "Employment training and support"],
-          area: "Beneficiary families in designated areas",
-          duration: "Long-term, ongoing project",
-          faq: PROJECT_FAQ_EN,
+          targetAudience: "Destitute, poor and helpless families long caught in poverty and financial crisis, and suitable brides and grooms from families in need",
+          budgetItems: [
+            "Help with building homes",
+            "Arranging income-generating employment",
+            "Purchasing and distributing livestock",
+            "Necessary arrangements and related costs of marriage",
+          ],
+          area: "Identified families who are truly helpless and in need",
+          duration: "Planned long-term project — to begin in stages once funding is secured",
+          faq: [
+            {
+              question: "Has this project started?",
+              answer:
+                "Not yet. Because of limited financial resources and an insufficient budget, the work has not been able to begin. In sha Allah, once the necessary funding and support are secured, it will be implemented in stages.",
+            },
+            {
+              question: "What support does this project plan to provide?",
+              answer: "Support in four areas: housing support, creating employment, livestock distribution, and marriage support for families in need.",
+            },
+            {
+              question: "Who will receive this support?",
+              answer:
+                "Families who are truly helpless and in need will be identified and supported according to our means and their needs — especially those who have long struggled with poverty and financial crisis.",
+            },
+            {
+              question: "What will my donation be spent on?",
+              answer:
+                "Help with building homes, arranging income-generating employment, purchasing and distributing livestock, and the necessary arrangements and related costs of marriage.",
+            },
+            ...PROJECT_FAQ_EN,
+          ],
           impactIntro: {
-            title: "Our Journey in Helping Families Become Self-Reliant",
+            title: "A Long-Term Plan Toward Self-Reliant Lives",
             body:
-              "**Homes are built** as needed for the destitute, poor and helpless, so that they have safe shelter.\n\nAlongside this, **livestock distribution** and **employment training and support** open a path to an income, so they can stand on their own feet.\n\n**Our aim is not short-term help, but making struggling families self-reliant over the long term.**",
+              "Poverty and financial hardship leave many families unable to afford **safe housing, a livelihood**, or **their children's marriages**. To stand beside them, this project plans **housing support, employment, livestock distribution** and **marriage support**.\n\nThe project is currently **in the planning stage**. In sha Allah, once the necessary funding and budget are secured, the work will begin in stages.\n\n**Our aim is to go beyond temporary help and give families in need the chance to become self-reliant.**",
           },
           impactStats: [
-            { icon: "house", value: "Homes", label: "Home construction", description: "Shelter built as needed" },
-            { icon: "livestock", value: "Livestock", label: "Livestock distribution", description: "A sustainable source of income" },
-            { icon: "employment", value: "Employment", label: "Work opportunities", description: "Employment arranged" },
-            { icon: "training", value: "Training", label: "Employment training", description: "Help building skills" },
-            { icon: "selfReliance", value: "Self-reliant", label: "Family self-reliance", description: "Destitute, poor and helpless families" },
-            { icon: "longTerm", value: "Long-term", label: "Ongoing project", description: "Continuous support" },
+            { icon: "milestone", value: "Planned", label: "Current project status", description: "To begin in stages once funded" },
+            { icon: "house", value: "Housing", label: "Help building homes", description: "Arranging safe housing" },
+            { icon: "employment", value: "Employment", label: "Income-generating work", description: "Creating lasting livelihoods" },
+            { icon: "livestock", value: "Livestock", label: "Livestock distribution", description: "Help earning a living" },
+            { icon: "marriage", value: "Marriage", label: "Marriage support", description: "For suitable brides and grooms in need" },
+            { icon: "selfReliance", value: "Self-reliant", label: "Lasting welfare", description: "A lasting path beyond temporary help" },
           ],
         },
       ],
