@@ -370,7 +370,7 @@ const AnalyticsScreen = ({ user }: AnalyticsScreenProps) => {
           Counts the public website only, in Bangladesh time, from the live site (not local development). No cookies or
           personal data are stored. Browsers you&apos;ve signed in to this dashboard on aren&apos;t counted. Every visit is
           counted, but most WhatsApp and Messenger links hide where they came from, so those visits show up as Direct —
-          add <code>?utm_source=whatsapp</code> to links you share to label them.
+          share links made with the Share link tool above to label them.
         </span>
       </p>
     </>
