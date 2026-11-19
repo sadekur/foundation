@@ -45,7 +45,7 @@ export const Footer = () => {
 
         <div className="mt-6 pt-6 border-t border-emerald-800 flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2 text-xs text-emerald-300">
           <span>
-            {siteConfig.email} &middot; {siteConfig.phones.join(" / ")}
+            {siteConfig.email} &middot; {siteConfig.footerPhones.join(" / ")}
           </span>
           <span className="text-emerald-400">
             &copy; {new Date().getFullYear()} {dictionary.nav.brand}. {dictionary.footer.rights}
