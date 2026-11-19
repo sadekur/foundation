@@ -142,6 +142,7 @@ const IMPACT_ICONS: Record<ProjectImpactIcon, LucideIcon> = {
   employment: Briefcase,
   training: GraduationCap,
   selfReliance: BadgeCheck,
+  marriage: Heart,
 };
 
 // Social cards link out to siteConfig's URLs (skipped if an href is ever blanked).
