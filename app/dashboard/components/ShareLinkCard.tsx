@@ -56,7 +56,7 @@ const ShareLinkCard = () => {
   const [channel, setChannel] = useState<string>(CHANNELS[0].value);
   const [origin, setOrigin] = useState("");
   const [copied, setCopied] = useState(false);
-  const resetTimer = useRef<ReturnType<typeof setTimeout>>();
+  const resetTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
     setOrigin(siteOrigin());
