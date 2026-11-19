@@ -92,7 +92,9 @@ export const projectBanners: (ProjectBanner | null)[] = [
   "/projects/banners/tube-well-o-jonokollan.png", // Tube Wells & Public Welfare
   "/projects/banners/brikkhoropon.jpg", // Tree Plantation & Eco-Friendly Activities
   null, // Free Medical Care & Humanitarian Aid
-  null, // Mosque & Madrasa Construction Support
+  // Mukundapur Uttarpara Jame Masjid — a small (616px-wide) photo, so it looks soft at full hero width;
+  // swap in a higher-resolution shot when one is available.
+  "/projects/banners/masjid-madrasa-nirman.png", // Mosque & Madrasa Construction Support
   null, // Rehabilitation & Employment Support
 ];
 
