@@ -1560,36 +1560,68 @@ export const dictionaries: Record<Language, Dictionary> = {
         {
           slug: "free-chikitsha-o-manobik-sahajjo",
           title: "Free Medical Care & Humanitarian Aid",
-          blurb: "Providing free medical care and humanitarian assistance when needed.",
+          blurb: "Launching in December 2026 with a free medical camp — free treatment for those in need and humanitarian aid in times of crisis.",
           description:
-            "Free medical care is arranged for those who cannot afford it, and necessary humanitarian assistance is provided during emergencies or disasters.",
+            "When people fall ill, what they need most is proper treatment and compassion. Yet many cannot see a doctor in time because they cannot afford it. With this need in mind, As-Salsabil Foundation has taken up a medical care initiative.\n\nAlhamdulillah! In sha Allah, the project is planned to begin formally with a **free medical camp in December 2026**. Through it, free treatment, health advice and necessary medical assistance will be arranged for people who are financially disadvantaged, poor and underprivileged.\n\nLater, as our capacity and support grow, the work will be expanded to provide **regular free medical care**. Alongside this, necessary humanitarian assistance will be given to people affected by natural disasters, accidents or any other emergency.\n\nThis is a new chapter for us. We do not want to see it as a one-off event, but as the beginning of a wider path of public-welfare medical care, as our means and opportunities allow.",
+          highlights: {
+            title: "Future Plans & Implementation",
+            items: [
+              "Planned launch in December 2026 — a free medical camp.",
+              "Free treatment, health advice and necessary medical assistance for the financially disadvantaged, poor and underprivileged.",
+              "Regular free medical care, as capacity and support grow.",
+              "Humanitarian aid for those affected by natural disasters, accidents and other emergencies.",
+            ],
+          },
           support: {
-            title: "Stand Beside the Sick and Those Affected by Disaster",
+            title: "Our Hope",
             body:
-              "Financial support is needed for treatment and medicine for patients who cannot afford them, for organizing medical camps, and for relief supplies during disasters and emergencies.\n\nYour donation can help with a patient's treatment or meet the needs of people affected by disaster.\n\n**Come, let us take part together in standing beside people in their time of need. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+              "Our hope is that, with the help of Allah and the support of our able brothers and sisters, this initiative will ease the hardship of people in need, help secure health care for them, and play an effective role in serving humanity.\n\nYour financial support is needed for organizing medical camps, for treatment and medicine costs, and for humanitarian aid in emergencies. If you are a doctor, your time and skills can enrich this free medical care initiative.\n\n**May Allah grant us the ability to carry out this noble initiative and accept everyone's support. Ameen.**",
           },
           objectives: [
-            "Free medical care for those in financial need",
-            "Humanitarian aid during emergencies",
-            "Health-awareness programs",
+            "Formally begin the work with a free medical camp in December 2026",
+            "Free treatment and health advice for the financially disadvantaged, poor and underprivileged",
+            "Raise health awareness among people in need",
+            "Provide regular free medical care as capacity allows",
+            "Deliver humanitarian aid during disasters, accidents and emergencies",
           ],
-          targetAudience: "Financially disadvantaged patients and disaster-affected people",
-          budgetItems: ["Treatment and medicine costs", "Medical camp organization", "Emergency relief supplies"],
-          area: "Underprivileged families in designated areas",
-          duration: "As-needed, ongoing project",
-          faq: PROJECT_FAQ_EN,
+          targetAudience: "Financially disadvantaged, poor and underprivileged people, and those affected by disasters or accidents",
+          budgetItems: ["Medical camp organization", "Treatment and medicine costs", "Emergency humanitarian aid and relief supplies"],
+          area: "Communities of disadvantaged and underprivileged people (camp location to be announced)",
+          duration: "Starting December 2026, growing into a regular program",
+          faq: [
+            {
+              question: "When will this project begin?",
+              answer:
+                "In sha Allah, the work will formally begin with a free medical camp in December 2026. The camp's exact date and location will be announced once confirmed.",
+            },
+            {
+              question: "Who will receive this care?",
+              answer:
+                "People who are financially disadvantaged, poor and underprivileged will receive free treatment, health advice and necessary medical assistance.",
+            },
+            {
+              question: "I'm a doctor — how can I get involved?",
+              answer:
+                "Your time and skills can enrich this free medical care initiative. If you're interested, please reach us by phone or email through our Contact page.",
+            },
+            {
+              question: "What will my donation be spent on?",
+              answer: "Organizing medical camps, treatment and medicine costs, and emergency humanitarian aid and relief supplies.",
+            },
+            ...PROJECT_FAQ_EN,
+          ],
           impactIntro: {
-            title: "Our Journey Beside the Sick & Those Affected by Disaster",
+            title: "The Start of a New Chapter",
             body:
-              "For those who cannot afford it, **free medical care** and **help with treatment and medicine costs** are arranged, and **medical camps** are organized as needed.\n\nDuring disasters and emergencies, **relief and humanitarian assistance** is delivered to affected people, and health-awareness programs are carried out as well.\n\n**Our aim is that no one goes without treatment for lack of money, and no one is left alone in a time of crisis.**",
+              "Many people cannot see a doctor in time because they cannot afford it. With them in mind, in sha Allah this project will begin with its **first free medical camp in December 2026**.\n\nThe camp will offer **free treatment, health advice** and necessary **medical assistance**. Later, as capacity allows, we plan to provide **regular medical care** and **humanitarian aid** during disasters, accidents and emergencies.\n\n**Our aim is that people in need get the chance to see a doctor, and that no one is left alone in a time of crisis.**",
           },
           impactStats: [
-            { icon: "medical", value: "Free", label: "Medical care", description: "For those in financial need" },
-            { icon: "medicine", value: "Medicine", label: "Treatment & medicine costs", description: "Support for patients in need" },
-            { icon: "camp", value: "Camps", label: "Medical camps", description: "Organized as needed" },
-            { icon: "relief", value: "Relief", label: "Emergency humanitarian aid", description: "During disasters and emergencies" },
-            { icon: "awareness", value: "Awareness", label: "Health awareness", description: "Health-awareness programs" },
-            { icon: "ongoing", value: "Ongoing", label: "Needs-based project", description: "There whenever help is needed" },
+            { icon: "milestone", value: "Dec 2026", label: "Planned launch", description: "With a free medical camp" },
+            { icon: "camp", value: "Free", label: "Medical camp", description: "For the disadvantaged and underprivileged" },
+            { icon: "medical", value: "Advice", label: "Treatment & health advice", description: "A chance to see a doctor" },
+            { icon: "awareness", value: "Awareness", label: "Health awareness", description: "Knowing more about one's own health" },
+            { icon: "relief", value: "Aid", label: "Emergency humanitarian aid", description: "During disasters, accidents and emergencies" },
+            { icon: "ongoing", value: "Regular", label: "Expanding the service", description: "As capacity and support grow" },
           ],
         },
         {
