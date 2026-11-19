@@ -3,6 +3,8 @@
 // foundation's actual channel/page links before relying on them.
 export const siteConfig = {
   phones: ["01780-664660", "01717-136456"],
+  // General contact numbers shown in the site footer (separate from the bKash/Nagad `phones`).
+  footerPhones: ["01717-136456", "01331-956755"],
   email: "salsabilfoundation1@gmail.com",
   youtube: {
     label: "As-Salsabil tv",
