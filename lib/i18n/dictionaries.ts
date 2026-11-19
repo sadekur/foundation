@@ -1663,35 +1663,71 @@ export const dictionaries: Record<Language, Dictionary> = {
         {
           slug: "masjid-madrasa-nirman",
           title: "Mosque & Madrasa Construction Support",
-          blurb: "Financial support for building and renovating mosques and madrasas.",
+          blurb: "Supporting the construction, renovation and development of mosques — support for the Mukundapur Uttarpara and Anandabazar Jame Masjids is ongoing.",
           description:
-            "Financial support is provided for constructing or renovating mosques and madrasas in various areas, helping ensure a proper environment for worship and Islamic education.",
+            "The mosque is one of the most important centers of Muslim society — for worship, Islamic education, dawah and community ties. Supporting the construction, renovation and development of mosques, as far as our means allow, is therefore one part of As-Salsabil Foundation's public-welfare work.\n\nAlhamdulillah! As-Salsabil Foundation has already given financial donations and support, as far as its means allowed, toward the construction of **Mukundapur Uttarpara Jame Masjid** and **Anandabazar Jame Masjid**. Construction of both mosques is still under way, and the Foundation's support continues.\n\nOur aim is to build a mosque-centered religious environment in society, to help ensure a beautiful and suitable place of worship for those who pray, and to play a part in spreading Islamic education and dawah.\n\n**Future plans:** In sha Allah, we hope to keep supporting the construction, renovation and development of mosques in various areas, according to our means, the need and priorities. Alongside this, our long-term dream is to establish a large Islamic educational institution, or madrasa, offering Islamic education in the light of the Qur'an and Sunnah together with the necessary general and modern education.",
+          highlights: {
+            title: "Highlights of Our Mosque Construction & Development Work",
+            items: [
+              "Financial donations and support for the construction of Mukundapur Uttarpara Jame Masjid.",
+              "Financial donations and support for the construction of Anandabazar Jame Masjid.",
+              "Continued support while construction of both mosques is under way.",
+              "Plans to support the construction, renovation and development of mosques in various areas, according to our means, the need and priorities.",
+              "A long-term dream of establishing a large Islamic educational institution, or madrasa.",
+            ],
+          },
           support: {
-            title: "Help Build a Proper Environment for Worship and Learning",
+            title: "Take Part in Building & Developing Mosques",
             body:
-              "Financial support is needed for construction and renovation materials, labor, and project oversight for mosques and madrasas in various areas.\n\nYour donation can help ensure a proper environment for worship and Islamic education — a good deed whose reward, in sha Allah, may continue for you as an ongoing sadaqah jariyah.\n\n**Come, let us take part together in building and renovating mosques and madrasas. May Allah accept the efforts of all of us and grant us the best reward. Ameen.**",
+              "Construction of Mukundapur Uttarpara Jame Masjid and Anandabazar Jame Masjid is still under way. Your financial support is needed to continue helping with this work, and with the construction, renovation and development of mosques in other areas in the future.\n\nYour donation can help create a beautiful and suitable place of worship for those who pray.\n\n**May Allah accept the donations of everyone who helps build and develop mosques, and accept these efforts as sadaqah jariyah. Ameen.**",
           },
           objectives: [
-            "Financial support for mosque-madrasa construction",
-            "Support for necessary renovation work",
-            "Improve the environment for Islamic education",
+            "Build a mosque-centered religious environment in society",
+            "Help ensure a beautiful and suitable place of worship for those who pray",
+            "Play a part in spreading Islamic education and dawah",
+            "Support the construction, renovation and development of mosques in various areas",
+            "In the long term, establish a large Islamic educational institution, or madrasa",
           ],
-          targetAudience: "Local mosque and madrasa committees",
-          budgetItems: ["Construction and renovation materials", "Labor costs", "Project oversight"],
-          area: "Identified mosque-madrasa locations",
-          duration: "As-needed project",
-          faq: PROJECT_FAQ_EN,
+          targetAudience: "Mosque congregations, students of Islamic knowledge, and the local Muslim community",
+          budgetItems: [
+            "Financial donations toward mosque construction",
+            "Support for mosque renovation and development",
+          ],
+          area: "Mukundapur Uttarpara and Anandabazar; other areas in stages, as needed",
+          duration: "Ongoing program",
+          faq: [
+            {
+              question: "Which mosques has the Foundation supported?",
+              answer:
+                "Financial donations and support have been given, as far as our means allowed, toward the construction of Mukundapur Uttarpara Jame Masjid and Anandabazar Jame Masjid. Construction of both mosques is still under way, and the Foundation's support continues.",
+            },
+            {
+              question: "Will other mosques be supported in the future?",
+              answer:
+                "In sha Allah, we hope to keep supporting the construction, renovation and development of mosques in various areas, according to our means, the need and priorities.",
+            },
+            {
+              question: "What are the plans for a madrasa?",
+              answer:
+                "Our long-term dream is to establish a large Islamic educational institution, or madrasa. If Allah grants us the ability, once the necessary preparations are complete and with your support, we want to move toward this dream step by step.",
+            },
+            {
+              question: "What will my donation be spent on?",
+              answer: "Financial donations toward mosque construction, and support for mosque renovation and development.",
+            },
+            ...PROJECT_FAQ_EN,
+          ],
           impactIntro: {
-            title: "Our Journey in Building Places of Worship & Learning",
+            title: "Building a Mosque-Centered Religious Environment",
             body:
-              "Financial support is provided for **constructing or renovating mosques and madrasas** in various areas, helping ensure a proper environment for worship and Islamic education.\n\nWorking with local **mosque and madrasa committees**, we cover construction and renovation materials and labor, and make sure the work is properly **overseen**.\n\n**Our aim is to build a beautiful, proper environment for worship and Islamic learning in every community.**",
+              "The mosque is one of the most important centers of Muslim society — for **worship, Islamic education, dawah and community ties**.\n\nAlhamdulillah, financial donations and support have already been given toward the construction of **Mukundapur Uttarpara Jame Masjid** and **Anandabazar Jame Masjid**. Construction of both is still under way, and the Foundation's **support continues**.\n\nAccording to our means, the need and priorities, we hope to keep supporting **the construction, renovation and development of mosques in various areas**.\n\n**Our aim is a beautiful, suitable place of worship for those who pray, and a mosque-centered religious environment in society.**",
           },
           impactStats: [
-            { icon: "mosque", value: "Mosques", label: "Mosque construction support", description: "Financial support in various areas" },
-            { icon: "madrasa", value: "Madrasas", label: "Madrasa construction support", description: "Better settings for Islamic learning" },
-            { icon: "renovation", value: "Renovation", label: "Necessary renovation", description: "Support for renovation work" },
-            { icon: "oversight", value: "Oversight", label: "Project oversight", description: "Managing construction and renovation" },
-            { icon: "committee", value: "Committees", label: "With local committees", description: "In coordination with mosque and madrasa committees" },
+            { icon: "mosque", value: "2", label: "Mosques supported in construction", description: "Mukundapur Uttarpara and Anandabazar Jame Masjids" },
+            { icon: "ongoing", value: "Ongoing", label: "Support continues", description: "Construction of both mosques is under way" },
+            { icon: "renovation", value: "Development", label: "Construction, renovation & development", description: "According to means, need and priorities" },
+            { icon: "community", value: "Community", label: "Mosque-centered society", description: "A center for worship, learning and dawah" },
+            { icon: "madrasa", value: "Dream", label: "A large madrasa", description: "Long-term future plan" },
             { icon: "sadaqahJariyah", value: "Sadaqah jariyah", label: "Continuing reward", description: "A lasting reward, in sha Allah" },
           ],
         },
