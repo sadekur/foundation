@@ -120,7 +120,8 @@ export type ProjectImpactIcon =
   | "livestock"
   | "employment"
   | "training"
-  | "selfReliance";
+  | "selfReliance"
+  | "marriage";
 
 // `value` is the big headline (a number, a year, or a short word like "Monthly"), `label` names
 // the activity, and the optional `description` adds one short supporting line.
