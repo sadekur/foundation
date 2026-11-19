@@ -8,6 +8,7 @@ import type { AnalyticsBreakdown, AnalyticsPeriod, AnalyticsResponse } from "@/t
 import AnalyticsBarChart, { type ChartBar } from "./AnalyticsBarChart";
 import AnalyticsBreakdownCard from "./AnalyticsBreakdownCard";
 import PageHeader from "./PageHeader";
+import ShareLinkCard from "./ShareLinkCard";
 import { getGalleryProjectTitle } from "./galleryProjectOptions";
 
 // Matches lib/analyticsStore.ts's ANALYTICS_MONTHS_SHOWN (that module is server-only).
